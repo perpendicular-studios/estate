@@ -2,6 +2,7 @@
 <h1>ParallelEngine</h1>
 <img src="Capture.PNG" alt="Image"/>
 </p>
+
 - - - -
 **ParallelEngine** is a 2D Game Engine done in C++.
 *Allegro5* is used for Graphics and Audio.

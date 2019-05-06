@@ -13,51 +13,69 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\handler">
+      <UniqueIdentifier>{a7366b4e-a5f2-4e59-bc28-a06a48c6ee52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\state">
+      <UniqueIdentifier>{48c06f05-7ae6-41ae-ba75-4e57f49a48ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entity">
+      <UniqueIdentifier>{bb49b7d6-bd77-457e-87e0-dec4d633c068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\handler">
+      <UniqueIdentifier>{5b6016d2-e171-4fe2-a770-2780b1e58eb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\entity">
+      <UniqueIdentifier>{1daf2fdb-98f7-41bd-b93a-672a1a3cd4a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\state">
+      <UniqueIdentifier>{96e22473-7a66-4379-a69b-27662e98fa59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gsm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="playstate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="display.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="assetloader.cpp">
+      <Filter>Source Files\handler</Filter>
     </ClCompile>
     <ClCompile Include="assetmanager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\handler</Filter>
+    </ClCompile>
+    <ClCompile Include="display.cpp">
+      <Filter>Source Files\handler</Filter>
     </ClCompile>
     <ClCompile Include="entity.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entity</Filter>
     </ClCompile>
-    <ClCompile Include="assetloader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="gsm.cpp">
+      <Filter>Source Files\state</Filter>
+    </ClCompile>
+    <ClCompile Include="playstate.cpp">
+      <Filter>Source Files\state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gsm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="playstate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="display.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="assetloader.h">
+      <Filter>Header Files\handler</Filter>
     </ClInclude>
     <ClInclude Include="assetmanager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="display.h">
+      <Filter>Header Files\handler</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\entity</Filter>
     </ClInclude>
-    <ClInclude Include="assetloader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="gsm.h">
+      <Filter>Header Files\state</Filter>
+    </ClInclude>
+    <ClInclude Include="playstate.h">
+      <Filter>Header Files\state</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>Header Files\state</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

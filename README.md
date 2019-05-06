@@ -1,4 +1,4 @@
-<p align="center">
+<p style="text-align: center">
 <h1>ParallelEngine</h1>
 <img src="Capture.PNG" alt="Image"/>
 </p>

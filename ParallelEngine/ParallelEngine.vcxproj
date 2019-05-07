@@ -159,6 +159,7 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="gsm.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="playstate.h" />
     <ClInclude Include="state.h" />
   </ItemGroup>
@@ -169,6 +170,7 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="gsm.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="playstate.cpp" />
   </ItemGroup>
   <ItemGroup>

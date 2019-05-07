@@ -54,6 +54,9 @@
     <ClCompile Include="playstate.cpp">
       <Filter>Source Files\state</Filter>
     </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files\entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="state.h">
       <Filter>Header Files\state</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files\entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

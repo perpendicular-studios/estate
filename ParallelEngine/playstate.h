@@ -3,6 +3,8 @@
 
 #include "state.h"
 #include "entity.h"
+#include "player.h"
+
 class PlayState : public State {
 public:
 	PlayState(GSM * gsm);
@@ -10,7 +12,7 @@ public:
 	void update() override;
 	void handleInput(ALLEGRO_KEYBOARD_STATE & ks) override;
 private:
-	Entity * player;
+	Player * player;
 };
 
 #endif

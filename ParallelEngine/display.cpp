@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "display.h"
 #include "playstate.h"
 #include <iostream>

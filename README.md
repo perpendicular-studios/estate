@@ -1,7 +1,7 @@
 # parallel-engine 
-![ParallelEngine Logo Image](Capture.PNG)
+![parallel-engine Logo Image](Capture.PNG)
 - - - -
-**ParallelEngine** is a 2D Game Engine done in C++.
+**parallel-engine** is a 2D Game Engine done in C++.
 *Allegro5* is used for Graphics and Audio.
 
 ## Installation

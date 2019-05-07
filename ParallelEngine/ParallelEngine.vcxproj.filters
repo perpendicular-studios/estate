@@ -31,6 +31,15 @@
     <Filter Include="Header Files\state">
       <UniqueIdentifier>{96e22473-7a66-4379-a69b-27662e98fa59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\tile">
+      <UniqueIdentifier>{6a5e3f8f-047e-40f9-ab16-f7943e58b643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tile">
+      <UniqueIdentifier>{3b36d61a-6e85-42d0-bca0-29ab6390015d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\math">
+      <UniqueIdentifier>{f12c1670-0071-42e3-b250-19e7362fe768}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +66,12 @@
     <ClCompile Include="player.cpp">
       <Filter>Source Files\entity</Filter>
     </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>Source Files\tile</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\handler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -82,6 +97,18 @@
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>Header Files\tile</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="vec2.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.h">
+      <Filter>Header Files\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

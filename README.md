@@ -1,4 +1,4 @@
-# ParallelEngine 
+# parallel-engine 
 ![ParallelEngine Logo Image](Capture.PNG)
 - - - -
 **ParallelEngine** is a 2D Game Engine done in C++.

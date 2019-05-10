@@ -116,6 +116,9 @@
     <ClInclude Include="animation.h">
       <Filter>Header Files\handler</Filter>
     </ClInclude>
+    <ClInclude Include="animationset.h">
+      <Filter>Header Files\handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

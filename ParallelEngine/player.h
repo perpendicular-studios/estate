@@ -3,6 +3,7 @@
 
 #include <allegro5/allegro5.h>
 #include "entity.h"
+#include "animationset.h"
 
 class Player : public Entity {
 public:
@@ -13,5 +14,6 @@ public:
 	void moveLeft() { setx(getx() - speed); }
 private:
 	float speed;
+	AnimationSet * animationSet;
 };
 #endif

@@ -23,6 +23,5 @@ void GSM::render() {
 }
 
 void GSM::update(ALLEGRO_KEYBOARD_STATE &ks) {
-	states.top()->update();
-	states.top()->handleInput(ks);
+	states.top()->update(ks);
 }

@@ -19,7 +19,6 @@ public:
 protected:
 	ALLEGRO_BITMAP* image;
 	float x, y;
-	Animation * animation;
 };
 
 #endif ENTITY_H

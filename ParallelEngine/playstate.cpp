@@ -13,10 +13,6 @@ void PlayState::render() {
 	al_flip_display();
 }
 
-void PlayState::handleInput(ALLEGRO_KEYBOARD_STATE & ks) {
+void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks) {
 	player->update(ks);
-}
-
-void PlayState::update() {
-
 }

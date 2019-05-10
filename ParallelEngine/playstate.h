@@ -10,8 +10,7 @@ class PlayState : public State {
 public:
 	PlayState(GSM * gsm);
 	void render() override;
-	void update() override;
-	void handleInput(ALLEGRO_KEYBOARD_STATE & ks) override;
+	void update(ALLEGRO_KEYBOARD_STATE & ks) override;
 private:
 	Player * player;
 	Tile * tile;

@@ -3,7 +3,7 @@
 template <class T>
 Rectangle<T>::Rectangle(Vector2<T> rectTopLeft, Vector2<T> rectTopRight, Vector2<T> rectBottomLeft, Vector2<T> rectBottomRight) {
 	width = rectTopRight.getx() - rectTopLeft.getx();
-	height = rectBottomleft.gety() - rectTopLeft.gety();
+	height = rectBottomLeft.gety() - rectTopLeft.gety();
 	x = rectTopLeft.getx();
 	y = rectTopLeft.gety();
 }

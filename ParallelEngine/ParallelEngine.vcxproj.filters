@@ -40,6 +40,9 @@
     <Filter Include="Header Files\math">
       <UniqueIdentifier>{f12c1670-0071-42e3-b250-19e7362fe768}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{200d75c1-37ad-4569-953d-d6f6700018bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,7 +72,10 @@
     <ClCompile Include="tile.cpp">
       <Filter>Source Files\tile</Filter>
     </ClCompile>
-    <ClCompile Include="camera.cpp">
+    <ClCompile Include="rectangle.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="animation.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,14 +107,14 @@
     <ClInclude Include="tile.h">
       <Filter>Header Files\tile</Filter>
     </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>Header Files\handler</Filter>
-    </ClInclude>
     <ClInclude Include="vec2.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
     <ClInclude Include="rectangle.h">
       <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="animation.h">
+      <Filter>Header Files\handler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

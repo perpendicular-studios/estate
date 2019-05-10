@@ -1,4 +1,5 @@
 #include "camera.h"
+#include <cmath>
 
 Camera::~Camera() {}
 
@@ -42,5 +43,37 @@ void Camera::setCenter(int x, int y) {
 }
 
 void Camera::update() {
+	float x, y, d;
+	float dx, dy, v;
+	x = (float)(target.x - position.x);
+	y = (float)(target.y - position.y);
 
+	if ((x*x + y*y) <= 1) {
+		position.x = target.x;
+		position.y = target.y;
+	}
+	else {
+		d = sqrt(x*x + y * y);
+		v = (d * speed) / 60;
+		if (v < 1.0f) v = 1.0f;
+
+		dx = x * (v / d);
+		dy = y * (v / d);
+
+		position.x += dx;
+		position.y += dy;
+	}
+}
+
+IntRect Camera::getTileBounds(int tileSize) {
+	int x = (int)(position.x / tileSize);
+	int y = (int)(position.y / tileSize);
+
+	int w = (int)(size.x / tileSize + 2);
+	int h = (int)(size.y / tileSize + 2);
+	
+	if (x % tileSize != 0) w++;
+	if (y % tileSize != 0) h++;
+
+	return IntRect(x, y, w, h);
 }

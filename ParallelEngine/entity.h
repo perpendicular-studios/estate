@@ -3,6 +3,7 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
+#include "animation.h"
 
 class Entity {
 public:
@@ -15,9 +16,10 @@ public:
 
 	virtual void render() = 0;
 	virtual void update(ALLEGRO_KEYBOARD_STATE & ks) = 0;
-private:
+protected:
 	ALLEGRO_BITMAP* image;
 	float x, y;
+	Animation * animation;
 };
 
 #endif ENTITY_H

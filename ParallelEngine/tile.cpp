@@ -6,6 +6,4 @@ void Tile::render(int x, int y) {
 
 }
 
-Tile::~Tile() {
-
-}
+Tile::~Tile() {}

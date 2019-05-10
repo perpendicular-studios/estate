@@ -10,7 +10,7 @@ public:
 	virtual void render() = 0;
 	virtual void update() = 0;
 	virtual void handleInput(ALLEGRO_KEYBOARD_STATE & ks) = 0;
-private:
+protected:
 	GSM * gsm;
 };
 #endif

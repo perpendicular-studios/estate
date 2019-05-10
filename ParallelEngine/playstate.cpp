@@ -3,7 +3,7 @@
 #include <iostream>
 
 PlayState::PlayState(GSM * gsm) : State(gsm) {
-	player = new Player(AssetLoader::manager->getImage("player"), 250, 250, 10);
+	player = new Player(AssetLoader::manager->getImage("player"), 250, 250);
 	tile = new Tile(AssetLoader::manager->getImage("image"));
 }
 

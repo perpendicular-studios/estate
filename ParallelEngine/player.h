@@ -7,13 +7,19 @@
 
 class Player : public Entity {
 public:
-	Player(ALLEGRO_BITMAP* img, float pos_x, float pos_y, float sp);
+	Player(ALLEGRO_BITMAP* img, float pos_x, float pos_y);
 	void render() override;
 	void update(ALLEGRO_KEYBOARD_STATE & ks) override;
-	void moveRight() { setx(getx() + speed); }
-	void moveLeft() { setx(getx() - speed); }
+	void moveRight() { x += speed; }
+	void moveLeft() { x -= speed; }
+	void moveUp() { y -= speed; }
+	void moveDown() { y += speed; }
+	
+	enum Direction { RIGHT, LEFT, FRONT, BACK };
 private:
 	float speed;
+	bool sprinting = false;
+	Direction direction;
 	AnimationSet * animationSet;
 };
 #endif

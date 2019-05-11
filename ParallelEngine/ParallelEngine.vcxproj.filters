@@ -78,6 +78,9 @@
     <ClCompile Include="animation.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
+    <ClCompile Include="tilemap.cpp">
+      <Filter>Source Files\tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="animationset.h">
       <Filter>Header Files\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="tilemap.h">
+      <Filter>Header Files\tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

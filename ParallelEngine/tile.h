@@ -10,6 +10,7 @@ public:
 	void render(int x, int y);
 private:
 	ALLEGRO_BITMAP * baseImage;
+	int x, y;
 };
 
 #endif TILE_H

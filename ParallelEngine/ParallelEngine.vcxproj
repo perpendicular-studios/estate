@@ -166,6 +166,7 @@
     <ClInclude Include="rectangle.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tile.h" />
+    <ClInclude Include="tilemap.h" />
     <ClInclude Include="vec2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +181,7 @@
     <ClCompile Include="playstate.cpp" />
     <ClCompile Include="rectangle.cpp" />
     <ClCompile Include="tile.cpp" />
+    <ClCompile Include="tilemap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

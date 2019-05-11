@@ -18,7 +18,6 @@ Player::Player(ALLEGRO_BITMAP * img, float pos_x, float pos_y) : Entity(img, pos
 	animationSet->addAnimation(new Animation(img, 38, 41, 2, 10, 0, 246), "sprint_back");
 	animationSet->addAnimation(new Animation(img, 38, 41, 2, 10, 0, 287), "sprint_right");
 
-
 	animationSet->setAnimation("idle_front");
 	direction = FRONT;
 }
@@ -58,8 +57,6 @@ void Player::update(ALLEGRO_KEYBOARD_STATE & ks) {
 		animationSet->setAnimation(sprinting ? "sprint_front" : "walk_front");
 		direction = FRONT;
 	}
-
-	
 	
 	if (!al_key_down(&ks, ALLEGRO_KEY_A) && 
 		!al_key_down(&ks, ALLEGRO_KEY_D) &&

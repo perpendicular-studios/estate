@@ -1,25 +1,34 @@
 #ifndef TILESET_H
 #define TILESET_H
-#include <vector>
 #include "tile.h"
+#include "assetloader.h"
+#include <vector>
 #include <string>
 #include <fstream>
+#include <iostream>
 
 class TileMap {
 public:
-	TileMap() {}
+	//block types
+	static const int NORMAL = 0;
+	static const int BLOCKED = 1;
+
+	TileMap(int tileSize) { this->tileSize = tileSize; }
 	~TileMap();
 
 	void loadTileMap(std::string path);
-	void loadTileSet(std::string path);
+	void loadTileSet(ALLEGRO_BITMAP * tileSheet);
 	void render();
 	void update();
+
+	int getType(int row, int col) { return collisionMap[row][col]; };
 private:
 	std::vector<std::vector<int>> graphicMap;
 	std::vector<std::vector<int>> collisionMap;
-	std::vector<Tile *> tileSet;
+	std::vector<std::vector<Tile>> tileSet;
 	int width, height;
 	int tileSize;
+	int numTilesAcross;
 };
 
 

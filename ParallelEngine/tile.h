@@ -4,9 +4,9 @@
 
 class Tile {
 public:
+	Tile() {}
 	Tile(ALLEGRO_BITMAP * image);
 	~Tile();
-
 	void render(int x, int y);
 private:
 	ALLEGRO_BITMAP * baseImage;

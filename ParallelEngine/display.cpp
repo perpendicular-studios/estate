@@ -6,9 +6,8 @@
 
 Display::Display(GSM * g) : gsm(g) {
 	al_init();
-	// Load in assets
+	display = al_create_display(WIDTH, HEIGHT);
 	AssetLoader * loader = new AssetLoader();
-	display = al_create_display(640, 480);
 	queue = al_create_event_queue();
 	timer = al_create_timer(1.0 / 60);
 
@@ -32,6 +31,7 @@ Display::Display(GSM * g) : gsm(g) {
 		ALLEGRO_KEYBOARD_STATE keyState;
 		al_get_keyboard_state(&keyState);
 
+		//std::cout << "Running..." << std::endl;
 		//Close button pressed, close
 		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			running = false;

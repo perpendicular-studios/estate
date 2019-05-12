@@ -7,23 +7,28 @@ The top left tile will be assigned 0
 The bottom right tile will be assigned 63
 These numbers are then used in the tile map to identify which tile to use from the tileset.
 */
-void TileMap::loadTileSet(std::string path) {
-	ALLEGRO_BITMAP * tileSheet = al_load_bitmap(path.c_str());
+void TileMap::loadTileSet(ALLEGRO_BITMAP * tileSheet) {
 	int width = al_get_bitmap_width(tileSheet);
 	int height = al_get_bitmap_height(tileSheet);
 
 	assert(width % tileSize == 0 && height % tileSize == 0); //require that the width and height of the tilesheet is divisible by the tileSize
 
-	int numTilesX = width / tileSize, numTilesY = height / tileSize;
-	tileSet.resize(numTilesX * numTilesY);
+	tileSet.resize(height / tileSize);
+	for (int i = 0; i < tileSet.size(); i++) { 
+		tileSet[i].resize(width / tileSize);
+	}
 
-	for (int i = 0; i < tileSet.size(); i++) {
-		tileSet[i] =
-			new Tile(al_create_sub_bitmap(
-				tileSheet,
-				(i % numTilesX) * tileSize,
-				(i % numTilesY) * tileSize,
-				tileSize, tileSize));
+	std::cout << "tileSet size: " << tileSet.size() << std::endl;
+	for (int row = 0; row < tileSet.size(); row++) {
+		std::cout << "tileSet[" << row << "] size: " << tileSet[row].size() << std::endl;
+		for (int col = 0; col < tileSet[row].size(); col++) {
+			tileSet[row][col] = 
+				Tile(al_create_sub_bitmap(
+					tileSheet,
+					col * tileSize,
+					row * tileSize,
+					tileSize, tileSize));
+		}
 	}
 }
 
@@ -31,8 +36,6 @@ void TileMap::loadTileMap(std::string path) {
 	/*
 	<width> 
 	<height>
-	<tile size>
-	<tileset path>
 	<graphic map>
 	<collision map>
 	*/
@@ -44,10 +47,6 @@ void TileMap::loadTileMap(std::string path) {
 		width = std::stoi(line);
 		std::getline(file, line);
 		height = std::stoi(line);
-		std::getline(file, line);
-		tileSize = std::stoi(line);
-		std::getline(file, line);
-		loadTileSet(line);
 
 		graphicMap.resize(height);
 		for (int i = 0; i < graphicMap.size(); i++) {
@@ -58,15 +57,22 @@ void TileMap::loadTileMap(std::string path) {
 		for (int i = 0; i < collisionMap.size(); i++) {
 			collisionMap[i].resize(width);
 		}
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
+				file >> graphicMap[row][col];
+			}
+		}
 
-		while (!file.eof()) {
-			for (int row = 0; row < height; row++) {
-				for (int col = 0; col < width; col++) {
-					file >> graphicMap[row][col];
-				}
+		std::cout << std::endl;
+		//skip a line 
+		std::getline(file, line);
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
+				file >> collisionMap[row][col];
 			}
 		}
 	}
+
 }
 
 void TileMap::update() {
@@ -74,16 +80,16 @@ void TileMap::update() {
 }
 
 void TileMap::render() {
+	
 	for (int row = 0; row < graphicMap.size(); row++) {
 		for (int col = 0; col < graphicMap[row].size(); col++) {
-			tileSet[graphicMap[row][col]]->render(tileSize * col, tileSize * row);
+			int rc = graphicMap[row][col];
+			int r = rc / tileSet[0].size();
+			int c = rc % tileSet[0].size();
+
+			tileSet[r][c].render(tileSize * col, tileSize * row);
 		}
 	}
 }
 
-TileMap::~TileMap() {
-	//delete the memory allocated for the tiles
-	for (int i = 0; i < tileSet.size(); i++) {
-		delete tileSet[i];
-	}
-}
+TileMap::~TileMap() {}

@@ -4,7 +4,7 @@
 #include "state.h"
 #include "entity.h"
 #include "player.h"
-#include "tile.h"
+#include "tilemap.h"
 
 class PlayState : public State {
 public:
@@ -13,7 +13,7 @@ public:
 	void update(ALLEGRO_KEYBOARD_STATE & ks) override;
 private:
 	Player * player;
-	Tile * tile;
+	TileMap * tm;
 };
 
 #endif

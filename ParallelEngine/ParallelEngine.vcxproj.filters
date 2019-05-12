@@ -133,5 +133,11 @@
     <Image Include="Image.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="images\tileset.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

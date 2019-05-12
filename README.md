@@ -17,13 +17,7 @@ This game engine is built for use in creating 2D games. The game engine has the 
 ### 2. Asset Loading and Management
  Hashmaps are used to store key-value pairs of assets for asset retrieval anywhere within the project. 
 ### 3. TileMap creation and Simple 2D Tile Collision Detection 
- TileMaps can be created with an external application included in the Engine, and then parsed in for use. TileMaps consist of a graphics layer, which tells the program what to draw and collision layer, which tells the program where collisions should occur. They are added into the program through a .ptm (Parallel TileMap) file which is structured like so:
- ---------------------- Start of File ----------------------
- <tilemap width>
- <tilemap height>
- <graphics map>
- <collision map>
-  ---------------------- End of File ----------------------
+ TileMaps can be created with an external application included in the Engine, and then parsed in for use. TileMaps consist of a graphics layer, which tells the program what to draw and collision layer, which tells the program where collisions should occur. They are added into the program through a .ptm (Parallel TileMap) file. 
 The graphics map contains numbers which reference certain tiles in the tilesheet and the collision map contains 1 for blocked tiles and 0 for normal tiles.
 ### 4. 2D Sprite Animation  
  2D character spritesheets can be added into the project and connected to entities very easily to add anamiation into entities.

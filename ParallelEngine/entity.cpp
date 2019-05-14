@@ -1,7 +1,14 @@
 #include "entity.h"
-ALLEGRO_BITMAP* Entity::getImage() const { return image; }
-float Entity::gety() const { return y; }
-float Entity::getx() const { return x; }
 
-void Entity::setx(float pos_x) { x = pos_x; }
-void Entity::sety(float pos_y) { y = pos_y; }
+Entity::Entity(TileMap * tm) : hitbox(0,0,0,0) {
+	this->tm = tm;
+}
+
+int Entity::getx() const { return x; }
+int Entity::gety() const { return y; }
+void Entity::setx(int x) { this->x = x; }
+void Entity::sety(int y) { this->y = y; }
+
+bool Entity::checkTileMapCollision() {
+	return false;
+}

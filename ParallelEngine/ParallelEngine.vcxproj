@@ -179,7 +179,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playstate.cpp" />
-    <ClCompile Include="rectangle.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="tilemap.cpp" />
   </ItemGroup>

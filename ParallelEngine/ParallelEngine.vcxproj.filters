@@ -40,9 +40,6 @@
     <Filter Include="Header Files\math">
       <UniqueIdentifier>{f12c1670-0071-42e3-b250-19e7362fe768}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\math">
-      <UniqueIdentifier>{200d75c1-37ad-4569-953d-d6f6700018bd}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>Source Files\tile</Filter>
-    </ClCompile>
-    <ClCompile Include="rectangle.cpp">
-      <Filter>Source Files\math</Filter>
     </ClCompile>
     <ClCompile Include="animation.cpp">
       <Filter>Source Files\handler</Filter>

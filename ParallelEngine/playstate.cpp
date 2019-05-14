@@ -3,10 +3,15 @@
 #include <iostream>
 
 PlayState::PlayState(GSM * gsm) : State(gsm) {
-	player = new Player(AssetLoader::manager->getImage("player"), 250, 250);
 	tm = new TileMap(32);
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
 	tm->loadTileMap("data/tilemap.ptm");
+	player = new Player(tm);
+}
+
+PlayState::~PlayState() {
+	delete player;
+	delete tm;
 }
 
 void PlayState::render() {

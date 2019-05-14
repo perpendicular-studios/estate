@@ -3,23 +3,20 @@
 
 #include <allegro5/allegro5.h>
 #include "entity.h"
-#include "animationset.h"
 
 class Player : public Entity {
 public:
-	Player(ALLEGRO_BITMAP* img, float pos_x, float pos_y);
+	Player(TileMap * tm);
 	void render() override;
 	void update(ALLEGRO_KEYBOARD_STATE & ks) override;
-	void moveRight() { x += speed; }
-	void moveLeft() { x -= speed; }
-	void moveUp() { y -= speed; }
-	void moveDown() { y += speed; }
+	void moveRight() { x += v; }
+	void moveLeft() { x -= v; }
+	void moveUp() { y -= v; }
+	void moveDown() { y += v; }
 	
 	enum Direction { RIGHT, LEFT, FRONT, BACK };
 private:
-	float speed;
 	bool sprinting = false;
 	Direction direction;
-	AnimationSet * animationSet;
 };
 #endif

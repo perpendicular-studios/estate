@@ -9,6 +9,7 @@
 class PlayState : public State {
 public:
 	PlayState(GSM * gsm);
+	~PlayState();
 	void render() override;
 	void update(ALLEGRO_KEYBOARD_STATE & ks) override;
 private:

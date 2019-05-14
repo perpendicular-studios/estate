@@ -3,22 +3,39 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
-#include "animation.h"
+#include "animationset.h"
+#include "rectangle.h"
+#include "tilemap.h"
+#include "vec2.h"
 
 class Entity {
 public:
-	Entity(ALLEGRO_BITMAP* img, float pos_x, float pos_y) : image(img), x(pos_x), y(pos_y) {}
-	ALLEGRO_BITMAP* getImage() const;
-	float getx() const;
-	float gety() const;
-	void setx(float x);
-	void sety(float y);
+	Entity(TileMap * tm);
+
+	int getx() const;
+	int gety() const;
+	void setx(int x);
+	void sety(int y);
+
+	bool contains(int x, int y) { return hitbox.contains(Vector2i(x, y)); }
+	bool contains(Rectangle<int> other) { return hitbox.contains(other); }
+	bool contains(Entity * other) { return hitbox.contains(other->hitbox); }
+	bool intersects(Rectangle<int> other) { return hitbox.intersects(other); }
+	bool intersects(Entity * entity) { return hitbox.intersects(entity->hitbox); }
+
+	bool checkTileMapCollision();
 
 	virtual void render() = 0;
 	virtual void update(ALLEGRO_KEYBOARD_STATE & ks) = 0;
 protected:
-	ALLEGRO_BITMAP* image;
-	float x, y;
+	int x, y;
+	int cwidth, cheight; // collision width and height (the hitbox dimensions)
+	int width, height;
+	int xtemp, ytemp; // storage for old position before collision
+	int v; // velocity
+	Rectangle<int> hitbox;
+	AnimationSet animationSet;
+	TileMap * tm;
 };
 
 #endif ENTITY_H

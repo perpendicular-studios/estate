@@ -75,12 +75,9 @@ void TileMap::loadTileMap(std::string path) {
 
 }
 
-void TileMap::update() {
-
-}
+void TileMap::update() {}
 
 void TileMap::render() {
-	
 	for (int row = 0; row < graphicMap.size(); row++) {
 		for (int col = 0; col < graphicMap[row].size(); col++) {
 			int rc = graphicMap[row][col];

@@ -22,6 +22,10 @@ public:
 	void update();
 
 	int getType(int row, int col) { return collisionMap[row][col]; };
+	int getTileSize() { return tileSize; }
+
+	int getNumCols() { return width; }
+	int getNumRows() { return height; }
 private:
 	std::vector<std::vector<int>> graphicMap;
 	std::vector<std::vector<int>> collisionMap;

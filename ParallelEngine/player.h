@@ -9,11 +9,8 @@ public:
 	Player(TileMap * tm);
 	void render() override;
 	void update(ALLEGRO_KEYBOARD_STATE & ks) override;
-	void moveRight() { x += v; }
-	void moveLeft() { x -= v; }
-	void moveUp() { y -= v; }
-	void moveDown() { y += v; }
-	
+	void setSprinting(bool b) { sprinting = b; }
+
 	enum Direction { RIGHT, LEFT, FRONT, BACK };
 private:
 	bool sprinting = false;

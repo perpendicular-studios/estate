@@ -1,9 +1,9 @@
 #include "player.h"
 Player::Player(TileMap * tm) : Entity(tm) {
-	v = 2;
+	moveSpeed = 2;
 	cwidth = cheight = 20;
 	width = height = 32;
-	hitbox = Rectangle<int>(x, y, cwidth, cheight);
+	x = y = 50;
 
 	ALLEGRO_BITMAP * img = AssetLoader::manager->getImage("player");
 	animationSet.addAnimation(new Animation(img, width, height, 5, 1, 32, 0), "idle_front");
@@ -30,42 +30,49 @@ void Player::render() {
 }
 
 void Player::update(ALLEGRO_KEYBOARD_STATE & ks) {
-	animationSet.getCurrentAnimation()->update();
-	v = sprinting ? 4 : 2;
+	setLeft(al_key_down(&ks, ALLEGRO_KEY_A));
+	setRight(al_key_down(&ks, ALLEGRO_KEY_D));
+	setUp(al_key_down(&ks, ALLEGRO_KEY_W));
+	setDown(al_key_down(&ks, ALLEGRO_KEY_S));
+	setSprinting(al_key_down(&ks, ALLEGRO_KEY_SPACE));
 
-	if (al_key_down(&ks, ALLEGRO_KEY_D)) {
-		sprinting = al_key_down(&ks, ALLEGRO_KEY_SPACE);
-		moveRight();
+	animationSet.getCurrentAnimation()->update();
+	moveSpeed = sprinting ? 4 : 2;
+
+	if (right) {
 		animationSet.setAnimation(sprinting ? "sprint_right" : "walk_right");
 		direction = RIGHT;
+		dx = moveSpeed;
 	}
-
-	if (al_key_down(&ks, ALLEGRO_KEY_A)) {
-		sprinting = al_key_down(&ks, ALLEGRO_KEY_SPACE);
-		moveLeft();
+	else if (left) {
 		animationSet.setAnimation(sprinting ? "sprint_left" : "walk_left");
 		direction = LEFT;
+		dx = -moveSpeed;
+	}
+	else {
+		dx = 0;
 	}
 
-	if (al_key_down(&ks, ALLEGRO_KEY_W)) {
-		sprinting = al_key_down(&ks, ALLEGRO_KEY_SPACE);
-		moveUp();
+	if (up) {
 		animationSet.setAnimation(sprinting ? "sprint_back" : "walk_back");
 		direction = BACK;
+		dy = -moveSpeed;
 	}
-
-	if (al_key_down(&ks, ALLEGRO_KEY_S)) {
-		sprinting = al_key_down(&ks, ALLEGRO_KEY_SPACE);
-		moveDown();
+	else if (down) {
 		animationSet.setAnimation(sprinting ? "sprint_front" : "walk_front");
 		direction = FRONT;
+		dy = moveSpeed;
 	}
-	
-	if (!al_key_down(&ks, ALLEGRO_KEY_A) && 
-		!al_key_down(&ks, ALLEGRO_KEY_D) &&
-		!al_key_down(&ks, ALLEGRO_KEY_W) &&
-		!al_key_down(&ks, ALLEGRO_KEY_S)) {
+	else { 
+		dy = 0; 
+	}
 
+	// move the player and check for collision.
+	checkTileMapCollision();
+	x = xtemp;
+	y = ytemp;
+	
+	if (!left && !right && !up && !down) {
 		switch (direction) {
 		case LEFT:
 			animationSet.setAnimation("idle_left");

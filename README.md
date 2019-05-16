@@ -25,6 +25,8 @@ The graphics map contains numbers which reference certain tiles in the tilesheet
  Shaders done in GLSL can be added into the project and used to produce any graphic effects you desire.
 ### 6. Entity Collision and Movement
  Entities can easily be created through grouping up different Components, and seamlessly integrated into a level with collision to the TileMap.
+### 7. Multiplayer Support
+ The engine includes multiplayer support for multiple players.
 
 ## License
 [MIT](https://opensource.org/licenses/MIT)

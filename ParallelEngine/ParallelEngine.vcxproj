@@ -163,11 +163,9 @@
     <ClInclude Include="gsm.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playstate.h" />
-    <ClInclude Include="rectangle.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tilemap.h" />
-    <ClInclude Include="vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
@@ -183,6 +181,7 @@
     <ClCompile Include="tilemap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\tilemap.ptm" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -8,12 +8,10 @@ class Player : public Entity {
 public:
 	Player(TileMap * tm);
 	void render() override;
-	void update(ALLEGRO_KEYBOARD_STATE & ks) override;
-	void setSprinting(bool b) { sprinting = b; }
+	void update() override;
 
 	enum Direction { RIGHT, LEFT, FRONT, BACK };
 private:
-	bool sprinting = false;
 	Direction direction;
 };
 #endif

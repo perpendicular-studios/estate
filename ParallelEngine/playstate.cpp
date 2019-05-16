@@ -22,6 +22,7 @@ void PlayState::render() {
 }
 
 void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks) {
-	player->update(ks);
+	player->update();
+
 	tm->update();
 }

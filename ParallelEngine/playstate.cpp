@@ -45,7 +45,13 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	int tileSize = tm->getTileSize();
 
 	hover = tm->getTileFromPosition(mouseX, mouseY);
-	blocked = tm->getType(hover.y / tileSize, hover.x / tileSize) == TileMap::BLOCKED;
+	int row = hover.y / tileSize;
+	int col = hover.x / tileSize;
+
+	if (row > tm->getNumRows() - 1) row = tm->getNumRows() - 1;
+	if (col > tm->getNumCols() - 1) col = tm->getNumCols() - 1;
+
+	blocked = tm->getType(row, col) == TileMap::BLOCKED;
 	canClick = player->getTargetLocation() == player->getPosition();
 
 	if (al_mouse_button_down(&ms, 1) && !blocked && canClick) {

@@ -24,5 +24,5 @@ void Camera::update(int x, int y) {
 	if (this->x > xmax - Var::WIDTH) this->x = xmax - Var::WIDTH;
 	if (this->y > ymax - Var::HEIGHT) this->y = ymax - Var::HEIGHT;
 	
-	std::cout << "y: " << this->y << ", ymax: " << ymax << std::endl;
+	std::cout << "y: " << this->y << ", ymax: " << ymax - Var::HEIGHT << std::endl;
 }

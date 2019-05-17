@@ -17,6 +17,7 @@ private:
 	TileMap * tm;
 	Vector2i hover;
 	ALLEGRO_BITMAP * hoverImage;
+	bool blocked = false, canClick = false;
 };
 
 #endif

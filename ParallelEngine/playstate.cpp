@@ -16,25 +16,42 @@ PlayState::~PlayState() {
 }
 
 void PlayState::render() {
-	int tileSize = tm->getTileSize();
-
 	al_clear_to_color(al_map_rgba_f(0, 0, 0, 1));
 	tm->render();
 	player->render();
-	al_draw_bitmap(hoverImage, hover.x, hover.y, 0);
+
+	if (canClick) {
+		al_draw_tinted_bitmap(hoverImage, al_map_rgba_f(blocked ? 1 : 0, blocked ? 0 : 1, blocked ? 0 : 1, 1), hover.x, hover.y, 0);
+	}
 
 	al_flip_display();
 }
 
 void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
-	int mouseX = al_get_mouse_state_axis(&ms, 0);
-	int mouseY = al_get_mouse_state_axis(&ms, 1);
+	cam->update(player->getx() / 2, player->gety() / 2);
 
-	if (al_mouse_button_down(&ms, 1)) {
+	ALLEGRO_TRANSFORM T;
+	al_identity_transform(&T);
+	al_translate_transform(&T, -cam->getx(), -cam->gety());
+	al_use_transform(&T);
+
+	float mouseX = al_get_mouse_state_axis(&ms, 0);
+	float mouseY = al_get_mouse_state_axis(&ms, 1);
+
+	al_identity_transform(&T);
+	al_translate_transform(&T, cam->getx(), cam->gety());
+	al_transform_coordinates(&T, &mouseX, &mouseY);
+
+	int tileSize = tm->getTileSize();
+
+	hover = tm->getTileFromPosition(mouseX, mouseY);
+	blocked = tm->getType(hover.y / tileSize, hover.x / tileSize) == TileMap::BLOCKED;
+	canClick = player->getTargetLocation() == player->getPosition();
+
+	if (al_mouse_button_down(&ms, 1) && !blocked && canClick) {
 		player->setTargetLocation(hover.x, hover.y);
 	}
 
-	hover = tm->getTileFromPosition(mouseX, mouseY);
 	player->update();
 	tm->update();
 }

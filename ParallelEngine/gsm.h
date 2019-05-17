@@ -9,6 +9,7 @@ public:
 	void pop();
 	void push(State* s);
 	void set(State* s);
+	State* top();
 	void render();
 	void update(ALLEGRO_KEYBOARD_STATE &ks, ALLEGRO_MOUSE_STATE &ms);
 private:

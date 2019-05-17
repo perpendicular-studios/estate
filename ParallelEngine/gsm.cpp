@@ -18,6 +18,10 @@ void GSM::set(State * s) {
 	states.push(s);
 }
 
+State* GSM::top() {
+	return states.top();
+}
+
 void GSM::render() {
 	states.top()->render();
 }

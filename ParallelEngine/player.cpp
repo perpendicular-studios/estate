@@ -1,10 +1,14 @@
 #include "player.h"
+#include "var.h"
+
 Player::Player(TileMap * tm) : Entity(tm) {
 	moveSpeed = 2;
 	width = height = 32;
-	x = y = 64;
+	x = 288;
+	y = 288;
 	xdest = x;
 	ydest = y;
+	tilesCanMove = 10;
 
 	ALLEGRO_BITMAP * img = AssetLoader::manager->getImage("player");
 	animationSet.addAnimation(new Animation(img, width, height, 5, 1, 32, 0), "idle_front");
@@ -22,6 +26,10 @@ Player::Player(TileMap * tm) : Entity(tm) {
 }
 
 void Player::render() {
+	animationSet.getCurrentAnimation()->render(x, y);
+}
+
+void Player::update() {
 	updateLocation();
 	if (dx < 0) {
 		animationSet.setAnimation("walk_left");
@@ -59,10 +67,5 @@ void Player::render() {
 			break;
 		}
 	}
-	animationSet.getCurrentAnimation()->render(x, y);
-}
-
-void Player::update() {
 	animationSet.getCurrentAnimation()->update();
-	//std::cout << xdest << ", " << ydest << std::endl;
 }

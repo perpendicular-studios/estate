@@ -1,31 +1,21 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "vec2.h"
-#include "rectangle.h"
+#include "var.h"
 
 class Camera {
 public:
-	Camera(int w, int h, float sp);
+	Camera(int x, int y, int width, int height, int xmin, int xmax, int ymin, int ymax);
 	~Camera();
+	void update(int x, int y);
 
-	void move(int x, int y);
-	void moveCenter(int x, int y);
-
-	void setTarget(int x, int y);
-	void setCenter(int x, int y);
-
-	void update();
-
-	Vector2i getPosition() { return Vector2i((int)(position.x), (int)(position.y)); }
-	Vector2i getTileOffset(int tileSize) { return Vector2i((int)(position.x) % tileSize, (int)(position.y) % tileSize); }
-	IntRect getTileBounds(int tileSize);
-
+	int getx() { return x; }
+	int gety() { return y; }
 private:
-	Vector2f position;
-	Vector2f target;
-	Vector2i size;
-	float speed;
+	int x, y;
+	int width, height;
+	int xmax, ymax, xmin, ymin;
 };
+
 
 #endif CAMERA_H

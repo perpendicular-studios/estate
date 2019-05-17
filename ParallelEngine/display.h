@@ -3,14 +3,15 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
+#include <iostream>
 #include "gsm.h"
 #include "assetmanager.h"
+#include "playstate.h"
+#include "assetloader.h"
+#include "var.h";
 
 class Display {
 public:
-	static const int WIDTH = 640;
-	static const int HEIGHT = 360;
-
 	Display(GSM * gsm);
 	~Display();
 private:

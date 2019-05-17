@@ -84,6 +84,7 @@ Vector2i TileMap::getTileFromPosition(int x, int y) {
 }
 
 void TileMap::render() {
+
 	for (int row = 0; row < graphicMap.size(); row++) {
 		for (int col = 0; col < graphicMap[row].size(); col++) {
 			int rc = graphicMap[row][col];

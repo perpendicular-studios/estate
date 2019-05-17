@@ -1,12 +1,9 @@
 
 #include "display.h"
-#include "playstate.h"
-#include <iostream>
-#include "assetloader.h"
 
 Display::Display(GSM * g) : gsm(g) {
 	al_init();
-	display = al_create_display(WIDTH, HEIGHT);
+	display = al_create_display(Var::WIDTH, Var::HEIGHT);
 	AssetLoader * loader = new AssetLoader();
 	queue = al_create_event_queue();
 	timer = al_create_timer(1.0 / 60);

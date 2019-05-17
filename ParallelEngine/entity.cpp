@@ -6,6 +6,8 @@ Entity::Entity(TileMap * tm) {
 }
 
 void Entity::updateLocation() {
+	if (tilesCanMove <= 0) return;
+
 	if (xdest < x) {
 		dx = -moveSpeed;
 	}
@@ -26,6 +28,10 @@ void Entity::updateLocation() {
 		dy = 0;
 	}
 
-	if (x != xdest) x += dx;
-	if (y != ydest) y += dy;
+	if (x != xdest) {
+		x += dx;
+	}
+	if (y != ydest) {
+		y += dy;
+	}
 }

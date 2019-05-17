@@ -158,6 +158,7 @@
     <ClInclude Include="animationset.h" />
     <ClInclude Include="assetloader.h" />
     <ClInclude Include="assetmanager.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="gsm.h" />
@@ -166,12 +167,14 @@
     <ClInclude Include="state.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tilemap.h" />
+    <ClInclude Include="var.h" />
     <ClInclude Include="vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="assetloader.cpp" />
     <ClCompile Include="assetmanager.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="gsm.cpp" />

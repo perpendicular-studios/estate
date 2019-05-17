@@ -37,6 +37,9 @@
     <Filter Include="Source Files\tile">
       <UniqueIdentifier>{3b36d61a-6e85-42d0-bca0-29ab6390015d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\math">
+      <UniqueIdentifier>{a260ac23-4982-477e-afc4-7d5aa7d613c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +113,9 @@
     <ClInclude Include="tilemap.h">
       <Filter>Header Files\tile</Filter>
     </ClInclude>
+    <ClInclude Include="vec2.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -118,13 +124,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Image.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="images\tileset.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\hover.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

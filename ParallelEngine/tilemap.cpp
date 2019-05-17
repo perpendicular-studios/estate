@@ -77,6 +77,12 @@ void TileMap::loadTileMap(std::string path) {
 
 void TileMap::update() {}
 
+Vector2i TileMap::getTileFromPosition(int x, int y) {
+	int c = (int)(x / tileSize);
+	int r = (int) (y / tileSize);
+	return Vector2i(c * tileSize, r * tileSize);
+}
+
 void TileMap::render() {
 	for (int row = 0; row < graphicMap.size(); row++) {
 		for (int col = 0; col < graphicMap[row].size(); col++) {

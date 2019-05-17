@@ -166,6 +166,7 @@
     <ClInclude Include="state.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tilemap.h" />
+    <ClInclude Include="vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
@@ -185,7 +186,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Image.jpg" />
+    <Image Include="images\hover.png" />
     <Image Include="images\player.png" />
     <Image Include="images\tileset.png" />
   </ItemGroup>

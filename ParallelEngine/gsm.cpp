@@ -22,6 +22,6 @@ void GSM::render() {
 	states.top()->render();
 }
 
-void GSM::update(ALLEGRO_KEYBOARD_STATE &ks) {
-	states.top()->update(ks);
+void GSM::update(ALLEGRO_KEYBOARD_STATE &ks, ALLEGRO_MOUSE_STATE &ms) {
+	states.top()->update(ks, ms);
 }

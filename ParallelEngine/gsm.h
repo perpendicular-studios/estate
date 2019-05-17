@@ -10,7 +10,7 @@ public:
 	void push(State* s);
 	void set(State* s);
 	void render();
-	void update(ALLEGRO_KEYBOARD_STATE &ks);
+	void update(ALLEGRO_KEYBOARD_STATE &ks, ALLEGRO_MOUSE_STATE &ms);
 private:
 	std::stack<State*> states;
 };

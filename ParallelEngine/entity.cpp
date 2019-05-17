@@ -5,7 +5,27 @@ Entity::Entity(TileMap * tm) {
 	this->tileSize = tm->getTileSize();
 }
 
-int Entity::getx() const { return x; }
-int Entity::gety() const { return y; }
-void Entity::setx(int x) { this->x = x; }
-void Entity::sety(int y) { this->y = y; }
+void Entity::updateLocation() {
+	if (xdest < x) {
+		dx = -moveSpeed;
+	}
+	else if (xdest > x) {
+		dx = moveSpeed;
+	}
+	else {
+		dx = 0;
+	}
+
+	if (ydest < y) {
+		dy = -moveSpeed;
+	}
+	else if (ydest > y) {
+		dy = moveSpeed;
+	}
+	else {
+		dy = 0;
+	}
+
+	if (x != xdest) x += dx;
+	if (y != ydest) y += dy;
+}

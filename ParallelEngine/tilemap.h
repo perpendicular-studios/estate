@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include "vec2.h"
 
 class TileMap {
 public:
@@ -26,6 +27,8 @@ public:
 
 	int getNumCols() { return width; }
 	int getNumRows() { return height; }
+
+	Vector2i getTileFromPosition(int x, int y);
 private:
 	std::vector<std::vector<int>> graphicMap;
 	std::vector<std::vector<int>> collisionMap;

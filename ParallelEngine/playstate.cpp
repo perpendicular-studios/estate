@@ -28,7 +28,7 @@ void PlayState::render() {
 }
 
 void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
-	cam->update(player->getx() / 2, player->gety() / 2);
+	cam->update(player->getx(), player->gety());
 
 	ALLEGRO_TRANSFORM T;
 	al_identity_transform(&T);

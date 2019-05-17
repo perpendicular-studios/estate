@@ -38,8 +38,8 @@ Display::Display(GSM * g) : gsm(g) {
 		}
 
 		if (event.type == ALLEGRO_EVENT_TIMER) {
-			gsm->render();
 			gsm->update(keyState, mouseState);
+			gsm->render();
 		}
 
 	}

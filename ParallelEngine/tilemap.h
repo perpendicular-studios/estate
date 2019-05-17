@@ -24,10 +24,6 @@ public:
 	void update();
 
 	int getType(int row, int col) { 
-		std::cout << "checking type of (row, col): (" << row << ", " << col << ")..." << std::endl;
-		if (col > collisionMap[0].size() || row > collisionMap.size()) {
-			return 0;
-		}
 		return collisionMap[row][col];
 	}
 

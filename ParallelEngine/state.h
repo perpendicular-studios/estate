@@ -10,7 +10,7 @@ class State {
 public:
 	State(GSM * g) : gsm(g) {
 		//xmin, xmax, ymin, ymax
-		cam = new Camera(Var::WIDTH / 2, Var::HEIGHT / 2, Var::WIDTH, Var::HEIGHT, 0, 640, 0, 720);
+		cam = new Camera(Var::WIDTH / 2, Var::HEIGHT / 2, 32, 32, 0, 640, 0, 720);
 	}
 
 	virtual void render() = 0;

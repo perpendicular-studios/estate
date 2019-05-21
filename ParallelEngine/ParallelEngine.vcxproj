@@ -159,8 +159,11 @@
     <ClInclude Include="assetloader.h" />
     <ClInclude Include="assetmanager.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="castle.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="entityloader.h" />
+    <ClInclude Include="entitymanager.h" />
     <ClInclude Include="gsm.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playstate.h" />
@@ -175,8 +178,10 @@
     <ClCompile Include="assetloader.cpp" />
     <ClCompile Include="assetmanager.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="castle.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="entityloader.cpp" />
     <ClCompile Include="gsm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
@@ -189,6 +194,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\castle.png" />
     <Image Include="images\hover.png" />
     <Image Include="images\player.png" />
     <Image Include="images\tileset.png" />

@@ -1,7 +1,8 @@
 #include "entity.h"
 
-Entity::Entity(TileMap * tm) {
+Entity::Entity(TileMap * tm, std::string key) {
 	this->tm = tm;
+	this->key = key;
 	this->tileSize = tm->getTileSize();
 }
 
@@ -11,22 +12,23 @@ void Entity::updateLocation() {
 	if (xdest < x) {
 		dx = -moveSpeed;
 	}
-	else if (xdest > x) {
+	if (xdest > x) {
 		dx = moveSpeed;
 	}
-	else {
+	if(xdest == x) {
 		dx = 0;
 	}
 
 	if (ydest < y) {
 		dy = -moveSpeed;
 	}
-	else if (ydest > y) {
+	if (ydest > y) {
 		dy = moveSpeed;
 	}
-	else {
+	if(ydest == y) {
 		dy = 0;
 	}
+
 
 	if (x != xdest) {
 		x += dx;

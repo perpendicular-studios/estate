@@ -11,10 +11,12 @@ public:
 
 	int getx() { return x; }
 	int gety() { return y; }
+
 private:
 	int x, y;
 	int width, height;
 	int xmax, ymax, xmin, ymin;
+	float scale, maxZoom;
 };
 
 

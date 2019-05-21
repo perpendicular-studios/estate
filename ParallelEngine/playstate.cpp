@@ -6,37 +6,40 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm = new TileMap(32);
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
 	tm->loadTileMap("data/tilemap.ptm");
-	player = new Player(tm);
 	hoverImage = AssetLoader::manager->getImage("hover");
+	
+	//Load in entities
+	entityLoader = new EntityLoader(tm);
+	currentEntity = EntityLoader::manager->getEntity("player");
 }
 
+
 PlayState::~PlayState() {
-	delete player;
+	delete entityLoader;
 	delete tm;
 }
 
 void PlayState::render() {
 	al_clear_to_color(al_map_rgba_f(0, 0, 0, 1));
 	tm->render();
-	player->render();
-
+	currentEntity->render();
+	EntityLoader::manager->getEntity("castle")->render();
 	if (canClick) {
 		al_draw_tinted_bitmap(hoverImage, al_map_rgba_f(blocked ? 1 : 0, blocked ? 0 : 1, blocked ? 0 : 1, 1), hover.x, hover.y, 0);
 	}
-
 	al_flip_display();
 }
 
 void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
-	cam->update(player->getx(), player->gety());
+	cam->update(currentEntity->getx(), currentEntity->gety());
 
 	ALLEGRO_TRANSFORM T;
 	al_identity_transform(&T);
 	al_translate_transform(&T, -cam->getx(), -cam->gety());
 	al_use_transform(&T);
 
-	float mouseX = al_get_mouse_state_axis(&ms, 0);
-	float mouseY = al_get_mouse_state_axis(&ms, 1);
+	float mouseX = ms.x;
+	float mouseY = ms.y;
 
 	al_identity_transform(&T);
 	al_translate_transform(&T, cam->getx(), cam->gety());
@@ -52,12 +55,11 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	if (col > tm->getNumCols() - 1) col = tm->getNumCols() - 1;
 
 	blocked = tm->getType(row, col) == TileMap::BLOCKED;
-	canClick = player->getTargetLocation() == player->getPosition();
+	canClick = currentEntity->getTargetLocation() == currentEntity->getPosition();
 
 	if (al_mouse_button_down(&ms, 1) && !blocked && canClick) {
-		player->setTargetLocation(hover.x, hover.y);
+		currentEntity->setTargetLocation(hover.x, hover.y);
 	}
-
-	player->update();
+	currentEntity->update();
 	tm->update();
 }

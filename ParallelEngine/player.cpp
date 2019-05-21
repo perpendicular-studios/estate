@@ -1,13 +1,11 @@
 #include "player.h"
 #include "var.h"
 
-Player::Player(TileMap * tm) : Entity(tm) {
+Player::Player(TileMap * tm, int x, int y, std::string key) : Entity(tm, key) {
 	moveSpeed = 2;
 	width = height = 32;
-	x = 288;
-	y = 288;
-	xdest = x;
-	ydest = y;
+	xdest = this->x = x;
+	ydest = this->y = y;
 	tilesCanMove = 10;
 
 	ALLEGRO_BITMAP * img = AssetLoader::manager->getImage("player");

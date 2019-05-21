@@ -10,6 +10,9 @@ Camera::Camera(int x, int y, int width, int height, int xmin, int xmax, int ymin
 	this->ymax = ymax;
 	this->xmin = xmin;
 	this->ymin = ymin;
+	this->scale = 1.0f;
+
+	this->maxZoom = 10;
 }
 
 Camera::~Camera() {}
@@ -24,5 +27,4 @@ void Camera::update(int x, int y) {
 	if (this->x > xmax - Var::WIDTH) this->x = xmax - Var::WIDTH;
 	if (this->y > ymax - Var::HEIGHT) this->y = ymax - Var::HEIGHT;
 	
-	std::cout << "y: " << this->y << ", ymax: " << ymax - Var::HEIGHT << std::endl;
 }

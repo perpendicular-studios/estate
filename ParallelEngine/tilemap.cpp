@@ -80,6 +80,11 @@ void TileMap::update() {}
 Vector2i TileMap::getTileFromPosition(int x, int y) {
 	int c = (int)(x / tileSize);
 	int r = (int) (y / tileSize);
+	if (c > width) c = width;
+	if (c < 0) c = 0;
+	if (r > height) r = height;
+	if (r < 0) r = 0;
+
 	return Vector2i(c * tileSize, r * tileSize);
 }
 

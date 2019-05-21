@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "player.h"
 #include "tilemap.h"
+#include "entityloader.h"
 
 class PlayState : public State {
 public:
@@ -13,7 +14,9 @@ public:
 	void render() override;
 	void update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) override;
 private:
-	Player * player;
+	EntityLoader * entityLoader;
+	Entity * currentEntity;
+
 	TileMap * tm;
 	Vector2i hover;
 	ALLEGRO_BITMAP * hoverImage;

@@ -9,7 +9,8 @@
 class AssetManager {
 public:
 	AssetManager();
-	void loadImage(std::string path, std::string key);
+	void loadImage(std::string path, std::string key) { loadImage(path, key, false); }
+	void loadImage(std::string path, std::string key, bool transparency);
 	ALLEGRO_BITMAP* getImage(std::string key);
 	void destroy_images();
 private:

@@ -3,7 +3,6 @@
 Entity::Entity(TileMap * tm, std::string key) {
 	this->tm = tm;
 	this->key = key;
-	this->tileSize = tm->getTileSize();
 }
 
 void Entity::updateLocation() {

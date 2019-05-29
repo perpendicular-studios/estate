@@ -1,13 +1,11 @@
 #ifndef TILESET_H
 #define TILESET_H
-#include "tile.h"
 #include "assetloader.h"
 #include <vector>
 #include <string>
 #include <fstream>
 #include <iostream>
 #include "vec2.h"
-#include "camera.h"
 
 class TileMap {
 public:
@@ -15,7 +13,7 @@ public:
 	static const int NORMAL = 0;
 	static const int BLOCKED = 1;
 
-	TileMap(int tileSize) { this->tileSize = tileSize; }
+	TileMap(int tileWidth_, int tileHeight_) : tileWidth(tileWidth_), tileHeight(tileHeight_) {}
 	~TileMap();
 
 	void loadTileMap(std::string path);
@@ -27,19 +25,18 @@ public:
 		return collisionMap[row][col];
 	}
 
-	int getTileSize() { return tileSize; }
+	int getTileWidth() { return tileWidth; }
+	int getTileHeight() { return tileHeight; }
 
-	int getNumCols() { return width; }
-	int getNumRows() { return height; }
-
-	Vector2i getTileFromPosition(int x, int y);
+	int getNumCols() { return cols; }
+	int getNumRows() { return rows; }
 private:
-	std::vector<std::vector<int>> graphicMap;
+	std::vector<std::vector<int>> map;
 	std::vector<std::vector<int>> collisionMap;
-	std::vector<std::vector<Tile>> tileSet;
-	int width, height;
-	int tileSize;
-	int numTilesAcross;
+	std::vector<std::vector<std::shared_ptr<ALLEGRO_BITMAP>>> tileSet;
+	int width, height; // in pixels
+	int tileWidth, tileHeight;
+	int cols, rows; // in hexes
 };
 
 

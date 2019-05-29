@@ -1,33 +1,18 @@
 #include "tilemap.h"
 
-/* 
-Every tile in the tileset is assigned a number 
-For a 256x256 tilesheet with 32x32 sized tiles, the there are 8 tiles in the rows and 8 in the columns
-The top left tile will be assigned 0
-The bottom right tile will be assigned 63
-These numbers are then used in the tile map to identify which tile to use from the tileset.
-*/
+// Initialize 2d hex array with hex images
 void TileMap::loadTileSet(ALLEGRO_BITMAP * tileSheet) {
-	int width = al_get_bitmap_width(tileSheet);
-	int height = al_get_bitmap_height(tileSheet);
+	int tileCols = al_get_bitmap_width(tileSheet) / tileWidth;
+	int tileRows = al_get_bitmap_height(tileSheet) / tileHeight;
 
-	assert(width % tileSize == 0 && height % tileSize == 0); //require that the width and height of the tilesheet is divisible by the tileSize
-
-	tileSet.resize(height / tileSize);
-	for (int i = 0; i < tileSet.size(); i++) { 
-		tileSet[i].resize(width / tileSize);
+	tileSet.resize(tileRows);
+	for (int i = 0; i < tileSet.size(); i++) {
+		tileSet[i].resize(tileCols);
 	}
 
-	std::cout << "tileSet size: " << tileSet.size() << std::endl;
-	for (int row = 0; row < tileSet.size(); row++) {
-		std::cout << "tileSet[" << row << "] size: " << tileSet[row].size() << std::endl;
-		for (int col = 0; col < tileSet[row].size(); col++) {
-			tileSet[row][col] = 
-				Tile(al_create_sub_bitmap(
-					tileSheet,
-					col * tileSize,
-					row * tileSize,
-					tileSize, tileSize));
+	for (int row = 0; row < tileRows; row++) {
+		for (int col = 0; col < tileCols; col++) {
+			tileSet[row][col] = std::shared_ptr<ALLEGRO_BITMAP>(al_create_sub_bitmap(tileSheet, tileWidth * col, tileHeight * row, tileWidth, tileHeight), al_destroy_bitmap);
 		}
 	}
 }
@@ -44,30 +29,32 @@ void TileMap::loadTileMap(std::string path) {
 	if (file.is_open()) {
 		std::string line;
 		std::getline(file, line);
-		width = std::stoi(line);
+		cols = std::stoi(line);
 		std::getline(file, line);
-		height = std::stoi(line);
+		rows = std::stoi(line);
 
-		graphicMap.resize(height);
-		for (int i = 0; i < graphicMap.size(); i++) {
-			graphicMap[i].resize(width);
+		width = cols * tileWidth;
+		height = rows * tileHeight;
+
+		map.resize(rows);
+		for (int i = 0; i < map.size(); i++) {
+			map[i].resize(cols);
 		}
 
-		collisionMap.resize(height);
+		collisionMap.resize(rows);
 		for (int i = 0; i < collisionMap.size(); i++) {
-			collisionMap[i].resize(width);
+			collisionMap[i].resize(cols);
 		}
-		for (int row = 0; row < height; row++) {
-			for (int col = 0; col < width; col++) {
-				file >> graphicMap[row][col];
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				file >> map[row][col];
 			}
 		}
 
-		std::cout << std::endl;
 		//skip a line 
 		std::getline(file, line);
-		for (int row = 0; row < height; row++) {
-			for (int col = 0; col < width; col++) {
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
 				file >> collisionMap[row][col];
 			}
 		}
@@ -77,26 +64,17 @@ void TileMap::loadTileMap(std::string path) {
 
 void TileMap::update() {}
 
-Vector2i TileMap::getTileFromPosition(int x, int y) {
-	int c = (int)(x / tileSize);
-	int r = (int) (y / tileSize);
-	if (c > width) c = width;
-	if (c < 0) c = 0;
-	if (r > height) r = height;
-	if (r < 0) r = 0;
-
-	return Vector2i(c * tileSize, r * tileSize);
-}
-
 void TileMap::render() {
+	for (int row = 0; row < rows; row++) {
+		for (int col = 0; col < cols; col++) {
+			int rc = map[row][col];
+			int r = rc / cols;
+			int c = rc % cols; 
 
-	for (int row = 0; row < graphicMap.size(); row++) {
-		for (int col = 0; col < graphicMap[row].size(); col++) {
-			int rc = graphicMap[row][col];
-			int r = rc / tileSet[0].size();
-			int c = rc % tileSet[0].size();
+			int yOffset = (c == 0 || c == 3) ? (c == 0) ? 4 : -4 : 0;
 
-			tileSet[r][c].render(tileSize * col, tileSize * row);
+			al_draw_bitmap(tileSet[r][c].get(), (col - row) * tileWidth / 2, (col + row) * (tileHeight - 4) / 2 + yOffset, 0);
+			
 		}
 	}
 }

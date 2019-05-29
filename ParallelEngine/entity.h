@@ -35,7 +35,6 @@ protected:
 	int moveSpeed; // velocity
 	int dx, dy;
 	TileMap * tm;
-	int tileSize;
 	bool left = false, right = false, up = false, down = false;
 	int xdest, ydest;
 	int tilesCanMove;

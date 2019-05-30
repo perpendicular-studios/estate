@@ -1,7 +1,7 @@
 #include "player.h"
 #include "var.h"
 
-Player::Player(TileMap * tm, int x, int y, std::string key) : Entity(tm, key) {
+Player::Player(TileMap * tm, int x, int y) : Entity(tm) {
 	moveSpeed = 2;
 	width = height = 32;
 	xdest = this->x = x;

@@ -33,6 +33,7 @@ public:
 private:
 	std::vector<std::vector<int>> map;
 	std::vector<std::vector<int>> collisionMap;
+	std::vector<std::vector<int>> depthMap;
 	std::vector<std::vector<std::shared_ptr<ALLEGRO_BITMAP>>> tileSet;
 	int width, height; // in pixels
 	int tileWidth, tileHeight;

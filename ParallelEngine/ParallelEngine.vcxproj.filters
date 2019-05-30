@@ -72,6 +72,9 @@
     <ClCompile Include="tilemap.cpp">
       <Filter>Source Files\tile</Filter>
     </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\handler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files\math</Filter>
     </ClInclude>
     <ClInclude Include="var.h">
+      <Filter>Header Files\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
       <Filter>Header Files\handler</Filter>
     </ClInclude>
   </ItemGroup>

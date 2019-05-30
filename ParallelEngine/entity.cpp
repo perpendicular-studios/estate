@@ -1,8 +1,7 @@
 #include "entity.h"
 
-Entity::Entity(TileMap * tm, std::string key) {
+Entity::Entity(TileMap * tm) {
 	this->tm = tm;
-	this->key = key;
 }
 
 void Entity::updateLocation() {

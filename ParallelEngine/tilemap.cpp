@@ -23,6 +23,7 @@ void TileMap::loadTileMap(std::string path) {
 	<height>
 	<graphic map>
 	<collision map>
+	<depth map>
 	*/
 
 	std::ifstream file(path);
@@ -36,6 +37,7 @@ void TileMap::loadTileMap(std::string path) {
 		width = cols * tileWidth;
 		height = rows * tileHeight;
 
+		/* Resize all the maps to the proper dimensions of the map */
 		map.resize(rows);
 		for (int i = 0; i < map.size(); i++) {
 			map[i].resize(cols);
@@ -45,19 +47,31 @@ void TileMap::loadTileMap(std::string path) {
 		for (int i = 0; i < collisionMap.size(); i++) {
 			collisionMap[i].resize(cols);
 		}
+
+		depthMap.resize(rows);
+		for (int i = 0; i < depthMap.size(); i++) {
+			depthMap[i].resize(cols);
+		}
+
+		/* Parse in data of the maps */
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
 				file >> map[row][col];
 			}
 		}
-
-		//skip a line 
 		std::getline(file, line);
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
 				file >> collisionMap[row][col];
 			}
 		}
+		std::getline(file, line);
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				file >> depthMap[row][col];
+			}
+		}
+		
 	}
 
 }
@@ -71,10 +85,17 @@ void TileMap::render() {
 			int r = rc / cols;
 			int c = rc % cols; 
 
-			int yOffset = (c == 0 || c == 3) ? (c == 0) ? 4 : -4 : 0;
+			int heightScale = 4;
+			int depth = depthMap[row][col];
+			int yOffset = (c == 0) ? 4 : -depth * heightScale;
 
-			al_draw_bitmap(tileSet[r][c].get(), (col - row) * tileWidth / 2, (col + row) * (tileHeight - 4) / 2 + yOffset, 0);
-			
+			// draw tiles under base tile (if there is one)
+			for (int i = 0; i < depth; i++) {
+				al_draw_bitmap(tileSet[r][c].get(), (col - row) * tileWidth / 2, (col + row) * (tileHeight - 6) / 2 - i * heightScale, 0);
+			}
+
+			// draws the base tile
+			al_draw_bitmap(tileSet[r][c].get(), (col - row) * tileWidth / 2, (col + row) * (tileHeight - 6) / 2 + yOffset, 0);
 		}
 	}
 }

@@ -9,7 +9,7 @@
 
 class Entity {
 public:
-	Entity(TileMap * tm, std::string key);
+	Entity(TileMap * tm);
 
 	int getx() const { return x; }
 	int gety() const { return y; }

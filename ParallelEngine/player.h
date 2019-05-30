@@ -6,7 +6,7 @@
 
 class Player : public Entity {
 public:
-	Player(TileMap * tm, int x, int y, std::string key);
+	Player(TileMap * tm, int x, int y);
 	void render() override;
 	void update() override;
 

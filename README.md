@@ -3,6 +3,8 @@
 **Estate** is a 2D RTS Game done in C++.
 *Allegro5* is used for Graphics and Audio.
 
+![Showcase Image](ParallelEngine/images/showcase.png)
+
 ## Installation
 
 Clone this repository, and open the .sln file with Visual Studio. Development of this project was done in Visual Studio 2017.

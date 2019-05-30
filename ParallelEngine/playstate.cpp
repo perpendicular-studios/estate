@@ -5,6 +5,7 @@
 PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm = std::shared_ptr<TileMap>(new TileMap(64, 32));
 	cam = std::shared_ptr<Camera>(new Camera(0, 0, 32, 32));
+	castle = std::shared_ptr<Castle>(new Castle(tm, 15, 15));
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
 	tm->loadTileMap("data/tilemap.ptm");
 }
@@ -18,6 +19,7 @@ void PlayState::render() {
 	al_use_transform(&trans);
 
 	tm->render();
+	castle->render();
 	al_flip_display();
 }
 

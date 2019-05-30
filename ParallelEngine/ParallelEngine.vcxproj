@@ -159,6 +159,7 @@
     <ClInclude Include="assetloader.h" />
     <ClInclude Include="assetmanager.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="castle.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="gsm.h" />

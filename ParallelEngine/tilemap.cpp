@@ -76,7 +76,34 @@ void TileMap::loadTileMap(std::string path) {
 
 }
 
-void TileMap::update() {}
+void TileMap::update() {
+	std::cout << waterY << std::endl;
+	// moves down
+	if (waterY >= 6) {
+		time += 1;
+		if (time < 60) {
+			dy = 0;
+		}
+		else {
+			time = 0;
+			dy = -speed;
+		}
+	}
+
+	// moves up
+	if (waterY <= 3.5) {
+		time += 1;
+		if (time < 60) {
+			dy = 0;
+		}
+		else {
+			time = 0;
+			dy = speed;
+		}
+	}
+
+	waterY += dy;
+}
 
 void TileMap::render() {
 	for (int row = 0; row < rows; row++) {
@@ -87,7 +114,8 @@ void TileMap::render() {
 
 			int heightScale = 4;
 			int depth = depthMap[row][col];
-			int yOffset = (c == 0) ? 4 : -depth * heightScale;
+			
+			int yOffset = (c == 0) ? waterY : -depth * heightScale;
 
 			// draw tiles under base tile (if there is one)
 			for (int i = 0; i < depth; i++) {

@@ -13,7 +13,7 @@ public:
 	static const int NORMAL = 0;
 	static const int BLOCKED = 1;
 
-	TileMap(int tileWidth_, int tileHeight_) : tileWidth(tileWidth_), tileHeight(tileHeight_) {}
+	TileMap(int tileWidth_, int tileHeight_) : tileWidth(tileWidth_), tileHeight(tileHeight_) { waterY = 4, speed = 0.02f, dy = speed, time = 0; }
 	~TileMap();
 
 	void loadTileMap(std::string path);
@@ -24,6 +24,8 @@ public:
 	int getType(int row, int col) { 
 		return collisionMap[row][col];
 	}
+
+	int getTileCol(int x) {}
 
 	int getTileWidth() { return tileWidth; }
 	int getTileHeight() { return tileHeight; }
@@ -37,7 +39,9 @@ private:
 	std::vector<std::vector<std::shared_ptr<ALLEGRO_BITMAP>>> tileSet;
 	int width, height; // in pixels
 	int tileWidth, tileHeight;
-	int cols, rows; // in hexes
+	int cols, rows; // in tiles
+	float waterY, speed, dy; // y offset of animation of water
+	float time;
 };
 
 

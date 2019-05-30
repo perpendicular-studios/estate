@@ -119,6 +119,9 @@
     <ClInclude Include="camera.h">
       <Filter>Header Files\handler</Filter>
     </ClInclude>
+    <ClInclude Include="castle.h">
+      <Filter>Header Files\tile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

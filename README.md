@@ -1,6 +1,6 @@
 # Estate
 - - - -
-**Estate** is a 2D RTS Game done in C++.
+**Estate** is an open source 2D RTS Game done in C++.
 *Allegro5* is used for Graphics and Audio.
 
 ![Showcase Image](ParallelEngine/images/showcase.png)

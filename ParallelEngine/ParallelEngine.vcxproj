@@ -158,6 +158,7 @@
     <ClInclude Include="animationset.h" />
     <ClInclude Include="assetloader.h" />
     <ClInclude Include="assetmanager.h" />
+    <ClInclude Include="building.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="castle.h" />
     <ClInclude Include="display.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="assetloader.cpp" />
     <ClCompile Include="assetmanager.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="castle.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="gsm.cpp" />

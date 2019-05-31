@@ -25,7 +25,11 @@ public:
 		return collisionMap[row][col];
 	}
 
-	int getTileCol(int x) {}
+	int getTileCol(float x, float y) { return x / tileWidth + y / tileHeight; }
+	int getTileRow(float x, float y) { return y / tileHeight - x / tileWidth; }
+
+	int getTileX(int row, int col) { return (col - row) * tileWidth / 2; }
+	int getTileY(int row, int col) { return (col + row) * tileHeight / 2; }
 
 	int getTileWidth() { return tileWidth; }
 	int getTileHeight() { return tileHeight; }

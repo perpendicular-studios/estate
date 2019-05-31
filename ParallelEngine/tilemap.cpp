@@ -77,7 +77,6 @@ void TileMap::loadTileMap(std::string path) {
 }
 
 void TileMap::update() {
-	std::cout << waterY << std::endl;
 	// moves down
 	if (waterY >= 6) {
 		time += 1;

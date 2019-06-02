@@ -16,7 +16,9 @@ public:
 private:
 	std::shared_ptr<TileMap> tm;
 	std::shared_ptr<Camera> cam;
-	std::shared_ptr<Castle> castle;
+	std::map<std::string, std::shared_ptr<Building>> buildings;
+	std::string buildingPlacing;
+	bool placing = false;
 };
 
 #endif

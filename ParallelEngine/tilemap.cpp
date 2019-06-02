@@ -118,11 +118,11 @@ void TileMap::render() {
 
 			// draw tiles under base tile (if there is one)
 			for (int i = 0; i < depth; i++) {
-				al_draw_bitmap(tileSet[r][c].get(), (col - row) * tileWidth / 2, (col + row) * (tileHeight - 6) / 2 - i * heightScale, 0);
+				al_draw_bitmap(tileSet[r][c].get(), getTileX(row, col), getTileY(row, col) - i * heightScale, 0);
 			}
 
 			// draws the base tile
-			al_draw_bitmap(tileSet[r][c].get(), (col - row) * tileWidth / 2, (col + row) * (tileHeight - 6) / 2 + yOffset, 0);
+			al_draw_bitmap(tileSet[r][c].get(), getTileX(row, col), getTileY(row, col) + yOffset, 0);
 		}
 	}
 }

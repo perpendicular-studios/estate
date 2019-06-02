@@ -184,6 +184,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playstate.cpp" />
     <ClCompile Include="tilemap.cpp" />
+    <ClCompile Include="var.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\tilemap.ptm" />

@@ -6,7 +6,7 @@
 /* Base class for special tiles (buildings) */
 class Building {
 public:
-	Building(std::shared_ptr<TileMap> tm_) : tm(tm_) {}
+	Building(std::shared_ptr<TileMap> tm_, std::string index_) : tm(tm_), index(index_) {}
 	int getx() const { return x; }
 	int gety() const { return y; }
 	int getrow() const { return row; }
@@ -18,6 +18,8 @@ public:
 	bool isPlaced() { return placed; }
 	bool isPlacing() { return placing; }
 
+	std::string getIndex() { return index; }
+
 	void enablePlacing() { placed = false; placing = true; }
 	void setPlaced() { placed = true; placing = false; }
 
@@ -25,6 +27,7 @@ protected:
 	ALLEGRO_BITMAP * img;
 	std::shared_ptr<TileMap> tm;
 	int x, y;
+	std::string index;
 	int row, col;
 	bool placed, placing;
 };

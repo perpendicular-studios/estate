@@ -29,7 +29,7 @@ public:
 	int getTileRow(float x, float y) { return y / tileHeight - x / tileWidth; }
 
 	int getTileX(int row, int col) { return (col - row) * tileWidth / 2; }
-	int getTileY(int row, int col) { return (col + row) * tileHeight / 2; }
+	int getTileY(int row, int col) { return (col + row) * (tileHeight - 6) / 2; }
 
 	int getTileWidth() { return tileWidth; }
 	int getTileHeight() { return tileHeight; }

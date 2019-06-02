@@ -78,6 +78,9 @@
     <ClCompile Include="castle.cpp">
       <Filter>Source Files\tile</Filter>
     </ClCompile>
+    <ClCompile Include="var.cpp">
+      <Filter>Source Files\handler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">

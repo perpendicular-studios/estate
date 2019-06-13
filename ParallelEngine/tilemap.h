@@ -25,21 +25,27 @@ public:
 		return collisionMap[row][col];
 	}
 
-	int getTileCol(float x, float y) { return x / tileWidth + y / tileHeight; }
-	int getTileRow(float x, float y) { return y / tileHeight - x / tileWidth; }
+	Vector2f screenToIso(int x, int y) {
+		return Vector2f(
+			x / tileWidth + y / tileHeight,
+			y / tileHeight - x / tileWidth);
+	}
 
-	int getTileX(int row, int col) { return (col - row) * tileWidth / 2; }
-	int getTileY(int row, int col) { return (col + row) * (tileHeight - 6) / 2; }
+	Vector2f isoToScreen(int row, int col) { 
+		return Vector2f(
+			(col - row) * tileWidth / 2,
+			(col + row) * tileHeight / 2);
+	}
 
 	int getTileWidth() { return tileWidth; }
 	int getTileHeight() { return tileHeight; }
 
 	int getNumCols() { return cols; }
 	int getNumRows() { return rows; }
+
 private:
 	std::vector<std::vector<int>> map;
 	std::vector<std::vector<int>> collisionMap;
-	std::vector<std::vector<int>> depthMap;
 	std::vector<std::vector<std::shared_ptr<ALLEGRO_BITMAP>>> tileSet;
 	int width, height; // in pixels
 	int tileWidth, tileHeight;

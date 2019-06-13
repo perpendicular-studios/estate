@@ -1,4 +1,5 @@
 #include "camera.h"
+#include <iostream>
 Camera::Camera(float x_, float y_, int width_, int height_) : x(x_), y(y_), width(width_), height(height_) {
 	moveSpeed = 5;
 }

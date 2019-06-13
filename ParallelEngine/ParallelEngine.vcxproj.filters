@@ -75,9 +75,6 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
-    <ClCompile Include="castle.cpp">
-      <Filter>Source Files\tile</Filter>
-    </ClCompile>
     <ClCompile Include="var.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
@@ -124,12 +121,6 @@
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>Header Files\handler</Filter>
-    </ClInclude>
-    <ClInclude Include="castle.h">
-      <Filter>Header Files\tile</Filter>
-    </ClInclude>
-    <ClInclude Include="building.h">
-      <Filter>Header Files\tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -48,11 +48,6 @@ void TileMap::loadTileMap(std::string path) {
 			collisionMap[i].resize(cols);
 		}
 
-		depthMap.resize(rows);
-		for (int i = 0; i < depthMap.size(); i++) {
-			depthMap[i].resize(cols);
-		}
-
 		/* Parse in data of the maps */
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
@@ -65,44 +60,11 @@ void TileMap::loadTileMap(std::string path) {
 				file >> collisionMap[row][col];
 			}
 		}
-		std::getline(file, line);
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < cols; col++) {
-				file >> depthMap[row][col];
-			}
-		}
-		
 	}
 
 }
 
-void TileMap::update() {
-	// moves down
-	if (waterY >= 6) {
-		time += 1;
-		if (time < 60) {
-			dy = 0;
-		}
-		else {
-			time = 0;
-			dy = -speed;
-		}
-	}
-
-	// moves up
-	if (waterY <= 3.5) {
-		time += 1;
-		if (time < 60) {
-			dy = 0;
-		}
-		else {
-			time = 0;
-			dy = speed;
-		}
-	}
-
-	waterY += dy;
-}
+void TileMap::update() {}
 
 void TileMap::render() {
 	for (int row = 0; row < rows; row++) {
@@ -111,18 +73,10 @@ void TileMap::render() {
 			int r = rc / cols;
 			int c = rc % cols; 
 
-			int heightScale = 4;
-			int depth = depthMap[row][col];
-			
-			int yOffset = (c == 0) ? waterY : -depth * heightScale;
-
-			// draw tiles under base tile (if there is one)
-			for (int i = 0; i < depth; i++) {
-				al_draw_bitmap(tileSet[r][c].get(), getTileX(row, col), getTileY(row, col) - i * heightScale, 0);
-			}
+			Vector2f screenCoord = isoToScreen(row, col);
 
 			// draws the base tile
-			al_draw_bitmap(tileSet[r][c].get(), getTileX(row, col), getTileY(row, col) + yOffset, 0);
+			al_draw_bitmap(tileSet[r][c].get(), screenCoord.x, screenCoord.y, 0);
 		}
 	}
 }

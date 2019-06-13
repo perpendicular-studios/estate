@@ -6,7 +6,6 @@
 #include "player.h"
 #include "tilemap.h"
 #include "camera.h"
-#include "castle.h"
 
 class PlayState : public State {
 public:
@@ -16,9 +15,7 @@ public:
 private:
 	std::shared_ptr<TileMap> tm;
 	std::shared_ptr<Camera> cam;
-	std::map<std::string, std::shared_ptr<Building>> buildings;
-	std::string buildingPlacing;
-	bool placing = false;
+	float mouseX, mouseY;
 };
 
 #endif

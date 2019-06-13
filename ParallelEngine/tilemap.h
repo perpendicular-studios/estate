@@ -26,9 +26,15 @@ public:
 	}
 
 	Vector2f screenToIso(int x, int y) {
-		return Vector2f(
-			x / tileWidth + y / tileHeight,
-			y / tileHeight - x / tileWidth);
+		float col = x / tileWidth + y / tileHeight;
+		float row = y / tileHeight - x / tileWidth;
+
+		if (col < 0) col = 0;
+		if (col > cols - 1) col = cols - 1;
+		if (row < 0) row = 0;
+		if (row > rows - 1) row = rows - 1;
+
+		return Vector2f(col, row);
 	}
 
 	Vector2f isoToScreen(int row, int col) { 

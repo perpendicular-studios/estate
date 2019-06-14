@@ -4,7 +4,7 @@
 
 class Camera {
 public:
-	Camera(float x, float y, int width, int height);
+	Camera(float x, float y);
 	void update();
 	void setLeft(bool b) { left = b; }
 	void setRight(bool b) { right = b; }
@@ -16,7 +16,6 @@ private:
 	float x, y;
 	int dx, dy;
 	int moveSpeed;
-	int width, height;
 	bool left = false, right = false, up = false, down = false;
 };
 

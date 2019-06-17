@@ -26,10 +26,11 @@ public:
 	}
 
 	Vector2f screenToIso(int x, int y) {
-		float col, row;
-		col = (x / (tileWidth / 2) + y / (tileHeight / 2)) / 2;
-		row = (y / (tileHeight / 2) - x / (tileWidth / 2)) / 2;
 
+		float col = (x / (tileWidth / 2) + y / (tileHeight / 2)) / 2;
+		float row = (y / (tileHeight / 2) - x / (tileWidth / 2)) / 2;
+		
+		if (x < 0) row++;			// for mouse offset adjustment when negative
 		if (col < 0) col = 0;
 		if (col > cols - 1) col = cols - 1;
 		if (row < 0) row = 0;

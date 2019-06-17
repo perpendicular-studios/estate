@@ -26,8 +26,9 @@ public:
 	}
 
 	Vector2f screenToIso(int x, int y) {
-		float col = x / tileWidth + y / tileHeight;
-		float row = y / tileHeight - x / tileWidth;
+		float col, row;
+		col = (x / (tileWidth / 2) + y / (tileHeight / 2)) / 2;
+		row = (y / (tileHeight / 2) - x / (tileWidth / 2)) / 2;
 
 		if (col < 0) col = 0;
 		if (col > cols - 1) col = cols - 1;

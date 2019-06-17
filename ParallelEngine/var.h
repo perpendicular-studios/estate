@@ -2,8 +2,8 @@
 #define VAR_H
 class Var {
 public:
-	static const int WIDTH = 640;
-	static const int HEIGHT = 360;
+	static const int WIDTH = 640; //640
+	static const int HEIGHT = 360; //360
 	static int uniqueBuildingID;
 
 	static int getUniqueBuildingID();

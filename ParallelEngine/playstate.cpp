@@ -14,6 +14,16 @@ void PlayState::render() {
 	al_clear_to_color(al_map_rgba_f(0, 0, 0, 1));
 	tm->render();
 
+	ALLEGRO_TRANSFORM trans;
+
+	al_identity_transform(&trans);
+	al_translate_transform(&trans, -cam->getx(), -cam->gety());
+	al_use_transform(&trans);
+
+	al_identity_transform(&trans);
+	al_translate_transform(&trans, cam->getx(), cam->gety());
+	al_transform_coordinates(&trans, &mouseX, &mouseY);
+
 	Vector2f mapCoord = tm->screenToIso(mouseX, mouseY);
 	Vector2f screenCoord = tm->isoToScreen(mapCoord.y, mapCoord.x);
 
@@ -27,16 +37,6 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 
 	mouseX = ms.x;
 	mouseY = ms.y;
-
-	ALLEGRO_TRANSFORM trans;
-
-	al_identity_transform(&trans);
-	al_translate_transform(&trans, -cam->getx(), -cam->gety());
-	al_use_transform(&trans);
-
-	al_identity_transform(&trans);
-	al_translate_transform(&trans, cam->getx(), cam->gety());
-	al_transform_coordinates(&trans, &mouseX, &mouseY);
 
 	cam->setLeft(al_key_down(&ks, ALLEGRO_KEY_A));
 	cam->setUp(al_key_down(&ks, ALLEGRO_KEY_W));

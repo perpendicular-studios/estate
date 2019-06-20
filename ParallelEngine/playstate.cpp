@@ -27,7 +27,10 @@ void PlayState::render() {
 	Vector2f mapCoord = tm->screenToIso(mouseX, mouseY);
 	Vector2f screenCoord = tm->isoToScreen(mapCoord.y, mapCoord.x);
 
-	al_draw_bitmap(AssetLoader::manager->getImage("hover"), screenCoord.x, screenCoord.y, 0);
+	hoverX = screenCoord.x;
+	hoverY = screenCoord.y;
+
+	al_draw_bitmap(AssetLoader::manager->getImage("hover"), hoverX, hoverY, 0);
 	al_flip_display();
 }
 
@@ -43,4 +46,7 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
 
+	if (al_mouse_button_down(&ms, 0)) {
+		
+	}
 }

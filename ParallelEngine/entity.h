@@ -9,39 +9,24 @@
 
 class Entity {
 public:
-	Entity(TileMap * tm);
+	Entity(std::shared_ptr<TileMap> tm, int id);
 
 	int getx() const { return x; }
 	int gety() const { return y; }
-	Vector2i getPosition() { return Vector2i(x, y); }
 
-	int getid() { return id; }
-
-	void setx(int x) { this->x = x; }
-	void sety(int y) { this->y = y; }
-	void setTargetLocation(int x, int y) {
-		xdest = x;
-		ydest = y;
-	}
-
-	Vector2i getTargetLocation() { return Vector2i(xdest, ydest); }
-	std::string getKey() { return key; }
 
 	virtual void render() = 0;
 	virtual void update() = 0;
 protected:
-	int x, y;
-	int width, height;
-	int moveSpeed; // velocity
-	int dx, dy;
-	TileMap * tm;
+	int x = 0, y = 0;
+	int width = 0, height = 0;
+	int moveSpeed; 
+	int dx = 0, dy = 0;
+	std::shared_ptr<TileMap> tm;
 	bool left = false, right = false, up = false, down = false;
-	int xdest, ydest;
-	int tilesCanMove;
 	int id;
-	std::string key;
 
-	void updateLocation();
+	void move(int xdest, int ydest);
 };
 
 #endif ENTITY_H

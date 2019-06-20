@@ -162,7 +162,7 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="gsm.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="peasant.h" />
     <ClInclude Include="playstate.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tilemap.h" />
@@ -178,7 +178,6 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="gsm.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="player.cpp" />
     <ClCompile Include="playstate.cpp" />
     <ClCompile Include="tilemap.cpp" />
     <ClCompile Include="var.cpp" />

@@ -15,7 +15,10 @@ public:
 private:
 	std::shared_ptr<TileMap> tm;
 	std::shared_ptr<Camera> cam;
+	std::vector<std::shared_ptr<Entity>> entityList;
+
 	float mouseX = 0, mouseY = 0;
+	float hoverX = 0, hoverY = 0;
 };
 
 #endif

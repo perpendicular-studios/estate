@@ -1,37 +1,20 @@
 #include "entity.h"
 
-Entity::Entity(TileMap * tm) {
-	this->tm = tm;
+Entity::Entity(std::shared_ptr<TileMap> tm_, int id_) : tm(tm_), id(id_) {
+	moveSpeed = 4;
 }
 
-void Entity::updateLocation() {
-	if (tilesCanMove <= 0) return;
-
-	if (xdest < x) {
-		dx = -moveSpeed;
-	}
-	if (xdest > x) {
-		dx = moveSpeed;
-	}
-	if(xdest == x) {
-		dx = 0;
-	}
-
-	if (ydest < y) {
-		dy = -moveSpeed;
-	}
-	if (ydest > y) {
-		dy = moveSpeed;
-	}
-	if(ydest == y) {
-		dy = 0;
-	}
-
-
+void Entity::move(int xdest, int ydest) {
 	if (x != xdest) {
+		if (x < xdest) dx = moveSpeed;
+		else dx = -moveSpeed;
+
 		x += dx;
 	}
 	if (y != ydest) {
+		if (y < ydest) dx = moveSpeed;
+		else dy = -moveSpeed;
+
 		y += dy;
 	}
 }

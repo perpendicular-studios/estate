@@ -20,9 +20,9 @@ void Camera::update() {
 	//exceptions
 	if (up && down) { dy = 0; }
 	else if (left && right) { dx = 0; }
-	
+		
 	//up
-	else if (up && y >= 0 && y > x/2 + Var::WIDTH /4 - tileWidth /4 && y > -x / 2 + offset) {
+	if (up && y >= 0 && y > x/2 + Var::WIDTH /4 - tileWidth /4 && y > -x / 2 + offset) {
 		dy = -moveSpeed;
 	}
 	else if (up && y >= 0  && y <= x/2 + Var::WIDTH /4 - tileWidth /4 && y > -x / 2 + offset) {
@@ -48,7 +48,7 @@ void Camera::update() {
 	}
 
 	//right
-	else if (right && x <= mapRightBound && y > x / 2 + Var::WIDTH / 4 - tileWidth / 4 && y < -x / 2 + mapHeightY + mapHeightX / 2) {
+	if (right && x <= mapRightBound && y > x / 2 + Var::WIDTH / 4 - tileWidth / 4 && y < -x / 2 + mapHeightY + mapHeightX / 2) {
 		dx = moveSpeed;
 	}
 	else if (right && x <= mapRightBound && y <= x / 2 + Var::WIDTH / 4 - tileWidth / 4 && y < -x / 2 + mapHeightY + mapHeightX / 2) {

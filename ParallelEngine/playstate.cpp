@@ -4,10 +4,10 @@
 
 PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm = std::shared_ptr<TileMap>(new TileMap(64, 32));
-	cam = std::shared_ptr<Camera>(new Camera(100, 500));
-
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
 	tm->loadTileMap("data/tilemap.ptm");
+	cam = std::shared_ptr<Camera>(new Camera(0, 0, tm)); //100, 500
+
 }
 
 void PlayState::render() {

@@ -40,6 +40,12 @@
     <Filter Include="Header Files\math">
       <UniqueIdentifier>{a260ac23-4982-477e-afc4-7d5aa7d613c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\building">
+      <UniqueIdentifier>{6aa6bc66-72c6-487c-b087-db829a63d6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\building">
+      <UniqueIdentifier>{2023cd1a-22c8-47fd-b568-4a43e7e4e006}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +80,15 @@
     </ClCompile>
     <ClCompile Include="var.cpp">
       <Filter>Source Files\handler</Filter>
+    </ClCompile>
+    <ClCompile Include="building.cpp">
+      <Filter>Source Files\building</Filter>
+    </ClCompile>
+    <ClCompile Include="buildinglist.cpp">
+      <Filter>Source Files\building</Filter>
+    </ClCompile>
+    <ClCompile Include="castle.cpp">
+      <Filter>Source Files\building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +133,15 @@
     </ClInclude>
     <ClInclude Include="peasant.h">
       <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="building.h">
+      <Filter>Header Files\building</Filter>
+    </ClInclude>
+    <ClInclude Include="buildinglist.h">
+      <Filter>Header Files\building</Filter>
+    </ClInclude>
+    <ClInclude Include="castle.h">
+      <Filter>Header Files\building</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

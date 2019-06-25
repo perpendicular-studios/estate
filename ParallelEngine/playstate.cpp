@@ -7,12 +7,13 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
 	tm->loadTileMap("data/tilemap.ptm");
 	cam = std::shared_ptr<Camera>(new Camera(0, 0, tm)); //100, 500
-
+	bl = new BuildingList();
 }
 
 void PlayState::render() {
 	al_clear_to_color(al_map_rgba_f(0, 0, 0, 1));
 	tm->render();
+
 
 	ALLEGRO_TRANSFORM trans;
 
@@ -46,7 +47,9 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
 
-	if (al_mouse_button_down(&ms, 0)) {
-		
+	if (al_mouse_button_down(&ms, 1)) {
+		//al_draw_bitmap(AssetLoader::manager->getImage("hover"), hoverX, hoverY, 0);
+		//al_flip_display();
+		std::cout << "hello";
 	}
 }

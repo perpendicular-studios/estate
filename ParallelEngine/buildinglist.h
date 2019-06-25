@@ -6,11 +6,17 @@
 
 class BuildingList {
 public:
-	// initialize new building, adds to list.
-	void addBuilding();
+	BuildingList() {}
+	~BuildingList();
 
+	// initialize new building, adds to list.
+	void addBuilding(Building *buildingObject);
+
+	void popBuilding(int buildingID);
+
+	void clearList();
 private:
-	std::vector<Building> buildingList;
+	std::vector<Building*> bl; 
 };
 
 #endif 

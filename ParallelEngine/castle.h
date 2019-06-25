@@ -5,11 +5,12 @@
 
 class Castle : public Building {
 public:
-	Castle();
+	Castle(int castleID);
 
 private:
 	int currGarrison, maxGarrison;
 	int woodStored;
+	int castleID;
 
 };
 

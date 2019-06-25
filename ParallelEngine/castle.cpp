@@ -1,6 +1,6 @@
 #include "castle.h"
 
-Castle::Castle() : Building(tm, id) {
+Castle::Castle(int castleID_) : Building(tm), castleID(castleID_) {
 	stone = 100;
 	gold = 200;
 }

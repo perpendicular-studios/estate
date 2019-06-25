@@ -8,7 +8,7 @@
 #include "assetmanager.h"
 #include "playstate.h"
 #include "assetloader.h"
-#include "var.h";
+#include "var.h"
 
 class Display {
 public:

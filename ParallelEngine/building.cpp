@@ -1,6 +1,6 @@
 #include "building.h"
 
-Building::Building(std::shared_ptr<TileMap> tm_, int id_) : tm(tm_), id(id_) {
+Building::Building(std::shared_ptr<TileMap> tm_) : tm(tm_) {
 	
 }
 

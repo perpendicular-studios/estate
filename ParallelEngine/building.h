@@ -6,6 +6,7 @@
 #include <string>
 #include "animationset.h"
 #include "tilemap.h"
+#include "assetloader.h"
 
 class Building {	
 public:
@@ -13,6 +14,8 @@ public:
 
 	int getx() const { return x; }
 	int gety() const { return y; }
+	void setx(int x_) {  x = x_; }
+	void sety(int y_) { y = y_; }
 
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
 	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);

@@ -17,3 +17,22 @@ void BuildingList::popBuilding(int buildingID) {
 void BuildingList::clearList() {
 	bl.clear();
 }
+
+void BuildingList::update() {
+
+
+	if (isBuildTrue) {
+		Building* castle1= new Castle(1);
+		addBuilding(castle1);
+		castle1->setx(x);
+		castle1->sety(y);
+	}
+}
+
+void BuildingList::render() {
+	if (bl.empty() == false) {
+		for (int i = 0; i < bl.size(); i++) {
+			al_draw_bitmap(AssetLoader::manager->getImage("castle"), bl[i]->getx(), bl[i]->gety(), 0);
+		}
+	}
+}

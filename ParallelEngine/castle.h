@@ -7,6 +7,9 @@ class Castle : public Building {
 public:
 	Castle(int castleID);
 
+	void render() override;
+	void update() override;
+
 private:
 	int currGarrison, maxGarrison;
 	int woodStored;

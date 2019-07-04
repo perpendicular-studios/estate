@@ -21,17 +21,19 @@ public:
 	void update();
 	// render buildlist objects
 	void render();
-
-
-
+	// place building
+	void placingBuilding(int buildingImg, float x, float y); // buildingImg will select from a switch to get correct building img
 	
 	void setBuild(bool b) { isBuildTrue = b; }
+	void setPlacing(bool p) { isPlacingTrue = p; }
+	bool getPlacing() { return isPlacingTrue; }
 	void setx(int x_) { x = x_; }
 	void sety(int y_) { y = y_; }
 private:
 	std::vector<Building*> bl; 
-	bool isBuildTrue = false;
+	bool isBuildTrue = false, isPlacingTrue = false;
 	int x, y;
+	bool buildMenu = false; 
 };
 
 #endif 

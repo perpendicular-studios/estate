@@ -34,6 +34,8 @@ void PlayState::render() {
 	bl->setx(screenCoord.x);
 	bl->sety(screenCoord.y);
 	
+	if (bl->getPlacing() == true) { bl->placingBuilding(1, hoverX, hoverY); }
+
 	al_draw_bitmap(AssetLoader::manager->getImage("hover"), hoverX, hoverY, 0);
 	al_flip_display();
 }
@@ -43,6 +45,8 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->update();
 	bl->update();
 
+	prevMouseState = currMouseState;
+
 	mouseX = ms.x;
 	mouseY = ms.y;
 
@@ -51,8 +55,11 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
 	
-	bl->setBuild(ms.buttons & 1);
+	if (ms.buttons & 1) { currMouseState = 1; }
+	else if (ms.buttons & 2) { currMouseState = 2; }
+	else currMouseState = 0;
 
+	bl->setBuild(prevMouseState != currMouseState && prevMouseState == 1);
 
 	if (al_mouse_button_down(&ms, 1)) {
 

@@ -1,6 +1,6 @@
 #include "entity.h"
 
-Entity::Entity(std::shared_ptr<TileMap> tm_, int id_) : tm(tm_), id(id_) {
+Entity::Entity(std::shared_ptr<TileMap> tm_) : tm(tm_) {
 	moveSpeed = 4;
 }
 

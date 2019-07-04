@@ -161,6 +161,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="entitymanager.h" />
     <ClInclude Include="gsm.h" />
     <ClInclude Include="peasant.h" />
     <ClInclude Include="playstate.h" />
@@ -178,9 +179,9 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="gsm.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="peasant.cpp" />
     <ClCompile Include="playstate.cpp" />
     <ClCompile Include="tilemap.cpp" />
-    <ClCompile Include="var.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\tilemap.ptm" />

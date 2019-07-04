@@ -9,11 +9,13 @@
 
 class Entity {
 public:
-	Entity(std::shared_ptr<TileMap> tm, int id);
+	Entity(std::shared_ptr<TileMap> tm);
 
 	int getx() const { return x; }
 	int gety() const { return y; }
+	int getid() const { return id; }
 
+	void setid(int id_) { id = id_; }
 
 	virtual void render() = 0;
 	virtual void update() = 0;

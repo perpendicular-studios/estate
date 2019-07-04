@@ -72,8 +72,8 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
-    <ClCompile Include="var.cpp">
-      <Filter>Source Files\handler</Filter>
+    <ClCompile Include="peasant.cpp">
+      <Filter>Source Files\entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +117,9 @@
       <Filter>Header Files\handler</Filter>
     </ClInclude>
     <ClInclude Include="peasant.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="entitymanager.h">
       <Filter>Header Files\entity</Filter>
     </ClInclude>
   </ItemGroup>

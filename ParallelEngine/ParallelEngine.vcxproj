@@ -158,7 +158,10 @@
     <ClInclude Include="animationset.h" />
     <ClInclude Include="assetloader.h" />
     <ClInclude Include="assetmanager.h" />
+    <ClInclude Include="building.h" />
+    <ClInclude Include="buildinglist.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="castle.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="entitymanager.h" />
@@ -174,13 +177,16 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="assetloader.cpp" />
     <ClCompile Include="assetmanager.cpp" />
+    <ClCompile Include="buildinglist.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="castle.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="gsm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="peasant.cpp" />
     <ClCompile Include="playstate.cpp" />
+    <ClCompile Include="building.cpp" />
     <ClCompile Include="tilemap.cpp" />
   </ItemGroup>
   <ItemGroup>

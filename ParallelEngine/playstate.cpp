@@ -45,8 +45,6 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->update();
 	bl->update();
 
-	prevMouseState = currMouseState;
-
 	mouseX = ms.x;
 	mouseY = ms.y;
 
@@ -55,6 +53,8 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
 	
+	prevMouseState = currMouseState;
+	//check if mouse state is different 
 	if (ms.buttons & 1) { currMouseState = 1; }
 	else if (ms.buttons & 2) { currMouseState = 2; }
 	else currMouseState = 0;

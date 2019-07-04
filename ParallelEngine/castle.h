@@ -9,11 +9,14 @@ public:
 
 	void render() override;
 	void update() override;
+	
+	ALLEGRO_BITMAP* getBaseImg() override { return bitmap; }
 
 private:
 	int currGarrison, maxGarrison;
 	int woodStored;
 	int castleID;
+	ALLEGRO_BITMAP* bitmap = AssetLoader::manager->getImage("castle");
 
 };
 

@@ -19,6 +19,7 @@ public:
 
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
 	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);
+	virtual ALLEGRO_BITMAP* getBaseImg() { return bitmap; }
 
 	virtual void render() = 0;
 	virtual void update() = 0;
@@ -37,6 +38,7 @@ protected:
 	int stone, metal, wood, food, gold;
 	int hp;
 	int lvl;
+	ALLEGRO_BITMAP* bitmap;
 
 };
 

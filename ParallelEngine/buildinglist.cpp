@@ -36,7 +36,7 @@ void BuildingList::render() {
 
 	if (bl.empty() == false) {
 		for (int i = 0; i < bl.size(); i++) {
-			al_draw_bitmap(AssetLoader::manager->getImage("castle"), bl[i]->getx(), bl[i]->gety(), 0);
+			al_draw_bitmap(bl[i]->getBaseImg() , bl[i]->getx(), bl[i]->gety(), 0);
 		}
 	}
 }

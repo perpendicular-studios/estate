@@ -33,7 +33,6 @@ private:
 	std::vector<Building*> bl; 
 	bool isBuildTrue = false, isPlacingTrue = false;
 	int x, y;
-	bool buildMenu = false; 
 };
 
 #endif 

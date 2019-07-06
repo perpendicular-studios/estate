@@ -78,9 +78,6 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
-    <ClCompile Include="var.cpp">
-      <Filter>Source Files\handler</Filter>
-    </ClCompile>
     <ClCompile Include="building.cpp">
       <Filter>Source Files\building</Filter>
     </ClCompile>
@@ -89,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="castle.cpp">
       <Filter>Source Files\building</Filter>
+    </ClCompile>
+    <ClCompile Include="peasant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mousekey.cpp">
+      <Filter>Source Files\handler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="castle.h">
       <Filter>Header Files\building</Filter>
+    </ClInclude>
+    <ClInclude Include="entitymanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mousekey.h">
+      <Filter>Header Files\handler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

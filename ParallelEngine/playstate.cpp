@@ -8,6 +8,7 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm->loadTileMap("data/tilemap.ptm");
 	cam = std::shared_ptr<Camera>(new Camera(0, 0, tm)); //100, 500
 	bl = new BuildingList();
+	mk = new MouseKey();
 }
 
 void PlayState::render() {
@@ -44,6 +45,7 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	tm->update();
 	cam->update();
 	bl->update();
+	mk->update(ks, ms);
 
 	mouseX = ms.x;
 	mouseY = ms.y;
@@ -52,14 +54,8 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setUp(al_key_down(&ks, ALLEGRO_KEY_W));
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
-	
-	prevMouseState = currMouseState;
-	//check if mouse state is different 
-	if (ms.buttons & 1) { currMouseState = 1; }
-	else if (ms.buttons & 2) { currMouseState = 2; }
-	else currMouseState = 0;
 
-	bl->setBuild(prevMouseState != currMouseState && prevMouseState == 1);
+	bl->setBuild(mk->rightClick);
 
 	if (al_mouse_button_down(&ms, 1)) {
 

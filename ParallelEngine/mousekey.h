@@ -17,9 +17,6 @@ private:
 	char prevKeyState, currKeyState;
 
 };
-
-
-
-#endif MOUSKEY_H
+#endif 
 
 

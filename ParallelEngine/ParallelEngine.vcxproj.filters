@@ -46,6 +46,9 @@
     <Filter Include="Source Files\building">
       <UniqueIdentifier>{2023cd1a-22c8-47fd-b568-4a43e7e4e006}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ingamemenu">
+      <UniqueIdentifier>{6aa13f0c-a9c5-43bb-a29b-4333d86b89c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="mousekey.h">
       <Filter>Header Files\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="igm.h">
+      <Filter>Header Files\ingamemenu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

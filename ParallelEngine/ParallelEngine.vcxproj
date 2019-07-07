@@ -78,6 +78,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -166,6 +167,7 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="entitymanager.h" />
     <ClInclude Include="gsm.h" />
+    <ClInclude Include="igm.h" />
     <ClInclude Include="mousekey.h" />
     <ClInclude Include="peasant.h" />
     <ClInclude Include="playstate.h" />

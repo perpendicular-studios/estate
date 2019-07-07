@@ -1,6 +1,7 @@
 #ifndef STATE_H
 #define STATE_H
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
 #include "var.h"
 
 class GSM;

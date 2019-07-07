@@ -4,6 +4,7 @@
 #include <stack>
 #include "state.h"
 
+// overall game state manager
 class GSM {
 public:
 	void pop();

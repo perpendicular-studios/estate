@@ -9,6 +9,7 @@
 #include "building.h"
 #include "buildinglist.h"
 #include "mousekey.h"
+#include "igm.h"
 
 class PlayState : public State {
 public:
@@ -24,7 +25,6 @@ private:
 
 	float mouseX = 0, mouseY = 0;
 	float hoverX = 0, hoverY = 0;
-	int prevMouseState = -1, currMouseState = -1;
 };
 
 #endif

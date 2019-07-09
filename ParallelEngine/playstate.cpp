@@ -41,6 +41,7 @@ void PlayState::render() {
 	al_use_transform(&trans);
 
 	menu->render();
+	
 
 	//used for camera
 	al_identity_transform(&trans);

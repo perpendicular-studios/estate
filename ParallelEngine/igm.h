@@ -30,6 +30,7 @@ public:
 	void buildingMenu();
 	void background();
 	
+	
 
 private:
 	std::vector<int> menu; 
@@ -39,5 +40,6 @@ private:
 	bool isClicked = false;
 	ButtonManager* bm;
 	Button* build;
+
 };
 #endif

@@ -3,7 +3,7 @@
 IGM::IGM() {
 	currState = 0;
 	bm = new ButtonManager;
-	
+	build = new Button(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, al_map_rgb(255, 51, 0), basic_font20, al_map_rgb(255, 255, 255), 25, Var::HEIGHT - 150, "Build", 1);
 }
 
 void IGM::background() {
@@ -13,9 +13,9 @@ void IGM::background() {
 
 //state 0
 void IGM::defaultMenu() {
-	build = new Button(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, al_map_rgb(255, 51, 0), basic_font20, al_map_rgb(255, 255, 255), 25, Var::HEIGHT - 150, "Build", 1);
+	build->drawButton();
 	bm->addButton(build);
-	
+
 }
 
 //state 1

@@ -9,6 +9,7 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	cam = std::shared_ptr<Camera>(new Camera(500, 500, tm)); //100, 500
 	bl = new BuildingList();
 	mk = new MouseKey();
+	menu = new IGM();
 }
 
 void PlayState::render() {
@@ -39,8 +40,7 @@ void PlayState::render() {
 	al_identity_transform(&trans);
 	al_use_transform(&trans);
 
-	al_draw_filled_rectangle(0, Var::HEIGHT - 200, Var::WIDTH, Var::HEIGHT, al_map_rgb(255, 204, 102));
-	al_draw_rectangle(0, Var::HEIGHT - 200, Var::WIDTH, Var::HEIGHT, al_map_rgb(153, 102, 51), 10);
+	menu->update();
 
 	//used for camera
 	al_identity_transform(&trans);
@@ -64,5 +64,5 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
 
-	bl->setBuild(mk->rightClick);
+	bl->setBuild(mk->leftClick);
 }

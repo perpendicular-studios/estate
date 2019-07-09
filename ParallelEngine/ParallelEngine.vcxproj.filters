@@ -49,6 +49,9 @@
     <Filter Include="Header Files\ingamemenu">
       <UniqueIdentifier>{6aa13f0c-a9c5-43bb-a29b-4333d86b89c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ingamemenu">
+      <UniqueIdentifier>{fb5de402-86dd-46ab-a5b7-03213e293885}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -94,6 +97,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mousekey.cpp">
+      <Filter>Source Files\handler</Filter>
+    </ClCompile>
+    <ClCompile Include="igm.cpp">
+      <Filter>Source Files\ingamemenu</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonmanager.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
   </ItemGroup>
@@ -157,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="igm.h">
       <Filter>Header Files\ingamemenu</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonmanager.h">
+      <Filter>Header Files\handler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

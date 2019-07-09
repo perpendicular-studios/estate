@@ -22,6 +22,7 @@ private:
 	std::vector<std::shared_ptr<Entity>> entityList;
 	BuildingList* bl;
 	MouseKey* mk;
+	IGM* menu;
 
 	float mouseX = 0, mouseY = 0;
 	float hoverX = 0, hoverY = 0;

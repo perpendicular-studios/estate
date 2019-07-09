@@ -4,6 +4,8 @@
 Display::Display(GSM * g) : gsm(g) {
 	al_init();
 	al_init_primitives_addon();
+	al_init_font_addon();
+	al_init_ttf_addon();
 	display = al_create_display(Var::WIDTH, Var::HEIGHT);
 	AssetLoader * loader = new AssetLoader();
 	queue = al_create_event_queue();

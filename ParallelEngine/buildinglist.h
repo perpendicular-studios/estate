@@ -8,8 +8,6 @@
 
 class BuildingList {
 public:
-	BuildingList() {}
-	~BuildingList();
 
 	// initialize new building, adds to list.
 	void addBuilding(Building *buildingObject);

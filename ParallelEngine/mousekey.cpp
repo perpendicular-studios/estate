@@ -10,8 +10,8 @@ void MouseKey::update(ALLEGRO_KEYBOARD_STATE& ks_, ALLEGRO_MOUSE_STATE& ms_) {
 	else if (ms.buttons & 2) { currMouseState = 2; }
 	else currMouseState = 0;
 
-	if (prevMouseState != currMouseState && prevMouseState == 1) { rightClick = true; }
-	else if (prevMouseState != currMouseState && prevMouseState == 2) { leftClick = true; }
+	if (prevMouseState != currMouseState && prevMouseState == 1) { leftClick = true; }
+	else if (prevMouseState != currMouseState && prevMouseState == 2) { rightClick = true; }
 	else rightClick = leftClick = false;
 
 	//keyboard single presses

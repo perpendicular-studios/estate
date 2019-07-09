@@ -1,19 +1,16 @@
 #ifndef BUTTONMANAGER_H
 #define BUTTONMANAGER_H
 
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_primitives.h>
-#include "mousekey.h"
+#include <vector>
+#include "button.h"
 
-
-class Button {
+class ButtonManager {
 public:
-	Button();
-	~Button();
-	void drawButton(float x, float y, ALLEGRO_COLOR color);
-
-	MouseKey* mk;
+	void addButton(Button* b);
+	void clearButtons();
+	int size() { return buttonList.size(); }
 	bool isClicked = false; 
+	std::vector<Button*> getList() { return buttonList; };
+	std::vector<Button*> buttonList;
 };
 #endif

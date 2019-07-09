@@ -40,7 +40,7 @@ void PlayState::render() {
 	al_identity_transform(&trans);
 	al_use_transform(&trans);
 
-	menu->update();
+	menu->render();
 
 	//used for camera
 	al_identity_transform(&trans);
@@ -55,6 +55,7 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->update();
 	bl->update();
 	mk->update(ks, ms);
+	menu->update(mk->leftClick, ms.x, ms.y);
 
 	mouseX = ms.x;
 	mouseY = ms.y;
@@ -64,5 +65,5 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
 
-	bl->setBuild(mk->leftClick);
+	//bl->setBuild(mk->leftClick);
 }

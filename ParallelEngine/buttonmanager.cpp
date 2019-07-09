@@ -1,10 +1,9 @@
 #include "buttonmanager.h"
 
-Button::Button() {
-
+void ButtonManager::addButton(Button* b) {
+	buttonList.push_back(b);
 }
 
-Button::~Button() {
-
-
+void ButtonManager::clearButtons() {
+	buttonList.clear();
 }

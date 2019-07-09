@@ -105,6 +105,9 @@
     <ClCompile Include="buttonmanager.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>Source Files\handler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files\ingamemenu</Filter>
     </ClInclude>
     <ClInclude Include="buttonmanager.h">
+      <Filter>Header Files\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
       <Filter>Header Files\handler</Filter>
     </ClInclude>
   </ItemGroup>

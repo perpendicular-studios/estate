@@ -1,6 +1,6 @@
-#include "mousekey.h"
+#include "inputhandler.h"
 
-void MouseKey::update(ALLEGRO_KEYBOARD_STATE& ks_, ALLEGRO_MOUSE_STATE& ms_) {
+void InputHandler::update(ALLEGRO_KEYBOARD_STATE& ks_, ALLEGRO_MOUSE_STATE& ms_) {
 	ms = ms_;
 	ks = ks_;
 

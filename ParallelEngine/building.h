@@ -35,7 +35,8 @@ protected:
 	int width = 0, height = 0;
 	std::shared_ptr<TileMap> tm;
 	int id;
-	int stone, metal, wood, food, gold;
+	int stone, wood, food, gold;
+	std::vector<std::pair<std::string, int>> misc; // other required misc items, and quantity of that misc item
 	int hp;
 	int lvl;
 	ALLEGRO_BITMAP* bitmap;

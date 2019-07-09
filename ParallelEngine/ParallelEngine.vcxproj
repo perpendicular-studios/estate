@@ -170,8 +170,11 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="gsm.h" />
     <ClInclude Include="igm.h" />
-    <ClInclude Include="mousekey.h" />
+    <ClInclude Include="inputhandler.h" />
+    <ClInclude Include="inventory.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="playstate.h" />
+    <ClInclude Include="resources.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tilemap.h" />
     <ClInclude Include="var.h" />
@@ -189,8 +192,9 @@
     <ClCompile Include="display.cpp" />
     <ClCompile Include="gsm.cpp" />
     <ClCompile Include="igm.cpp" />
+    <ClCompile Include="inputhandler.cpp" />
+    <ClCompile Include="inventory.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mousekey.cpp" />
     <ClCompile Include="playstate.cpp" />
     <ClCompile Include="building.cpp" />
     <ClCompile Include="tilemap.cpp" />

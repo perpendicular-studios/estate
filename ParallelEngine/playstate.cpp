@@ -8,7 +8,6 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm->loadTileMap("data/tilemap.ptm");
 	cam = std::shared_ptr<Camera>(new Camera(500, 500, tm)); //100, 500
 	bl = new BuildingList();
-	mk = new MouseKey();
 	menu = new IGM();
 }
 
@@ -55,8 +54,8 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	tm->update();
 	cam->update();
 	bl->update();
-	mk->update(ks, ms);
-	menu->update(mk->leftClick, ms.x, ms.y);
+	input.update(ks, ms);
+	menu->update(input.leftClickDown(), ms.x, ms.y);
 
 	mouseX = ms.x;
 	mouseY = ms.y;

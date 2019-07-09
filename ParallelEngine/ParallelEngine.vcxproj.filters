@@ -46,6 +46,12 @@
     <Filter Include="Source Files\ingamemenu">
       <UniqueIdentifier>{fb5de402-86dd-46ab-a5b7-03213e293885}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\entity">
+      <UniqueIdentifier>{cc7218b5-611c-4365-98cb-9a108ef73a4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entity">
+      <UniqueIdentifier>{ab46718d-82b8-451c-ae97-b522a328bc12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,9 +90,6 @@
     <ClCompile Include="castle.cpp">
       <Filter>Source Files\building</Filter>
     </ClCompile>
-    <ClCompile Include="mousekey.cpp">
-      <Filter>Source Files\handler</Filter>
-    </ClCompile>
     <ClCompile Include="igm.cpp">
       <Filter>Source Files\ingamemenu</Filter>
     </ClCompile>
@@ -95,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="button.cpp">
       <Filter>Source Files\handler</Filter>
+    </ClCompile>
+    <ClCompile Include="inputhandler.cpp">
+      <Filter>Source Files\handler</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>Source Files\entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,9 +152,6 @@
     <ClInclude Include="castle.h">
       <Filter>Header Files\building</Filter>
     </ClInclude>
-    <ClInclude Include="mousekey.h">
-      <Filter>Header Files\handler</Filter>
-    </ClInclude>
     <ClInclude Include="igm.h">
       <Filter>Header Files\ingamemenu</Filter>
     </ClInclude>
@@ -154,6 +160,18 @@
     </ClInclude>
     <ClInclude Include="button.h">
       <Filter>Header Files\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="inputhandler.h">
+      <Filter>Header Files\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="resources.h">
+      <Filter>Header Files\entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

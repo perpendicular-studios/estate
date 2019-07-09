@@ -6,7 +6,7 @@
 #include "camera.h"
 #include "building.h"
 #include "buildinglist.h"
-#include "mousekey.h"
+#include "inputhandler.h"
 #include "igm.h"
 
 class PlayState : public State {
@@ -18,7 +18,7 @@ private:
 	std::shared_ptr<TileMap> tm;
 	std::shared_ptr<Camera> cam;
 	BuildingList* bl;
-	MouseKey* mk;
+	InputHandler input;
 	IGM* menu;
 
 	float mouseX = 0, mouseY = 0;

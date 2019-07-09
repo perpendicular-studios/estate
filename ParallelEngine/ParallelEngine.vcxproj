@@ -168,12 +168,9 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="castle.h" />
     <ClInclude Include="display.h" />
-    <ClInclude Include="entity.h" />
-    <ClInclude Include="entitymanager.h" />
     <ClInclude Include="gsm.h" />
     <ClInclude Include="igm.h" />
     <ClInclude Include="mousekey.h" />
-    <ClInclude Include="peasant.h" />
     <ClInclude Include="playstate.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tilemap.h" />
@@ -190,12 +187,10 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="castle.cpp" />
     <ClCompile Include="display.cpp" />
-    <ClCompile Include="entity.cpp" />
     <ClCompile Include="gsm.cpp" />
     <ClCompile Include="igm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mousekey.cpp" />
-    <ClCompile Include="peasant.cpp" />
     <ClCompile Include="playstate.cpp" />
     <ClCompile Include="building.cpp" />
     <ClCompile Include="tilemap.cpp" />

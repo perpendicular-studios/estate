@@ -15,7 +15,6 @@ void IGM::background() {
 void IGM::defaultMenu() {
 	build->drawButton();
 	bm->addButton(build);
-
 }
 
 //state 1

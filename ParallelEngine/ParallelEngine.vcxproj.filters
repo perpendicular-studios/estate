@@ -19,14 +19,8 @@
     <Filter Include="Source Files\state">
       <UniqueIdentifier>{48c06f05-7ae6-41ae-ba75-4e57f49a48ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\entity">
-      <UniqueIdentifier>{bb49b7d6-bd77-457e-87e0-dec4d633c068}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\handler">
       <UniqueIdentifier>{5b6016d2-e171-4fe2-a770-2780b1e58eb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\entity">
-      <UniqueIdentifier>{1daf2fdb-98f7-41bd-b93a-672a1a3cd4a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\state">
       <UniqueIdentifier>{96e22473-7a66-4379-a69b-27662e98fa59}</UniqueIdentifier>
@@ -66,9 +60,6 @@
     <ClCompile Include="display.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>Source Files\entity</Filter>
-    </ClCompile>
     <ClCompile Include="gsm.cpp">
       <Filter>Source Files\state</Filter>
     </ClCompile>
@@ -93,9 +84,6 @@
     <ClCompile Include="castle.cpp">
       <Filter>Source Files\building</Filter>
     </ClCompile>
-    <ClCompile Include="peasant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="mousekey.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
@@ -118,9 +106,6 @@
     </ClInclude>
     <ClInclude Include="display.h">
       <Filter>Header Files\handler</Filter>
-    </ClInclude>
-    <ClInclude Include="entity.h">
-      <Filter>Header Files\entity</Filter>
     </ClInclude>
     <ClInclude Include="gsm.h">
       <Filter>Header Files\state</Filter>
@@ -149,9 +134,6 @@
     <ClInclude Include="camera.h">
       <Filter>Header Files\handler</Filter>
     </ClInclude>
-    <ClInclude Include="peasant.h">
-      <Filter>Header Files\entity</Filter>
-    </ClInclude>
     <ClInclude Include="building.h">
       <Filter>Header Files\building</Filter>
     </ClInclude>
@@ -160,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="castle.h">
       <Filter>Header Files\building</Filter>
-    </ClInclude>
-    <ClInclude Include="entitymanager.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mousekey.h">
       <Filter>Header Files\handler</Filter>

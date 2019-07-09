@@ -2,8 +2,6 @@
 #define PLAYSTATE_H
 
 #include "state.h"
-#include "entity.h"
-#include "player.h"
 #include "tilemap.h"
 #include "camera.h"
 #include "building.h"
@@ -19,7 +17,6 @@ public:
 private:
 	std::shared_ptr<TileMap> tm;
 	std::shared_ptr<Camera> cam;
-	std::vector<std::shared_ptr<Entity>> entityList;
 	BuildingList* bl;
 	MouseKey* mk;
 	IGM* menu;

@@ -6,11 +6,11 @@
 class Inventory {
 public:
 	Inventory(int f, int g, int w, int s) : food(f), gold(g), wood(w), stone(s) {}
-	void addResource(Resource res);
-	void removeResource(Resource res, int quantity);
+	void addResource(Resource * res);
+	void removeResource(Resource * res, int quantity);
 
 private:
-	std::map<std::string, Resource> inventory;
+	std::map<std::string, Resource*> inventory;
 	int food;
 	int gold;
 	int wood;

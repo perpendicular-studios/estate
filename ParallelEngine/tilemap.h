@@ -12,6 +12,7 @@ public:
 	//block types
 	static const int NORMAL = 0;
 	static const int BLOCKED = 1;
+	static const int RESOURCE = 2;
 
 	TileMap(int tileWidth_, int tileHeight_) : tileWidth(tileWidth_), tileHeight(tileHeight_) { waterY = 4, speed = 0.02f, dy = speed, time = 0; cols = rows = 0; height = width = 0; }
 	~TileMap();
@@ -23,6 +24,10 @@ public:
 
 	int getType(int row, int col) { 
 		return collisionMap[row][col];
+	}
+
+	int getTile(int row, int col) {
+		return map[row][col];
 	}
 
 	Vector2f screenToIso(int x, int y) {

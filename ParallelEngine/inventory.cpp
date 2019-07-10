@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-void Inventory::addResource(Resource * res) {
+void Inventory::addResource(const Resource * res) {
 	switch (res->getResourceType()) {
 	case FOOD:
 		food += res->getYield();
@@ -8,34 +8,30 @@ void Inventory::addResource(Resource * res) {
 		wood += res->getYield();
 	case STONE:
 		stone += res->getYield();
+	case GOLD:
+		gold += res->getYield();
 	case MISC:
-		auto it = inventory.find(res->getName());
-		if (it == inventory.end()) {
-			inventory[res->getName()] = res;
-			inventory[res->getName()]->addOne();
-		}
-		else {
-			inventory[res->getName()]->addOne();
-		}
+		inventory[res->getName()].push_back(res);
 	}
 }
 
-void Inventory::removeResource(Resource * res, int quantity) {
+void Inventory::removeResource(const Resource * res, int quantity) {
 	switch (res->getResourceType()) {
 	case FOOD:
-		food -= quantity;
+		(food >= quantity) ? food -= quantity : throw "Not enough food!";		
 	case WOOD:
-		wood -= quantity;
+		(wood >= quantity) ? wood -= quantity : throw "Not enough wood!";
 	case STONE:
-		stone -= quantity;
+		(stone >= quantity) ? stone -= quantity : throw "Not enough stone!";
+	case GOLD:
+		(gold >= quantity) ? gold -= quantity : throw "Not enough gold!";
 	case MISC:
-		auto it = inventory.find(res->getName());
-		if (it == inventory.end()) {
-			// the player does not have the required MISC resource, throw an error TODO
+		if (inventory[res->getName()].size() >= quantity) {
+			auto begin = inventory[res->getName()].begin();
+			inventory[res->getName()].erase(begin, begin + quantity);
 		}
 		else {
-			inventory[res->getName()]->subOne();
-			if (inventory[res->getName()]->getQuantity() == 0) inventory.erase(res->getName());
+			throw "Not enough " + res->getName() + "!";
 		}
 	}
 }

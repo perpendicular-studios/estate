@@ -2,15 +2,16 @@
 #define INVENTORY_H
 #include "resources.h"
 #include <map>
+#include <vector>
 
 class Inventory {
 public:
 	Inventory(int f, int g, int w, int s) : food(f), gold(g), wood(w), stone(s) {}
-	void addResource(Resource * res);
-	void removeResource(Resource * res, int quantity);
+	void addResource(const Resource * res);
+	void removeResource(const Resource * res, int quantity);
 
 private:
-	std::map<std::string, Resource*> inventory;
+	std::map<std::string, std::vector<const Resource*>> inventory;
 	int food;
 	int gold;
 	int wood;

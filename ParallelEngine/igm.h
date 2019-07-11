@@ -7,39 +7,43 @@
 #include <allegro5/allegro_ttf.h>
 #include "var.h"
 #include <string>
-#include <vector>
 #include "buttonmanager.h"
+#include "menustates.h"
+#include "buildinglist.h"
+#include <iostream>
 
 //in-game menu
 class IGM {
 public:
 	IGM();
-	// initialize new state, adds to list.
-	void addState(int state);
-	// delete state 
-	void popState(int buildingID);
 	// update states
-	void update(bool clicked, int x, int y);
+	void update(BuildingList* bl, bool clicked, int x, int y);
 	// render states 
 	void render();
 	// returns current state
-	void stateSelector(int state);
+	void stateSelector(menuStates state);
+
 
 	//basic menu types
+	void gameBackground();
+	void menuBackground();
 	void defaultMenu();
 	void buildingMenu();
-	void background();
+	void diploMenu();
+	void overviewMenu();
 	
 	
+	//getter methods
+	bool getIsBuild() { return isBuild; }
+	 
 
 private:
-	std::vector<int> menu; 
-	int defaultMenuNum = 2;
-	int currState;
+	menuStates currState, prevState;
 	ALLEGRO_FONT* basic_font20 = al_load_font("arial.ttf", 20, 0);
 	bool isClicked = false;
 	ButtonManager* bm;
-	Button* build;
-
+	Button *flag, *production, *build, *exit, *castle;
+	bool isBuild = false;
+	int relativeClicks = 0;
 };
 #endif

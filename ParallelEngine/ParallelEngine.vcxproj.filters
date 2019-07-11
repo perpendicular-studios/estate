@@ -182,6 +182,9 @@
     <ClInclude Include="entity.h">
       <Filter>Header Files\entity</Filter>
     </ClInclude>
+    <ClInclude Include="menustates.h">
+      <Filter>Header Files\ingamemenu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

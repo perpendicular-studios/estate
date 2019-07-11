@@ -173,6 +173,7 @@
     <ClInclude Include="igm.h" />
     <ClInclude Include="inputhandler.h" />
     <ClInclude Include="inventory.h" />
+    <ClInclude Include="menustates.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playstate.h" />
     <ClInclude Include="resources.h" />

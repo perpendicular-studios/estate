@@ -191,6 +191,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="castle.cpp" />
     <ClCompile Include="display.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="gsm.cpp" />
     <ClCompile Include="igm.cpp" />
     <ClCompile Include="inputhandler.cpp" />

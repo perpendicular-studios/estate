@@ -31,5 +31,4 @@ static const Resource* HEAVY_STONE_ORE = new Resource("h_stone", STONE, 10);
 static const Resource* WOOL = new Resource("Cloth", MISC, 1);
 static const Resource* IRON_ORE = new Resource("Iron", MISC, 1);
 
-
 #endif

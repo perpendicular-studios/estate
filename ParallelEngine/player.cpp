@@ -44,3 +44,36 @@ void Player::updateInventory() {
 		}
 	}
 }
+
+bool Player::buyBuilding(Building* building) {
+	int foodCost = building->getFoodCost();
+	int stoneCost = building->getStoneCost();
+	int woodCost = building->getWoodCost();
+	int goldCost = building->getGoldCost();
+
+	bool success = false;
+
+	if (building->requiresItems()) {
+		for (auto req : building->getRequiredItems()) {
+			try {
+				inventory->removeResource(req.first, req.second);
+			}
+			catch (char* e) {
+				std::cout << e << std::endl;
+			}
+		}
+	}
+
+	try {
+		if (foodCost != 0) inventory->removeResource(FOOD, foodCost);
+		if (stoneCost != 0) inventory->removeResource(STONE, stoneCost);
+		if (woodCost != 0) inventory->removeResource(WOOD, woodCost);
+		if (goldCost != 0) inventory->removeResource(GOLD, goldCost);
+		success = true;
+	}
+	catch (char* e) {
+		std::cout << e << std::endl;
+	}
+
+	return success;
+}

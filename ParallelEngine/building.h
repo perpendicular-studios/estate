@@ -30,13 +30,22 @@ public:
 	int getHp() const { return hp; }
 	int loseHp(int dmg) { hp -= dmg; }
 	bool isStanding() { return hp > 0; }
+
+	int getStoneCost() const { return stone; }
+	int getWoodCost() const { return wood; }
+	int getFoodCost() const { return food; }
+	int getGoldCost() const { return gold; }
+
+	bool requiresItems() const { return misc.empty(); }
+	std::vector<std::pair<const Resource*, int>> getRequiredItems() const { return misc; }
+
 protected:
 	int x = 0, y = 0;
 	int width = 0, height = 0;
 	std::shared_ptr<TileMap> tm;
 	int id;
 	int stone, wood, food, gold;
-	std::vector<std::pair<std::string, int>> misc; // other required misc items, and quantity of that misc item
+	std::vector<std::pair<const Resource*, int>> misc; // other required misc items, and quantity of that misc item
 	int hp;
 	int lvl;
 	ALLEGRO_BITMAP* bitmap;

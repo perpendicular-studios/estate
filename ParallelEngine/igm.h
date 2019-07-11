@@ -21,7 +21,7 @@ public:
 	// render states 
 	void render();
 	// returns current state
-	void stateSelector(menuStates state);
+	void stateSelector(MenuState state);
 
 
 	//basic menu types
@@ -38,7 +38,7 @@ public:
 	 
 
 private:
-	menuStates currState, prevState;
+	MenuState currState, prevState;
 	ALLEGRO_FONT* basic_font20 = al_load_font("arial.ttf", 20, 0);
 	bool isClicked = false;
 	ButtonManager* bm;

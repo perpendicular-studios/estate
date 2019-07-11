@@ -18,16 +18,16 @@ public:
 	float fontX, fontY;
 	std::string text;
 	
-	menuStates returnState;
+	MenuState returnState;
 	int action;
 
 	//functions
 	Button(float x1, float y1, float x2, float y2, ALLEGRO_COLOR backgroundColor, ALLEGRO_FONT* fontType, 
-		ALLEGRO_COLOR fontColor, float fontX, float fontY, std::string text, menuStates returnState_);
+		ALLEGRO_COLOR fontColor, float fontX, float fontY, std::string text, MenuState returnState_);
 	Button(float x1_, float y1_, float x2_, float y2_, ALLEGRO_COLOR backgroundColor_, ALLEGRO_FONT* fontType_,
 		ALLEGRO_COLOR fontColor_, float fontX_, float fontY_, std::string text_, int action_);
 
-	menuStates getState() { return returnState; }
+	MenuState getState() { return returnState; }
 
 	void drawButton();
 	bool isInBounds(float x, float y);

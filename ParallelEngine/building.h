@@ -7,6 +7,7 @@
 #include "animationset.h"
 #include "tilemap.h"
 #include "assetloader.h"
+#include "resources.h"
 
 class Building {	
 public:

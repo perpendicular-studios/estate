@@ -48,7 +48,7 @@ void IGM::buildingMenu() {
 	
 }
 
-void IGM::stateSelector(menuStates state) {
+void IGM::stateSelector(MenuState state) {
 	switch (state)
 	{
 	case reset:

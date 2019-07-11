@@ -1,7 +1,7 @@
 #include "button.h"
 
 Button::Button(float x1_, float y1_, float x2_, float y2_, ALLEGRO_COLOR backgroundColor_, ALLEGRO_FONT* fontType_, 
-	ALLEGRO_COLOR fontColor_, float fontX_, float fontY_, std::string text_, menuStates returnState_) {
+	ALLEGRO_COLOR fontColor_, float fontX_, float fontY_, std::string text_, MenuState returnState_) {
 	backgroundColor = backgroundColor_;
 	fontType = fontType_;
 	fontColor = fontColor_;

@@ -55,7 +55,7 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->update();
 	bl->update();
 	input.update(ks, ms);
-	menu->update(input.leftClickDown(), ms.x, ms.y);
+	menu->update(bl, input.leftClickDown(), ms.x, ms.y);
 
 	mouseX = ms.x;
 	mouseY = ms.y;
@@ -65,5 +65,5 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
 
-	//bl->setBuild(mk->leftClick);
+	bl->setBuild(menu->getIsBuild());
 }

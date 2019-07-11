@@ -28,7 +28,7 @@ void BuildingList::update() {
 
 			isPlacingTrue = false;
 		}
-		else if (isPlacingTrue == false) { isPlacingTrue = true; }
+		else if (isPlacingTrue == false) { isPlacingTrue = true;}
 	}
 }
 

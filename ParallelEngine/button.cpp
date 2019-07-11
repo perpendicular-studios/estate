@@ -1,7 +1,7 @@
 #include "button.h"
 
 Button::Button(float x1_, float y1_, float x2_, float y2_, ALLEGRO_COLOR backgroundColor_, ALLEGRO_FONT* fontType_, 
-	ALLEGRO_COLOR fontColor_, float fontX_, float fontY_, std::string text_, int returnState_) {
+	ALLEGRO_COLOR fontColor_, float fontX_, float fontY_, std::string text_, menuStates returnState_) {
 	backgroundColor = backgroundColor_;
 	fontType = fontType_;
 	fontColor = fontColor_;
@@ -15,8 +15,11 @@ Button::Button(float x1_, float y1_, float x2_, float y2_, ALLEGRO_COLOR backgro
 	returnState = returnState_;
 }
 
+
+
 bool Button::isInBounds(float x_, float y_) {
-	if (x_ < x2 && x_ > x1 && y_ < y2 && y_ > y1) return true;
+	if (x_ < x2 && x_ > x1 && y_ < y2 && y_ > y1) { return true; }
+	
 }
 
 void Button::drawButton() {

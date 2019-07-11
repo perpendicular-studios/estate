@@ -24,7 +24,9 @@ public:
 	
 	void setBuild(bool b) { isBuildTrue = b; }
 	void setPlacing(bool p) { isPlacingTrue = p; }
+
 	bool getPlacing() { return isPlacingTrue; }
+
 	void setx(int x_) { x = x_; }
 	void sety(int y_) { y = y_; }
 private:

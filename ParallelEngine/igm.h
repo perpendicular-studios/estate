@@ -7,6 +7,7 @@
 #include <allegro5/allegro_ttf.h>
 #include "var.h"
 #include <string>
+#include "player.h"
 #include "buttonmanager.h"
 #include "menustates.h"
 #include "buildinglist.h"
@@ -15,7 +16,7 @@
 //in-game menu
 class IGM {
 public:
-	IGM();
+	IGM(Player * player_);
 	// update states
 	void update(BuildingList* bl, bool clicked, int x, int y);
 	// render states 
@@ -32,16 +33,15 @@ public:
 	void diploMenu();
 	void overviewMenu();
 	
-	
 	//getter methods
 	bool getIsBuild() { return isBuild; }
 	 
-
 private:
 	MenuState currState, prevState;
-	ALLEGRO_FONT* basic_font20 = al_load_font("arial.ttf", 20, 0);
+	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
 	bool isClicked = false;
 	ButtonManager* bm;
+	Player* player;
 	Button *flag, *production, *build, *exit, *castle;
 	bool isBuild = false;
 	int relativeClicks = 0;

@@ -7,6 +7,7 @@
 #include "building.h"
 #include "buildinglist.h"
 #include "inputhandler.h"
+#include "player.h"
 #include "igm.h"
 
 class PlayState : public State {
@@ -20,6 +21,7 @@ private:
 	BuildingList* bl;
 	InputHandler input;
 	IGM* menu;
+	Player* player;
 
 	float mouseX = 0, mouseY = 0;
 	float hoverX = 0, hoverY = 0;

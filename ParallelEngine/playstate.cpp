@@ -8,7 +8,8 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm->loadTileMap("data/tilemap.ptm");
 	cam = std::shared_ptr<Camera>(new Camera(500, 500, tm)); //100, 500
 	bl = new BuildingList();
-	menu = new IGM();
+	player = new Player();
+	menu = new IGM(player);
 }
 
 void PlayState::render() {
@@ -40,7 +41,6 @@ void PlayState::render() {
 	al_use_transform(&trans);
 
 	menu->render();
-	
 
 	//used for camera
 	al_identity_transform(&trans);

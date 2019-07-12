@@ -53,13 +53,15 @@ bool Player::buyBuilding(Building* building) {
 
 	bool success = false;
 
-	if (building->requiresItems()) {
+	if (building->requiresItems() && inventory->hasItems()) {
 		for (auto req : building->getRequiredItems()) {
-			try {
-				inventory->removeResource(req.first, req.second);
-			}
-			catch (char* e) {
-				std::cout << e << std::endl;
+			if (inventory->hasItem(req.first->getName())) {
+				try {
+					inventory->removeResource(req.first, req.second);
+				}
+				catch (char* e) {
+					std::cout << e << std::endl;
+				}
 			}
 		}
 	}

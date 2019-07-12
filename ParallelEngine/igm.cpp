@@ -1,6 +1,6 @@
 #include "igm.h"
 
-IGM::IGM() {
+IGM::IGM(Player* player_) : player(player_) {
 	currState = defaultState;
 	bm = new ButtonManager;
 	build = new Button(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, al_map_rgb(255, 51, 0), basic_font20, al_map_rgb(255, 255, 255), 25, Var::HEIGHT - 150, "Build", overviewState);
@@ -12,6 +12,10 @@ IGM::IGM() {
 
 void IGM::gameBackground() {
 	al_draw_filled_rectangle(Var::WIDTH - 500, 0, Var::WIDTH, 30, al_map_rgb(153, 102, 0)); //resources background 
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 480, 5, 0, std::to_string(player->getGold()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 330, 5, 0, std::to_string(player->getFood()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 180, 5, 0, std::to_string(player->getStone()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 30, 5, 0, std::to_string(player->getWood()).c_str());
 	al_draw_filled_rectangle(0, 0, 100, 100, al_map_rgb(0, 0, 0));							//flag black background
 
 	production->drawButton();

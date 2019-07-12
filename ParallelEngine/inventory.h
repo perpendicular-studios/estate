@@ -10,6 +10,15 @@ public:
 	void addResource(const Resource * res);
 	void removeResource(ResourceType res, int quantity);
 	void removeResource(const Resource * res, int quantity);
+
+	int getFood() const { return food; }
+	int getGold() const { return gold; }
+	int getWood() const { return wood; }
+	int getStone() const { return stone; }
+
+	bool hasItems() { return inventory.empty(); }
+	bool hasItem(std::string key) { return !(inventory[key].empty()); } //if not empty, inventory has item
+
 private:
 	std::map<std::string, std::vector<const Resource*>> inventory;
 	int food;

@@ -7,8 +7,17 @@
 #include <vector>
 class Player {
 public:
+	Player() { inventory = new Inventory(0,0,0,0); }
+
 	void updateInventory(); //turn by turn update
 	bool buyBuilding(Building* building);
+
+	int getGold() { return inventory->getGold(); }
+	int getStone() { return inventory->getStone(); }
+	int getWood() { return inventory->getWood(); }
+	int getFood() { return inventory->getFood(); }
+
+	Inventory* getInventory() { return inventory; }
 private:
 	std::vector<Entity*> entities;
 	Inventory * inventory;

@@ -67,10 +67,10 @@ bool Player::buyBuilding(Building* building) {
 	}
 
 	try {
-		if (foodCost != 0) inventory->removeResource(FOOD, foodCost);
-		if (stoneCost != 0) inventory->removeResource(STONE, stoneCost);
-		if (woodCost != 0) inventory->removeResource(WOOD, woodCost);
-		if (goldCost != 0) inventory->removeResource(GOLD, goldCost);
+		if (foodCost != 0 && getFood() >= foodCost) inventory->removeResource(FOOD, foodCost);
+		if (stoneCost != 0 && getStone() >= stoneCost) inventory->removeResource(STONE, stoneCost);
+		if (woodCost != 0 && getWood() >= woodCost) inventory->removeResource(WOOD, woodCost);
+		if (goldCost != 0 && getGold() >= goldCost) inventory->removeResource(GOLD, goldCost);
 		success = true;
 	}
 	catch (char* e) {

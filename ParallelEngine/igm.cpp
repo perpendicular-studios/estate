@@ -8,14 +8,16 @@ IGM::IGM(Player* player_) : player(player_) {
 	production = new Button(0, 50, 50, 100, al_map_rgb(0, 0, 255), basic_font20, al_map_rgb(255, 255, 255), 0, 50, "Prod", buildState);
 	exit = new Button(225, 100, 250, 125, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), 225, 100, "X", defaultState);
 	castle = new Button(25, 150, 75, 200, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), 25, 150, "Castle", action);
+	misc = new Button(Var::WIDTH - 50, 0, Var::WIDTH, 50, al_map_rgb(211, 211, 211), basic_font20, al_map_rgb(255, 255, 255), 0, 0, "MISC", inventory); // should open an inventory
 }
 
 void IGM::gameBackground() {
-	al_draw_filled_rectangle(Var::WIDTH - 500, 0, Var::WIDTH, 30, al_map_rgb(153, 102, 0)); //resources background 
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 480, 5, 0, std::to_string(player->getGold()).c_str());
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 330, 5, 0, std::to_string(player->getFood()).c_str());
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 180, 5, 0, std::to_string(player->getStone()).c_str());
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 30, 5, 0, std::to_string(player->getWood()).c_str());
+	al_draw_filled_rectangle(Var::WIDTH - 550, 0, Var::WIDTH - 50, 40, al_map_rgb(153, 102, 0)); //resources background 
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 530, 5, 0, std::to_string(player->getGold()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 380, 5, 0, std::to_string(player->getFood()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 230, 5, 0, std::to_string(player->getStone()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 80, 5, 0, std::to_string(player->getWood()).c_str());
+	misc->drawButton();
 	al_draw_filled_rectangle(0, 0, 100, 100, al_map_rgb(0, 0, 0));							//flag black background
 
 	production->drawButton();

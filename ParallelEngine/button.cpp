@@ -1,8 +1,8 @@
 #include "button.h"
 
-Button::Button(float x1_, float y1_, float x2_, float y2_, ALLEGRO_COLOR backgroundColor_, ALLEGRO_FONT* fontType_, 
+Button::Button(float x1_, float y1_, float x2_, float y2_, ALLEGRO_BITMAP* bitmap_, ALLEGRO_FONT* fontType_, 
 	ALLEGRO_COLOR fontColor_, std::string text_, MenuState returnState_) {
-	backgroundColor = backgroundColor_;
+	bitmap = bitmap_;
 	fontType = fontType_;
 	fontColor = fontColor_;
 	text = text_;
@@ -23,6 +23,7 @@ bool Button::isInBounds(float x_, float y_) {
 }
 
 void Button::drawButton() {
-	al_draw_filled_rectangle(x1, y1, x2, y2, backgroundColor);
+	al_draw_bitmap(bitmap, x1, y1, 0);
+//	al_draw_filled_rectangle(x1, y1, x2, y2, backgroundColor);
 	al_draw_text(fontType, fontColor, fontX, fontY, 0, text.c_str());
 }

@@ -12,6 +12,7 @@
 #include "menustates.h"
 #include "buildinglist.h"
 #include <iostream>
+#include "assetloader.h"
 
 //in-game menu
 class IGM {

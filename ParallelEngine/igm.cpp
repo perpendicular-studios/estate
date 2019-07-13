@@ -3,12 +3,12 @@
 IGM::IGM(Player* player_) : player(player_) {
 	currState = defaultState;
 	bm = new ButtonManager;
-	build = new MenuButton(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, al_map_rgb(255, 51, 0), basic_font20, al_map_rgb(255, 255, 255), "Build", overviewState);
-	flag = new MenuButton(0, 0, 100, 50, al_map_rgb(0, 204, 0), basic_font20, al_map_rgb(255, 255, 255), "Flag", overviewState);
-	production = new MenuButton(0, 50, 50, 100, al_map_rgb(0, 0, 255), basic_font20, al_map_rgb(255, 255, 255), "Prod", buildState);
-	exit = new MenuButton(225, 100, 250, 125, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), "X", defaultState);
-	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, al_map_rgb(211, 211, 211), basic_font20, al_map_rgb(255, 255, 255), "MISC", inventory); // should open an inventory
-	castle = new BuildButton(25, 150, 75, 200, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), "Castle", c);
+	build = new MenuButton(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", overviewState);
+	flag = new MenuButton(0, 0, 100, 50, AssetLoader::manager->getImage("flagbg"), basic_font20, al_map_rgb(255, 255, 255), "Flag", overviewState);
+	production = new MenuButton(0, 50, 50, 100, AssetLoader::manager->getImage("productionbg"), basic_font20, al_map_rgb(255, 255, 255), "Prod", buildState);
+	exit = new MenuButton(225, 100, 250, 125, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", defaultState);
+	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", inventory); // should open an inventory
+	castle = new BuildButton(25, 150, 75, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", c);
 }
 
 void IGM::gameBackground() {

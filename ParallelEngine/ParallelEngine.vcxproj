@@ -178,6 +178,7 @@
     <ClInclude Include="menustates.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playstate.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="resources.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tilemap.h" />
@@ -212,10 +213,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\basicbutton.png" />
     <Image Include="images\castle.png" />
+    <Image Include="images\flagbg.png" />
     <Image Include="images\hover.png" />
+    <Image Include="images\miscbg.png" />
     <Image Include="images\player.png" />
+    <Image Include="images\productionbg.png" />
+    <Image Include="images\resourcebg.png" />
     <Image Include="images\tileset.png" />
+    <Image Include="images\x.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="arial.ttf" />

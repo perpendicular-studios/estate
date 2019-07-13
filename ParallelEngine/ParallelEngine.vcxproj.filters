@@ -203,6 +203,9 @@
     <ClInclude Include="buildbutton.h">
       <Filter>Header Files\button</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -221,6 +224,24 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\castle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\resourcebg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\basicbutton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\flagbg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\productionbg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\miscbg.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -8,6 +8,12 @@ AssetLoader::AssetLoader() {
 	manager->loadImage("images/tileset.png", "tileset");
 	manager->loadImage("images/hover.png", "hover", true);
 	manager->loadImage("images/castle.png", "castle", true);
+	manager->loadImage("images/resourcebg.png", "resourcebg", false);
+	manager->loadImage("images/basicbutton.png", "basicbutton", false);
+	manager->loadImage("images/productionbg.png", "productionbg", false);
+	manager->loadImage("images/flagbg.png", "flagbg", false);
+	manager->loadImage("images/x.png", "x", false);
+	manager->loadImage("images/miscbg.png", "miscbg", false);
 	std::cout << "Done Loading Images..." << std::endl;
 
 }

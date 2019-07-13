@@ -18,17 +18,18 @@ void BuildingList::clearList() {
 	bl.clear();
 }
 
-void BuildingList::update() {
+void BuildingList::update(Building* b, std::string buildingType) {
 	if (isBuildTrue) { 
 		if (isPlacingTrue) {
-			Building* castle1 = new Castle(1);
-			addBuilding(castle1);
-			castle1->setx(x);
-			castle1->sety(y);
-
+			if (buildingType == "Castle") { b = new Castle(bl.size()); }
+			addBuilding(b);
+			b->setx(x);
+			b->sety(y);
+			
 			isPlacingTrue = false;
 		}
 		else if (isPlacingTrue == false) { isPlacingTrue = true;}
+		isBuildTrue = false;
 	}
 }
 

@@ -12,6 +12,7 @@
 class Building {	
 public:
 	Building(std::shared_ptr<TileMap> tm);
+	Building(ALLEGRO_BITMAP* bitmap);
 
 	int getx() const { return x; }
 	int gety() const { return y; }
@@ -21,9 +22,6 @@ public:
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
 	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);
 	virtual ALLEGRO_BITMAP* getBaseImg() { return bitmap; }
-
-	virtual void render() = 0;
-	virtual void update() = 0;
 	
 	int getID() { return id; }
 	void setID(int id_) { id = id_; }

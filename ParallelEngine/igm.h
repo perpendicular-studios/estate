@@ -34,8 +34,9 @@ public:
 	void diploMenu();
 	void overviewMenu();
 	
-	//getter methods
-	bool getIsBuild() { return isBuild; }
+	// getter methods
+	Building* getBuilding() { return newBuilding; }
+	std::string getBuildingType() { return buildingType; }
 	 
 private:
 	MenuState currState, prevState;
@@ -44,9 +45,11 @@ private:
 	ButtonManager* bm;
 	Player* player;
 	MenuButton *flag, *production, *build, *exit, *misc;
-	BuildButton *castle;
-	bool isBuild = false;
+	BuildButton *castle, *newBuildingPlaceHolder;
+	Building* newBuilding;
+	std::string buildingType;
 	int relativeClicks = 0;
+	int buttonIndex;
 	Castle* c;
 };
 #endif

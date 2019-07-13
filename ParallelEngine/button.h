@@ -26,6 +26,7 @@ public:
 		ALLEGRO_COLOR fontColor, std::string text, MenuState returnState);
 
 	MenuState getState() { return returnState; }
+	std::string getText() { return text; }
 	void drawButton();
 	bool isInBounds(float x, float y);
 

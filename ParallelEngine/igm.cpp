@@ -58,7 +58,6 @@ void IGM::stateSelector(MenuState state) {
 	switch (state)
 	{
 	case reset:
-		isBuild = false;
 		break;
 	case defaultState:
 		defaultMenu();
@@ -69,9 +68,8 @@ void IGM::stateSelector(MenuState state) {
 	case buildState:
 		buildingMenu();
 		break;
-	case action:
+	case placingBuilding:
 		buildingMenu();
-		isBuild = false;
 		break;
 	default:
 		defaultMenu();
@@ -83,22 +81,31 @@ void IGM::update(BuildingList* bl, bool clicked, int x, int y){
 	prevState = currState;
 
 	if (relativeClicks > 1) {
-		currState = buildState;
+		currState = placingBuilding;
 		relativeClicks = 0;
 		std::cout << "changed state";
-		isBuild = false;
 	}
 
 	if (clicked) {
 		for (int i = 0; i < bm->size(); i++) {
-			if (bm->getList()[i]->isInBounds(x, y) == true) { currState = bm->getList()[i]->getState(); }
+			if (bm->getList()[i]->isInBounds(x, y) == true) { 
+				currState = bm->getList()[i]->getState(); 
+				buttonIndex = i;
+				if (currState == placingBuilding) { 
+					newBuildingPlaceHolder = (BuildButton*)bm->getList()[buttonIndex]; 
+					newBuilding = newBuildingPlaceHolder->getBuilding();
+					buildingType = newBuildingPlaceHolder->getText();
+				}
+			}
 		}
-		if (currState == action && relativeClicks <= 1) {
-			isBuild = true; std::cout << "building..."; relativeClicks++;
+		if (currState == placingBuilding && relativeClicks <= 1) {
+			bl->setBuild(true);
+			std::cout << "building..."; 
+			relativeClicks++;
 		}
 	}
 
-	if (prevState != currState && prevState == action) {
+	if (prevState != currState && prevState == placingBuilding) {
 		stateSelector(reset); std::cout << "reset";
 	}
 	

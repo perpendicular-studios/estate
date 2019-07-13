@@ -82,20 +82,21 @@ void IGM::update(BuildingList* bl, bool clicked, int x, int y){
 	prevState = currState;
 
 	if (relativeClicks > 1) {
-		currState = placingBuilding;
+		currState = buildState;
 		relativeClicks = 0;
 		std::cout << "changed state";
 	}
 
 	if (clicked) {
 		for (int i = 0; i < bm->size(); i++) {
-			if (bm->getList()[i]->isInBounds(x, y) == true) { 
+			if (bm->getList()[i]->isInBounds(x, y) == true && bm->getList()[i]->getVisible() == true) {
 				currState = bm->getList()[i]->getState(); 
 				buttonIndex = i;
 				if (currState == placingBuilding) { 
 					newBuildingPlaceHolder = (BuildButton*)bm->getList()[buttonIndex]; 
 					newBuilding = newBuildingPlaceHolder->getBuilding();
 					buildingType = newBuildingPlaceHolder->getText();
+					relativeClicks = 0;
 				}
 			}
 		}
@@ -105,19 +106,15 @@ void IGM::update(BuildingList* bl, bool clicked, int x, int y){
 			relativeClicks++;
 		}
 	}
-
-	if (prevState != currState && prevState == placingBuilding) {
-		stateSelector(reset); std::cout << "reset";
-	}
 }
 
 void IGM::render() {
+	for (int i = 0; i < bm->size(); i++) {
+		bm->getList()[i]->setVisible(false);
+	}
 	gameBackground();
 	stateSelector(currState);
 	for (int i = 0; i < bm->size(); i++) { 
 		if (bm->getList()[i]->getVisible() == true) { bm->getList()[i]->drawButton(); }
-	}
-	for (int i = 0; i < bm->size(); i++) {
-		bm->getList()[i]->setVisible(false);
 	}
 }

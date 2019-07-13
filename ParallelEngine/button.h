@@ -19,14 +19,19 @@ private:
 	ALLEGRO_FONT* fontType;
 	float fontX, fontY;
 	std::string text;
+	bool visible;
 
 public:
 	//functions
 	Button(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* fontType, 
-		ALLEGRO_COLOR fontColor, std::string text, MenuState returnState);
+		ALLEGRO_COLOR fontColor, std::string text, bool visible, MenuState returnState);
 
 	MenuState getState() { return returnState; }
 	std::string getText() { return text; }
+	bool getVisible() { return visible; }
+
+	void setVisible(bool b) { visible = b; }
+
 	void drawButton();
 	bool isInBounds(float x, float y);
 

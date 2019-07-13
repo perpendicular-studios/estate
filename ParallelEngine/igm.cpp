@@ -3,12 +3,12 @@
 IGM::IGM(Player* player_) : player(player_) {
 	currState = defaultState;
 	bm = new ButtonManager;
-	build = new Button(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, al_map_rgb(255, 51, 0), basic_font20, al_map_rgb(255, 255, 255), 25, Var::HEIGHT - 150, "Build", overviewState);
-	flag = new Button(0, 0, 100, 50, al_map_rgb(0, 204, 0), basic_font20, al_map_rgb(255, 255, 255), 0, 0, "Flag", overviewState);
-	production = new Button(0, 50, 50, 100, al_map_rgb(0, 0, 255), basic_font20, al_map_rgb(255, 255, 255), 0, 50, "Prod", buildState);
-	exit = new Button(225, 100, 250, 125, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), 225, 100, "X", defaultState);
-	castle = new Button(25, 150, 75, 200, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), 25, 150, "Castle", action);
-	misc = new Button(Var::WIDTH - 50, 0, Var::WIDTH, 50, al_map_rgb(211, 211, 211), basic_font20, al_map_rgb(255, 255, 255), 0, 0, "MISC", inventory); // should open an inventory
+	build = new MenuButton(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, al_map_rgb(255, 51, 0), basic_font20, al_map_rgb(255, 255, 255), "Build", overviewState);
+	flag = new MenuButton(0, 0, 100, 50, al_map_rgb(0, 204, 0), basic_font20, al_map_rgb(255, 255, 255), "Flag", overviewState);
+	production = new MenuButton(0, 50, 50, 100, al_map_rgb(0, 0, 255), basic_font20, al_map_rgb(255, 255, 255), "Prod", buildState);
+	exit = new MenuButton(225, 100, 250, 125, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), "X", defaultState);
+	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, al_map_rgb(211, 211, 211), basic_font20, al_map_rgb(255, 255, 255), "MISC", inventory); // should open an inventory
+	castle = new BuildButton(25, 150, 75, 200, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), "Castle", c);
 }
 
 void IGM::gameBackground() {
@@ -18,7 +18,7 @@ void IGM::gameBackground() {
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 230, 5, 0, std::to_string(player->getStone()).c_str());
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 80, 5, 0, std::to_string(player->getWood()).c_str());
 	misc->drawButton();
-	al_draw_filled_rectangle(0, 0, 100, 100, al_map_rgb(0, 0, 0));							//flag black background
+	al_draw_filled_rectangle(0, 0, 100, 100, al_map_rgb(0, 0, 0));								//flag black background
 
 	production->drawButton();
 	bm->addButton(production);

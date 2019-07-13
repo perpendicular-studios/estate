@@ -1,0 +1,13 @@
+#ifndef MENUBUTTON_H
+#define MENUBUTTON_H
+
+#include "button.h"
+#include "menustates.h"
+
+class MenuButton : public Button {
+public:
+	MenuButton(float x1, float y1, float x2, float y2, ALLEGRO_COLOR backgroundColor, ALLEGRO_FONT* fontType,
+		ALLEGRO_COLOR fontColor, std::string text, MenuState returnState_);
+};
+
+#endif 

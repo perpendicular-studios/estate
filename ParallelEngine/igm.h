@@ -42,8 +42,10 @@ private:
 	bool isClicked = false;
 	ButtonManager* bm;
 	Player* player;
-	Button *flag, *production, *build, *exit, *castle, *misc;
+	MenuButton *flag, *production, *build, *exit, *misc;
+	BuildButton *castle;
 	bool isBuild = false;
 	int relativeClicks = 0;
+	Castle* c;
 };
 #endif

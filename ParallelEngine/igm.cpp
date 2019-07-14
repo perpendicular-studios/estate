@@ -4,8 +4,8 @@ IGM::IGM(Player* player_) : player(player_) {
 	currState = defaultState;
 	bm = new ButtonManager;
 	build = new Button(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, al_map_rgb(255, 51, 0), basic_font20, al_map_rgb(255, 255, 255), 25, Var::HEIGHT - 150, "Build", overviewState);
-	flag = new Button(0, 0, 100, 50, al_map_rgb(0, 204, 0), basic_font20, al_map_rgb(255, 255, 255), 0, 0, "Flag", overviewState);
-	production = new Button(0, 50, 50, 100, al_map_rgb(0, 0, 255), basic_font20, al_map_rgb(255, 255, 255), 0, 50, "Prod", buildState);
+	flag = new Button(0, 0, 100, 100, al_map_rgb(0, 204, 0), basic_font20, al_map_rgb(255, 255, 255), 0, 0, "Flag", overviewState);
+	production = new Button(0, 100, 50, 150, al_map_rgb(0, 0, 255), basic_font20, al_map_rgb(255, 255, 255), 0, 100, "Prod", buildState);
 	exit = new Button(225, 100, 250, 125, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), 225, 100, "X", defaultState);
 	castle = new Button(25, 150, 75, 200, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), 25, 150, "Castle", action);
 	misc = new Button(Var::WIDTH - 50, 0, Var::WIDTH, 50, al_map_rgb(211, 211, 211), basic_font20, al_map_rgb(255, 255, 255), 0, 0, "MISC", inventory); // should open an inventory

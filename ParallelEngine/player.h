@@ -18,6 +18,8 @@ public:
 	int getFood() { return inventory->getFood(); }
 
 	Inventory* getInventory() { return inventory; }
+	void addTileToInventory(int tileID);
+
 private:
 	std::vector<Entity*> entities;
 	Inventory * inventory;

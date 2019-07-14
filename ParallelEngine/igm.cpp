@@ -3,12 +3,19 @@
 IGM::IGM(Player* player_) : player(player_) {
 	currState = defaultState;
 	bm = new ButtonManager;
-	build = new Button(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, al_map_rgb(255, 51, 0), basic_font20, al_map_rgb(255, 255, 255), 25, Var::HEIGHT - 150, "Build", overviewState);
-	flag = new Button(0, 0, 100, 100, al_map_rgb(0, 204, 0), basic_font20, al_map_rgb(255, 255, 255), 0, 0, "Flag", overviewState);
-	production = new Button(0, 100, 50, 150, al_map_rgb(0, 0, 255), basic_font20, al_map_rgb(255, 255, 255), 0, 100, "Prod", buildState);
-	exit = new Button(225, 100, 250, 125, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), 225, 100, "X", defaultState);
-	castle = new Button(25, 150, 75, 200, al_map_rgb(255, 0, 0), basic_font20, al_map_rgb(255, 255, 255), 25, 150, "Castle", action);
-	misc = new Button(Var::WIDTH - 50, 0, Var::WIDTH, 50, al_map_rgb(211, 211, 211), basic_font20, al_map_rgb(255, 255, 255), 0, 0, "MISC", inventory); // should open an inventory
+	build = new MenuButton(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", 0, overviewState);
+	flag = new MenuButton(0, 0, 100, 50, AssetLoader::manager->getImage("flagbg"), basic_font20, al_map_rgb(255, 255, 255), "Flag", 0, overviewState);
+	production = new MenuButton(0, 50, 50, 100, AssetLoader::manager->getImage("productionbg"), basic_font20, al_map_rgb(255, 255, 255), "Prod", 0, buildState);
+	exit = new MenuButton(225, 100, 250, 125, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
+	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, inventory); // should open an inventory
+	castle = new BuildButton(25, 150, 75, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, c);
+
+	bm->addButton(build);
+	bm->addButton(flag);
+	bm->addButton(production);
+	bm->addButton(exit);
+	bm->addButton(misc);
+	bm->addButton(castle);
 }
 
 void IGM::gameBackground() {
@@ -17,20 +24,16 @@ void IGM::gameBackground() {
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 380, 5, 0, std::to_string(player->getFood()).c_str());
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 230, 5, 0, std::to_string(player->getStone()).c_str());
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 80, 5, 0, std::to_string(player->getWood()).c_str());
-	misc->drawButton();
-	al_draw_filled_rectangle(0, 0, 100, 100, al_map_rgb(0, 0, 0));							//flag black background
-
-	production->drawButton();
-	bm->addButton(production);
-	flag->drawButton();
-	bm->addButton(flag);
+	al_draw_filled_rectangle(0, 0, 100, 100, al_map_rgb(0, 0, 0));								//flag black background
+	misc->setVisible(true);
+	production->setVisible(true);
+	flag->setVisible(true);
 }
 
 void IGM::menuBackground() {
 	al_draw_filled_rectangle(0, 100, 250, 500, al_map_rgb(255, 204, 0));
 	al_draw_rectangle(1, 100, 250, 500, al_map_rgb(153, 77, 0), 3);
-	exit->drawButton();
-	bm->addButton(exit);
+	exit->setVisible(true);
 }
 
 // default state
@@ -49,16 +52,13 @@ void IGM::diploMenu() {
 // build state
 void IGM::buildingMenu() {
 	menuBackground();
-	castle->drawButton();
-	bm->addButton(castle);
-	
+	castle->setVisible(true);
 }
 
 void IGM::stateSelector(MenuState state) {
 	switch (state)
 	{
 	case reset:
-		isBuild = false;
 		break;
 	case defaultState:
 		defaultMenu();
@@ -69,9 +69,8 @@ void IGM::stateSelector(MenuState state) {
 	case buildState:
 		buildingMenu();
 		break;
-	case action:
+	case placingBuilding:
 		buildingMenu();
-		isBuild = false;
 		break;
 	default:
 		defaultMenu();
@@ -86,26 +85,36 @@ void IGM::update(BuildingList* bl, bool clicked, int x, int y){
 		currState = buildState;
 		relativeClicks = 0;
 		std::cout << "changed state";
-		isBuild = false;
 	}
 
 	if (clicked) {
 		for (int i = 0; i < bm->size(); i++) {
-			if (bm->getList()[i]->isInBounds(x, y) == true) { currState = bm->getList()[i]->getState(); }
+			if (bm->getList()[i]->isInBounds(x, y) == true && bm->getList()[i]->getVisible() == true) {
+				currState = bm->getList()[i]->getState(); 
+				buttonIndex = i;
+				if (currState == placingBuilding) { 
+					newBuildingPlaceHolder = (BuildButton*)bm->getList()[buttonIndex]; 
+					newBuilding = newBuildingPlaceHolder->getBuilding();
+					buildingType = newBuildingPlaceHolder->getText();
+					relativeClicks = 0;
+				}
+			}
 		}
-		if (currState == action && relativeClicks <= 1) {
-			isBuild = true; std::cout << "building..."; relativeClicks++;
+		if (currState == placingBuilding && relativeClicks <= 1) {
+			bl->setBuild(true);
+			std::cout << "building..."; 
+			relativeClicks++;
 		}
 	}
-
-	if (prevState != currState && prevState == action) {
-		stateSelector(reset); std::cout << "reset";
-	}
-	
-	bm->clearButtons();
 }
 
 void IGM::render() {
+	for (int i = 0; i < bm->size(); i++) {
+		bm->getList()[i]->setVisible(false);
+	}
 	gameBackground();
 	stateSelector(currState);
+	for (int i = 0; i < bm->size(); i++) { 
+		if (bm->getList()[i]->getVisible() == true) { bm->getList()[i]->drawButton(); }
+	}
 }

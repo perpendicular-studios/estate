@@ -16,7 +16,7 @@ public:
 	// clear all buildings
 	void clearList();
 	// update buildlist objects
-	void update();
+	void update(Building* b, std::string buildingType);
 	// render buildlist objects
 	void render();
 	// place building

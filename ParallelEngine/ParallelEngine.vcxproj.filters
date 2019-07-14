@@ -52,6 +52,12 @@
     <Filter Include="Source Files\entity">
       <UniqueIdentifier>{ab46718d-82b8-451c-ae97-b522a328bc12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\button">
+      <UniqueIdentifier>{8cb8ba3e-0715-4ca9-a104-13f051e853cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\button">
+      <UniqueIdentifier>{c6ae517a-ff85-4b50-8eab-a6223c12998a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,12 +99,6 @@
     <ClCompile Include="igm.cpp">
       <Filter>Source Files\ingamemenu</Filter>
     </ClCompile>
-    <ClCompile Include="buttonmanager.cpp">
-      <Filter>Source Files\handler</Filter>
-    </ClCompile>
-    <ClCompile Include="button.cpp">
-      <Filter>Source Files\handler</Filter>
-    </ClCompile>
     <ClCompile Include="inputhandler.cpp">
       <Filter>Source Files\handler</Filter>
     </ClCompile>
@@ -110,6 +110,18 @@
     </ClCompile>
     <ClCompile Include="entity.cpp">
       <Filter>Source Files\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>Source Files\button</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonmanager.cpp">
+      <Filter>Source Files\button</Filter>
+    </ClCompile>
+    <ClCompile Include="menubutton.cpp">
+      <Filter>Source Files\button</Filter>
+    </ClCompile>
+    <ClCompile Include="buildbutton.cpp">
+      <Filter>Source Files\button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,12 +173,6 @@
     <ClInclude Include="igm.h">
       <Filter>Header Files\ingamemenu</Filter>
     </ClInclude>
-    <ClInclude Include="buttonmanager.h">
-      <Filter>Header Files\handler</Filter>
-    </ClInclude>
-    <ClInclude Include="button.h">
-      <Filter>Header Files\handler</Filter>
-    </ClInclude>
     <ClInclude Include="inputhandler.h">
       <Filter>Header Files\handler</Filter>
     </ClInclude>
@@ -184,6 +190,21 @@
     </ClInclude>
     <ClInclude Include="menustates.h">
       <Filter>Header Files\ingamemenu</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonmanager.h">
+      <Filter>Header Files\button</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Header Files\button</Filter>
+    </ClInclude>
+    <ClInclude Include="menubutton.h">
+      <Filter>Header Files\button</Filter>
+    </ClInclude>
+    <ClInclude Include="buildbutton.h">
+      <Filter>Header Files\button</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +224,24 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\castle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\resourcebg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\basicbutton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\flagbg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\productionbg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\miscbg.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

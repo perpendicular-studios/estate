@@ -6,9 +6,6 @@
 class Castle : public Building {
 public:
 	Castle(int castleID);
-
-	void render() override;
-	void update() override;
 	
 	ALLEGRO_BITMAP* getBaseImg() override { return bitmap; }
 

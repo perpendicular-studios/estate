@@ -12,6 +12,7 @@
 #include "menustates.h"
 #include "buildinglist.h"
 #include <iostream>
+#include "assetloader.h"
 
 //in-game menu
 class IGM {
@@ -33,8 +34,9 @@ public:
 	void diploMenu();
 	void overviewMenu();
 	
-	//getter methods
-	bool getIsBuild() { return isBuild; }
+	// getter methods
+	Building* getBuilding() { return newBuilding; }
+	std::string getBuildingType() { return buildingType; }
 	 
 private:
 	MenuState currState, prevState;
@@ -42,8 +44,12 @@ private:
 	bool isClicked = false;
 	ButtonManager* bm;
 	Player* player;
-	Button *flag, *production, *build, *exit, *castle, *misc;
-	bool isBuild = false;
+	MenuButton *flag, *production, *build, *exit, *misc;
+	BuildButton *castle, *newBuildingPlaceHolder;
+	Building* newBuilding;
+	std::string buildingType;
 	int relativeClicks = 0;
+	int buttonIndex;
+	Castle* c;
 };
 #endif

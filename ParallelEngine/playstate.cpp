@@ -53,7 +53,7 @@ void PlayState::render() {
 void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	tm->update();
 	cam->update();
-	bl->update();
+	bl->update(menu->getBuilding(), menu->getBuildingType());
 	input.update(ks, ms);
 	menu->update(bl, input.leftClickDown(), ms.x, ms.y);
 
@@ -64,6 +64,4 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->setUp(al_key_down(&ks, ALLEGRO_KEY_W));
 	cam->setRight(al_key_down(&ks, ALLEGRO_KEY_D));
 	cam->setDown(al_key_down(&ks, ALLEGRO_KEY_S));
-
-	bl->setBuild(menu->getIsBuild());
 }

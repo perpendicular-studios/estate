@@ -22,6 +22,7 @@ private:
 	InputHandler input;
 	IGM* menu;
 	Player* player;
+	Entity* selectedEntity;
 
 	float mouseX = 0, mouseY = 0;
 	float hoverX = 0, hoverY = 0;

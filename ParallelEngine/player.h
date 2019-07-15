@@ -20,6 +20,7 @@ public:
 	Inventory* getInventory() { return inventory; }
 	void addTileToInventory(int tileID);
 
+	Entity* entityInTile(Vector2i clickCoord);
 private:
 	std::vector<Entity*> entities;
 	Inventory * inventory;

@@ -3,14 +3,14 @@
 #include "tilemap.h"
 class Entity {
 public:
-	Entity(TileMap* tm_);
+	Entity(TileMap* tm_, int tileCost_);
 	~Entity();
 	
 	virtual void update() = 0;
 	virtual void render() = 0;
 
-	int getx() { return x; }
-	int gety() { return y; }
+	int getx() const { return x; }
+	int gety() const { return y; }
 
 	int getTileType() {
 		return tm->getType(getrow(), getcol());
@@ -19,12 +19,20 @@ public:
 	int getTileID() {
 		return tm->getTile(getrow(), getcol());
 	}
-private:
+
+	void renderRadius();
+
+	int getcol() const { return tm->screenToIso(x, y).x; }
+	int getrow() const { return tm->screenToIso(x, y).y; }
+
+	bool operator==(Entity* rhs) { return (this->getrow() == rhs->getrow() && this->getcol() == rhs->getcol()); }
+protected:
 	TileMap* tm;
 	int x, y;
+	int xdest, ydest;
+	int tileCost; // amount of tiles that unit can move per turn
 
-	int getcol() { return tm->screenToIso(x, y).x; }
-	int getrow() { return tm->screenToIso(x, y).y; }
+	int getTileCost() { return tileCost; }
 };
 
 #endif

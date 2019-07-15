@@ -182,6 +182,7 @@
     <ClInclude Include="resources.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tilemap.h" />
+    <ClInclude Include="units.h" />
     <ClInclude Include="var.h" />
     <ClInclude Include="vec2.h" />
   </ItemGroup>
@@ -207,6 +208,7 @@
     <ClCompile Include="playstate.cpp" />
     <ClCompile Include="building.cpp" />
     <ClCompile Include="tilemap.cpp" />
+    <ClCompile Include="units.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\tilemap.ptm" />

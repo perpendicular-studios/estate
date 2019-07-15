@@ -25,6 +25,16 @@ void PlayState::render() {
 	al_transform_coordinates(&trans, &mouseX, &mouseY);
 
 	Vector2f mapCoord = tm->screenToIso(mouseX, mouseY);
+	if (input.leftClickDown()) {
+		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.x, mapCoord.y));
+
+		if (selectedEntity && clickEntity == selectedEntity) {
+			selectedEntity = NULL; // deselect
+		}
+		else {
+			selectedEntity = clickEntity; // select
+		}
+	}
 	Vector2f screenCoord = tm->isoToScreen(mapCoord.y, mapCoord.x);
 
 	hoverX = screenCoord.x;
@@ -34,6 +44,8 @@ void PlayState::render() {
 	bl->sety(screenCoord.y);
 
 	if (bl->getPlacing() == true) { bl->placingBuilding(1, hoverX, hoverY); }
+	
+	if (selectedEntity) selectedEntity->renderRadius();
 	al_draw_bitmap(AssetLoader::manager->getImage("hover"), hoverX, hoverY, 0);
 
 	//for static display images add here

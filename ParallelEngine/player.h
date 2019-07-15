@@ -21,6 +21,7 @@ public:
 	void addTileToInventory(int tileID);
 
 	Entity* entityInTile(Vector2i clickCoord);
+	void addEntity(Entity* e);
 private:
 	std::vector<Entity*> entities;
 	Inventory * inventory;

@@ -131,6 +131,9 @@ Entity* Player::entityInTile(Vector2i clickCoord) {
 	for (Entity* e : entities) {
 		if (e->getrow() == clickCoord.y && e->getcol() == clickCoord.x) return e;
 	}
-
 	return NULL;
+}
+
+void Player::addEntity(Entity* e) {
+	entities.push_back(e);
 }

@@ -45,11 +45,12 @@ private:
 	ButtonManager* bm;
 	Player* player;
 	MenuButton *flag, *production, *build, *exit, *misc;
-	BuildButton *castle, *newBuildingPlaceHolder;
+	BuildButton *castle, *towncenter, *newBuildingPlaceHolder;
 	Building* newBuilding;
 	std::string buildingType;
 	int relativeClicks = 0;
 	int buttonIndex;
 	Castle* c;
+	Towncenter* tc;
 };
 #endif

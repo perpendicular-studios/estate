@@ -22,6 +22,7 @@ void BuildingList::update(Building* b, std::string buildingType) {
 	if (isBuildTrue) { 
 		if (isPlacingTrue) {
 			if (buildingType == "Castle") { b = new Castle(bl.size()); }
+			else if (buildingType == "Towncenter") { b = new Towncenter(bl.size()); }
 			addBuilding(b);
 			b->setx(x);
 			b->sety(y);
@@ -42,6 +43,9 @@ void BuildingList::render() {
 	}
 }
 
-void BuildingList::placingBuilding(int buildingImg, float x, float y) {
-	al_draw_bitmap(AssetLoader::manager->getImage("castle"), x, y, 0);
+void BuildingList::placingBuilding(std::string buildingType, float x, float y) {
+	ALLEGRO_BITMAP* bitmap = AssetLoader::manager->getImage("castle");						// set default value in case of error
+	if (buildingType == "Casle") { bitmap = AssetLoader::manager->getImage("castle"); }
+	else if (buildingType == "Towncenter") { bitmap = AssetLoader::manager->getImage("towncenter"); }
+	al_draw_bitmap(bitmap, x, y, 0);
 }

@@ -19,7 +19,7 @@ void PlayState::render() {
 	
 	ALLEGRO_TRANSFORM trans;
 
-	//for mouse following images add here
+	//for mouse or isometric images add here
 	al_identity_transform(&trans);
 	al_translate_transform(&trans, cam->getx(), cam->gety());
 	al_transform_coordinates(&trans, &mouseX, &mouseY);
@@ -43,7 +43,7 @@ void PlayState::render() {
 	bl->setx(screenCoord.x);
 	bl->sety(screenCoord.y);
 
-	if (bl->getPlacing() == true) { bl->placingBuilding(1, hoverX, hoverY); }
+	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuildingType(), hoverX, hoverY); }
 	
 	if (selectedEntity) selectedEntity->renderRadius();
 	al_draw_bitmap(AssetLoader::manager->getImage("hover"), hoverX, hoverY, 0);

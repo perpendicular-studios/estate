@@ -182,6 +182,7 @@
     <ClInclude Include="resources.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tilemap.h" />
+    <ClInclude Include="towncenter.h" />
     <ClInclude Include="units.h" />
     <ClInclude Include="var.h" />
     <ClInclude Include="vec2.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="playstate.cpp" />
     <ClCompile Include="building.cpp" />
     <ClCompile Include="tilemap.cpp" />
+    <ClCompile Include="towncenter.cpp" />
     <ClCompile Include="units.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +226,7 @@
     <Image Include="images\productionbg.png" />
     <Image Include="images\resourcebg.png" />
     <Image Include="images\tileset.png" />
+    <Image Include="images\town_center.png" />
     <Image Include="images\x.png" />
   </ItemGroup>
   <ItemGroup>

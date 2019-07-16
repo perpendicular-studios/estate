@@ -4,6 +4,7 @@
 #include <vector>
 #include "building.h"
 #include "castle.h"
+#include "towncenter.h"
 //#include "tilemap.h"
 
 class BuildingList {
@@ -20,7 +21,7 @@ public:
 	// render buildlist objects
 	void render();
 	// place building
-	void placingBuilding(int buildingImg, float x, float y); // buildingImg will select from a switch to get correct building img
+	void placingBuilding(std::string buildingType, float x, float y); // buildingImg will select from a switch to get correct building img
 	
 	void setBuild(bool b) { isBuildTrue = b; }
 	void setPlacing(bool p) { isPlacingTrue = p; }

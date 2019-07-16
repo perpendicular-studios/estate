@@ -126,6 +126,9 @@
     <ClCompile Include="units.cpp">
       <Filter>Source Files\entity</Filter>
     </ClCompile>
+    <ClCompile Include="towncenter.cpp">
+      <Filter>Source Files\building</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -212,6 +215,9 @@
     <ClInclude Include="units.h">
       <Filter>Header Files\entity</Filter>
     </ClInclude>
+    <ClInclude Include="towncenter.h">
+      <Filter>Header Files\building</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -248,6 +254,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\miscbg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\town_center.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

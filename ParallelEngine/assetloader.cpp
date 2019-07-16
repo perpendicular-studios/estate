@@ -9,6 +9,7 @@ AssetLoader::AssetLoader() {
 	manager->loadImage("images/hover.png", "hover", true);
 	manager->loadImage("images/radius.png", "radius", true);
 	manager->loadImage("images/castle.png", "castle", true);
+	manager->loadImage("images/town_center.png", "towncenter", true);
 	manager->loadImage("images/resourcebg.png", "resourcebg", false);
 	manager->loadImage("images/basicbutton.png", "basicbutton", false);
 	manager->loadImage("images/productionbg.png", "productionbg", false);

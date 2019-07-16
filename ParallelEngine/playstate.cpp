@@ -9,7 +9,7 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	cam = std::shared_ptr<Camera>(new Camera(500, 500, tm)); //100, 500
 	bl = new BuildingList();
 	player = new Player();
-	menu = new IGM(player);
+	menu = new IGM(player, bl);
 }
 
 void PlayState::render() {
@@ -40,10 +40,15 @@ void PlayState::render() {
 	hoverX = screenCoord.x;
 	hoverY = screenCoord.y;
 
-	bl->setx(screenCoord.x);
-	bl->sety(screenCoord.y);
+	buildOffsetX = screenCoord.x - menu->getBuilding()->getWidth()/2;
+	buildOffsetY = screenCoord.y - menu->getBuilding()->getHeight()*0.75;
 
-	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuildingType(), hoverX, hoverY); }
+	bl->setx(buildOffsetX);
+	bl->sety(buildOffsetY);
+
+	menu->isoRender();
+
+	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuildingType(), buildOffsetX, buildOffsetY); }
 	
 	if (selectedEntity) selectedEntity->renderRadius();
 	al_draw_bitmap(AssetLoader::manager->getImage("hover"), hoverX, hoverY, 0);
@@ -52,7 +57,7 @@ void PlayState::render() {
 	al_identity_transform(&trans);
 	al_use_transform(&trans);
 
-	menu->render();
+	menu->staticRender();
 
 	//used for camera
 	al_identity_transform(&trans);
@@ -67,7 +72,7 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	cam->update();
 	bl->update(menu->getBuilding(), menu->getBuildingType());
 	input.update(ks, ms);
-	menu->update(bl, input.leftClickDown(), ms.x, ms.y);
+	menu->update(input.leftClickDown(), ms.x, ms.y);
 
 	mouseX = ms.x;
 	mouseY = ms.y;

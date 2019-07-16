@@ -17,11 +17,12 @@
 //in-game menu
 class IGM {
 public:
-	IGM(Player * player_);
+	IGM(Player * player_, BuildingList* bl);
 	// update states
-	void update(BuildingList* bl, bool clicked, int x, int y);
+	void update(bool clicked, int x, int y);
 	// render states 
-	void render();
+	void staticRender();
+	void isoRender();
 	// returns current state
 	void stateSelector(MenuState state);
 
@@ -44,13 +45,18 @@ private:
 	bool isClicked = false;
 	ButtonManager* bm;
 	Player* player;
+	BuildingList* bl;
 	MenuButton *flag, *production, *build, *exit, *misc;
 	BuildButton *castle, *towncenter, *newBuildingPlaceHolder;
-	Building* newBuilding;
+
 	std::string buildingType;
 	int relativeClicks = 0;
 	int buttonIndex;
 	Castle* c;
 	Towncenter* tc;
+
+	Castle* sampleCastle;
+	Towncenter* sampleTC;
+	Building* newBuilding;
 };
 #endif

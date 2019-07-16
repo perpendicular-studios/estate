@@ -11,8 +11,7 @@
 
 class Building {	
 public:
-	Building(std::shared_ptr<TileMap> tm);
-	Building(ALLEGRO_BITMAP* bitmap);
+	Building(ALLEGRO_BITMAP* bitmap, int width, int height);
 
 	int getx() const { return x; }
 	int gety() const { return y; }
@@ -23,6 +22,8 @@ public:
 	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);
 	virtual ALLEGRO_BITMAP* getBaseImg() { return bitmap; }
 	
+	int getWidth() { return width; }
+	int getHeight() { return height; }
 	int getID() { return id; }
 	void setID(int id_) { id = id_; }
 
@@ -40,7 +41,7 @@ public:
 
 protected:
 	int x = 0, y = 0;
-	int width = 0, height = 0;
+	int width, height;
 	std::shared_ptr<TileMap> tm;
 	int id;
 	int stone, wood, food, gold;

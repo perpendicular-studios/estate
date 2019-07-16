@@ -1,15 +1,19 @@
 #include "igm.h"
 
-IGM::IGM(Player* player_) : player(player_) {
+IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	currState = defaultState;
+	sampleCastle = new Castle(-1);
+	sampleTC = new Towncenter(-1);
+	newBuilding = sampleCastle;
+
 	bm = new ButtonManager;
 	build = new MenuButton(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", 0, overviewState);
 	flag = new MenuButton(0, 0, 100, 100, AssetLoader::manager->getImage("flagbg"), basic_font20, al_map_rgb(255, 255, 255), "Flag", 0, overviewState);
 	production = new MenuButton(0, 100, 50, 100, AssetLoader::manager->getImage("productionbg"), basic_font20, al_map_rgb(255, 255, 255), "Prod", 0, buildState);
 	exit = new MenuButton(225, 100, 250, 125, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
 	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, inventory); // should open an inventory
-	castle = new BuildButton(25, 150, 75, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, c);
-	towncenter = new BuildButton(100, 150, 150, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, tc);
+	castle = new BuildButton(25, 150, 75, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, sampleCastle);
+	towncenter = new BuildButton(100, 150, 150, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, sampleTC);
 
 	bm->addButton(build);
 	bm->addButton(flag);
@@ -81,7 +85,7 @@ void IGM::stateSelector(MenuState state) {
 	}
 }
 
-void IGM::update(BuildingList* bl, bool clicked, int x, int y){ 
+void IGM::update(bool clicked, int x, int y){ 
 	prevState = currState;
 
 	if (relativeClicks > 1) {
@@ -103,6 +107,7 @@ void IGM::update(BuildingList* bl, bool clicked, int x, int y){
 					relativeClicks = 0;
 					bl->setPlacing(false);
 				}
+				//when you click exit while placing building
 				if (prevState == placingBuilding && currState == defaultState) {
 					relativeClicks = 0;
 					bl->setPlacing(false);
@@ -117,7 +122,7 @@ void IGM::update(BuildingList* bl, bool clicked, int x, int y){
 	}
 }
 
-void IGM::render() {
+void IGM::staticRender() {
 	for (int i = 0; i < bm->size(); i++) {
 		bm->getList()[i]->setVisible(false);
 	}
@@ -126,4 +131,9 @@ void IGM::render() {
 	for (int i = 0; i < bm->size(); i++) { 
 		if (bm->getList()[i]->getVisible() == true) { bm->getList()[i]->drawButton(); }
 	}
+}
+
+void IGM::isoRender() {
+
+
 }

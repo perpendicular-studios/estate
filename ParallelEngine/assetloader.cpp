@@ -15,6 +15,7 @@ AssetLoader::AssetLoader() {
 	manager->loadImage("images/flagbg.png", "flagbg", false);
 	manager->loadImage("images/x.png", "x", false);
 	manager->loadImage("images/miscbg.png", "miscbg", false);
+	manager->loadImage("images/resources.png", "resources", false);
 	std::cout << "Done Loading Images..." << std::endl;
 
 }

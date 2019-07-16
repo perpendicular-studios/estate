@@ -25,11 +25,11 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 }
 
 void IGM::gameBackground() {
-	al_draw_filled_rectangle(Var::WIDTH - 550, 0, Var::WIDTH - 50, 40, al_map_rgb(153, 102, 0)); //resources background 
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 530, 5, 0, std::to_string(player->getGold()).c_str());
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 380, 5, 0, std::to_string(player->getFood()).c_str());
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 230, 5, 0, std::to_string(player->getStone()).c_str());
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 80, 5, 0, std::to_string(player->getWood()).c_str());
+	al_draw_bitmap(AssetLoader::manager->getImage("resources"), Var::WIDTH - 550, 0, 0);
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 40      , 8, 0, std::to_string(player->getGold()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 125 + 40, 8, 0, std::to_string(player->getFood()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 250 + 40, 8, 0, std::to_string(player->getStone()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 375 + 40, 8, 0, std::to_string(player->getWood()).c_str());
 	al_draw_filled_rectangle(0, 0, 100, 100, al_map_rgb(0, 0, 0));								//flag black background
 	misc->setVisible(true);
 	production->setVisible(true);

@@ -10,12 +10,11 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	newBuilding = sampleCastle;
 
 	bm = new ButtonManager;
-	build = new MenuButton(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", 0, overviewState);
+	build = new MenuButton(200, 200, 250, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", 0, productionState);
 	flag = new MenuButton(0, 0, 100, 100, AssetLoader::manager->getImage("flagbg"), basic_font20, al_map_rgb(255, 255, 255), "Flag", 0, overviewState);
 	production = new MenuButton(0, 100, 50, 150, AssetLoader::manager->getImage("productionbg"), basic_font20, al_map_rgb(255, 255, 255), "Prod", 0, buildState);
-	exit = new MenuButton(225, 150, 250, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
-	exit1 = new MenuButton(Var::WIDTH - 25, 40, Var::WIDTH, 65, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
-	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 40, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, inventory); // should open an inventory
+	exit = new MenuButton(225, 100, 250, 125, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
+	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, inventory); // should open an inventory
 	castle = new BuildButton(25, 150, 75, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, sampleCastle);
 	towncenter = new BuildButton(100, 150, 150, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, sampleTC);
 
@@ -42,8 +41,8 @@ void IGM::gameBackground() {
 }
 
 void IGM::menuBackground() {
-	al_draw_filled_rectangle(0, 150, 250, 500, al_map_rgb(255, 204, 0));
-	al_draw_rectangle(1, 150, 250, 500, al_map_rgb(153, 77, 0), 3);
+	al_draw_filled_rectangle(0, 100, 250, 500, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(1, 100, 250, 500, al_map_rgb(153, 77, 0), 3);
 	exit->setVisible(true);
 }
 
@@ -53,16 +52,23 @@ void IGM::defaultMenu() {}
 // overview state
 void IGM::overviewMenu() {
 	menuBackground();
+	build->setVisible(true);
+	castle->setVisible(true);
+	towncenter->setVisible(true);
 }
 
 // diplo state
-void IGM::diploMenu() {
+void IGM::diploMenu() {}
 
+// production state, by default the first menu is the building menu when clciking production button
+void IGM::productionMenu() { 
+	buildingMenu(); 
 }
 
 // build state
 void IGM::buildingMenu() {
 	menuBackground();
+	build->setVisible(true);
 	castle->setVisible(true);
 	towncenter->setVisible(true);
 }
@@ -91,6 +97,9 @@ void IGM::stateSelector(MenuState state) {
 		break;
 	case overviewState:
 		overviewMenu();
+		break;
+	case productionState:
+		productionMenu();
 		break;
 	case buildState:
 		buildingMenu();
@@ -129,8 +138,8 @@ void IGM::update(bool clicked, int x, int y){
 					relativeClicks = 0;
 					bl->setPlacing(false);
 				}
-				//when you click exit while placing building
-				if (prevState == placingBuilding && currState == defaultState) {
+				//when you click something else while placing building
+				if (prevState == placingBuilding && currState != prevState) {
 					relativeClicks = 0;
 					bl->setPlacing(false);
 				}

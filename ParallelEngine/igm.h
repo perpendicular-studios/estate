@@ -34,7 +34,6 @@ public:
 	void buildingMenu();
 	void diploMenu();
 	void overviewMenu();
-	void inventoryMenu();
 	
 	// getter methods
 	Building* getBuilding() { return newBuilding; }

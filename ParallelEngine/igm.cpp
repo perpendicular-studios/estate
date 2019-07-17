@@ -1,6 +1,9 @@
 #include "igm.h"
+#include "resources.h"
 
 IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
+	player->getInventory()->addResource(IRON_ORE);
+	player->getInventory()->addResource(WOOL);
 	currState = defaultState;
 	sampleCastle = new Castle(-1);
 	sampleTC = new Towncenter(-1);
@@ -10,8 +13,9 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	build = new MenuButton(25, Var::HEIGHT - 175, 75, Var::HEIGHT - 125, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", 0, overviewState);
 	flag = new MenuButton(0, 0, 100, 100, AssetLoader::manager->getImage("flagbg"), basic_font20, al_map_rgb(255, 255, 255), "Flag", 0, overviewState);
 	production = new MenuButton(0, 100, 50, 150, AssetLoader::manager->getImage("productionbg"), basic_font20, al_map_rgb(255, 255, 255), "Prod", 0, buildState);
-	exit = new MenuButton(225, 100, 250, 125, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
-	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, inventory); // should open an inventory
+	exit = new MenuButton(225, 150, 250, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
+	exit1 = new MenuButton(Var::WIDTH - 25, 40, Var::WIDTH, 65, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
+	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 40, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, inventory); // should open an inventory
 	castle = new BuildButton(25, 150, 75, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, sampleCastle);
 	towncenter = new BuildButton(100, 150, 150, 200, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, sampleTC);
 
@@ -19,13 +23,14 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	bm->addButton(flag);
 	bm->addButton(production);
 	bm->addButton(exit);
+	bm->addButton(exit1);
 	bm->addButton(misc);
 	bm->addButton(castle);
 	bm->addButton(towncenter);
 }
 
 void IGM::gameBackground() {
-	al_draw_bitmap(AssetLoader::manager->getImage("resources"), Var::WIDTH - 550, 0, 0);
+	al_draw_bitmap(AssetLoader::manager->getImage("resources_menu"), Var::WIDTH - 550, 0, 0);
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 40      , 8, 0, std::to_string(player->getGold()).c_str());
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 125 + 40, 8, 0, std::to_string(player->getFood()).c_str());
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 250 + 40, 8, 0, std::to_string(player->getStone()).c_str());
@@ -37,8 +42,8 @@ void IGM::gameBackground() {
 }
 
 void IGM::menuBackground() {
-	al_draw_filled_rectangle(0, 100, 250, 500, al_map_rgb(255, 204, 0));
-	al_draw_rectangle(1, 100, 250, 500, al_map_rgb(153, 77, 0), 3);
+	al_draw_filled_rectangle(0, 150, 250, 500, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(1, 150, 250, 500, al_map_rgb(153, 77, 0), 3);
 	exit->setVisible(true);
 }
 
@@ -62,6 +67,20 @@ void IGM::buildingMenu() {
 	towncenter->setVisible(true);
 }
 
+void IGM::inventoryMenu() {
+	al_draw_filled_rectangle(Var::WIDTH - 550, 40, Var::WIDTH, 400, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(Var::WIDTH - 549, 41, Var::WIDTH - 1, 399, al_map_rgb(153, 77, 0), 3);
+	exit1->setVisible(true);
+	std::vector<std::vector<const Resource*>> miscResources = player->getInventory()->getMiscResources();
+	for (int i = 0; i < miscResources.size(); i++) {
+		int h = 50 + i * 25;
+		std::string itemDesc = (miscResources[i][0]->getName() + " - " + std::to_string(miscResources[i].size()));
+		miscResources[i][0]->drawImage(miscResources[i][0]->getName(), Var::WIDTH - 225 - (itemDesc.size() * 20 + 28) / 2, h);
+		al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 225 - (itemDesc.size()*20 - 28) / 2, h, 0,
+			itemDesc.c_str());
+	}
+}
+
 void IGM::stateSelector(MenuState state) {
 	switch (state)
 	{
@@ -78,6 +97,9 @@ void IGM::stateSelector(MenuState state) {
 		break;
 	case placingBuilding:
 		buildingMenu();
+		break;
+	case inventory:
+		inventoryMenu();
 		break;
 	default:
 		defaultMenu();

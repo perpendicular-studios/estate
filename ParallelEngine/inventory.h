@@ -19,6 +19,18 @@ public:
 	bool hasItems() { return inventory.empty(); }
 	bool hasItem(std::string key) { return !(inventory[key].empty()); } //if not empty, inventory has item
 
+	std::vector<std::vector<const Resource*>> getMiscResources() {
+		std::vector<std::vector<const Resource*>> result;
+		for (std::pair<std::string, std::vector<const Resource*>> e : inventory) {
+			if(e.second.size() > 0) {
+				if (e.second[0]->getResourceType() == MISC) {
+					result.push_back(e.second);
+				}
+			}
+		}
+		return result;
+	}
+
 private:
 	std::map<std::string, std::vector<const Resource*>> inventory;
 	int food;

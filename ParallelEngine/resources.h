@@ -1,6 +1,9 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
 #include <string>
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_image.h>
+#include "assetloader.h"
 enum ResourceType { FOOD, WOOD, STONE, GOLD, MISC };
 
 class Resource {
@@ -9,6 +12,7 @@ public:
 	std::string getName() const { return name; }
 	ResourceType getResourceType() const { return type; }
 	int getYield() const { return yield; }
+	void drawImage(std::string key, int x, int y) const { al_draw_bitmap(AssetLoader::manager->getImage(key), x, y, 0); }
 private:
 	std::string name;
 	ResourceType type;

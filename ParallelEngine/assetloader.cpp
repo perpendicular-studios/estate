@@ -10,13 +10,17 @@ AssetLoader::AssetLoader() {
 	manager->loadImage("images/radius.png", "radius", true);
 	manager->loadImage("images/castle.png", "castle", true);
 	manager->loadImage("images/town_center.png", "towncenter", true);
-	manager->loadImage("images/resourcebg.png", "resourcebg", false);
 	manager->loadImage("images/basicbutton.png", "basicbutton", false);
 	manager->loadImage("images/productionbg.png", "productionbg", false);
 	manager->loadImage("images/flagbg.png", "flagbg", false);
 	manager->loadImage("images/x.png", "x", false);
 	manager->loadImage("images/miscbg.png", "miscbg", false);
-	manager->loadImage("images/resources.png", "resources", false);
+	manager->loadImage("images/resources_menu.png", "resources_menu", false);
+
+
+	// load misc resource sprites
+	manager->loadImage("images/iron.png", "Iron", false);
+	manager->loadImage("images/cloth.png", "Cloth", false);
 	std::cout << "Done Loading Images..." << std::endl;
 
 }

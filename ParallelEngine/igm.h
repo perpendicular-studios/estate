@@ -34,6 +34,7 @@ public:
 	void buildingMenu();
 	void diploMenu();
 	void overviewMenu();
+	void inventoryMenu();
 	
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
@@ -46,7 +47,7 @@ private:
 	ButtonManager* bm;
 	Player* player;
 	BuildingList* bl;
-	MenuButton *flag, *production, *build, *exit, *misc;
+	MenuButton *flag, *production, *build, *exit, *exit1, *misc;
 	BuildButton *castle, *towncenter, *newBuildingPlaceHolder;
 
 	std::string buildingType;

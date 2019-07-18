@@ -19,6 +19,7 @@ void BuildingList::clearList() {
 }
 
 void BuildingList::update(Building* b, std::string buildingType) {
+//	std::cout << col << "," << row << "\n";
 	if (isBuildTrue) { 
 		if (isPlacingTrue) {
 			if (buildingType == "Castle") { b = new Castle(bl.size()); }
@@ -26,7 +27,8 @@ void BuildingList::update(Building* b, std::string buildingType) {
 			addBuilding(b);
 			b->setx(x);
 			b->sety(y);
-			
+			b->setCol(col);
+			b->setRow(row);
 			isPlacingTrue = false;
 		}
 		else if (isPlacingTrue == false) { isPlacingTrue = true;}

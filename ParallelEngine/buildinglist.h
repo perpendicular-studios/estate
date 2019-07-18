@@ -30,10 +30,13 @@ public:
 
 	void setx(int x_) { x = x_; }
 	void sety(int y_) { y = y_; }
+	void setCol(int col_) { col = col_; }
+	void setRow(int row_) { row = row_; }
 private:
 	std::vector<Building*> bl; 
 	bool isBuildTrue = false, isPlacingTrue = false;
 	int x, y;
+	int col, row;
 };
 
 #endif 

@@ -13,7 +13,6 @@ private:
 	int currGarrison, maxGarrison;
 	int towncenterID;
 	ALLEGRO_BITMAP* bitmap = AssetLoader::manager->getImage("towncenter");
-
 };
 
 #endif 

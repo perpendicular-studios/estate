@@ -35,24 +35,31 @@ void PlayState::render() {
 			selectedEntity = clickEntity; // select
 		}
 	}
+
+	bl->setCol(mapCoord.x);
+	bl->setRow(mapCoord.y);
+
 	Vector2f screenCoord = tm->isoToScreen(mapCoord.y, mapCoord.x);
 
+		//hover
 	hoverX = screenCoord.x;
 	hoverY = screenCoord.y;
-
-	buildOffsetX = screenCoord.x - menu->getBuilding()->getWidth()/2;
-	buildOffsetY = screenCoord.y - menu->getBuilding()->getHeight()*0.75;
-
-	bl->setx(buildOffsetX);
-	bl->sety(buildOffsetY);
-
-	menu->isoRender();
-
-	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuildingType(), buildOffsetX, buildOffsetY); }
-	
-	if (selectedEntity) selectedEntity->renderRadius();
 	al_draw_bitmap(AssetLoader::manager->getImage("hover"), hoverX, hoverY, 0);
 
+		//building
+	Vector2f buildOffset = tm->screenToIso(menu->getBuilding()->getWidth() / 2, menu->getBuilding()->getHeight());
+	buildOffset = tm->isoToScreen(buildOffset.x, buildOffset.y);
+	placingCoordX = screenCoord.x + buildOffset.x;
+	placingCoordY = screenCoord.y - buildOffset.y;
+
+	bl->setx(placingCoordX);
+	bl->sety(placingCoordY);
+	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuildingType(), placingCoordX, placingCoordY); }
+	
+	if (selectedEntity) selectedEntity->renderRadius();
+
+	menu->isoRender();
+	
 	//for static display images add here
 	al_identity_transform(&trans);
 	al_use_transform(&trans);

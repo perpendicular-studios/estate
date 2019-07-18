@@ -3,6 +3,7 @@
 #include "inventory.h"
 #include "entity.h"
 #include "building.h"
+#include "buildinglist.h"
 #include <string>
 #include <vector>
 class Player {

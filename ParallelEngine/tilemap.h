@@ -50,6 +50,9 @@ public:
 			(col + row) * tileHeight / 2);
 	}
 
+	bool checkOccupied(int row, int col);
+	void setOccupied(int row, int col);
+
 	int getTileWidth() { return tileWidth; }
 	int getTileHeight() { return tileHeight; }
 
@@ -59,6 +62,7 @@ public:
 private:
 	std::vector<std::vector<int>> map;
 	std::vector<std::vector<int>> collisionMap;
+	std::vector<std::vector<bool>> occupiedMap;
 	std::vector<std::vector<std::shared_ptr<ALLEGRO_BITMAP>>> tileSet;
 	int width, height; // in pixels
 	int tileWidth, tileHeight;

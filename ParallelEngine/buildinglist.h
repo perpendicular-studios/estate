@@ -5,10 +5,11 @@
 #include "building.h"
 #include "castle.h"
 #include "towncenter.h"
-//#include "tilemap.h"
+#include "tilemap.h"
 
 class BuildingList {
 public:
+	BuildingList(std::shared_ptr<TileMap> tm_) : tm(tm_) {}
 
 	// initialize new building, adds to list.
 	void addBuilding(Building *buildingObject);
@@ -33,6 +34,7 @@ public:
 	void setCol(int col_) { col = col_; }
 	void setRow(int row_) { row = row_; }
 private:
+	std::shared_ptr<TileMap> tm;
 	std::vector<Building*> bl; 
 	bool isBuildTrue = false, isPlacingTrue = false;
 	int x, y;

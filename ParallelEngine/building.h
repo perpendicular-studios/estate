@@ -21,6 +21,8 @@ public:
 	int getRow() const { return row; }
 	void setCol(int col_) { col = col_; }
 	void setRow(int row_) { row = row_; }
+	int getColWidth() const { return colWidth; }
+	int getRowHeight() const { return rowHeight; }
 
 
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
@@ -47,6 +49,7 @@ public:
 protected:
 	int x = 0, y = 0;
 	int col = 0, row = 0;
+	int colWidth = 0, rowHeight = 0;
 	int width, height;
 	std::shared_ptr<TileMap> tm;
 	int id;

@@ -48,6 +48,11 @@ void TileMap::loadTileMap(std::string path) {
 			collisionMap[i].resize(cols);
 		}
 
+		occupiedMap.resize(rows);
+		for (int i = 0; i < occupiedMap.size(); i++) {
+			occupiedMap[i].resize(cols);
+		}
+
 		/* Parse in data of the maps */
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
@@ -60,8 +65,22 @@ void TileMap::loadTileMap(std::string path) {
 				file >> collisionMap[row][col];
 			}
 		}
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				collisionMap[row][col] = 0;
+			}
+		}
 	}
 
+}
+
+bool TileMap::checkOccupied(int row, int col) {
+	if (occupiedMap[row][col] == 0) { return false; }
+	else return true;
+}
+
+void TileMap::setOccupied(int row, int col) {
+	occupiedMap[row][col] = 1;
 }
 
 void TileMap::update() {}

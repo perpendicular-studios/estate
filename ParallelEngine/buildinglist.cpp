@@ -19,17 +19,31 @@ void BuildingList::clearList() {
 }
 
 void BuildingList::update(Building* b, std::string buildingType) {
-//	std::cout << col << "," << row << "\n";
+	
 	if (isBuildTrue) { 
 		if (isPlacingTrue) {
-			if (buildingType == "Castle") { b = new Castle(bl.size()); }
-			else if (buildingType == "Towncenter") { b = new Towncenter(bl.size()); }
-			addBuilding(b);
-			b->setx(x);
-			b->sety(y);
-			b->setCol(col);
-			b->setRow(row);
-			isPlacingTrue = false;
+			if (tm->checkOccupied(row, col) == false) {
+				if (buildingType == "Castle") { b = new Castle(bl.size()); }
+				else if (buildingType == "Towncenter") { b = new Towncenter(bl.size()); }
+				addBuilding(b);
+				b->setx(x);
+				b->sety(y);
+				b->setCol(col);
+				b->setRow(row);
+				std::cout << b->getRow() << "," << b->getCol() << "\n";
+				std::cout << b->getRow() - b->getRowHeight() << "," << b->getCol() - b->getColWidth() << "\n";
+				for (int row_ = b->getRow(); row_ >= b->getRow() - b->getRowHeight(); row_--) {
+					for (int col_ = b->getCol(); col_ >= b->getCol() - b->getColWidth(); col_--) {
+						tm->setOccupied(row_, col_);
+						std::cout << "Occupied Tile: " << row_ << "," << col_ << "\n";
+					}
+				}
+				isPlacingTrue = false;
+			}
+			else if (tm->checkOccupied(row, col) == true) {
+				std::cout << "Cannot place in this location \n";
+				isPlacingTrue = false;
+			}
 		}
 		else if (isPlacingTrue == false) { isPlacingTrue = true;}
 		isBuildTrue = false;

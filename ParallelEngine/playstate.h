@@ -26,7 +26,7 @@ private:
 
 	float mouseX = 0, mouseY = 0;
 	float hoverX = 0, hoverY = 0;
-	float buildOffsetX = 0, buildOffsetY = 0;
+	float placingCoordX = 0, placingCoordY = 0;
 };
 
 #endif

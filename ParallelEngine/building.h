@@ -17,6 +17,11 @@ public:
 	int gety() const { return y; }
 	void setx(int x_) {  x = x_; }
 	void sety(int y_) { y = y_; }
+	int getCol() const { return col; }
+	int getRow() const { return row; }
+	void setCol(int col_) { col = col_; }
+	void setRow(int row_) { row = row_; }
+
 
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
 	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);
@@ -41,6 +46,7 @@ public:
 
 protected:
 	int x = 0, y = 0;
+	int col = 0, row = 0;
 	int width, height;
 	std::shared_ptr<TileMap> tm;
 	int id;

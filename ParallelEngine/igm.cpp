@@ -31,8 +31,8 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 
 void IGM::gameBackground() {
 	al_draw_bitmap(AssetLoader::manager->getImage("resources_menu"), Var::WIDTH - 550, 0, 0);
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 40      , 8, 0, std::to_string(player->getGold()).c_str());
-	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 125 + 40, 8, 0, std::to_string(player->getFood()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 40      , 8, 0, std::to_string(player->getFood()).c_str());
+	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 125 + 40, 8, 0, std::to_string(player->getGold()).c_str());
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 250 + 40, 8, 0, std::to_string(player->getStone()).c_str());
 	al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 550 + 375 + 40, 8, 0, std::to_string(player->getWood()).c_str());
 	al_draw_filled_rectangle(0, 0, 100, 100, al_map_rgb(0, 0, 0));								//flag black background
@@ -75,15 +75,15 @@ void IGM::buildingMenu() {
 }
 
 void IGM::inventoryMenu() {
-	al_draw_filled_rectangle(Var::WIDTH - 550, 40, Var::WIDTH, 400, al_map_rgb(255, 204, 0));
-	al_draw_rectangle(Var::WIDTH - 549, 41, Var::WIDTH - 1, 399, al_map_rgb(153, 77, 0), 3);
 	exit1->setVisible(true);
 	std::vector<std::vector<const Resource*>> miscResources = player->getInventory()->getMiscResources();
+	al_draw_filled_rectangle(Var::WIDTH - 550, 40, Var::WIDTH, 40 + miscResources.size() * 35, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(Var::WIDTH - 549, 41, Var::WIDTH - 1, 40 + miscResources.size() * 35 - 1, al_map_rgb(153, 77, 0), 3);
 	for (int i = 0; i < miscResources.size(); i++) {
 		int h = 50 + i * 25;
 		std::string itemDesc = (miscResources[i][0]->getName() + " - " + std::to_string(miscResources[i].size()));
 		miscResources[i][0]->drawImage(miscResources[i][0]->getName(), Var::WIDTH - 225 - (itemDesc.size() * 20 + 28) / 2, h);
-		al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 225 - (itemDesc.size()*20 - 28) / 2, h, 0,
+		al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 225 - (itemDesc.size() * 20 - 28) / 2, h, 0,
 			itemDesc.c_str());
 	}
 }

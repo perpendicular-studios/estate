@@ -3,7 +3,7 @@
 #include "entity.h"
 class Peasant : public Entity {
 public:
-	Peasant(TileMap* tm, int tileCost) : Entity(tm, tileCost) {
+	Peasant(TileMap* tm, int tileCost, int food, int gold, int stone, int wood) : Entity(tm, tileCost, food, gold, stone, wood) {
 		img = AssetLoader::manager->getImage("peasant");
 	}
 	void update() override;

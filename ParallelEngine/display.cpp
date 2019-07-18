@@ -34,17 +34,11 @@ Display::Display(GSM * g) : gsm(g) {
 		ALLEGRO_MOUSE_STATE mouseState;
 		al_get_mouse_state(&mouseState);
 
-		//std::cout << "Running..." << std::endl;
-		//Close button pressed, close
-		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-			running = false;
-		}
-
 		if (event.type == ALLEGRO_EVENT_TIMER) {
 			gsm->update(keyState, mouseState);
 			gsm->render();
 		}
-
+		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) running = false;
 	}
 }
 

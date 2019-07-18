@@ -12,6 +12,7 @@ public:
 
 	void updateInventory(); //turn by turn update
 	bool buyBuilding(Building* building);
+	bool buyEntity(Entity* entity);
 
 	int getGold() { return inventory->getGold(); }
 	int getStone() { return inventory->getStone(); }

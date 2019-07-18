@@ -24,7 +24,6 @@ public:
 	int getColWidth() const { return colWidth; }
 	int getRowHeight() const { return rowHeight; }
 
-
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
 	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);
 	virtual ALLEGRO_BITMAP* getBaseImg() { return bitmap; }
@@ -43,6 +42,7 @@ public:
 	int getFoodCost() const { return food; }
 	int getGoldCost() const { return gold; }
 
+	void addRequiredItem(std::pair<const Resource*, int> item) { misc.push_back(item); }
 	bool requiresItems() const { return misc.empty(); }
 	std::vector<std::pair<const Resource*, int>> getRequiredItems() const { return misc; }
 

@@ -34,7 +34,9 @@ public:
 	void buildingMenu();
 	void diploMenu();
 	void overviewMenu();
-	
+	void productionMenu();
+	void inventoryMenu();
+
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
 	std::string getBuildingType() { return buildingType; }

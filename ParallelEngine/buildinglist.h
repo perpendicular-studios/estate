@@ -21,8 +21,11 @@ public:
 	void update(Building* b, std::string buildingType);
 	// render buildlist objects
 	void render();
+	//check placing bounds
+	void checkPlacingBounds(Building* b);
 	// place building
 	void placingBuilding(std::string buildingType, float x, float y); // buildingImg will select from a switch to get correct building img
+	
 	
 	void setBuild(bool b) { isBuildTrue = b; }
 	void setPlacing(bool p) { isPlacingTrue = p; }
@@ -36,7 +39,7 @@ public:
 private:
 	std::shared_ptr<TileMap> tm;
 	std::vector<Building*> bl; 
-	bool isBuildTrue = false, isPlacingTrue = false;
+	bool isBuildTrue = false, isPlacingTrue = false, isOccupied = false;
 	int x, y;
 	int col, row;
 };

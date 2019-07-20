@@ -4,8 +4,8 @@ Building::Building(ALLEGRO_BITMAP* bitmap_, int width_, int height_) : bitmap(bi
 	for (int i = width; i % 64 != 0; i++) {
 		colWidth = i/64;
 	}
-	for (int j = height; j % 32 != 0; j++) {
-		rowHeight = j/32;
+	for (int j = height; j % 64 != 0; j++) {
+		rowHeight = j/64;
 	}
 }
 

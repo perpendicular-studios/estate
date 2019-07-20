@@ -18,11 +18,34 @@ void BuildingList::clearList() {
 	bl.clear();
 }
 
+void BuildingList::checkPlacingBounds(Building* b) {
+	b->setCol(col);
+	b->setRow(row);
+	if (b->getRow() - b->getRowHeight() < 0 || b->getCol() - b->getColWidth() < 0) {
+		isOccupied = true;
+		std::cout << "Cannot place in this location \n";
+		isPlacingTrue = false;
+	}
+	else {
+		for (int row_ = b->getRow(); row_ >= b->getRow() - b->getRowHeight(); row_--) {
+			for (int col_ = b->getCol(); col_ >= b->getCol() - b->getColWidth(); col_--) {
+				if (tm->checkOccupied(row_, col_)) {
+					isOccupied = true;
+					std::cout << "Cannot place in this location \n";
+					isPlacingTrue = false;
+					isOccupied = true;
+					row_ = col_ = 0;
+				}
+			}
+		}
+	}
+}
+
 void BuildingList::update(Building* b, std::string buildingType) {
-	
 	if (isBuildTrue) { 
 		if (isPlacingTrue) {
-			if (tm->checkOccupied(row, col) == false) {
+			checkPlacingBounds(b);
+			if (isOccupied == false) {
 				if (buildingType == "Castle") { b = new Castle(bl.size()); }
 				else if (buildingType == "Towncenter") { b = new Towncenter(bl.size()); }
 				addBuilding(b);
@@ -40,10 +63,7 @@ void BuildingList::update(Building* b, std::string buildingType) {
 				}
 				isPlacingTrue = false;
 			}
-			else if (tm->checkOccupied(row, col) == true) {
-				std::cout << "Cannot place in this location \n";
-				isPlacingTrue = false;
-			}
+			isOccupied = false;
 		}
 		else if (isPlacingTrue == false) { isPlacingTrue = true;}
 		isBuildTrue = false;
@@ -61,7 +81,7 @@ void BuildingList::render() {
 
 void BuildingList::placingBuilding(std::string buildingType, float x, float y) {
 	ALLEGRO_BITMAP* bitmap = AssetLoader::manager->getImage("castle");						// set default value in case of error
-	if (buildingType == "Casle") { bitmap = AssetLoader::manager->getImage("castle"); }
+	if (buildingType == "Castle") { bitmap = AssetLoader::manager->getImage("castle"); }
 	else if (buildingType == "Towncenter") { bitmap = AssetLoader::manager->getImage("towncenter"); }
 	al_draw_bitmap(bitmap, x, y, 0);
 }

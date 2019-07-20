@@ -22,9 +22,9 @@ public:
 	// render buildlist objects
 	void render();
 	//check placing bounds
-	void checkPlacingBounds(Building* b);
+	bool checkPlacingBounds(Building* b);
 	// place building
-	void placingBuilding(std::string buildingType, float x, float y); // buildingImg will select from a switch to get correct building img
+	void placingBuilding(Building* b, std::string buildingType, float x, float y); // buildingImg will select from a switch to get correct building img
 	
 	
 	void setBuild(bool b) { isBuildTrue = b; }

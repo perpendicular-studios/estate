@@ -34,9 +34,15 @@ Display::Display(GSM * g) : gsm(g) {
 		ALLEGRO_MOUSE_STATE mouseState;
 		al_get_mouse_state(&mouseState);
 
+		bool redraw = false;
 		if (event.type == ALLEGRO_EVENT_TIMER) {
 			gsm->update(keyState, mouseState);
+			redraw = true;
+		}
+
+		if (redraw && al_event_queue_is_empty(queue)) {
 			gsm->render();
+			redraw = false;
 		}
 		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) running = false;
 	}

@@ -76,12 +76,12 @@ bool BuildingList::checkPlacingBounds(Building* b) {
 void BuildingList::update(Building* b, std::string buildingType) {
 	if (isBuildTrue) { 
 		if (isPlacingTrue) {
-			if (checkPlacingBounds(b) == true) {
+			if (checkPlacingBounds(b)) {
 				isOccupied = true;
 				std::cout << "Cannot place in this location \n";
 				isPlacingTrue = false;
 			}
-			if (isOccupied == false) {
+			if (!isOccupied) {
 				if (buildingType == "Castle") { b = new Castle(bl.size()); }
 				else if (buildingType == "Towncenter") { b = new Towncenter(bl.size()); }
 				b->setx(x);
@@ -101,7 +101,7 @@ void BuildingList::update(Building* b, std::string buildingType) {
 			}
 			isOccupied = false;
 		}
-		else if (isPlacingTrue == false) { isPlacingTrue = true;}
+		else if (!isPlacingTrue) { isPlacingTrue = true;}
 		isBuildTrue = false;
 	}
 }
@@ -119,6 +119,6 @@ void BuildingList::placingBuilding(Building* b, std::string buildingType, float 
 	ALLEGRO_BITMAP* bitmap = AssetLoader::manager->getImage("castle");						// set default value in case of error
 	if (buildingType == "Castle") { bitmap = AssetLoader::manager->getImage("castle"); }
 	else if (buildingType == "Towncenter") { bitmap = AssetLoader::manager->getImage("towncenter"); }
-	if (checkPlacingBounds(b) == true) { al_draw_tinted_bitmap(bitmap, al_map_rgb(240, 128, 128), x, y, 0); }
+	if (checkPlacingBounds(b)) { al_draw_tinted_bitmap(bitmap, al_map_rgb(240, 128, 128), x, y, 0); }
 	else { al_draw_bitmap(bitmap, x, y, 0); }
 }

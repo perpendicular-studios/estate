@@ -70,6 +70,7 @@ void TileMap::loadTileMap(std::string path) {
 				collisionMap[row][col] = 0;
 			}
 		}
+
 	}
 
 }

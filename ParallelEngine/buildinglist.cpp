@@ -2,8 +2,45 @@
 #include <vector>
 
 void BuildingList::addBuilding(Building* buildingObject) {
-	bl.push_back(buildingObject);
-	buildingObject->setID(bl.size() - 1);
+	if (bl.empty() == true) { bl.push_back(buildingObject); }
+	else {
+		int i = 0;
+		bool reachEnd = false;
+		while ((bl[i]->getCol() - bl[i]->getColWidth() > buildingObject->getCol() || bl[i]->getRow() - bl[i]->getRowHeight() > buildingObject->getRow()) && reachEnd == false) {
+			std::cout << "traversing \n";
+			i++;
+			if (i == bl.size()) { 
+				reachEnd = true;
+				i--;
+			}
+		}
+		if (reachEnd == true) {
+			std::cout << "Insert at front\n";
+			bl.insert(bl.begin(), buildingObject);
+		}
+		else {
+			while ((bl[i]->getCol() - bl[i]->getColWidth() <= buildingObject->getCol() && bl[i]->getRow() - bl[i]->getRowHeight() <= buildingObject->getRow()) && reachEnd == false) {
+				std::cout << "traversing \n";
+				i++;
+				if (i == bl.size()) {
+					reachEnd = true;
+					i--;
+				}
+			}
+			if (reachEnd == true) {
+				std::cout << "Insert at end \n";
+				bl.insert(bl.end(), buildingObject);
+			}
+			else {
+				std::cout << "Inserting at " << i  << "\n";
+				bl.insert(bl.begin() + i , buildingObject);
+			}
+			
+		} 
+	} 
+
+	buildingObject->setID(numID);
+	numID++;
  }
 
 void BuildingList::popBuilding(int buildingID) {
@@ -47,17 +84,17 @@ void BuildingList::update(Building* b, std::string buildingType) {
 			if (isOccupied == false) {
 				if (buildingType == "Castle") { b = new Castle(bl.size()); }
 				else if (buildingType == "Towncenter") { b = new Towncenter(bl.size()); }
-				addBuilding(b);
 				b->setx(x);
 				b->sety(y);
 				b->setCol(col);
 				b->setRow(row);
+				addBuilding(b);
 				std::cout << b->getRow() << "," << b->getCol() << "\n";
 				std::cout << b->getRow() - b->getRowHeight() << "," << b->getCol() - b->getColWidth() << "\n";
 				for (int row_ = b->getRow(); row_ >= b->getRow() - b->getRowHeight(); row_--) {
 					for (int col_ = b->getCol(); col_ >= b->getCol() - b->getColWidth(); col_--) {
 						tm->setOccupied(row_, col_);
-						std::cout << "Occupied Tile: " << row_ << "," << col_ << "\n";
+						//std::cout << "Occupied Tile: " << row_ << "," << col_ << "\n";
 					}
 				}
 				isPlacingTrue = false;

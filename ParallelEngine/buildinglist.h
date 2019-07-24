@@ -26,7 +26,6 @@ public:
 	// place building
 	void placingBuilding(Building* b, std::string buildingType, float x, float y); // buildingImg will select from a switch to get correct building img
 	
-	
 	void setBuild(bool b) { isBuildTrue = b; }
 	void setPlacing(bool p) { isPlacingTrue = p; }
 
@@ -42,6 +41,7 @@ private:
 	bool isBuildTrue = false, isPlacingTrue = false, isOccupied = false;
 	int x, y;
 	int col, row;
+	int numID = 0;
 };
 
 #endif 

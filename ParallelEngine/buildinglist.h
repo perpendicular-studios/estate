@@ -24,10 +24,10 @@ public:
 	//check placing bounds
 	bool checkPlacingBounds(Building* b);
 	// place building
-	void placingBuilding(Building* b, std::string buildingType, float x, float y); // buildingImg will select from a switch to get correct building img
+	void placingBuilding(Building* b, float x, float y); // buildingImg will select from a switch to get correct building img
 	
-	void setBuild(bool b) { isBuildTrue = b; }
 	void setPlacing(bool p) { isPlacingTrue = p; }
+	void setCurrBuilding(Building* b) { currBuilding = b; }
 
 	bool getPlacing() { return isPlacingTrue; }
 
@@ -38,10 +38,11 @@ public:
 private:
 	std::shared_ptr<TileMap> tm;
 	std::vector<Building*> bl; 
-	bool isBuildTrue = false, isPlacingTrue = false, isOccupied = false;
+	bool isPlacingTrue = false;
 	int x, y;
 	int col, row;
 	int numID = 0;
+	Building* currBuilding;
 };
 
 #endif 

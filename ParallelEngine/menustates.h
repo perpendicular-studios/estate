@@ -1,7 +1,7 @@
 #ifndef MENUSTATES_H
 #define MENUSTATES_H
 
-enum MenuState { defaultState, overviewState, buildState, action, reset, inventory, placingBuilding, productionState };
+enum MenuState { defaultState, overviewState, buildState, action, reset, inventory, placingBuilding, placingBuildingTest, productionState };
 
 
 #endif 

@@ -1,12 +1,9 @@
 #include "building.h"
 
 Building::Building(ALLEGRO_BITMAP* bitmap_, int width_, int height_) : bitmap(bitmap_), width(width_), height(height_) {
-	for (int i = width; i % 64 != 0; i++) {
-		colWidth = i/64;
-	}
-	for (int j = height; j % 64 != 0; j++) {
-		rowHeight = j/64;
-	}
+	//for whole number cols and rows
+	colWidth = (width + 63) / 64;			
+	rowHeight = (height + 63) / 64;
 }
 
 void Building::draw(ALLEGRO_BITMAP* bitmap, float x, float y) {

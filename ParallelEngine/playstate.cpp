@@ -56,7 +56,8 @@ void PlayState::render() {
 
 	bl->setx(placingCoordX);
 	bl->sety(placingCoordY);
-	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuilding(),menu->getBuildingType(), placingCoordX, placingCoordY); }
+
+	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuilding(), placingCoordX, placingCoordY); }
 	
 	if (selectedEntity) selectedEntity->renderRadius();
 
@@ -79,9 +80,8 @@ void PlayState::render() {
 void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	tm->update();
 	cam->update();
-	bl->update(menu->getBuilding(), menu->getBuildingType());
 	input.update(ks, ms);
-	menu->update(input.leftClickDown(), ms.x, ms.y);
+	menu->update(input.leftClickDown(), input.keyClickDown(), input.keyPressed(), ms.x, ms.y, bl);
 
 	mouseX = ms.x;
 	mouseY = ms.y;

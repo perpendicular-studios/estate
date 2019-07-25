@@ -106,7 +106,10 @@ void IGM::stateSelector(MenuState state) {
 		buildingMenu();
 		break;
 	case placingBuilding:
-		buildingMenu();
+		//buildingMenu();
+		break;
+	case placingBuildingTest:
+		//buildingMenu();
 		break;
 	case inventory:
 		inventoryMenu();
@@ -117,49 +120,68 @@ void IGM::stateSelector(MenuState state) {
 	}
 }
 
-void IGM::update(bool clicked, int x, int y){ 
+void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, BuildingList* bl){ 
 	prevState = currState;
 
-	if (relativeClicks > 1) {
-		currState = buildState;
-		relativeClicks = 0;
-		std::cout << "changed state";
-	}
-
 	if (clicked) {
+		if (currState == placingBuilding) { prevState = currState = placingBuildingTest; }
+
+		//iterate through all current clickables and buttons
 		for (int i = 0; i < bm->size(); i++) {
-			// check if state changed
+			// check if button is properly clicked
 			if (bm->getList()[i]->isInBounds(x, y) == true && bm->getList()[i]->getVisible() == true) {
-				currState = bm->getList()[i]->getState(); 
+				currState = bm->getList()[i]->getState();
 				buttonIndex = i;
-				if (currState == placingBuilding) { 
-					newBuildingPlaceHolder = (BuildButton*)bm->getList()[buttonIndex]; 
-					newBuilding = newBuildingPlaceHolder->getBuilding();
-					buildingType = newBuildingPlaceHolder->getText();
-					relativeClicks = 0;
-					bl->setPlacing(false);
-				}
-				//when you click something else while placing building
-				if (prevState == placingBuilding && currState != prevState) {
-					relativeClicks = 0;
-					bl->setPlacing(false);
-				}
 			}
 		}
-		if (currState == placingBuilding && relativeClicks <= 1) {
-			bl->setBuild(true);
-			std::cout << "building..."; 
-			relativeClicks++;
+		if (currState == placingBuilding) {
+			//set template building info
+			newBuildingPlaceHolder = (BuildButton*)bm->getList()[buttonIndex];
+			newBuilding = newBuildingPlaceHolder->getBuilding();
+			buildingType = newBuildingPlaceHolder->getText();
+			bl->setCurrBuilding(newBuilding);
+			bl->setPlacing(true);
+		}
+
+		//when you click something else while placing building
+		if (prevState == placingBuildingTest && currState != prevState && currState != placingBuilding) {
+			//relativeClicks = 0;
+			bl->setPlacing(false);
+		}
+
+		//check if placing building in valid location 
+		if (currState == placingBuildingTest) {
+			if (bl->checkPlacingBounds(newBuilding)) {
+				std::cout << "Cannot place in this location \n";
+			}
+			//valid placement
+			else {
+				std::cout << "Placing Building \n";
+				bl->update(newBuilding, buildingType);
+				bl->setPlacing(false);
+				currState = buildState;
+			}
+		}
+	}
+
+	if (keyClicked) {
+		if (currState == placingBuilding && key == "esc") { 
+			bl->setPlacing(false);
+			currState = buildState; 
 		}
 	}
 }
 
 void IGM::staticRender() {
+	//setting all buttons to be non-visible
 	for (int i = 0; i < bm->size(); i++) {
 		bm->getList()[i]->setVisible(false);
 	}
+
 	gameBackground();
 	stateSelector(currState);
+
+	//drawing buttons in currState that are visible
 	for (int i = 0; i < bm->size(); i++) { 
 		if (bm->getList()[i]->getVisible() == true) { bm->getList()[i]->drawButton(); }
 	}

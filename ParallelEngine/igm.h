@@ -19,7 +19,7 @@ class IGM {
 public:
 	IGM(Player * player_, BuildingList* bl);
 	// update states
-	void update(bool clicked, int x, int y);
+	void update(bool clicked, bool keyClicked, std::string key, int x, int y, BuildingList* bl);
 	// render states 
 	void staticRender();
 	void isoRender();

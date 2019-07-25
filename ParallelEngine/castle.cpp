@@ -7,4 +7,5 @@ Castle::Castle(int castleID_) : Building(bitmap, 607, 447), castleID(castleID_) 
 	food = 0;
 	width = 400;
 	height = 352;
+	buildingType = "castle";
 }

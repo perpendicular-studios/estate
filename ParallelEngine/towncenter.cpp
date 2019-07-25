@@ -7,5 +7,5 @@ Towncenter::Towncenter(int towncenterID_) : Building(bitmap, 255, 287), towncent
 	food = 0;
 	width = 255;
 	height = 287;
-	buildingType = "towncenter";
+	buildingType = towncenter;
 }

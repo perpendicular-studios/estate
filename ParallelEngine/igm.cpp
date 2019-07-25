@@ -106,10 +106,8 @@ void IGM::stateSelector(MenuState state) {
 		buildingMenu();
 		break;
 	case placingBuilding:
-		//buildingMenu();
 		break;
 	case placingBuildingTest:
-		//buildingMenu();
 		break;
 	case inventory:
 		inventoryMenu();
@@ -165,7 +163,7 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 	}
 
 	if (keyClicked) {
-		if (currState == placingBuilding && key == "esc") { 
+		if ((currState == placingBuilding || currState == placingBuildingTest) && key == "esc") { 
 			bl->setPlacing(false);
 			currState = buildState; 
 		}

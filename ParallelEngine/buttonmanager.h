@@ -5,6 +5,7 @@
 #include "button.h"
 #include "menubutton.h"
 #include "buildbutton.h"
+#include "buildinginfobutton.h"
 
 class ButtonManager {
 public:

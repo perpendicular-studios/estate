@@ -39,20 +39,18 @@ public:
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
-	std::string getBuildingType() { return buildingType; }
 	 
 private:
 	MenuState currState, prevState;
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
 	bool isClicked = false;
-	ButtonManager* bm;
+	ButtonManager* bm, *buildingbm;
 	Player* player;
 	BuildingList* bl;
 	MenuButton *flag, *production, *build, *exit, *exit1, *misc;
 	BuildButton *castle, *towncenter, *newBuildingPlaceHolder;
+	BuildingInfoButton* newInfoButton;
 
-	std::string buildingType;
-	int relativeClicks = 0;
 	int buttonIndex;
 	Castle* c;
 	Towncenter* tc;

@@ -16,7 +16,8 @@ void PlayState::render() {
 	al_clear_to_color(al_map_rgba_f(0, 0, 0, 1));
 	tm->render();
 	bl->render();
-	
+	menu->isoRender();
+
 	ALLEGRO_TRANSFORM trans;
 
 	//for mouse or isometric images add here
@@ -61,7 +62,6 @@ void PlayState::render() {
 	
 	if (selectedEntity) selectedEntity->renderRadius();
 
-	menu->isoRender();
 	
 	//for static display images add here
 	al_identity_transform(&trans);

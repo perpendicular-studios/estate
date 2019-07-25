@@ -18,7 +18,7 @@ public:
 	// clear all buildings
 	void clearList();
 	// update buildlist objects
-	void update(Building* b, std::string buildingType);
+	void update(Building* b);
 	// render buildlist objects
 	void render();
 	//check placing bounds
@@ -32,9 +32,15 @@ public:
 	bool getPlacing() { return isPlacingTrue; }
 
 	void setx(int x_) { x = x_; }
+	int getx() { return x; }
 	void sety(int y_) { y = y_; }
+	int gety() { return y; }
 	void setCol(int col_) { col = col_; }
+	int getCol() { return col; }
 	void setRow(int row_) { row = row_; }
+	int getRow() { return row; }
+	Building* getCurrBuilding() { return currBuilding; }
+
 private:
 	std::shared_ptr<TileMap> tm;
 	std::vector<Building*> bl; 

@@ -70,8 +70,8 @@ bool BuildingList::checkPlacingBounds(Building* b) {
 }
 
 void BuildingList::update(Building* b, std::string buildingType) {
-	if (b->getBuildingType() == castle) { b = new Castle(bl.size()); }
-	else if (b->getBuildingType() == towncenter) { b = new Towncenter(bl.size()); }
+	if (b->getBuildingType() == CASTLE) { b = new Castle(bl.size()); }
+	else if (b->getBuildingType() == TOWNCENTER) { b = new Towncenter(bl.size()); }
 	b->setx(x);
 	b->sety(y);
 	b->setCol(col);

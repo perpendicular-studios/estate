@@ -4,18 +4,18 @@
 IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	player->getInventory()->addResource(IRON_ORE);
 	player->getInventory()->addResource(WOOL);
-	currState = defaultState;
+	currState = DEFAULTSTATE;
 	sampleCastle = new Castle(-1);
 	sampleTC = new Towncenter(-1);
 	newBuilding = sampleCastle;
 
 	bm = new ButtonManager;
-	build = new MenuButton(200, 200, 250, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", 0, productionState);
-	flag = new MenuButton(0, 0, 100, 100, AssetLoader::manager->getImage("flagbg"), basic_font20, al_map_rgb(255, 255, 255), "Flag", 0, overviewState);
-	production = new MenuButton(0, 100, 50, 150, AssetLoader::manager->getImage("productionbg"), basic_font20, al_map_rgb(255, 255, 255), "Prod", 0, buildState);
-	exit = new MenuButton(225, 150, 250, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
-	exit1 = new MenuButton(Var::WIDTH - 25, 40, Var::WIDTH, 65, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, defaultState);
-	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, inventory); // should open an inventory
+	build = new MenuButton(200, 200, 250, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", 0, PRODUCTIONSTATE);
+	flag = new MenuButton(0, 0, 100, 100, AssetLoader::manager->getImage("flagbg"), basic_font20, al_map_rgb(255, 255, 255), "Flag", 0, OVERVIEWSTATE);
+	production = new MenuButton(0, 100, 50, 150, AssetLoader::manager->getImage("productionbg"), basic_font20, al_map_rgb(255, 255, 255), "Prod", 0, BUILDSTATE);
+	exit = new MenuButton(225, 150, 250, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE);
+	exit1 = new MenuButton(Var::WIDTH - 25, 40, Var::WIDTH, 65, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE);
+	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, INVENTORY); // should open an inventory
 	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, sampleCastle);
 	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, sampleTC);
 
@@ -91,25 +91,25 @@ void IGM::inventoryMenu() {
 void IGM::stateSelector(MenuState state) {
 	switch (state)
 	{
-	case reset:
+	case RESET:
 		break;
-	case defaultState:
+	case DEFAULTSTATE:
 		defaultMenu();
 		break;
-	case overviewState:
+	case OVERVIEWSTATE:
 		overviewMenu();
 		break;
-	case productionState:
+	case PRODUCTIONSTATE:
 		productionMenu();
 		break;
-	case buildState:
+	case BUILDSTATE:
 		buildingMenu();
 		break;
-	case placingBuilding:
+	case PLACINGBUILDING:
 		break;
-	case placingBuildingTest:
+	case PLACINGBUILDINGTEST:
 		break;
-	case inventory:
+	case INVENTORY:
 		inventoryMenu();
 		break;
 	default:
@@ -122,7 +122,7 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 	prevState = currState;
 
 	if (clicked) {
-		if (currState == placingBuilding) { prevState = currState = placingBuildingTest; }
+		if (currState == PLACINGBUILDING) { prevState = currState = PLACINGBUILDINGTEST; }
 
 		//iterate through all current clickables and buttons
 		for (int i = 0; i < bm->size(); i++) {
@@ -132,7 +132,7 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 				buttonIndex = i;
 			}
 		}
-		if (currState == placingBuilding) {
+		if (currState == PLACINGBUILDING) {
 			//set template building info
 			newBuildingPlaceHolder = (BuildButton*)bm->getList()[buttonIndex];
 			newBuilding = newBuildingPlaceHolder->getBuilding();
@@ -142,13 +142,13 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 		}
 
 		//when you click something else while placing building
-		if (prevState == placingBuildingTest && currState != prevState && currState != placingBuilding) {
+		if (prevState == PLACINGBUILDINGTEST && currState != prevState && currState != PLACINGBUILDING) {
 			//relativeClicks = 0;
 			bl->setPlacing(false);
 		}
 
 		//check if placing building in valid location 
-		if (currState == placingBuildingTest) {
+		if (currState == PLACINGBUILDINGTEST) {
 			if (bl->checkPlacingBounds(newBuilding)) {
 				std::cout << "Cannot place in this location \n";
 			}
@@ -157,15 +157,15 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 				std::cout << "Placing Building \n";
 				bl->update(newBuilding, buildingType);
 				bl->setPlacing(false);
-				currState = buildState;
+				currState = BUILDSTATE;
 			}
 		}
 	}
 
 	if (keyClicked) {
-		if ((currState == placingBuilding || currState == placingBuildingTest) && key == "esc") { 
+		if ((currState == PLACINGBUILDING || currState == PLACINGBUILDINGTEST) && key == "esc") { 
 			bl->setPlacing(false);
-			currState = buildState; 
+			currState = BUILDSTATE; 
 		}
 	}
 }

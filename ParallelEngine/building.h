@@ -9,7 +9,7 @@
 #include "assetloader.h"
 #include "resources.h"
 
-enum BuildingType {castle, towncenter};
+enum BuildingType {CASTLE, TOWNCENTER};
 
 class Building {	
 public:

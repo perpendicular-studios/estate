@@ -2,6 +2,8 @@
 #include "display.h"
 
 Display::Display(GSM * g) : gsm(g) {
+	bool redraw = true;
+
 	al_init();
 	al_init_primitives_addon();
 	al_init_font_addon();
@@ -23,8 +25,11 @@ Display::Display(GSM * g) : gsm(g) {
 	gsm->push(new PlayState(gsm));
 
 	// Update
+	al_flip_display();
 	al_start_timer(timer);
+
 	while (running) {
+
 		ALLEGRO_EVENT event;
 		al_wait_for_event(queue, &event);
 
@@ -34,11 +39,17 @@ Display::Display(GSM * g) : gsm(g) {
 		ALLEGRO_MOUSE_STATE mouseState;
 		al_get_mouse_state(&mouseState);
 
+		if (redraw && al_event_queue_is_empty(queue)) {
+			gsm->render();
+			redraw = false;
+		}
+
 		if (event.type == ALLEGRO_EVENT_TIMER) {
 			gsm->update(keyState, mouseState);
-			gsm->render();
+			redraw = true;
 		}
-		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) running = false;
+		else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) running = false;
+
 	}
 }
 

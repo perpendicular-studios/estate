@@ -129,6 +129,9 @@
     <ClCompile Include="towncenter.cpp">
       <Filter>Source Files\building</Filter>
     </ClCompile>
+    <ClCompile Include="buildinginfobutton.cpp">
+      <Filter>Source Files\button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="towncenter.h">
       <Filter>Header Files\building</Filter>
+    </ClInclude>
+    <ClInclude Include="buildinginfobutton.h">
+      <Filter>Header Files\button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,10 +16,24 @@ void InputHandler::update(ALLEGRO_KEYBOARD_STATE& ks_, ALLEGRO_MOUSE_STATE& ms_)
 
 	//keyboard single presses
 	prevKeyState = currKeyState;
-	if (al_key_down(&ks, ALLEGRO_KEY_B)) { currKeyState = 'b'; }
+	//b key
+	if (al_key_down(&ks, ALLEGRO_KEY_B)) { currKeyState = "b"; }
 	else currKeyState = ' ';
 
-	if (prevKeyState != currKeyState && currKeyState == 'b') { b = true; }
-	else b = false;
+	if (prevKeyState != currKeyState && currKeyState == "b") { 
+		keyPress = "b"; 
+		keyClick = true;
+	}
+	else keyClick = false;
+
+	//escape key
+	if (al_key_down(&ks, ALLEGRO_KEY_ESCAPE)) { currKeyState = "esc"; }
+	else currKeyState = ' ';
+
+	if (prevKeyState != currKeyState && currKeyState == "esc") {
+		keyPress = "esc";
+		keyClick = true;
+	}
+	else keyClick = false;
 
 }

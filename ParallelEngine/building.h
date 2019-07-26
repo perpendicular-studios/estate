@@ -9,8 +9,11 @@
 #include "assetloader.h"
 #include "resources.h"
 
+enum BuildingType {CASTLE, TOWNCENTER};
+
 class Building {	
 public:
+	
 	Building(ALLEGRO_BITMAP* bitmap, int width, int height);
 
 	int getx() const { return x; }
@@ -23,6 +26,7 @@ public:
 	void setRow(int row_) { row = row_; }
 	int getColWidth() const { return colWidth; }
 	int getRowHeight() const { return rowHeight; }
+	BuildingType getBuildingType() { return buildingType; }
 
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
 	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);
@@ -41,6 +45,8 @@ public:
 	int getWoodCost() const { return wood; }
 	int getFoodCost() const { return food; }
 	int getGoldCost() const { return gold; }
+	int getTopCol() { return col - colWidth; }
+	int getTopRow() { return row - rowHeight; }
 
 	void addRequiredItem(std::pair<const Resource*, int> item) { misc.push_back(item); }
 	bool requiresItems() const { return misc.empty(); }
@@ -58,7 +64,7 @@ protected:
 	int hp;
 	int lvl;
 	ALLEGRO_BITMAP* bitmap;
-
+	BuildingType buildingType;
 };
 
 #endif

@@ -70,6 +70,7 @@ void TileMap::loadTileMap(std::string path) {
 				collisionMap[row][col] = 0;
 			}
 		}
+
 	}
 
 }
@@ -96,8 +97,12 @@ void TileMap::render() {
 
 			// draws the base tile
 			al_draw_bitmap(tileSet[r][c].get(), screenCoord.x, screenCoord.y, 0);
+
+			if (checkOccupied(row, col) == true) {
+				al_draw_bitmap(AssetLoader::manager->getImage("radius"), screenCoord.x, screenCoord.y, 0);
+			}
 		}
-	}
+	}	
 }
 
 TileMap::~TileMap() {}

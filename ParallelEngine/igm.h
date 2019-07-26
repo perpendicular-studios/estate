@@ -19,7 +19,7 @@ class IGM {
 public:
 	IGM(Player * player_, BuildingList* bl);
 	// update states
-	void update(bool clicked, int x, int y);
+	void update(bool clicked, bool keyClicked, std::string key, int x, int y, BuildingList* bl);
 	// render states 
 	void staticRender();
 	void isoRender();
@@ -36,29 +36,33 @@ public:
 	void overviewMenu();
 	void productionMenu();
 	void inventoryMenu();
+	void buildingInfoBackground();
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
-	std::string getBuildingType() { return buildingType; }
-	 
+
+	//setter methods
+	void setCol(int col) { currCol = col; }
+	void setRow(int row) { currRow = row; }
 private:
 	MenuState currState, prevState;
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
 	bool isClicked = false;
-	ButtonManager* bm;
+	ButtonManager* bm, *buildingbm;
 	Player* player;
 	BuildingList* bl;
-	MenuButton *flag, *production, *build, *exit, *exit1, *misc;
+	MenuButton *flag, *production, *build, *exit, *exit1, *misc, *rightExit;
 	BuildButton *castle, *towncenter, *newBuildingPlaceHolder;
+	BuildingInfoButton* newInfoButton;
 
-	std::string buildingType;
-	int relativeClicks = 0;
 	int buttonIndex;
 	Castle* c;
 	Towncenter* tc;
 
 	Castle* sampleCastle;
 	Towncenter* sampleTC;
-	Building* newBuilding;
+	Building* newBuilding, *selectedBuilding;
+
+	int currCol = 0, currRow = 0;
 };
 #endif

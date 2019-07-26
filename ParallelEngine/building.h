@@ -45,6 +45,8 @@ public:
 	int getWoodCost() const { return wood; }
 	int getFoodCost() const { return food; }
 	int getGoldCost() const { return gold; }
+	int getTopCol() { return col - colWidth; }
+	int getTopRow() { return row - rowHeight; }
 
 	void addRequiredItem(std::pair<const Resource*, int> item) { misc.push_back(item); }
 	bool requiresItems() const { return misc.empty(); }

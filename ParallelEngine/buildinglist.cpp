@@ -6,38 +6,22 @@ void BuildingList::addBuilding(Building* buildingObject) {
 	else {
 		int i = 0;
 		bool reachEnd = false;
-		while ((bl[i]->getCol() - bl[i]->getColWidth() > buildingObject->getCol() || bl[i]->getRow() - bl[i]->getRowHeight() > buildingObject->getRow()) && reachEnd == false) {
-			std::cout << "traversing \n";
+		while (isBuilding1InFront(buildingObject, bl[i]) == true && reachEnd == false) {
 			i++;
-			if (i == bl.size()) { 
+			if (i == bl.size()) {
 				reachEnd = true;
 				i--;
 			}
 		}
 		if (reachEnd == true) {
-			std::cout << "Insert at front\n";
-			bl.insert(bl.begin(), buildingObject);
+			std::cout << "Insert at end \n";
+			bl.insert(bl.end(), buildingObject);
 		}
 		else {
-			while ((bl[i]->getCol() - bl[i]->getColWidth() <= buildingObject->getCol() && bl[i]->getRow() - bl[i]->getRowHeight() <= buildingObject->getRow()) && reachEnd == false) {
-				std::cout << "traversing \n";
-				i++;
-				if (i == bl.size()) {
-					reachEnd = true;
-					i--;
-				}
-			}
-			if (reachEnd == true) {
-				std::cout << "Insert at end \n";
-				bl.insert(bl.end(), buildingObject);
-			}
-			else {
-				std::cout << "Inserting at " << i  << "\n";
-				bl.insert(bl.begin() + i , buildingObject);
-			}
-			
-		} 
-	} 
+			std::cout << "Inserting at " << i << "\n";
+			bl.insert(bl.begin() + i, buildingObject);
+		}
+	}
 
 	buildingObject->setID(numID);
 	numID++;
@@ -99,4 +83,13 @@ void BuildingList::placingBuilding(Building* b, float x, float y) {
 	ALLEGRO_BITMAP* bitmap = b->getBaseImg();
 	if (checkPlacingBounds(b)) { al_draw_tinted_bitmap(bitmap, al_map_rgb(240, 128, 128), x, y, 0); }
 	else { al_draw_bitmap(bitmap, x, y, 0); }
+}
+
+bool BuildingList::isBuilding1InFront(Building* b1, Building* b2) {
+	//check if b1 is in front of b2
+	if (b1->getRow() <= b2->getTopRow()) { return false; }
+	else if (b2->getRow() <= b1->getTopRow()) { return true; }
+
+	if (b1->getCol() <= b2->getTopCol()) { return false; }
+	else if (b2->getCol() <= b1->getTopCol()) { return true; }
 }

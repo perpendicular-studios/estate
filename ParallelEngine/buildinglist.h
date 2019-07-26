@@ -25,6 +25,8 @@ public:
 	bool checkPlacingBounds(Building* b);
 	// place building
 	void placingBuilding(Building* b, float x, float y); // buildingImg will select from a switch to get correct building img
+	//check which building is in front
+	bool isBuilding1InFront(Building* b1, Building* b2);
 	
 	void setPlacing(bool p) { isPlacingTrue = p; }
 	void setCurrBuilding(Building* b) { currBuilding = b; }

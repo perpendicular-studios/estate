@@ -36,10 +36,14 @@ public:
 	void overviewMenu();
 	void productionMenu();
 	void inventoryMenu();
+	void buildingInfoBackground();
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
-	 
+
+	//setter methods
+	void setCol(int col) { currCol = col; }
+	void setRow(int row) { currRow = row; }
 private:
 	MenuState currState, prevState;
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
@@ -47,7 +51,7 @@ private:
 	ButtonManager* bm, *buildingbm;
 	Player* player;
 	BuildingList* bl;
-	MenuButton *flag, *production, *build, *exit, *exit1, *misc;
+	MenuButton *flag, *production, *build, *exit, *exit1, *misc, *rightExit;
 	BuildButton *castle, *towncenter, *newBuildingPlaceHolder;
 	BuildingInfoButton* newInfoButton;
 
@@ -57,6 +61,8 @@ private:
 
 	Castle* sampleCastle;
 	Towncenter* sampleTC;
-	Building* newBuilding;
+	Building* newBuilding, *selectedBuilding;
+
+	int currCol = 0, currRow = 0;
 };
 #endif

@@ -38,7 +38,9 @@ void PlayState::render() {
 			selectedEntity = clickEntity; // select
 		}
 	}
-
+	
+	menu->setCol(mapCoord.x);
+	menu->setRow(mapCoord.y);
 	bl->setCol(mapCoord.x);
 	bl->setRow(mapCoord.y);
 

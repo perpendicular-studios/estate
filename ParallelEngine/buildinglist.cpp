@@ -2,6 +2,7 @@
 #include <vector>
 
 void BuildingList::addBuilding(Building* buildingObject) {
+	//buildings are sorted by render order (0 is rendered first)
 	if (bl.empty()) { bl.push_back(buildingObject); }
 	else {
 		int i = 0;
@@ -92,4 +93,14 @@ bool BuildingList::isBuilding1InFront(Building* b1, Building* b2) {
 
 	if (b1->getCol() <= b2->getTopCol()) { return false; }
 	else if (b2->getCol() <= b1->getTopCol()) { return true; }
+}
+
+Building* BuildingList::isTileInBounds(int currCol, int currRow) {
+	Building* returnBuilding = NULL;
+	for (int i = 0; i < bl.size(); i++) {
+		if (currCol <= bl[i]->getCol() && currCol >= bl[i]->getTopCol() && currRow <= bl[i]->getRow() && currRow >= bl[i]->getTopRow()) {
+			returnBuilding = bl[i];
+		}
+	}
+	return returnBuilding;
 }

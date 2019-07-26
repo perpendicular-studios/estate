@@ -27,11 +27,13 @@ public:
 	void placingBuilding(Building* b, float x, float y); // buildingImg will select from a switch to get correct building img
 	//check which building is in front
 	bool isBuilding1InFront(Building* b1, Building* b2);
+	//loop through to see if click is on a building tile
+	Building* isTileInBounds(int currCol, int currRow);
 	
 	void setPlacing(bool p) { isPlacingTrue = p; }
-	void setCurrBuilding(Building* b) { currBuilding = b; }
-
 	bool getPlacing() { return isPlacingTrue; }
+	void setCurrBuilding(Building* b) { currBuilding = b; }
+	int getSize() { return bl.size(); }
 
 	void setx(int x_) { x = x_; }
 	int getx() { return x; }

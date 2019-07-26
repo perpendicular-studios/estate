@@ -19,6 +19,7 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, INVENTORY); // should open an inventory
 	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, sampleCastle);
 	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, sampleTC);
+	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE);
 
 	bm->addButton(build);
 	bm->addButton(flag);
@@ -28,6 +29,7 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	bm->addButton(misc);
 	bm->addButton(castle);
 	bm->addButton(towncenter);
+	bm->addButton(rightExit);
 }
 
 void IGM::gameBackground() {
@@ -46,6 +48,12 @@ void IGM::menuBackground() {
 	al_draw_filled_rectangle(0, 150, 250, 550, al_map_rgb(255, 204, 0));
 	al_draw_rectangle(1, 150, 250, 550, al_map_rgb(153, 77, 0), 3);
 	exit->setVisible(true);
+}
+
+void IGM::buildingInfoBackground() {
+	al_draw_filled_rectangle(Var::WIDTH, 150, Var::WIDTH - 250, 550, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 250, 550, al_map_rgb(153, 77, 0), 3);
+	rightExit->setVisible(true);
 }
 
 // default state
@@ -111,7 +119,8 @@ void IGM::stateSelector(MenuState state) {
 	case PLACINGBUILDINGTEST:
 		break;
 	case BUILDINGINFOSTATE:
-		std::cout << "clicked";
+		buildingInfoBackground();
+		std::cout << selectedBuilding->getID();
 		break;
 	case INVENTORY:
 		inventoryMenu();
@@ -124,18 +133,17 @@ void IGM::stateSelector(MenuState state) {
 
 void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, BuildingList* bl){ 
 	prevState = currState;
-
+	
 	if (clicked) {
+		std::cout << x << "," << y << "\n";
+		if (currState == BUILDINGINFOSTATE) { currState = DEFAULTSTATE; }
 		if (currState == PLACINGBUILDING) { prevState = currState = PLACINGBUILDINGTEST; }
 
 		//iterate through all current clickables and menu buttons
 		//iterate buildings
-		for (int i = 0; i < buildingbm->size(); i++) {
-			//check if building is clicked
-			if (buildingbm->getList()[i]->isInBounds(x, y) == true) {
-				currState = buildingbm->getList()[i]->getState();
-				buttonIndex = i;
-			}
+		selectedBuilding = bl->isTileInBounds(currCol, currRow);
+		if (selectedBuilding != NULL) {
+			currState = BUILDINGINFOSTATE;
 		}
 		//iterate menu buttons
 		for (int i = 0; i < bm->size(); i++) {
@@ -168,8 +176,6 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 				std::cout << "Placing Building \n";
 				bl->update(newBuilding);
 				bl->setPlacing(false);
-				newInfoButton = new BuildingInfoButton(bl->getx() + bl->getCurrBuilding()->getWidth() / 2, bl->gety() + bl->getCurrBuilding()->getHeight() / 2, bl->getx() + bl->getCurrBuilding()->getWidth() / 2 + 50, bl->getCurrBuilding()->getHeight() / 2 + 50, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Info", 1, bl->getCurrBuilding());
-				buildingbm->addButton(newInfoButton);
 				currState = BUILDSTATE;
 			}
 		}

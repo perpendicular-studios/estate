@@ -142,7 +142,7 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 		//iterate through all current clickables and menu buttons
 		//iterate buildings
 		selectedBuilding = bl->isTileInBounds(currCol, currRow);
-		if (selectedBuilding != NULL) {
+		if (selectedBuilding != NULL && currState != PLACINGBUILDINGTEST) {
 			currState = BUILDINGINFOSTATE;
 		}
 		//iterate menu buttons

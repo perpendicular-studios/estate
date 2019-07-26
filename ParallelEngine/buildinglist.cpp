@@ -8,7 +8,6 @@ void BuildingList::addBuilding(Building* buildingObject) {
 
 void BuildingList::popBuilding(int buildingID) {
 	bl.erase(bl.begin() + buildingID);
-	
 	for (int i = buildingID; i < bl.size(); i++) {
 		bl[i]->setID(i);
 	}

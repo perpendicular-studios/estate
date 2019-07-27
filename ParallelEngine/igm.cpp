@@ -11,15 +11,15 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 
 	bm = new ButtonManager;
 	buildingbm = new ButtonManager;
-	build = new MenuButton(200, 200, 250, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Build", 0, PRODUCTIONSTATE, this);
-	flag = new MenuButton(0, 0, 100, 100, AssetLoader::manager->getImage("flagbg"), basic_font20, al_map_rgb(255, 255, 255), "Flag", 0, OVERVIEWSTATE, this);
-	production = new MenuButton(0, 100, 50, 150, AssetLoader::manager->getImage("productionbg"), basic_font20, al_map_rgb(255, 255, 255), "Prod", 0, BUILDSTATE, this);
-	exit = new MenuButton(225, 150, 250, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE, this);
-	exit1 = new MenuButton(Var::WIDTH - 25, 40, Var::WIDTH, 65, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE, this);
-	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, INVENTORY, this); // should open an inventory
-	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, sampleCastle, player, this);
-	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, sampleTC, player, this);
-	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE, this);
+	build = new MenuButton(200, 200, 250, 250, AssetLoader::manager->getImage("basicbutton"), false, PRODUCTIONSTATE, this);
+	flag = new MenuButton(0, 0, 100, 100, AssetLoader::manager->getImage("flagbg"), false, OVERVIEWSTATE, this);
+	production = new MenuButton(0, 100, 50, 150, AssetLoader::manager->getImage("productionbg"), false, BUILDSTATE, this);
+	exit = new MenuButton(225, 150, 250, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
+	exit1 = new MenuButton(Var::WIDTH - 25, 40, Var::WIDTH, 65, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
+	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), 0, INVENTORY, this); // should open an inventory
+	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleCastle, player, this);
+	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleTC, player, this);
+	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 
 	bm->addButton(build);
 	bm->addButton(flag);

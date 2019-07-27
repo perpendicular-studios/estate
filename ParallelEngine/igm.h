@@ -24,8 +24,7 @@ public:
 	void staticRender();
 	void isoRender();
 	// returns current state
-	void stateSelector(MenuState state);
-
+	void setState(MenuState state);
 
 	//basic menu types
 	void gameBackground();
@@ -36,7 +35,6 @@ public:
 	void overviewMenu();
 	void productionMenu();
 	void inventoryMenu();
-	void buildingInfoBackground();
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
@@ -53,7 +51,6 @@ private:
 	BuildingList* bl;
 	MenuButton *flag, *production, *build, *exit, *exit1, *misc, *rightExit;
 	BuildButton *castle, *towncenter, *newBuildingPlaceHolder;
-	BuildingInfoButton* newInfoButton;
 
 	int buttonIndex;
 	Castle* c;

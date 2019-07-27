@@ -7,12 +7,9 @@ class Towncenter : public Building {
 public:
 	Towncenter(int towncenterID);
 
-	ALLEGRO_BITMAP* getBaseImg() override { return bitmap; }
-
 private:
 	int currGarrison, maxGarrison;
 	int towncenterID;
-	ALLEGRO_BITMAP* bitmap = AssetLoader::manager->getImage("towncenter");
 };
 
 #endif 

@@ -1,6 +1,6 @@
 #include "towncenter.h"
 
-Towncenter::Towncenter(int towncenterID_) : Building(bitmap, 255, 287), towncenterID(towncenterID_) {
+Towncenter::Towncenter(int towncenterID_) : Building(AssetLoader::manager->getImage("towncenter"), 255, 287), towncenterID(towncenterID_) {
 	stone = 300;
 	gold = 0;
 	wood = 300;

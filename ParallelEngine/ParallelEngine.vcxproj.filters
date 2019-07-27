@@ -129,7 +129,7 @@
     <ClCompile Include="towncenter.cpp">
       <Filter>Source Files\building</Filter>
     </ClCompile>
-    <ClCompile Include="buildinginfobutton.cpp">
+    <ClCompile Include="unitbutton.cpp">
       <Filter>Source Files\button</Filter>
     </ClCompile>
   </ItemGroup>
@@ -221,7 +221,7 @@
     <ClInclude Include="towncenter.h">
       <Filter>Header Files\building</Filter>
     </ClInclude>
-    <ClInclude Include="buildinginfobutton.h">
+    <ClInclude Include="unitbutton.h">
       <Filter>Header Files\button</Filter>
     </ClInclude>
   </ItemGroup>

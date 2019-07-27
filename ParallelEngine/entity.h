@@ -1,9 +1,10 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 #include "tilemap.h"
+#include "resources.h"
 class Entity {
 public:
-	Entity(TileMap* tm_, int tileCost_, int food, int gold, int stone, int wood);
+	Entity(TileMap* tm_, int tileCost_, int food, int gold, int stone, int wood, ALLEGRO_BITMAP * img_);
 	~Entity();
 	
 	virtual void update() = 0;
@@ -29,6 +30,9 @@ public:
 	int getGoldCost() const { return gold; }
 	int getStoneCost() const { return stone; }
 	int getWoodCost() const { return wood; }
+	std::vector<Resource*> getRequiredItems() { return requiredItems; }
+
+	ALLEGRO_BITMAP* getImage() { return img; }
 
 	bool operator==(Entity* rhs) { return (this->getrow() == rhs->getrow() && this->getcol() == rhs->getcol()); }
 protected:
@@ -37,6 +41,8 @@ protected:
 	int xdest, ydest;
 	int tileCost; // amount of tiles that unit can move per turn
 	int food, gold, stone, wood;
+	std::vector<Resource*> requiredItems;
+	ALLEGRO_BITMAP* img;
 
 	int getTileCost() { return tileCost; }
 };

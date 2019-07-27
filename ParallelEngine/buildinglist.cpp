@@ -7,14 +7,14 @@ void BuildingList::addBuilding(Building* buildingObject) {
 	else {
 		int i = 0;
 		bool reachEnd = false;
-		while (isBuilding1InFront(buildingObject, bl[i]) == true && reachEnd == false) {
+		while (isBuilding1InFront(buildingObject, bl[i]) && !reachEnd) {
 			i++;
 			if (i == bl.size()) {
 				reachEnd = true;
 				i--;
 			}
 		}
-		if (reachEnd == true) {
+		if (reachEnd) {
 			std::cout << "Insert at end \n";
 			bl.insert(bl.end(), buildingObject);
 		}

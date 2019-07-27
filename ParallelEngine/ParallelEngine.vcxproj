@@ -165,7 +165,6 @@
     <ClInclude Include="assetmanager.h" />
     <ClInclude Include="buildbutton.h" />
     <ClInclude Include="building.h" />
-    <ClInclude Include="buildinginfobutton.h" />
     <ClInclude Include="buildinglist.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="buttonmanager.h" />
@@ -186,6 +185,7 @@
     <ClInclude Include="state.h" />
     <ClInclude Include="tilemap.h" />
     <ClInclude Include="towncenter.h" />
+    <ClInclude Include="unitbutton.h" />
     <ClInclude Include="units.h" />
     <ClInclude Include="var.h" />
     <ClInclude Include="vec2.h" />
@@ -195,7 +195,6 @@
     <ClCompile Include="assetloader.cpp" />
     <ClCompile Include="assetmanager.cpp" />
     <ClCompile Include="buildbutton.cpp" />
-    <ClCompile Include="buildinginfobutton.cpp" />
     <ClCompile Include="buildinglist.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="buttonmanager.cpp" />
@@ -214,6 +213,7 @@
     <ClCompile Include="building.cpp" />
     <ClCompile Include="tilemap.cpp" />
     <ClCompile Include="towncenter.cpp" />
+    <ClCompile Include="unitbutton.cpp" />
     <ClCompile Include="units.cpp" />
   </ItemGroup>
   <ItemGroup>

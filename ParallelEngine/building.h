@@ -30,7 +30,7 @@ public:
 
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
 	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);
-	virtual ALLEGRO_BITMAP* getBaseImg() { return bitmap; }
+	ALLEGRO_BITMAP* getBaseImg() { return bitmap; }
 	
 	int getWidth() { return width; }
 	int getHeight() { return height; }

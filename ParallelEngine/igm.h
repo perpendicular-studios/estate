@@ -35,6 +35,7 @@ public:
 	void overviewMenu();
 	void productionMenu();
 	void inventoryMenu();
+	void buildingInfoBackground();
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }

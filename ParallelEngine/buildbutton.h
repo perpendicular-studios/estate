@@ -11,7 +11,7 @@
 class BuildButton : public Button {
 public:
 	BuildButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* fontType,
-		ALLEGRO_COLOR fontColor, std::string text, bool visible_, Building* target, Player* player);
+		ALLEGRO_COLOR fontColor, std::string text, bool visible_, Building* target, Player* player, IGM* igm);
 
 	Building* getBuilding() { return target; }
 
@@ -21,6 +21,7 @@ public:
 private:
 	Player* player;
 	Building* target;
+	IGM* igm;
 };
 
 #endif 

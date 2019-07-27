@@ -1,13 +1,15 @@
 #include "buildbutton.h"
+#include "igm.h"
 
 BuildButton::BuildButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* fontType,
-	ALLEGRO_COLOR fontColor, std::string text, bool visible, Building* target_, Player* player_) :
-	Button(x1, y1, x2, y2, bitmap, fontType, fontColor, text, visible, PLACINGBUILDING), target(target_), player(player_) {}
+	ALLEGRO_COLOR fontColor, std::string text, bool visible, Building* target_, Player* player_, IGM* igm_) :
+	Button(x1, y1, x2, y2, bitmap, fontType, fontColor, text, visible, PLACINGBUILDING), target(target_), player(player_), igm(igm_) {}
 
 void BuildButton::onClick() {
 	if (player->buyBuilding(target)) {
 
 	}
+	igm->setState(returnState);
 }
 
 void BuildButton::render() {

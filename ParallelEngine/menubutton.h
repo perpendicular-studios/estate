@@ -3,7 +3,6 @@
 
 #include "button.h"
 #include "menustates.h"
-#include "igm.h"
 
 class MenuButton : public Button {
 public:

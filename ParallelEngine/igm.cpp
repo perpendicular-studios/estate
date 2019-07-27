@@ -17,8 +17,8 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	exit = new MenuButton(225, 150, 250, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE, this);
 	exit1 = new MenuButton(Var::WIDTH - 25, 40, Var::WIDTH, 65, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE, this);
 	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), basic_font20, al_map_rgb(255, 255, 255), "MISC", 0, INVENTORY, this); // should open an inventory
-	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, sampleCastle, player);
-	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, sampleTC, player);
+	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Castle", 0, sampleCastle, player, this);
+	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), basic_font20, al_map_rgb(255, 255, 255), "Towncenter", 0, sampleTC, player, this);
 	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), basic_font20, al_map_rgb(255, 255, 255), "X", 0, DEFAULTSTATE, this);
 
 	bm->addButton(build);
@@ -56,9 +56,6 @@ void IGM::defaultMenu() {}
 // overview state
 void IGM::overviewMenu() {
 	menuBackground();
-	build->setVisible(true);
-	castle->setVisible(true);
-	towncenter->setVisible(true);
 }
 
 // diplo state
@@ -77,6 +74,12 @@ void IGM::buildingMenu() {
 	towncenter->setVisible(true);
 }
 
+void IGM::buildingInfoBackground() {
+	al_draw_filled_rectangle(Var::WIDTH, 150, Var::WIDTH - 250, 550, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 250, 550, al_map_rgb(153, 77, 0), 3);
+	rightExit->setVisible(true);
+}
+
 void IGM::inventoryMenu() {
 	exit1->setVisible(true);
 	std::vector<std::vector<const Resource*>> miscResources = player->getInventory()->getMiscResources();
@@ -92,6 +95,7 @@ void IGM::inventoryMenu() {
 }
 
 void IGM::setState(MenuState state) {
+	currState = state;
 	switch (state)
 	{
 	case RESET:
@@ -112,6 +116,10 @@ void IGM::setState(MenuState state) {
 		break;
 	case PLACINGBUILDINGTEST:
 		break;
+	case BUILDINGINFOSTATE:
+		buildingInfoBackground();
+		std::cout << selectedBuilding->getID();
+		break;
 	case INVENTORY:
 		inventoryMenu();
 		break;
@@ -126,14 +134,20 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 	
 	if (clicked) {
 		std::cout << x << "," << y << "\n";
+		//do not delete these edge case test conditions
+		if (currState == BUILDINGINFOSTATE) { currState = DEFAULTSTATE; }
 		if (currState == PLACINGBUILDING) { prevState = currState = PLACINGBUILDINGTEST; }
 
 		//iterate through all current clickables and menu buttons
 		//iterate buildings
+		selectedBuilding = bl->isTileInBounds(currCol, currRow);
+		if (selectedBuilding != NULL && currState != PLACINGBUILDINGTEST) {
+			currState = BUILDINGINFOSTATE;
+		}
 		//iterate menu buttons
 		for (int i = 0; i < bm->size(); i++) {
 			// check if button is properly clicked
-			if (bm->getList()[i]->isInBounds(x, y) && bm->getList()[i]->isVisible()) {
+			if (bm->getList()[i]->isInBounds(x, y) == true && bm->getList()[i]->isVisible() == true) {
 				bm->getList()[i]->onClick();
 				buttonIndex = i;
 			}

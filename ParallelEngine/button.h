@@ -9,6 +9,8 @@
 #include <string>
 #include "menustates.h"
 
+class IGM;
+
 
 class Button {
 public:

@@ -5,8 +5,7 @@
 #include "player.h"
 class UnitButton : public Button {
 public:
-	UnitButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, ALLEGRO_FONT* fontType,
-		ALLEGRO_COLOR fontColor, std::string text, bool visible, MenuState returnState, Entity* target, Player* player);
+	UnitButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, bool visible, Entity* target, Player* player);
 private:
 	Player* player;
 	Entity* target;

@@ -1,12 +1,12 @@
 #include "igm.h"
-#include "resources.h"
 
-IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
+IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl(bl_), tm(tm_) {
 	player->getInventory()->addResource(IRON_ORE);
 	player->getInventory()->addResource(WOOL);
 	currState = DEFAULTSTATE;
 	sampleCastle = new Castle(-1);
 	sampleTC = new Towncenter(-1);
+	samplePeasant = new Peasant(tm, 20, 0, 0, 0, 0);
 	newBuilding = sampleCastle;
 
 	bm = new ButtonManager;
@@ -21,6 +21,8 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleTC, player, this);
 	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 
+	peasant = new UnitButton(Var::WIDTH - 200, 200, Var::WIDTH - 150, 250, AssetLoader::manager->getImage("basicbutton"), false, samplePeasant, player);
+
 	bm->addButton(build);
 	bm->addButton(flag);
 	bm->addButton(production);
@@ -30,6 +32,7 @@ IGM::IGM(Player* player_, BuildingList* bl_) : player(player_), bl(bl_) {
 	bm->addButton(castle);
 	bm->addButton(towncenter);
 	bm->addButton(rightExit);
+	bm->addButton(peasant);
 }
 
 void IGM::gameBackground() {
@@ -78,6 +81,7 @@ void IGM::buildingInfoBackground() {
 	al_draw_filled_rectangle(Var::WIDTH, 150, Var::WIDTH - 250, 550, al_map_rgb(255, 204, 0));
 	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 250, 550, al_map_rgb(153, 77, 0), 3);
 	rightExit->setVisible(true);
+	peasant->setVisible(true);
 }
 
 void IGM::inventoryMenu() {

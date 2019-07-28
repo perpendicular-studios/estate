@@ -154,6 +154,12 @@ Entity* Player::entityInTile(Vector2i clickCoord) {
 	return NULL;
 }
 
+void Player::renderEntities() {
+	for (Entity* e : entities) {
+		e->render();
+	}
+}
+
 void Player::addEntity(Entity* e) {
 	entities.push_back(e);
 }

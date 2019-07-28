@@ -23,6 +23,7 @@ public:
 	void addTileToInventory(int tileID);
 
 	Entity* entityInTile(Vector2i clickCoord);
+	void renderEntities();
 	void addEntity(Entity* e);
 private:
 	std::vector<Entity*> entities;

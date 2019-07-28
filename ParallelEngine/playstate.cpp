@@ -9,13 +9,14 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	cam = std::shared_ptr<Camera>(new Camera(500, 500, tm)); //100, 500
 	bl = new BuildingList(tm);
 	player = new Player();
-	menu = new IGM(player, bl);
+	menu = new IGM(player, bl, tm.get());
 }
 
 void PlayState::render() {
 	al_clear_to_color(al_map_rgba_f(0, 0, 0, 1));
 	tm->render();
 	bl->render();
+	player->renderEntities();
 	menu->isoRender();
 
 	ALLEGRO_TRANSFORM trans;
@@ -63,7 +64,6 @@ void PlayState::render() {
 	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuilding(), placingCoordX, placingCoordY); }
 	
 	if (selectedEntity) selectedEntity->renderRadius();
-
 	
 	//for static display images add here
 	al_identity_transform(&trans);

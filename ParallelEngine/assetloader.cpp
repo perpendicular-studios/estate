@@ -16,6 +16,7 @@ AssetLoader::AssetLoader() {
 	manager->loadImage("images/x.png", "x", false);
 	manager->loadImage("images/miscbg.png", "miscbg", false);
 	manager->loadImage("images/resources_menu.png", "resources_menu", false);
+	manager->loadImage("images/peasant.png", "peasant", false);
 
 
 	// load misc resource sprites

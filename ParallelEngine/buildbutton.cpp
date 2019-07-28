@@ -14,7 +14,7 @@ void BuildButton::onClick() {
 void BuildButton::render() {
 	al_draw_bitmap(bitmap, x1, y1, 0);
 	ALLEGRO_BITMAP* buildingImg = target->getBaseImg();
-	al_draw_scaled_bitmap(buildingImg, 0, 0, al_get_bitmap_width(buildingImg), al_get_bitmap_height(buildingImg), x1, y1, x2 - x1 - 2, y2 - y1 - 2, 0);
+	al_draw_scaled_bitmap(buildingImg, 0, 0, al_get_bitmap_width(buildingImg), al_get_bitmap_height(buildingImg), x1 + 4, y1 + 4, x2 - x1 - 8, y2 - y1 - 8, 0);
 	if (text.length() > 0 && fontType != NULL) {
 		al_draw_text(fontType, fontColor, fontX, fontY, 0, text.c_str());
 	}

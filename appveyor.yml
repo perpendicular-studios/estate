@@ -1,6 +1,17 @@
 image: Visual Studio 2019
 configuration: Debug
+environment:
+  access_token:
+    secure: FwsOr4yfXL+Q4EnC1Y/W304WUy0WsQohNIb3+faj38vJ7K7+MDCCYyxVSTbIVkXE
 before_build:
   - nuget restore
 build:
+  verbosity: minimal
   project: ParallelEngine.sln
+# on_success:
+#  - git config --global credential.helper store
+#  - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+#  - git config --global user.email "email"
+#  - git config --global user.name "username"
+#  - git commit -m 'Successful push'
+#  - git push origin master

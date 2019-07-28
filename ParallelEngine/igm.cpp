@@ -81,7 +81,7 @@ void IGM::buildingInfoBackground() {
 	al_draw_filled_rectangle(Var::WIDTH, 150, Var::WIDTH - 250, 550, al_map_rgb(255, 204, 0));
 	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 250, 550, al_map_rgb(153, 77, 0), 3);
 	rightExit->setVisible(true);
-	peasant->setVisible(true);
+	if(selectedBuilding->getBuildingType() == TOWNCENTER) peasant->setVisible(true);
 }
 
 void IGM::inventoryMenu() {

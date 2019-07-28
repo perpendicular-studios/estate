@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/5q9oyb55ti1bs38b?svg=true)](https://ci.appveyor.com/project/kozr/estate)
 # Estate
 - - - -
 **Estate** is an open source 2D RTS Game done in C++.

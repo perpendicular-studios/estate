@@ -10,6 +10,8 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	bl = new BuildingList(tm);
 	player = new Player();
 	menu = new IGM(player, bl, tm.get());
+
+
 }
 
 void PlayState::render() {
@@ -61,7 +63,7 @@ void PlayState::render() {
 	bl->setx(placingCoordX);
 	bl->sety(placingCoordY);
 
-	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuilding(), placingCoordX, placingCoordY); }
+	if (bl->getPlacing()) { bl->placingBuilding(menu->getBuilding(), placingCoordX, placingCoordY); }
 	
 	if (selectedEntity) selectedEntity->renderRadius();
 	

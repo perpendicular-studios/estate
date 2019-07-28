@@ -6,7 +6,6 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	currState = DEFAULTSTATE;
 	sampleCastle = new Castle(-1);
 	sampleTC = new Towncenter(-1);
-	samplePeasant = new Peasant(tm, 20, 0, 0, 0, 0);
 	newBuilding = sampleCastle;
 
 	bm = new ButtonManager;
@@ -21,7 +20,7 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleTC, player, this);
 	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 
-	peasant = new UnitButton(Var::WIDTH - 200, 200, Var::WIDTH - 150, 250, AssetLoader::manager->getImage("basicbutton"), false, samplePeasant, player);
+	peasant = new UnitButton(Var::WIDTH - 200, 200, Var::WIDTH - 150, 250, AssetLoader::manager->getImage("basicbutton"), false, new Peasant(tm, 20, 0, 0, 0, 0, 0, 0), player);
 
 	bm->addButton(build);
 	bm->addButton(flag);

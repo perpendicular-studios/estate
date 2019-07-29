@@ -11,9 +11,7 @@ void UnitButton::render() {
 
 void UnitButton::onClick() {
 	if (player->buyEntity(target)) {
-		std::cout << "player buy target is " << player->buyEntity(target) << std::endl;
 		if (igm->getPrevSelectedBuilding() != NULL) {
-			std::cout << "onclick buy button is working" << std::endl;
 			target->setPosition(igm->getPrevSelectedBuilding()->getx(), igm->getPrevSelectedBuilding()->gety());
 			target->render();
 		}

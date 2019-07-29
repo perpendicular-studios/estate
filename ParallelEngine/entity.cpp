@@ -1,6 +1,8 @@
 #include "entity.h"
-Entity::Entity(TileMap* tm_, int tileCost_, int food_, int gold_, int stone_, int wood_, ALLEGRO_BITMAP* img_, int x_, int y_) : tm(tm_), tileCost(tileCost_), food(food_), gold(gold_), stone(stone_), wood(wood_), img(img_), x(x_), y(y_) {
+Entity::Entity(TileMap* tm_, int tileCost_, int food_, int gold_, int stone_, int wood_, ALLEGRO_BITMAP* img_) : tm(tm_), tileCost(tileCost_), food(food_), gold(gold_), stone(stone_), wood(wood_), img(img_) {
 	xdest = ydest = 0;
+	x = 492;
+	y = 253;
 }
 
 Entity::~Entity() {

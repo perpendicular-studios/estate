@@ -11,8 +11,7 @@ void UnitButton::render() {
 void UnitButton::onClick() {
 	if (player->buyEntity(target)) {
 		if (building != nullptr) {
-			target->setx(building->getx());
-			target->sety(building->gety());
+			target->setPosition(building->getx(), building->gety());
 		}
 		player->addEntity(target);
 	}

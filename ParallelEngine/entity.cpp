@@ -7,6 +7,11 @@ Entity::~Entity() {
 	delete tm;
 }
 
+void Entity::setPosition(int x_, int y_) {
+	x = x_;
+	y = y_;
+}
+
 void Entity::renderRadius() {
 	// render radius of movement
 	int topBound, bottomBound, leftBound, rightBound;
@@ -47,5 +52,9 @@ void Entity::renderRadius() {
 			al_draw_bitmap(AssetLoader::manager->getImage("radius"), screenCoord.x, screenCoord.y, 0);
 		}
 	}
+
+}
+
+void Entity::moveTo(int x, int y) {
 
 }

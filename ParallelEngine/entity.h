@@ -13,8 +13,7 @@ public:
 	int getx() const { return x; }
 	int gety() const { return y; }
 
-	void setx(int x_) { x = x_; }
-	void sety(int y_) { y = y_; }
+	void setPosition(int x_, int y_);
 
 	int getTileType() {
 		return tm->getType(getrow(), getcol());
@@ -25,6 +24,7 @@ public:
 	}
 
 	void renderRadius();
+	void moveTo(int x, int y);
 
 	int getcol() const { return tm->screenToIso(x, y).x; }
 	int getrow() const { return tm->screenToIso(x, y).y; }

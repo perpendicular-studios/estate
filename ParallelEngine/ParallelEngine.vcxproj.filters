@@ -265,6 +265,12 @@
     <Image Include="images\town_center.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="images\peasant.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\radius.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="basicfont.ttf">

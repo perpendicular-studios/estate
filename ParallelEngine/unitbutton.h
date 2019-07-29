@@ -5,10 +5,11 @@
 #include "player.h"
 class UnitButton : public Button {
 public:
-	UnitButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, bool visible, Entity* target, Player* player);
+	UnitButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, bool visible, Entity* target, Player* player, Building* building);
 private:
 	Player* player;
 	Entity* target;
+	Building* building;
 	void render() override;
 	void onClick() override;
 };

@@ -4,7 +4,7 @@
 #include "resources.h"
 class Entity {
 public:
-	Entity(TileMap* tm_, int tileCost_, int food, int gold, int stone, int wood, ALLEGRO_BITMAP * img_, int x, int y);
+	Entity(TileMap* tm_, int tileCost_, int food, int gold, int stone, int wood, ALLEGRO_BITMAP * img_);
 	~Entity();
 	
 	virtual void update() = 0;
@@ -12,9 +12,6 @@ public:
 
 	int getx() const { return x; }
 	int gety() const { return y; }
-
-	void setx(int x_) { x = x_; }
-	void sety(int y_) { y = y_; }
 
 	int getTileType() {
 		return tm->getType(getrow(), getcol());

@@ -26,5 +26,6 @@ Button::Button(float x1_, float y1_, float x2_, float y2_, ALLEGRO_BITMAP* bitma
 	visible(visible_) {}
 
 bool Button::isInBounds(float x_, float y_) {
-	return (x_ < x2 && x_ > x1 && y_ < y2 && y_ > y1);
+	if (x_ < x2 && x_ > x1 && y_ < y2 && y_ > y1) { return true; }
+	
 }

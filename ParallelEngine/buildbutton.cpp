@@ -6,8 +6,9 @@ BuildButton::BuildButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP*
 
 void BuildButton::onClick() {
 	if (player->buyBuilding(target)) {
-		igm->setState(returnState);
+
 	}
+	igm->setState(returnState);
 }
 
 void BuildButton::render() {

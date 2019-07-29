@@ -11,10 +11,8 @@ void UnitButton::render() {
 
 void UnitButton::onClick() {
 	if (player->buyEntity(target)) {
-		if (igm->getPrevSelectedBuilding() != NULL) {
-			target->setPosition(igm->getPrevSelectedBuilding()->getx(), igm->getPrevSelectedBuilding()->gety());
-			target->render();
-		}
+		target->setPosition(igm->getPrevSelectedBuilding()->getx(), igm->getPrevSelectedBuilding()->gety());
+		target->render();
 		player->addEntity(target);
 	}
 }

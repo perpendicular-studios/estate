@@ -10,8 +10,7 @@ void UnitButton::render() {
 }
 
 void UnitButton::onClick() {
-	bool success = player->buyEntity(target);
-	if (success) {
+	if (player->buyEntity(target)) {
 		player->addEntity(target);
 	}
 }

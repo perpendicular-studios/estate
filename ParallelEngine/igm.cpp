@@ -150,7 +150,7 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 		//iterate menu buttons
 		for (int i = 0; i < bm->size(); i++) {
 			// check if button is properly clicked
-			if (bm->getList()[i]->isInBounds(x, y) == true && bm->getList()[i]->isVisible() == true) {
+			if (bm->getList()[i]->isInBounds(x, y) && bm->getList()[i]->isVisible()) {
 				bm->getList()[i]->onClick();
 				buttonIndex = i;
 			}

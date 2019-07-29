@@ -4,6 +4,7 @@
 class Peasant : public Entity {
 public:
 	Peasant(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y);
+	virtual Peasant* clone() const;
 	void update() override;
 	void render() override;
 };

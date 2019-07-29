@@ -149,7 +149,11 @@ bool Player::buyEntity(Entity* entity) {
 
 Entity* Player::entityInTile(Vector2i clickCoord) {
 	for (Entity* e : entities) {
-		if (e->getrow() == clickCoord.y && e->getcol() == clickCoord.x) return e;
+		if (e->getrow() == clickCoord.y && e->getcol() == clickCoord.x)
+		{
+			std::cout << "I got clicked on " << std::endl;
+			return e;
+		}
 	}
 	return NULL;
 }

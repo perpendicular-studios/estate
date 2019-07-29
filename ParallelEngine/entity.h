@@ -6,7 +6,8 @@ class Entity {
 public:
 	Entity(TileMap* tm_, int tileCost_, int food, int gold, int stone, int wood, ALLEGRO_BITMAP * img_, int x, int y);
 	~Entity();
-	
+
+	virtual Entity* clone() const = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;
 
@@ -33,6 +34,9 @@ public:
 	int getGoldCost() const { return gold; }
 	int getStoneCost() const { return stone; }
 	int getWoodCost() const { return wood; }
+	int getTileCost() const { return tileCost; }
+	// TODO: might need some refactoring
+	TileMap* getTileMap() const { return tm; }
 	std::vector<Resource*> getRequiredItems() { return requiredItems; }
 
 	ALLEGRO_BITMAP* getImage() { return img; }
@@ -46,8 +50,6 @@ protected:
 	int food, gold, stone, wood;
 	std::vector<Resource*> requiredItems;
 	ALLEGRO_BITMAP* img;
-
-	int getTileCost() { return tileCost; }
 };
 
 #endif

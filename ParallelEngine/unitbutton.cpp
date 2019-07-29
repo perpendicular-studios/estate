@@ -10,9 +10,10 @@ void UnitButton::render() {
 }
 
 void UnitButton::onClick() {
-	if (player->buyEntity(target)) {
-		target->setPosition(igm->getPrevSelectedBuilding()->getx(), igm->getPrevSelectedBuilding()->gety());
-		target->render();
-		player->addEntity(target);
+	Entity* newEnt = target->clone();
+	if (player->buyEntity(newEnt)) {
+		newEnt->setPosition(igm->getPrevSelectedBuilding()->getx(), igm->getPrevSelectedBuilding()->gety());
+		newEnt->render();
+		player->addEntity(newEnt);
 	}
 }

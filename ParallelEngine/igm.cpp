@@ -146,11 +146,13 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 		
 		selectedBuilding = bl->isTileInBounds(currCol, currRow);
 		if (selectedBuilding != NULL) {
+			// prevSelectedBuilding gives game "memory" of its last focused building
 			prevSelectedBuilding = selectedBuilding;
+			if (currState != PLACINGBUILDINGTEST) {
+				currState = BUILDINGINFOSTATE;
+			}
 		}
-		if (selectedBuilding !=  NULL && currState != PLACINGBUILDINGTEST) {
-			currState = BUILDINGINFOSTATE;
-		} 
+
 		//iterate menu buttons
 		for (int i = 0; i < bm->size(); i++) {
 			// check if button is properly clicked

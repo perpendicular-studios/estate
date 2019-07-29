@@ -10,8 +10,6 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	bl = new BuildingList(tm);
 	player = new Player();
 	menu = new IGM(player, bl, tm.get());
-
-
 }
 
 void PlayState::render() {

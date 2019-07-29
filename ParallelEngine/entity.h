@@ -13,6 +13,9 @@ public:
 	int getx() const { return x; }
 	int gety() const { return y; }
 
+	void setx(int x_) { x = x_; }
+	void sety(int y_) { y = y_; }
+
 	int getTileType() {
 		return tm->getType(getrow(), getcol());
 	}

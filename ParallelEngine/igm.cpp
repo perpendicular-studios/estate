@@ -20,7 +20,7 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleTC, player, this);
 	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 
-	peasant = new UnitButton(Var::WIDTH - 200, 200, Var::WIDTH - 150, 250, AssetLoader::manager->getImage("basicbutton"), false, new Peasant(tm, 20, 0, 0, 0, 0, 0, 0), player);
+	peasant = new UnitButton(Var::WIDTH - 200, 200, Var::WIDTH - 150, 250, AssetLoader::manager->getImage("basicbutton"), false, new Peasant(tm, 20, 0, 0, 0, 0, 0, 0), player, selectedBuilding);
 
 	bm->addButton(build);
 	bm->addButton(flag);
@@ -150,7 +150,7 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 		//iterate menu buttons
 		for (int i = 0; i < bm->size(); i++) {
 			// check if button is properly clicked
-			if (bm->getList()[i]->isInBounds(x, y) && bm->getList()[i]->isVisible()) {
+			if (bm->getList()[i]->isInBounds(x, y) == true && bm->getList()[i]->isVisible() == true) {
 				bm->getList()[i]->onClick();
 				buttonIndex = i;
 			}

@@ -3,11 +3,15 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include <string>
 #include "animationset.h"
 #include "tilemap.h"
 #include "assetloader.h"
 #include "resources.h"
+#include "var.h"
 
 enum BuildingType {CASTLE, TOWNCENTER};
 
@@ -29,7 +33,6 @@ public:
 	BuildingType getBuildingType() { return buildingType; }
 
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
-	void draw_interface(ALLEGRO_BITMAP* bitmap, float x, float y);
 	ALLEGRO_BITMAP* getBaseImg() { return bitmap; }
 	
 	int getWidth() { return width; }
@@ -52,6 +55,10 @@ public:
 	bool requiresItems() const { return misc.empty(); }
 	std::vector<std::pair<const Resource*, int>> getRequiredItems() const { return misc; }
 
+	virtual void drawBuildingWindow() = 0;
+	void drawBuildingHP();
+	void drawBuildingWindowBackground();
+
 protected:
 	int x = 0, y = 0;
 	int col = 0, row = 0;
@@ -61,10 +68,13 @@ protected:
 	int id;
 	int stone, wood, food, gold;
 	std::vector<std::pair<const Resource*, int>> misc; // other required misc items, and quantity of that misc item
-	int hp;
+	int hp, currHp;
 	int lvl;
 	ALLEGRO_BITMAP* bitmap;
 	BuildingType buildingType;
+	std::string buildingTypeString;
+	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
+	ALLEGRO_FONT* basic_font15 = al_load_font("basicfont.ttf", 15, 0);
 };
 
 #endif

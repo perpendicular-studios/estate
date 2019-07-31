@@ -14,7 +14,8 @@ public:
 	int getx() const { return x; }
 	int gety() const { return y; }
 
-	void setPosition(int x_, int y_);
+	bool setPosition(int x_, int y_);
+	Vector2f findNearestUnoccupiedPos(int x_, int y_);
 
 	int getTileType() {
 		return tm->getType(getrow(), getcol());
@@ -30,20 +31,21 @@ public:
 	int getcol() const { return tm->screenToIso(x, y).x; }
 	int getrow() const { return tm->screenToIso(x, y).y; }
 
+//	Vector2f getTileCenter();
+
 	int getFoodCost() const { return food; }
 	int getGoldCost() const { return gold; }
 	int getStoneCost() const { return stone; }
 	int getWoodCost() const { return wood; }
 	int getTileCost() const { return tileCost; }
-	// TODO: might need some refactoring
-	TileMap* getTileMap() const { return tm; }
+
 	std::vector<Resource*> getRequiredItems() { return requiredItems; }
 
 	ALLEGRO_BITMAP* getImage() { return img; }
 
 	bool operator==(Entity* rhs) { return (this->getrow() == rhs->getrow() && this->getcol() == rhs->getcol()); }
 protected:
-	TileMap* tm;
+	TileMap* tm;	
 	int x, y;
 	int xdest, ydest;
 	int tileCost; // amount of tiles that unit can move per turn

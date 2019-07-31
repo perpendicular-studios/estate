@@ -52,7 +52,7 @@ public:
 	}
 
 	bool checkOccupied(int row, int col);
-	void setOccupied(int row, int col);
+	void setOccupyStatus(int row, int col, int status);
 
 	int getTileWidth() { return tileWidth; }
 	int getTileHeight() { return tileHeight; }

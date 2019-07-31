@@ -12,7 +12,13 @@ void UnitButton::render() {
 void UnitButton::onClick() {
 	Entity* e = target->clone();
 	if (player->buyEntity(e)) {
-		e->setPosition(igm->getPrevSelectedBuilding()->getx(), igm->getPrevSelectedBuilding()->gety());
-		player->addEntity(e);
+		if (e->setPosition(igm->getPrevSelectedBuilding()->getRow(), igm->getPrevSelectedBuilding()->getCol())) {
+			std::cout << "Troops spawned" << std::endl;
+			player->addEntity(e);
+		}
+		else {
+			std::cout << "Could not spawn troop" << std::endl;
+			delete e;
+		}
 	}
 }

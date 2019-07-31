@@ -8,6 +8,7 @@ Entity::~Entity() {
 }
 
 // Input: row, col
+// TODO: Decide what to do when tile isn't found
 bool Entity::setPosition(int x_, int y_) {
 	Vector2f coords = findNearestUnoccupiedPos(x_, y_);
 	std::cout << "Found a spot at " << coords.x << ", " << coords.y << std::endl;
@@ -17,20 +18,13 @@ bool Entity::setPosition(int x_, int y_) {
 	y = coords.y;
 	std::cout << "Found a spot at pixel " << coords.x << ", " << coords.y << std::endl;
 	return true;
-	
-	//tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
-	//std::cout << getrow() << ", " << getcol() << " is not unoccupied 0 == " << tm->checkOccupied(getrow(), getcol()) << std::endl;
-	//x = x_;
-	//y = y_;
-	//tm->setOccupyStatus(coords.x, coords.y, TileMap::BLOCKED);
-	//std::cout << getrow() << ", " << getcol() << " is now occupied 1 == " << tm->checkOccupied(getrow(), getcol()) << std::endl;
-//	return true;
 }
 
 // BFS
 // Takes in row, col
 // Returns row, col
 // TODO:: Do something when nearest unoccupied tile isn't found
+// Intentional bug turned feature incoming
 Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
 	std::queue<Vector2f> q;
 	Vector2f currPos = Vector2f(x_, y_);
@@ -41,7 +35,7 @@ Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
 		if (currPos.x < 0 && currPos.y < 0 && currPos.x >= tm->getNumRows() && currPos.y >= tm->getNumCols()) {
 			continue;
 		}
-		if (tm->checkOccupied(currPos.x, currPos.y)) {
+		if (tm->checkOccupied(currPos.x, currPos.y) || tm->getTile(currPos.x, currPos.y) == 0) {
 			q.push(Vector2f(currPos.x, currPos.y + 1));
 			q.push(Vector2f(currPos.x + 1, currPos.y + 1));
 			q.push(Vector2f(currPos.x + 1, currPos.y));

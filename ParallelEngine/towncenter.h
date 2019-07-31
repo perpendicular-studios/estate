@@ -7,6 +7,8 @@ class Towncenter : public Building {
 public:
 	Towncenter(int towncenterID);
 
+	void drawBuildingWindow() override;
+
 private:
 	int currGarrison, maxGarrison;
 	int towncenterID;

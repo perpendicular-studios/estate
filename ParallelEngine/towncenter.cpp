@@ -8,4 +8,10 @@ Towncenter::Towncenter(int towncenterID_) : Building(AssetLoader::manager->getIm
 	width = 255;
 	height = 287;
 	buildingType = TOWNCENTER;
+	buildingTypeString = "Towncenter";
+	currHp = hp = 500;
+}
+
+void Towncenter::drawBuildingWindow() {
+	drawBuildingWindowBackground();
 }

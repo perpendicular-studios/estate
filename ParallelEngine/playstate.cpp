@@ -61,7 +61,7 @@ void PlayState::render() {
 	bl->setx(placingCoordX);
 	bl->sety(placingCoordY);
 
-	if (bl->getPlacing()) { bl->placingBuilding(menu->getBuilding(), placingCoordX, placingCoordY); }
+	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuilding(), placingCoordX, placingCoordY); }
 	
 	if (selectedEntity) selectedEntity->renderRadius();
 	

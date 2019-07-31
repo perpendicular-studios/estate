@@ -42,6 +42,7 @@ public:
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
+	Building* getPrevSelectedBuilding() { return prevSelectedBuilding; }
 
 	//setter methods
 	void setCol(int col) { currCol = col; }
@@ -63,7 +64,7 @@ private:
 	Castle* sampleCastle;
 	Towncenter* sampleTC;
 	Peasant* samplePeasant;
-	Building* newBuilding, *selectedBuilding;
+	Building* newBuilding, *selectedBuilding, *prevSelectedBuilding;
 
 	TileMap* tm;
 

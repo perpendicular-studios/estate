@@ -226,8 +226,10 @@
     <Image Include="images\flagbg.png" />
     <Image Include="images\hover.png" />
     <Image Include="images\miscbg.png" />
+    <Image Include="images\peasant.png" />
     <Image Include="images\player.png" />
     <Image Include="images\productionbg.png" />
+    <Image Include="images\radius.png" />
     <Image Include="images\resourcebg.png" />
     <Image Include="images\tileset.png" />
     <Image Include="images\town_center.png" />

@@ -11,7 +11,7 @@ Display::Display(GSM * g) : gsm(g) {
 	display = al_create_display(Var::WIDTH, Var::HEIGHT);
 	AssetLoader * loader = new AssetLoader();
 	queue = al_create_event_queue();
-	timer = al_create_timer(1.0 / 60); 
+	timer = al_create_timer(1.0 / 32); 
 
 	al_install_keyboard();
 	al_install_mouse();

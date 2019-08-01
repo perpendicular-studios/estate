@@ -14,6 +14,7 @@
 #include "var.h"
 
 enum BuildingType {CASTLE, TOWNCENTER};
+typedef std::pair<const MiscResource*, int> MiscResourceStack;
 
 class Building {	
 public:
@@ -51,9 +52,9 @@ public:
 	int getTopCol() { return col - colWidth; }
 	int getTopRow() { return row - rowHeight; }
 
-	void addRequiredItem(std::pair<const Resource*, int> item) { misc.push_back(item); }
+	void addRequiredItem(MiscResourceStack item) { misc.push_back(item); }
 	bool requiresItems() const { return misc.empty(); }
-	std::vector<std::pair<const Resource*, int>> getRequiredItems() const { return misc; }
+	std::vector<MiscResourceStack> getRequiredItems() const { return misc; }
 
 	virtual void drawBuildingWindow() = 0;
 	void drawBuildingHP();
@@ -67,7 +68,7 @@ protected:
 	std::shared_ptr<TileMap> tm;
 	int id;
 	int stone, wood, food, gold;
-	std::vector<std::pair<const Resource*, int>> misc; // other required misc items, and quantity of that misc item
+	std::vector<MiscResourceStack> misc; // other required misc items, and quantity of that misc item
 	int hp, currHp;
 	int lvl;
 	ALLEGRO_BITMAP* bitmap;

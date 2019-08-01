@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-void Inventory::addResource(const Resource * res) {
+void Inventory::addGeneralResource(const GeneralResource * res) {
 	switch (res->getResourceType()) {
 	case FOOD:
 		food += res->getYield();
@@ -14,13 +14,16 @@ void Inventory::addResource(const Resource * res) {
 	case GOLD:
 		gold += res->getYield();
 		break;
-	case MISC:
-		inventory[res->getName()].push_back(res);
-		break;
 	}
 }
 
-void Inventory::removeResource(ResourceType res, int quantity) {
+void Inventory::addMiscResource(const MiscResource* res, int quantity) {
+	for (int i = 0; i < quantity; i++) {
+		inventory[res->getName()].push_back(res);
+	}
+}
+
+void Inventory::removeGeneralResource(ResourceType res, int quantity) {
 	switch (res) {
 	case FOOD:
 		(food >= quantity) ? food -= quantity : throw "Not enough food!";
@@ -34,25 +37,22 @@ void Inventory::removeResource(ResourceType res, int quantity) {
 	case GOLD:
 		(gold >= quantity) ? gold -= quantity : throw "Not enough gold!";
 		break;
-	default:
-		throw "Cant remove MISC item without a given MISC item object";
-		break;
 	}
 }
 
-void Inventory::removeResource(const Resource * res, int quantity) {
-	switch (res->getResourceType()) {
-	case MISC:
-		if (inventory[res->getName()].size() >= quantity) {
-			auto begin = inventory[res->getName()].begin();
+void Inventory::removeMiscResource(const MiscResource* res, int quantity) {
+	if (this->hasItem(res->getName())) {
+		auto begin = inventory[res->getName()].begin();
 			inventory[res->getName()].erase(begin, begin + quantity);
-		}
-		else {
-			throw "Not enough " + res->getName() + "!";
-		}
-		break;
-	default:
-		throw "item in inventory shouldn't be FOOD, WOOD, GOLD, STONE";
-		break;
 	}
+}
+
+std::vector<std::vector<const MiscResource*>> Inventory::getMiscResources() {
+	std::vector<std::vector<const MiscResource*>> result;
+	for (std::pair<std::string, std::vector<const MiscResource*>> e : inventory) {
+		if (e.second.size() > 0) {
+			result.push_back(e.second);
+		}
+	}
+	return result;
 }

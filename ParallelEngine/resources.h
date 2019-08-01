@@ -48,4 +48,7 @@ static const GeneralResource* HEAVY_STONE_ORE = new GeneralResource("heavy_stone
 static const MiscResource* CLOTH = new MiscResource("Cloth", "cloth");
 static const MiscResource* IRON_ORE = new MiscResource("Iron", "iron");
 
+// The id that each resource is referred to is the index in this list + the number of other map tiles. E.x. if there are 5 tiles in the map, wheat is 5, rice is 6, etc...
+static const Resource* allResource[2] = { WHEAT, RICE };
+
 #endif

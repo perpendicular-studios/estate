@@ -20,10 +20,11 @@ AssetLoader::AssetLoader() {
 	manager->loadImage("images/peasant.png", "peasant", false);
 	manager->loadImage("images/knight.png","knight", false);
 
-
-	// load misc resource sprites
-	manager->loadImage("images/iron.png", "iron", false);
-	manager->loadImage("images/cloth.png", "cloth", false);
+	// load resource sprites
+	manager->loadImage("images/resources/tile_wheat.png", "tile_wheat", false);
+	manager->loadImage("images/resources/tile_rice.png", "tile_rice", false);
+	manager->loadImage("images/resources/iron.png", "iron", false);
+	manager->loadImage("images/resources/cloth.png", "cloth", false);
 	std::cout << "Done Loading Images..." << std::endl;
 
 }

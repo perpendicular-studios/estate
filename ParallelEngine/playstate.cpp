@@ -15,8 +15,8 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 void PlayState::render() {
 	al_clear_to_color(al_map_rgba_f(0, 0, 0, 1));
 	tm->render();
-	bl->render();
 	player->renderEntities();
+	bl->render();
 	menu->isoRender();
 
 	ALLEGRO_TRANSFORM trans;

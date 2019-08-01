@@ -1,6 +1,6 @@
 #include "unitbutton.h"
 #include "igm.h"
-UnitButton::UnitButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, bool visible, Entity* target_, Player* player_, IGM* igm_) : Button(x1, y1, x2, y2, bitmap, visible, DEFAULTSTATE), 
+UnitButton::UnitButton(float x1, float y1, float x2, float y2, ALLEGRO_BITMAP* bitmap, bool visible, Entity* target_, Player* player_, IGM* igm_) : Button(x1, y1, x2, y2, bitmap, visible, BUILDINGINFOSTATE), 
 	target(target_), player(player_), igm(igm_) {}
 
 void UnitButton::render() {
@@ -21,4 +21,5 @@ void UnitButton::onClick() {
 			delete e;
 		}
 	}
+	igm->setState(returnState);
 }

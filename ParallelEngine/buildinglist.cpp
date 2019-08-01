@@ -57,6 +57,7 @@ bool BuildingList::checkPlacingBounds(Building* b) {
 void BuildingList::update(Building* b) {
 	if (b->getBuildingType() == CASTLE) { b = new Castle(bl.size()); }
 	else if (b->getBuildingType() == TOWNCENTER) { b = new Towncenter(bl.size()); }
+	else if(b->getBuildingType() == MARKET) { b = new Market(bl.size()); }
 	b->setx(x);
 	b->sety(y);
 	b->setCol(col);

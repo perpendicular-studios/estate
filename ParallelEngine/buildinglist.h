@@ -5,6 +5,7 @@
 #include "building.h"
 #include "castle.h"
 #include "towncenter.h"
+#include "market.h"
 #include "tilemap.h"
 
 class BuildingList {

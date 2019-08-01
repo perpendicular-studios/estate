@@ -13,7 +13,7 @@
 #include "resources.h"
 #include "var.h"
 
-enum BuildingType {CASTLE, TOWNCENTER};
+enum BuildingType {CASTLE, TOWNCENTER, MARKET};
 
 class Building {	
 public:

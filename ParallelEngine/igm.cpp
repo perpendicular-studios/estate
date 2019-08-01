@@ -6,7 +6,9 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	currState = DEFAULTSTATE;
 	sampleCastle = new Castle(-1);
 	sampleTC = new Towncenter(-1);
+	sampleMarket = new Market(-1);
 	samplePeasant = new Peasant(tm, 20, 0, 0, 0, 0, 0, 0);
+	sampleKnight = new Knight(tm, 20, 0, 0, 0, 0, 0, 0);
 	newBuilding = sampleCastle;
 
 	bm = new ButtonManager;
@@ -19,9 +21,11 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), 0, INVENTORY, this); // should open an inventory
 	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleCastle, player, this);
 	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleTC, player, this);
+	market = new BuildButton(145, 200, 195, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleMarket, player, this);
 	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 
 	peasant = new UnitButton(Var::WIDTH - 230, 325, Var::WIDTH - 180, 375, AssetLoader::manager->getImage("basicbutton"), false, samplePeasant, player, this);
+	knight = new UnitButton(Var::WIDTH - 230, 325, Var::WIDTH - 180, 375, AssetLoader::manager->getImage("basicbutton"), false, sampleKnight, player, this);
 
 	bm->addButton(build);
 	bm->addButton(flag);
@@ -31,8 +35,10 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	bm->addButton(misc);
 	bm->addButton(castle);
 	bm->addButton(towncenter);
+	bm->addButton(market);
 	bm->addButton(rightExit);
 	bm->addButton(peasant);
+	bm->addButton(knight);
 }
 
 void IGM::gameBackground() {
@@ -75,6 +81,7 @@ void IGM::buildingMenu() {
 	build->setVisible(true);
 	castle->setVisible(true);
 	towncenter->setVisible(true);
+	market->setVisible(true);
 }
 
 void IGM::buildingInfoBackground() {
@@ -82,6 +89,7 @@ void IGM::buildingInfoBackground() {
 	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 250, 550, al_map_rgb(153, 77, 0), 3);
 	rightExit->setVisible(true);
 	if(selectedBuilding->getBuildingType() == TOWNCENTER) peasant->setVisible(true);
+	if (selectedBuilding->getBuildingType() == CASTLE) knight->setVisible(true);
 }
 
 void IGM::inventoryMenu() {
@@ -122,7 +130,6 @@ void IGM::setState(MenuState state) {
 		break;
 	case BUILDINGINFOSTATE:
 		buildingInfoBackground();
-		//std::cout << selectedBuilding->getID();
 		selectedBuilding->drawBuildingWindow();
 		break;
 	case INVENTORY:

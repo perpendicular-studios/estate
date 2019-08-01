@@ -22,8 +22,8 @@ AssetLoader::AssetLoader() {
 
 
 	// load misc resource sprites
-	manager->loadImage("images/iron.png", "Iron", false);
-	manager->loadImage("images/cloth.png", "Cloth", false);
+	manager->loadImage("images/iron.png", "iron", false);
+	manager->loadImage("images/cloth.png", "cloth", false);
 	std::cout << "Done Loading Images..." << std::endl;
 
 }

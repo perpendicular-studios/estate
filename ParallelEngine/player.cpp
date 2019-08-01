@@ -3,7 +3,7 @@
 // add resource items from entities standing on resource tiles on the map.
 void Player::updateInventory() {
 	for (Entity * e : entities) {
-		const Resource* tileResource = WHEAT;
+		const GeneralResource* tileResource = WHEAT;
 		switch (e->getTileID()) {
 		case 6: //rice
 			tileResource = RICE;
@@ -15,36 +15,31 @@ void Player::updateInventory() {
 			tileResource = MUTTON;
 			break;
 		case 9: //light_wood
-			tileResource = LIGHT_WOOD;
+			tileResource = TREE;
 			break;
-		case 10: //heavy_wood
-			tileResource = HEAVY_WOOD;
-			break;
-		case 11: //light_gold_ore
+		case 10: //light_gold_ore
 			tileResource = LIGHT_GOLD_ORE;
 			break;
-		case 12: //heavy_gold_ore
+		case 11: //heavy_gold_ore
 			tileResource = HEAVY_GOLD_ORE;
 			break;
-		case 13: //light_stone_ore
+		case 12: //light_stone_ore
 			tileResource = LIGHT_STONE_ORE;
 			break;
-		case 14: //heavy_stone_ore
+		case 13: //heavy_stone_ore
 			tileResource = HEAVY_STONE_ORE;
 			break;
-		case 15: //wool
-			tileResource = WOOL;
-			break;
-		case 16: //iron_ore
-			tileResource = IRON_ORE;
+		default:
+			tileResource = NULL;
 			break;
 		}
-		inventory->addResource(tileResource);
+		inventory->addGeneralResource(tileResource);
 	}
 }
 
+//temporary! remove when entity movement is implemented
 void Player::addTileToInventory(int tileID) {
-	const Resource* tileResource;
+	const GeneralResource* tileResource;
 	switch (tileID) {
 	case 5:
 		tileResource = WHEAT;
@@ -58,35 +53,26 @@ void Player::addTileToInventory(int tileID) {
 		tileResource = MUTTON;
 		break;
 	case 9: //light_wood
-		tileResource = LIGHT_WOOD;
+		tileResource = TREE;
 		break;
-	case 10: //heavy_wood
-		tileResource = HEAVY_WOOD;
-		break;
-	case 11: //light_gold_ore
+	case 10: //light_gold_ore
 		tileResource = LIGHT_GOLD_ORE;
 		break;
-	case 12: //heavy_gold_ore
+	case 11: //heavy_gold_ore
 		tileResource = HEAVY_GOLD_ORE;
 		break;
-	case 13: //light_stone_ore
+	case 12: //light_stone_ore
 		tileResource = LIGHT_STONE_ORE;
 		break;
-	case 14: //heavy_stone_ore
+	case 13: //heavy_stone_ore
 		tileResource = HEAVY_STONE_ORE;
-		break;
-	case 15: //wool
-		tileResource = WOOL;
-		break;
-	case 16: //iron_ore
-		tileResource = IRON_ORE;
 		break;
 	default:
 		tileResource = NULL;
 		break;
 	}
 
-	if(tileResource != NULL) inventory->addResource(tileResource);
+	if(tileResource != NULL) inventory->addGeneralResource(tileResource);
 }
 
 
@@ -102,7 +88,7 @@ bool Player::buyBuilding(Building* building) {
 		for (auto req : building->getRequiredItems()) {
 			if (inventory->hasItem(req.first->getName())) {
 				try {
-					inventory->removeResource(req.first, req.second);
+					inventory->removeMiscResource(req.first, req.second);
 				}
 				catch (char* e) {
 					std::cout << e << std::endl;
@@ -112,10 +98,10 @@ bool Player::buyBuilding(Building* building) {
 	}
 
 	try {
-		if (foodCost != 0 && getFood() >= foodCost) inventory->removeResource(FOOD, foodCost);
-		if (stoneCost != 0 && getStone() >= stoneCost) inventory->removeResource(STONE, stoneCost);
-		if (woodCost != 0 && getWood() >= woodCost) inventory->removeResource(WOOD, woodCost);
-		if (goldCost != 0 && getGold() >= goldCost) inventory->removeResource(GOLD, goldCost);
+		if (foodCost != 0 && getFood() >= foodCost) inventory->removeGeneralResource(FOOD, foodCost);
+		if (stoneCost != 0 && getStone() >= stoneCost) inventory->removeGeneralResource(STONE, stoneCost);
+		if (woodCost != 0 && getWood() >= woodCost) inventory->removeGeneralResource(WOOD, woodCost);
+		if (goldCost != 0 && getGold() >= goldCost) inventory->removeGeneralResource(GOLD, goldCost);
 		success = true;
 	}
 	catch (char* e) {
@@ -133,10 +119,10 @@ bool Player::buyEntity(Entity* entity) {
 
 	bool success = false;
 	try {
-		if (foodCost != 0 && getFood() >= foodCost) inventory->removeResource(FOOD, foodCost);
-		if (stoneCost != 0 && getStone() >= stoneCost) inventory->removeResource(STONE, stoneCost);
-		if (woodCost != 0 && getWood() >= woodCost) inventory->removeResource(WOOD, woodCost);
-		if (goldCost != 0 && getGold() >= goldCost) inventory->removeResource(GOLD, goldCost);
+		if (foodCost != 0 && getFood() >= foodCost) inventory->removeGeneralResource(FOOD, foodCost);
+		if (stoneCost != 0 && getStone() >= stoneCost) inventory->removeGeneralResource(STONE, stoneCost);
+		if (woodCost != 0 && getWood() >= woodCost) inventory->removeGeneralResource(WOOD, woodCost);
+		if (goldCost != 0 && getGold() >= goldCost) inventory->removeGeneralResource(GOLD, goldCost);
 		success = true;
 	}
 	catch (char* e) {

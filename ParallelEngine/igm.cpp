@@ -160,6 +160,10 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 				currState = BUILDINGINFOSTATE;
 			}
 		}
+		
+		//if spawning units, so window does not close
+		if (prevState == BUILDINGINFOSTATE) { selectedBuilding = prevSelectedBuilding; }
+
 		//iterate menu buttons
 		for (int i = 0; i < bm->size(); i++) {
 			// check if button is properly clicked

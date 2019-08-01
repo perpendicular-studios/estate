@@ -76,12 +76,12 @@ void TileMap::loadTileMap(std::string path) {
 }
 
 bool TileMap::checkOccupied(int row, int col) {
-	if (occupiedMap[row][col] == 0) { return false; }
+	if (occupiedMap[row][col] == NORMAL) { return false; }
 	else return true;
 }
 
-void TileMap::setOccupied(int row, int col) {
-	occupiedMap[row][col] = 1;
+void TileMap::setOccupyStatus(int row, int col, int status) {
+	occupiedMap[row][col] = status;
 }
 
 void TileMap::update() {}

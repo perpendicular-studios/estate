@@ -42,6 +42,7 @@ public:
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
+	Building* getPrevSelectedBuilding() { return prevSelectedBuilding; }
 
 	//setter methods
 	void setCol(int col) { currCol = col; }
@@ -54,16 +55,18 @@ private:
 	Player* player;
 	BuildingList* bl;
 	MenuButton *flag, *production, *build, *exit, *exit1, *misc, *rightExit;
-	BuildButton *castle, *towncenter, *newBuildingPlaceHolder;
-	UnitButton* peasant;
+	BuildButton *castle, *towncenter, *market, *newBuildingPlaceHolder;
+	UnitButton* peasant, *knight;
 	int buttonIndex;
 	Castle* c;
 	Towncenter* tc;
 
 	Castle* sampleCastle;
 	Towncenter* sampleTC;
+	Market* sampleMarket;
 	Peasant* samplePeasant;
-	Building* newBuilding, *selectedBuilding;
+	Knight* sampleKnight;
+	Building* newBuilding, *selectedBuilding, *prevSelectedBuilding;
 
 	TileMap* tm;
 

@@ -1,12 +1,14 @@
 #include "igm.h"
 
 IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl(bl_), tm(tm_) {
-	player->getInventory()->addResource(IRON_ORE);
-	player->getInventory()->addResource(WOOL);
+	player->getInventory()->addMiscResource(IRON_ORE, 3);
+	player->getInventory()->addMiscResource(CLOTH, 1);
 	currState = DEFAULTSTATE;
 	sampleCastle = new Castle(-1);
 	sampleTC = new Towncenter(-1);
-	samplePeasant = new Peasant(tm, 20, 0, 0, 0, 0);
+	sampleMarket = new Market(-1);
+	samplePeasant = new Peasant(tm, 20, 0, 0, 0, 0, 0, 0);
+	sampleKnight = new Knight(tm, 20, 0, 0, 0, 0, 0, 0);
 	newBuilding = sampleCastle;
 
 	bm = new ButtonManager;
@@ -19,9 +21,11 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), 0, INVENTORY, this); // should open an inventory
 	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleCastle, player, this);
 	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleTC, player, this);
+	market = new BuildButton(145, 200, 195, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleMarket, player, this);
 	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 
-	peasant = new UnitButton(Var::WIDTH - 230, 325, Var::WIDTH - 180, 375, AssetLoader::manager->getImage("basicbutton"), false, samplePeasant, player);
+	peasant = new UnitButton(Var::WIDTH - 230, 325, Var::WIDTH - 180, 375, AssetLoader::manager->getImage("basicbutton"), false, samplePeasant, player, this);
+	knight = new UnitButton(Var::WIDTH - 230, 325, Var::WIDTH - 180, 375, AssetLoader::manager->getImage("basicbutton"), false, sampleKnight, player, this);
 
 	bm->addButton(build);
 	bm->addButton(flag);
@@ -31,8 +35,10 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	bm->addButton(misc);
 	bm->addButton(castle);
 	bm->addButton(towncenter);
+	bm->addButton(market);
 	bm->addButton(rightExit);
 	bm->addButton(peasant);
+	bm->addButton(knight);
 }
 
 void IGM::gameBackground() {
@@ -75,6 +81,7 @@ void IGM::buildingMenu() {
 	build->setVisible(true);
 	castle->setVisible(true);
 	towncenter->setVisible(true);
+	market->setVisible(true);
 }
 
 void IGM::buildingInfoBackground() {
@@ -82,17 +89,18 @@ void IGM::buildingInfoBackground() {
 	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 250, 550, al_map_rgb(153, 77, 0), 3);
 	rightExit->setVisible(true);
 	if(selectedBuilding->getBuildingType() == TOWNCENTER) peasant->setVisible(true);
+	if (selectedBuilding->getBuildingType() == CASTLE) knight->setVisible(true);
 }
 
 void IGM::inventoryMenu() {
 	exit1->setVisible(true);
-	std::vector<std::vector<const Resource*>> miscResources = player->getInventory()->getMiscResources();
+	std::vector<std::vector<const MiscResource*>> miscResources = player->getInventory()->getMiscResources();
 	al_draw_filled_rectangle(Var::WIDTH - 550, 40, Var::WIDTH, 40 + miscResources.size() * 35, al_map_rgb(255, 204, 0));
 	al_draw_rectangle(Var::WIDTH - 549, 41, Var::WIDTH - 1, 40 + miscResources.size() * 35 - 1, al_map_rgb(153, 77, 0), 3);
 	for (int i = 0; i < miscResources.size(); i++) {
 		int h = 50 + i * 25;
 		std::string itemDesc = (miscResources[i][0]->getName() + " - " + std::to_string(miscResources[i].size()));
-		miscResources[i][0]->drawImage(miscResources[i][0]->getName(), Var::WIDTH - 225 - (itemDesc.size() * 20 + 28) / 2, h);
+		miscResources[i][0]->render(Var::WIDTH - 225 - (itemDesc.size() * 20 + 28) / 2, h);
 		al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 225 - (itemDesc.size() * 20 - 28) / 2, h, 0,
 			itemDesc.c_str());
 	}
@@ -122,7 +130,6 @@ void IGM::setState(MenuState state) {
 		break;
 	case BUILDINGINFOSTATE:
 		buildingInfoBackground();
-		//std::cout << selectedBuilding->getID();
 		selectedBuilding->drawBuildingWindow();
 		break;
 	case INVENTORY:
@@ -146,9 +153,17 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 		//iterate through all current clickables and menu buttons
 		//iterate buildings
 		selectedBuilding = bl->isTileInBounds(currCol, currRow);
-		if (selectedBuilding != NULL && currState != PLACINGBUILDINGTEST) {
-			currState = BUILDINGINFOSTATE;
+		if (selectedBuilding != NULL) {
+			// prevSelectedBuilding gives game "memory" of its last focused building
+			prevSelectedBuilding = selectedBuilding;
+			if (currState != PLACINGBUILDINGTEST) {
+				currState = BUILDINGINFOSTATE;
+			}
 		}
+		
+		//if spawning units, so window does not close
+		if (prevState == BUILDINGINFOSTATE) { selectedBuilding = prevSelectedBuilding; }
+
 		//iterate menu buttons
 		for (int i = 0; i < bm->size(); i++) {
 			// check if button is properly clicked

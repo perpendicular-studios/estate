@@ -3,10 +3,18 @@
 #include "entity.h"
 class Peasant : public Entity {
 public:
-	Peasant(TileMap* tm, int tileCost, int food, int gold, int stone, int wood);
+	Peasant(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y);
+	Entity* clone() const override;
 	void update() override;
 	void render() override;
 };
 
+class Knight : public Entity {
+public:
+	Knight(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y);
+	Entity* clone() const override;
+	void update() override;
+	void render() override;
+};
 
 #endif

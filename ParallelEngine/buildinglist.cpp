@@ -57,6 +57,7 @@ bool BuildingList::checkPlacingBounds(Building* b) {
 void BuildingList::update(Building* b) {
 	if (b->getBuildingType() == CASTLE) { b = new Castle(bl.size()); }
 	else if (b->getBuildingType() == TOWNCENTER) { b = new Towncenter(bl.size()); }
+	else if(b->getBuildingType() == MARKET) { b = new Market(bl.size()); }
 	b->setx(x);
 	b->sety(y);
 	b->setCol(col);
@@ -67,7 +68,7 @@ void BuildingList::update(Building* b) {
 	std::cout << b->getRow() - b->getRowHeight() << "," << b->getCol() - b->getColWidth() << "\n";
 	for (int row_ = b->getRow(); row_ >= b->getRow() - b->getRowHeight(); row_--) {
 		for (int col_ = b->getCol(); col_ >= b->getCol() - b->getColWidth(); col_--) {
-			tm->setOccupied(row_, col_);
+			tm->setOccupyStatus(row_, col_, 1);
 		}
 	}
 }

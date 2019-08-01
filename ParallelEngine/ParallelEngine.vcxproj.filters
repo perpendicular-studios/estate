@@ -132,6 +132,9 @@
     <ClCompile Include="unitbutton.cpp">
       <Filter>Source Files\button</Filter>
     </ClCompile>
+    <ClCompile Include="market.cpp">
+      <Filter>Source Files\building</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -224,6 +227,9 @@
     <ClInclude Include="unitbutton.h">
       <Filter>Header Files\button</Filter>
     </ClInclude>
+    <ClInclude Include="market.h">
+      <Filter>Header Files\building</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -263,6 +269,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="images\town_center.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\peasant.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\radius.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\knight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\market.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

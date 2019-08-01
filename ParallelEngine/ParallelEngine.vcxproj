@@ -176,6 +176,7 @@
     <ClInclude Include="igm.h" />
     <ClInclude Include="inputhandler.h" />
     <ClInclude Include="inventory.h" />
+    <ClInclude Include="market.h" />
     <ClInclude Include="menubutton.h" />
     <ClInclude Include="menustates.h" />
     <ClInclude Include="player.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="inputhandler.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="market.cpp" />
     <ClCompile Include="menubutton.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playstate.cpp" />
@@ -225,9 +227,13 @@
     <Image Include="images\castle.png" />
     <Image Include="images\flagbg.png" />
     <Image Include="images\hover.png" />
+    <Image Include="images\knight.png" />
+    <Image Include="images\market.png" />
     <Image Include="images\miscbg.png" />
+    <Image Include="images\peasant.png" />
     <Image Include="images\player.png" />
     <Image Include="images\productionbg.png" />
+    <Image Include="images\radius.png" />
     <Image Include="images\resourcebg.png" />
     <Image Include="images\tileset.png" />
     <Image Include="images\town_center.png" />

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include "vec2.h"
+#include "resources.h"
 
 class TileMap {
 public:
@@ -14,12 +15,13 @@ public:
 	static const int BLOCKED = 1;
 
 	TileMap(int tileWidth_, int tileHeight_) : tileWidth(tileWidth_), tileHeight(tileHeight_) { 
-		waterY = 4, speed = 0.02f, dy = speed, time = 0; cols = rows = 0; height = width = 0;
+		cols = rows = 0; height = width = 0;
 	}
 	~TileMap();
 
 	void loadTileMap(std::string path);
 	void loadTileSet(ALLEGRO_BITMAP * tileSheet);
+	void loadResourceSet(std::vector<const Resource*> allResources);
 	void render();
 	void update();
 
@@ -65,11 +67,10 @@ private:
 	std::vector<std::vector<int>> collisionMap;
 	std::vector<std::vector<bool>> occupiedMap;
 	std::vector<std::vector<std::shared_ptr<ALLEGRO_BITMAP>>> tileSet;
+	std::vector<std::shared_ptr<ALLEGRO_BITMAP>> resourceSet;
 	int width, height; // in pixels
 	int tileWidth, tileHeight;
 	int cols, rows; // in tiles
-	float waterY, speed, dy; // y offset of animation of water
-	float time;
 };
 
 

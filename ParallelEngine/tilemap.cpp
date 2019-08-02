@@ -73,10 +73,7 @@ void TileMap::loadTileMap(std::string path) {
 				file >> collisionMap[row][col];
 			}
 		}
-		
-
 	}
-
 }
 
 bool TileMap::checkOccupied(int row, int col) {

@@ -29,8 +29,8 @@ void PlayState::render() {
 	Vector2f mapCoord = tm->screenToIso(mouseX, mouseY);
 	if (input.leftClickDown()) {
 		player->addTileToInventory(tm->getTile(mapCoord.y, mapCoord.x));
-
-		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.x, mapCoord.y));
+		std::cout << mapCoord.x << ", " << mapCoord.y << std::endl;
+		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.y, mapCoord.x));
 
 		if (selectedEntity && clickEntity == selectedEntity) {
 			selectedEntity = NULL; // deselect

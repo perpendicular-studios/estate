@@ -5,6 +5,7 @@
 PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm = std::shared_ptr<TileMap>(new TileMap(64, 32));
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
+	tm->loadResourceSet(std::vector<const Resource*>(allResource, allResource + sizeof(allResource) / sizeof(allResource[0])));
 	tm->loadTileMap("data/tilemap.ptm");
 	cam = std::shared_ptr<Camera>(new Camera(500, 500, tm)); //100, 500
 	bl = new BuildingList(tm);
@@ -29,8 +30,8 @@ void PlayState::render() {
 	Vector2f mapCoord = tm->screenToIso(mouseX, mouseY);
 	if (input.leftClickDown()) {
 		player->addTileToInventory(tm->getTile(mapCoord.y, mapCoord.x));
-		std::cout << mapCoord.x << ", " << mapCoord.y << std::endl;
-		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.y, mapCoord.x));
+		std::cout << "Collision: " << tm->getType(mapCoord.y, mapCoord.x) << std::endl;
+		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.x, mapCoord.y));
 
 		if (selectedEntity && clickEntity == selectedEntity) {
 			selectedEntity = NULL; // deselect

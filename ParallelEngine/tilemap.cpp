@@ -17,6 +17,14 @@ void TileMap::loadTileSet(ALLEGRO_BITMAP * tileSheet) {
 	}
 }
 
+void TileMap::loadResourceSet(std::vector<const Resource*> allResources) {
+	resourceSet.resize(allResources.size());
+	for (int i = 0; i < resourceSet.size(); i++) {
+		resourceSet[i] = std::shared_ptr<ALLEGRO_BITMAP>(allResources[i]->getTileImage(), al_destroy_bitmap);
+	}
+
+}
+
 void TileMap::loadTileMap(std::string path) {
 	/*
 	<width> 
@@ -65,14 +73,11 @@ void TileMap::loadTileMap(std::string path) {
 				file >> collisionMap[row][col];
 			}
 		}
-
 	}
-
 }
 
 bool TileMap::checkOccupied(int row, int col) {
-	if (occupiedMap[row][col] == NORMAL) { return false; }
-	else return true;
+	return (occupiedMap[row][col] == BLOCKED);
 }
 
 void TileMap::setOccupyStatus(int row, int col, int status) {
@@ -82,6 +87,7 @@ void TileMap::setOccupyStatus(int row, int col, int status) {
 void TileMap::update() {}
 
 void TileMap::render() {
+	// render tilemap
 	for (int row = 0; row < rows; row++) {
 		for (int col = 0; col < cols; col++) {
 			int rc = map[row][col];
@@ -91,9 +97,16 @@ void TileMap::render() {
 			Vector2f screenCoord = isoToScreen(row, col);
 
 			// draws the base tile
-			al_draw_bitmap(tileSet[r][c].get(), screenCoord.x, screenCoord.y, 0);
+			int numTiles = tileSet.size() * tileSet[0].size();
+			if (rc < numTiles) {
+				al_draw_bitmap(tileSet[r][c].get(), screenCoord.x, screenCoord.y, 0);
+			}
+			else {
+				int resourceIndex = rc - numTiles;
+			    al_draw_bitmap(resourceSet[resourceIndex].get(), screenCoord.x, screenCoord.y, 0);
+			}
 
-			if (checkOccupied(row, col) == true) {
+			if (checkOccupied(row, col)) {
 				al_draw_bitmap(AssetLoader::manager->getImage("radius"), screenCoord.x, screenCoord.y, 0);
 			}
 		}

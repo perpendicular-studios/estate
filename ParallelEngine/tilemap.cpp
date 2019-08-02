@@ -65,11 +65,6 @@ void TileMap::loadTileMap(std::string path) {
 				file >> collisionMap[row][col];
 			}
 		}
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < cols; col++) {
-				collisionMap[row][col] = 0;
-			}
-		}
 
 	}
 

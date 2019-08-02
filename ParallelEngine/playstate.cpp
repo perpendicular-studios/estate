@@ -29,7 +29,7 @@ void PlayState::render() {
 	Vector2f mapCoord = tm->screenToIso(mouseX, mouseY);
 	if (input.leftClickDown()) {
 		player->addTileToInventory(tm->getTile(mapCoord.y, mapCoord.x));
-
+		std::cout << "Collision: " << tm->getType(mapCoord.y, mapCoord.x) << std::endl;
 		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.x, mapCoord.y));
 
 		if (selectedEntity && clickEntity == selectedEntity) {

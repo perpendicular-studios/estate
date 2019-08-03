@@ -31,7 +31,7 @@ void PlayState::render() {
 	if (input.leftClickDown()) {
 		player->addTileToInventory(tm->getTile(mapCoord.y, mapCoord.x));
 		std::cout << "Collision: " << tm->getType(mapCoord.y, mapCoord.x) << std::endl;
-		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.x, mapCoord.y));
+		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.y, mapCoord.x));
 
 		if (selectedEntity && clickEntity == selectedEntity) {
 			selectedEntity = NULL; // deselect

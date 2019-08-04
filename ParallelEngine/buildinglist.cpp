@@ -54,10 +54,11 @@ bool BuildingList::checkPlacingBounds(Building* b) {
 	return false;
 }
 
-void BuildingList::update(Building* b) {
+void BuildingList::update(Building* b, Player* p) {
 	if (b->getBuildingType() == CASTLE) { b = new Castle(bl.size()); }
 	else if (b->getBuildingType() == TOWNCENTER) { b = new Towncenter(bl.size()); }
 	else if(b->getBuildingType() == MARKET) { b = new Market(bl.size()); }
+	b->setPlayer(p);
 	b->setx(x);
 	b->sety(y);
 	b->setCol(col);
@@ -104,4 +105,10 @@ Building* BuildingList::isTileInBounds(int currCol, int currRow) {
 		}
 	}
 	return returnBuilding;
+}
+
+void BuildingList::produceUnits() {
+	for (int i = 0; i < bl.size(); i++) {
+		bl[i]->produceUnits();
+	}
 }

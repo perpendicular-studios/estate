@@ -38,6 +38,7 @@ public:
 	int getStoneCost() const { return stone; }
 	int getWoodCost() const { return wood; }
 	int getTileCost() const { return tileCost; }
+	std::string getEntityTypeString() const { return entityTypeString; }
 
 	std::vector<Resource*> getRequiredItems() { return requiredItems; }
 
@@ -50,6 +51,7 @@ protected:
 	int xdest, ydest;
 	int tileCost; // amount of tiles that unit can move per turn
 	int food, gold, stone, wood;
+	std::string entityTypeString;
 	std::vector<Resource*> requiredItems;
 	ALLEGRO_BITMAP* img;
 };

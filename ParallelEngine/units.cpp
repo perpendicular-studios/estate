@@ -2,7 +2,9 @@
 
 //peasant
 Peasant::Peasant(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y) : 
-	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("peasant"), x, y) {}
+	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("peasant"), x, y) {
+	entityTypeString = "Peasant";
+}
 
 Entity* Peasant::clone() const {
 	return new Peasant(*this);
@@ -16,7 +18,9 @@ void Peasant::render() {
 
 //knight
 Knight::Knight(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y) :
-	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("knight"), x, y) {}
+	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("knight"), x, y) {
+	entityTypeString = "Knight";
+}
 
 Entity* Knight::clone() const {
 	return new Knight(*this);

@@ -135,6 +135,9 @@
     <ClCompile Include="market.cpp">
       <Filter>Source Files\building</Filter>
     </ClCompile>
+    <ClCompile Include="unitqueuebutton.cpp">
+      <Filter>Source Files\button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetloader.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="market.h">
       <Filter>Header Files\building</Filter>
+    </ClInclude>
+    <ClInclude Include="unitqueuebutton.h">
+      <Filter>Header Files\button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

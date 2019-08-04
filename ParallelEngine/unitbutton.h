@@ -1,5 +1,5 @@
-#ifndef UNIT_BUTTON_H
-#define UNIT_BUTTON_H
+#ifndef UNITBUTTON_H
+#define UNITBUTTON_H
 #include "button.h"
 #include "entity.h"
 #include "player.h"
@@ -14,4 +14,4 @@ private:
 	void onClick() override;
 };
 
-#endif UNIT_BUTTON_H
+#endif UNITBUTTON_H

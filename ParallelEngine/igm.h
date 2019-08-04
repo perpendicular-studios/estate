@@ -10,7 +10,6 @@
 #include "player.h"
 #include "buttonmanager.h"
 #include "menustates.h"
-#include "unitbutton.h"
 #include "buildinglist.h"
 #include <iostream>
 #include "assetloader.h"
@@ -57,6 +56,8 @@ private:
 	MenuButton *flag, *production, *build, *exit, *exit1, *misc, *rightExit;
 	BuildButton *castle, *towncenter, *market, *newBuildingPlaceHolder;
 	UnitButton* peasant, *knight;
+	UnitQueueButton* zero, * one, * two, * three, * four, * five, * six, * seven, * eight, * nine, * ten;
+	std::vector<UnitQueueButton*> buttonQueue;
 	int buttonIndex;
 	Castle* c;
 	Towncenter* tc;

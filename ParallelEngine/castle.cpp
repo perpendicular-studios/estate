@@ -20,5 +20,5 @@ void Castle::drawBuildingWindow() {
 	char buffer1[100];
 	snprintf(buffer1, 33, "%s%d%s%d", "Garrison: ", currGarrison, "/", maxGarrison);
 	const char* garrisonChar = buffer1;
-	al_draw_text(basic_font15, al_map_rgb(0, 0, 0), Var::WIDTH - 240, 275, 0, garrisonChar);
+	al_draw_text(basic_font15, al_map_rgb(0, 0, 0), Var::WIDTH - 290, 275, 0, garrisonChar);
 }

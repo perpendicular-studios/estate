@@ -38,6 +38,7 @@ public:
 	void productionMenu();
 	void inventoryMenu();
 	void buildingInfoBackground();
+	bool isInWindowBounds(int x, int y);
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
@@ -48,6 +49,7 @@ public:
 	void setRow(int row) { currRow = row; }
 private:
 	MenuState currState, prevState;
+	bool isLeftWindowOpen, isRightWindowOpen;
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
 	bool isClicked = false;
 	ButtonManager* bm, *buildingbm;

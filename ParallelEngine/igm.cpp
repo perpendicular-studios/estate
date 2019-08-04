@@ -92,16 +92,26 @@ void IGM::gameBackground() {
 	misc->setVisible(true);
 	production->setVisible(true);
 	flag->setVisible(true);
+	isLeftWindowOpen = isRightWindowOpen = false;
 }
 
 void IGM::menuBackground() {
 	al_draw_filled_rectangle(0, 150, 300, 650, al_map_rgb(255, 204, 0));
 	al_draw_rectangle(1, 150, 300, 650, al_map_rgb(153, 77, 0), 3);
 	exit->setVisible(true);
+	isLeftWindowOpen = true;
+}
+
+bool IGM::isInWindowBounds(int x, int y) {
+	if (isLeftWindowOpen) { return x <= 300 && x >= 0 && y >= 150 && y <= 650; }
+	if (isRightWindowOpen) { return x >= Var::WIDTH - 300 && x <= Var::WIDTH && y >= 150 && y <= 650; }
+	return false;
 }
 
 // default state
-void IGM::defaultMenu() {}
+void IGM::defaultMenu() {
+	isLeftWindowOpen = isRightWindowOpen = false;
+}
 
 // overview state
 void IGM::overviewMenu() {
@@ -135,6 +145,7 @@ void IGM::buildingInfoBackground() {
 		buttonQueue[i]->setVisible(true);
 		buttonQueue[i]->setEntity(selectedBuilding->getUnitQueue()[i]);
 	}
+	isRightWindowOpen = true;
 }
 
 void IGM::inventoryMenu() {
@@ -191,17 +202,19 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 	
 	if (clicked) {
 		//do not delete these edge case test conditions
-		if (currState == BUILDINGINFOSTATE) { currState = DEFAULTSTATE; }
+		if (currState == BUILDINGINFOSTATE && !isInWindowBounds(x,y)) { currState = DEFAULTSTATE; }
 		if (currState == PLACINGBUILDING) { prevState = currState = PLACINGBUILDINGTEST; }
 
 		//iterate through all current clickables and menu buttons
-		//iterate buildings
-		selectedBuilding = bl->isTileInBounds(currCol, currRow);
-		if (selectedBuilding != NULL) {
-			// prevSelectedBuilding gives game "memory" of its last focused building
-			prevSelectedBuilding = selectedBuilding;
-			if (currState != PLACINGBUILDINGTEST) {
-				currState = BUILDINGINFOSTATE;
+		//iterate buildings and check to make sure the click is not behind a window
+		if (!isInWindowBounds(x, y)) {
+			selectedBuilding = bl->isTileInBounds(currCol, currRow);
+			if (selectedBuilding != NULL) {
+				// prevSelectedBuilding gives game "memory" of its last focused building
+				prevSelectedBuilding = selectedBuilding;
+				if (currState != PLACINGBUILDINGTEST) {
+					currState = BUILDINGINFOSTATE;
+				}
 			}
 		}
 		

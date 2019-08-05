@@ -19,7 +19,7 @@ public:
 	// clear all buildings
 	void clearList();
 	// update buildlist objects
-	void update(Building* b);
+	void update(Building* b, Player* p);
 	// render buildlist objects
 	void render();
 	//check placing bounds
@@ -30,6 +30,9 @@ public:
 	bool isBuilding1InFront(Building* b1, Building* b2);
 	//loop through to see if click is on a building tile
 	Building* isTileInBounds(int currCol, int currRow);
+	//produce units
+	void produceUnits();
+
 	
 	void setPlacing(bool p) { isPlacingTrue = p; }
 	bool getPlacing() { return isPlacingTrue; }

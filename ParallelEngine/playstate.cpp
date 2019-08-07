@@ -27,31 +27,17 @@ void PlayState::render() {
 	al_translate_transform(&trans, cam->getx(), cam->gety());
 	al_transform_coordinates(&trans, &mouseX, &mouseY);
 
-	Vector2f mapCoord = tm->screenToIso(mouseX, mouseY);
-	if (input.leftClickDown()) {
-		player->addTileToInventory(tm->getTile(mapCoord.y, mapCoord.x));
-		//std::cout << "Collision: " << tm->getType(mapCoord.y, mapCoord.x) << std::endl;
-		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.x, mapCoord.y));
-
-		if (selectedEntity && clickEntity == selectedEntity) {
-			selectedEntity = NULL; // deselect
-		}
-		else {
-			selectedEntity = clickEntity; // select
-		}
-	}
+	mapCoord = tm->screenToIso(mouseX, mouseY);
 	
 	menu->setCol(mapCoord.x);
 	menu->setRow(mapCoord.y);
 	bl->setCol(mapCoord.x);
 	bl->setRow(mapCoord.y);
 
-	Vector2f screenCoord = tm->isoToScreen(mapCoord.y, mapCoord.x);
+	screenCoord = tm->isoToScreen(mapCoord.y, mapCoord.x);
 
-		//hover
-	hoverX = screenCoord.x;
-	hoverY = screenCoord.y;
-	al_draw_bitmap(AssetLoader::manager->getImage("hover"), hoverX, hoverY, 0);
+	//hover
+	al_draw_bitmap(AssetLoader::manager->getImage("hover"), screenCoord.x, screenCoord.y, 0);
 
 		//building
 	Vector2f buildOffset = tm->screenToIso(menu->getBuilding()->getWidth() / 2, menu->getBuilding()->getHeight());
@@ -88,6 +74,19 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 
 	mouseX = ms.x;
 	mouseY = ms.y;
+
+	if (input.leftClickDown()) {
+		player->addTileToInventory(tm->getTile(mapCoord.y, mapCoord.x));
+		//std::cout << "Collision: " << tm->getType(mapCoord.y, mapCoord.x) << std::endl;
+		Entity* clickEntity = player->entityInTile(Vector2i(mapCoord.x, mapCoord.y));
+
+		if (selectedEntity && clickEntity == selectedEntity) {
+			selectedEntity = NULL; // deselect
+		}
+		else {
+			selectedEntity = clickEntity; // select
+		}
+	}
 
 	cam->setLeft(al_key_down(&ks, ALLEGRO_KEY_A));
 	cam->setUp(al_key_down(&ks, ALLEGRO_KEY_W));

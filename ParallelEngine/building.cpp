@@ -5,7 +5,7 @@ Building::Building(ALLEGRO_BITMAP* bitmap_, int width_, int height_) : bitmap(bi
 	//for whole number cols and rows
 	colWidth = (width + 63) / 64;			
 	rowHeight = (height + 63) / 64;
-	unitQueueTimer = al_create_timer(1);
+	unitQueueTimer = al_create_timer(0.01);
 	al_start_timer(unitQueueTimer);
 }
 
@@ -33,11 +33,16 @@ void Building::drawBuildingWindowBackground() {
 void Building::drawUnitQueue() {
 	if (!unitQueue.empty()) {
 		int time = al_get_timer_count(unitQueueTimer) - startTime;
-		float percentage = ((float)time / 10);
-		percentage = percentage * 75;
+		float percentage = ((float)time / 1000);
+		int percentInt = ((float)time / 1000 * 100);
+		percentage = percentage * 80;
 		al_draw_filled_rectangle(Var::WIDTH - 190, 495, Var::WIDTH - 95, 510, al_map_rgb(0, 0, 0));
-		al_draw_filled_rectangle(Var::WIDTH - 185, 500, Var::WIDTH - 175 + percentage, 505, al_map_rgb(0, 255, 0));
-
+		al_draw_filled_rectangle(Var::WIDTH - 185, 500, Var::WIDTH - 180 + percentage, 505, al_map_rgb(0, 255, 0));
+		
+		char buffer1[100];
+		snprintf(buffer1, 33, "%d%s", percentInt, "%");
+		const char* percentString = buffer1;
+		al_draw_text(basic_font15, al_map_rgb(0, 0, 0), Var::WIDTH - 75, 490, 0, percentString);
 		al_draw_text(basic_font15, al_map_rgb(0, 0, 0), Var::WIDTH - 190, 480, 0, currEntity->getEntityTypeString().c_str());
 	}
 }
@@ -62,7 +67,7 @@ void Building::cancelUnit(int num) {
 }
 
 void Building::produceUnits() {
-	if (al_get_timer_count(unitQueueTimer) - startTime >=  10) { isSpawn = true; }
+	if (al_get_timer_count(unitQueueTimer) - startTime >=  1000) { isSpawn = true; }
 	if (!unitQueue.empty() && isSpawn) {
 		newEntity = unitQueue.front();
 		unitQueue.erase(unitQueue.begin() + 0);

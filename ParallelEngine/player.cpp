@@ -2,8 +2,8 @@
 
 // add resource items from entities standing on resource tiles on the map.
 void Player::updateInventory() {
-	for (Entity * e : entities) {
-		const GeneralResource* tileResource = (const GeneralResource*)allResource[e->getTileID()];
+	for (std::pair<std::pair<int, int>, Entity*> e : entities) {
+		const GeneralResource* tileResource = (const GeneralResource*)allResource[e.second->getTileID()];
 		inventory->addGeneralResource(tileResource);
 	}
 }

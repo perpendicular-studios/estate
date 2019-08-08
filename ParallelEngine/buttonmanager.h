@@ -5,6 +5,8 @@
 #include "button.h"
 #include "menubutton.h"
 #include "buildbutton.h"
+#include "unitbutton.h"
+#include "unitqueuebutton.h"
 
 class ButtonManager {
 public:

@@ -13,19 +13,19 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 
 	bm = new ButtonManager;
 	buildingbm = new ButtonManager;
-	build = new MenuButton(200, 200, 250, 250, AssetLoader::manager->getImage("basicbutton"), false, PRODUCTIONSTATE, this);
+	build = new MenuButton(250, 200, 300, 250, AssetLoader::manager->getImage("basicbutton"), false, PRODUCTIONSTATE, this);
 	flag = new MenuButton(0, 0, 100, 100, AssetLoader::manager->getImage("flagbg"), false, OVERVIEWSTATE, this);
 	production = new MenuButton(0, 100, 50, 150, AssetLoader::manager->getImage("productionbg"), false, BUILDSTATE, this);
-	exit = new MenuButton(225, 150, 250, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
+	exit = new MenuButton(275, 150, 300, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 	exit1 = new MenuButton(Var::WIDTH - 25, 40, Var::WIDTH, 65, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 	misc = new MenuButton(Var::WIDTH - 50, 0, Var::WIDTH, 50, AssetLoader::manager->getImage("miscbg"), 0, INVENTORY, this); // should open an inventory
 	castle = new BuildButton(15, 200, 65, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleCastle, player, this);
 	towncenter = new BuildButton(80, 200, 130, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleTC, player, this);
 	market = new BuildButton(145, 200, 195, 250, AssetLoader::manager->getImage("basicbutton"), false, sampleMarket, player, this);
-	rightExit = new MenuButton(Var::WIDTH - 250, 150, Var::WIDTH - 225, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
+	rightExit = new MenuButton(Var::WIDTH - 300, 150, Var::WIDTH - 275, 175, AssetLoader::manager->getImage("x"), false, DEFAULTSTATE, this);
 
-	peasant = new UnitButton(Var::WIDTH - 230, 325, Var::WIDTH - 180, 375, AssetLoader::manager->getImage("basicbutton"), false, samplePeasant, player, this);
-	knight = new UnitButton(Var::WIDTH - 230, 325, Var::WIDTH - 180, 375, AssetLoader::manager->getImage("basicbutton"), false, sampleKnight, player, this);
+	peasant = new UnitButton(Var::WIDTH - 290, 325, Var::WIDTH - 240, 375, AssetLoader::manager->getImage("basicbutton"), false, samplePeasant, player, this);
+	knight = new UnitButton(Var::WIDTH - 290, 325, Var::WIDTH - 240, 375, AssetLoader::manager->getImage("basicbutton"), false, sampleKnight, player, this);
 
 	bm->addButton(build);
 	bm->addButton(flag);
@@ -39,6 +39,47 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	bm->addButton(rightExit);
 	bm->addButton(peasant);
 	bm->addButton(knight);
+
+	//all unit queue button stuff below
+	int leftEdge = Var::WIDTH - 290;
+	int gap = 55;
+	zero = new UnitQueueButton(Var::WIDTH - 290, 475, Var::WIDTH - 240, 525, AssetLoader::manager->getImage("basicbutton"), false, player, this, 0);
+
+	one = new UnitQueueButton(leftEdge, 535, leftEdge + 50, 585, AssetLoader::manager->getImage("basicbutton"), false, player, this, 1);
+	two = new UnitQueueButton(leftEdge + gap, 535, leftEdge + gap + 50, 585, AssetLoader::manager->getImage("basicbutton"), false, player, this, 2);
+	three = new UnitQueueButton(leftEdge + gap * 2, 535, leftEdge + gap * 2 + 50, 585, AssetLoader::manager->getImage("basicbutton"), false, player, this, 3);
+	four = new UnitQueueButton(leftEdge + gap * 3, 535, leftEdge + gap * 3 + 50, 585, AssetLoader::manager->getImage("basicbutton"), false, player, this, 4);
+	five = new UnitQueueButton(leftEdge + gap * 4, 535, leftEdge + gap * 4 + 50, 585, AssetLoader::manager->getImage("basicbutton"), false, player, this, 5);
+
+	six = new UnitQueueButton(leftEdge, 595, leftEdge - 50, 645, AssetLoader::manager->getImage("basicbutton"), false, player, this, 6);
+	seven = new UnitQueueButton(leftEdge + gap, 595, leftEdge + gap + 50, 645, AssetLoader::manager->getImage("basicbutton"), false, player, this, 7);
+	eight = new UnitQueueButton(leftEdge + gap * 2, 595, leftEdge + gap * 2 + 50, 645, AssetLoader::manager->getImage("basicbutton"), false, player, this, 8);
+	nine = new UnitQueueButton(leftEdge + gap * 3, 595, leftEdge + gap * 3 + 50, 645, AssetLoader::manager->getImage("basicbutton"), false, player, this, 9);
+	ten = new UnitQueueButton(leftEdge + gap * 4, 595, leftEdge + gap * 4 + 50, 645, AssetLoader::manager->getImage("basicbutton"), false, player, this, 10);
+
+	buttonQueue.push_back(zero);
+	buttonQueue.push_back(one);
+	buttonQueue.push_back(two);
+	buttonQueue.push_back(three);
+	buttonQueue.push_back(four);
+	buttonQueue.push_back(five);
+	buttonQueue.push_back(six);
+	buttonQueue.push_back(seven);
+	buttonQueue.push_back(eight);
+	buttonQueue.push_back(nine);
+	buttonQueue.push_back(ten);
+
+	bm->addButton(zero);
+	bm->addButton(one);
+	bm->addButton(two);
+	bm->addButton(three);
+	bm->addButton(four);
+	bm->addButton(five);
+	bm->addButton(six);
+	bm->addButton(seven);
+	bm->addButton(eight);
+	bm->addButton(nine);
+	bm->addButton(ten);
 }
 
 void IGM::gameBackground() {
@@ -51,16 +92,26 @@ void IGM::gameBackground() {
 	misc->setVisible(true);
 	production->setVisible(true);
 	flag->setVisible(true);
+	isLeftWindowOpen = isRightWindowOpen = false;
 }
 
 void IGM::menuBackground() {
-	al_draw_filled_rectangle(0, 150, 250, 550, al_map_rgb(255, 204, 0));
-	al_draw_rectangle(1, 150, 250, 550, al_map_rgb(153, 77, 0), 3);
+	al_draw_filled_rectangle(0, 150, 300, 650, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(1, 150, 300, 650, al_map_rgb(153, 77, 0), 3);
 	exit->setVisible(true);
+	isLeftWindowOpen = true;
+}
+
+bool IGM::isInWindowBounds(int x, int y) {
+	if (isLeftWindowOpen) { return x <= 300 && x >= 0 && y >= 150 && y <= 650; }
+	if (isRightWindowOpen) { return x >= Var::WIDTH - 300 && x <= Var::WIDTH && y >= 150 && y <= 650; }
+	return false;
 }
 
 // default state
-void IGM::defaultMenu() {}
+void IGM::defaultMenu() {
+	isLeftWindowOpen = isRightWindowOpen = false;
+}
 
 // overview state
 void IGM::overviewMenu() {
@@ -85,11 +136,16 @@ void IGM::buildingMenu() {
 }
 
 void IGM::buildingInfoBackground() {
-	al_draw_filled_rectangle(Var::WIDTH, 150, Var::WIDTH - 250, 550, al_map_rgb(255, 204, 0));
-	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 250, 550, al_map_rgb(153, 77, 0), 3);
+	al_draw_filled_rectangle(Var::WIDTH, 150, Var::WIDTH - 300, 650, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 300, 650, al_map_rgb(153, 77, 0), 3);
 	rightExit->setVisible(true);
-	if(selectedBuilding->getBuildingType() == TOWNCENTER) peasant->setVisible(true);
+	if (selectedBuilding->getBuildingType() == TOWNCENTER) peasant->setVisible(true);
 	if (selectedBuilding->getBuildingType() == CASTLE) knight->setVisible(true);
+	for (int i = 0; i < selectedBuilding->getUnitQueue().size(); i++) {
+		buttonQueue[i]->setVisible(true);
+		buttonQueue[i]->setEntity(selectedBuilding->getUnitQueue()[i]);
+	}
+	isRightWindowOpen = true;
 }
 
 void IGM::inventoryMenu() {
@@ -145,29 +201,30 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 	prevState = currState;
 	
 	if (clicked) {
-		std::cout << x << "," << y << "\n";
 		//do not delete these edge case test conditions
-		if (currState == BUILDINGINFOSTATE) { currState = DEFAULTSTATE; }
+		if (currState == BUILDINGINFOSTATE && !isInWindowBounds(x,y)) { currState = DEFAULTSTATE; }
 		if (currState == PLACINGBUILDING) { prevState = currState = PLACINGBUILDINGTEST; }
 
 		//iterate through all current clickables and menu buttons
-		//iterate buildings
-		selectedBuilding = bl->isTileInBounds(currCol, currRow);
-		if (selectedBuilding != NULL) {
-			// prevSelectedBuilding gives game "memory" of its last focused building
-			prevSelectedBuilding = selectedBuilding;
-			if (currState != PLACINGBUILDINGTEST) {
-				currState = BUILDINGINFOSTATE;
+		//iterate buildings and check to make sure the click is not behind a window
+		if (!isInWindowBounds(x, y)) {
+			selectedBuilding = bl->isTileInBounds(currCol, currRow);
+			if (selectedBuilding != NULL) {
+				// prevSelectedBuilding gives game "memory" of its last focused building
+				prevSelectedBuilding = selectedBuilding;
+				if (currState != PLACINGBUILDINGTEST) {
+					currState = BUILDINGINFOSTATE;
+				}
 			}
 		}
 		
 		//if spawning units, so window does not close
-		if (prevState == BUILDINGINFOSTATE) { selectedBuilding = prevSelectedBuilding; }
+	    if (prevState == BUILDINGINFOSTATE) { selectedBuilding = prevSelectedBuilding; }
 
 		//iterate menu buttons
 		for (int i = 0; i < bm->size(); i++) {
 			// check if button is properly clicked
-			if (bm->getList()[i]->isInBounds(x, y) == true && bm->getList()[i]->isVisible() == true) {
+			if (bm->getList()[i]->isInBounds(x, y) && bm->getList()[i]->isVisible()) {
 				bm->getList()[i]->onClick();
 				buttonIndex = i;
 			}
@@ -193,7 +250,7 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 			//valid placement
 			else {
 				std::cout << "Placing Building \n";
-				bl->update(newBuilding);
+				bl->update(newBuilding, player);
 				bl->setPlacing(false);
 				currState = BUILDSTATE;
 			}
@@ -206,6 +263,9 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, B
 			currState = BUILDSTATE; 
 		}
 	}
+
+	//automatic updates
+	bl->produceUnits();
 }
 
 void IGM::staticRender() {

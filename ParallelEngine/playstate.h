@@ -24,8 +24,9 @@ private:
 	Player* player;
 	Entity* selectedEntity;
 
+	Vector2f mapCoord, screenCoord;
+
 	float mouseX = 0, mouseY = 0;
-	float hoverX = 0, hoverY = 0;
 	float placingCoordX = 0, placingCoordY = 0;
 };
 

@@ -8,6 +8,7 @@
 #include "buildinglist.h"
 #include <string>
 #include <vector>
+#include <unordered_map>
 class Player {
 public:
 	Player() { inventory = new Inventory(0,0,0,0); }
@@ -24,11 +25,11 @@ public:
 	Inventory* getInventory() { return inventory; }
 	void addTileToInventory(int tileID);
 
-	Entity* entityInTile(Vector2i clickCoord);
+	Entity* entityInTile(int row, int col);
 	void renderEntities();
 	void addEntity(Entity* e);
 private:
-	std::vector<Entity*> entities;
+	std::map<std::pair<int, int>, Entity*> entities;
 	Inventory * inventory;
 };
 

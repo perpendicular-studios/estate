@@ -10,7 +10,6 @@
 #include "player.h"
 #include "buttonmanager.h"
 #include "menustates.h"
-#include "unitbutton.h"
 #include "buildinglist.h"
 #include <iostream>
 #include "assetloader.h"
@@ -39,6 +38,7 @@ public:
 	void productionMenu();
 	void inventoryMenu();
 	void buildingInfoBackground();
+	bool isInWindowBounds(int x, int y);
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
@@ -49,6 +49,7 @@ public:
 	void setRow(int row) { currRow = row; }
 private:
 	MenuState currState, prevState;
+	bool isLeftWindowOpen, isRightWindowOpen;
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
 	bool isClicked = false;
 	ButtonManager* bm, *buildingbm;
@@ -57,6 +58,8 @@ private:
 	MenuButton *flag, *production, *build, *exit, *exit1, *misc, *rightExit;
 	BuildButton *castle, *towncenter, *market, *newBuildingPlaceHolder;
 	UnitButton* peasant, *knight;
+	UnitQueueButton* zero, * one, * two, * three, * four, * five, * six, * seven, * eight, * nine, * ten;
+	std::vector<UnitQueueButton*> buttonQueue;
 	int buttonIndex;
 	Castle* c;
 	Towncenter* tc;

@@ -12,6 +12,9 @@
 #include "assetloader.h"
 #include "resources.h"
 #include "var.h"
+#include "entity.h"
+
+class Player;
 
 enum BuildingType {CASTLE, TOWNCENTER, MARKET};
 typedef std::pair<const MiscResource*, int> MiscResourceStack;
@@ -32,6 +35,8 @@ public:
 	int getColWidth() const { return colWidth; }
 	int getRowHeight() const { return rowHeight; }
 	BuildingType getBuildingType() { return buildingType; }
+	void setPlayer(Player* p_) { p = p_; }
+	std::vector<Entity*> getUnitQueue() { return unitQueue; }
 
 	void draw(ALLEGRO_BITMAP* bitmap, float x, float y);
 	ALLEGRO_BITMAP* getBaseImg() { return bitmap; }
@@ -59,6 +64,10 @@ public:
 	virtual void drawBuildingWindow() = 0;
 	void drawBuildingHP();
 	void drawBuildingWindowBackground();
+	void drawUnitQueue();
+	void addUnit(Entity* e);
+	void cancelUnit(int num);
+	void produceUnits();
 
 protected:
 	int x = 0, y = 0;
@@ -76,6 +85,12 @@ protected:
 	std::string buildingTypeString;
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
 	ALLEGRO_FONT* basic_font15 = al_load_font("basicfont.ttf", 15, 0);
+	std::vector<Entity*> unitQueue;
+	ALLEGRO_TIMER* unitQueueTimer;
+	long startTime = 0;
+	bool isSpawn = false;
+	Entity* newEntity, *currEntity;
+	Player* p;
 };
 
 #endif

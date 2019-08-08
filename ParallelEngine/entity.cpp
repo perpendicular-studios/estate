@@ -36,7 +36,7 @@ Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
 		if (currPos.x < 0 && currPos.y < 0 && currPos.x >= tm->getNumRows() && currPos.y >= tm->getNumCols()) {
 			continue;
 		}
-		if (tm->checkOccupied(currPos.x, currPos.y) || tm->getType(currPos.x, currPos.y) == TileMap::BLOCKED) {
+		if (tm->checkOccupied(currPos.x, currPos.y) || tm->getType(currPos.x, currPos.y) == TileMap::BLOCKED) { // getTile needs to be changed to getType
 			q.push(Vector2f(currPos.x, currPos.y + 1));
 			q.push(Vector2f(currPos.x + 1, currPos.y + 1));
 			q.push(Vector2f(currPos.x + 1, currPos.y));

@@ -2,9 +2,9 @@
 
 // add resource items from entities standing on resource tiles on the map.
 void Player::updateInventory() {
-	for (Entity * e : entities) {
+	for (auto& e : entities) {
 		const GeneralResource* tileResource = WHEAT;
-		switch (e->getTileID()) {
+		switch (e.second->getTileID()) {
 		case 6: //rice
 			tileResource = RICE;
 			break;
@@ -133,25 +133,25 @@ bool Player::buyEntity(Entity* entity) {
 
 }
 
-Entity* Player::entityInTile(int row, int col) {
-	std::cout << "clicked row: " << row << ", col: " << col << std::endl;
-	for (Entity* e : entities) {
-		if (e->getrow() == row && e->getcol() == col)
-		{
-			std::cout << "I got clicked on " << std::endl;
-			return e;
-		}
+// Input: row, col
+Entity* Player::entityInTile(Vector2i clickCoord) {
+	std::pair<int, int> pair(clickCoord.x, clickCoord.y);
+	if (entities.find(pair) != entities.end()) {
+		std::cout << "I got clicked on " << std::endl;
+		return entities.at(pair);
 	}
-	return NULL;
+	else
+		return NULL;
 }
 
 void Player::renderEntities() {
-	for (Entity* e : entities) {
-		e->render();
-	}
+		for (auto& e : entities) {
+			e.second->render();
+		}
 }
 
 void Player::addEntity(Entity* e) {
 	std::cout << "Added entity at row: " << e->getrow() << ", col: " << e->getcol() << std::endl;
-	entities.push_back(e);
+	std::pair<int, int> coords(e->getrow(), e->getcol());
+	entities.insert({ coords, e });
 }

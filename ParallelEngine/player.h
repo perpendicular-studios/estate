@@ -6,6 +6,7 @@
 #include "buildinglist.h"
 #include <string>
 #include <vector>
+#include <unordered_map>
 class Player {
 public:
 	Player() { inventory = new Inventory(0,0,0,0); }
@@ -26,7 +27,7 @@ public:
 	void renderEntities();
 	void addEntity(Entity* e);
 private:
-	std::vector<Entity*> entities;
+	std::map<std::pair<int, int>, Entity*> entities;
 	Inventory * inventory;
 };
 

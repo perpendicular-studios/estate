@@ -187,6 +187,7 @@
     <ClInclude Include="tilemap.h" />
     <ClInclude Include="towncenter.h" />
     <ClInclude Include="unitbutton.h" />
+    <ClInclude Include="unitqueuebutton.h" />
     <ClInclude Include="units.h" />
     <ClInclude Include="var.h" />
     <ClInclude Include="vec2.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="tilemap.cpp" />
     <ClCompile Include="towncenter.cpp" />
     <ClCompile Include="unitbutton.cpp" />
+    <ClCompile Include="unitqueuebutton.cpp" />
     <ClCompile Include="units.cpp" />
   </ItemGroup>
   <ItemGroup>

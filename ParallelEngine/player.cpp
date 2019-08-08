@@ -133,9 +133,10 @@ bool Player::buyEntity(Entity* entity) {
 
 }
 
-Entity* Player::entityInTile(Vector2i clickCoord) {
+Entity* Player::entityInTile(int row, int col) {
+	std::cout << "clicked row: " << row << ", col: " << col << std::endl;
 	for (Entity* e : entities) {
-		if (e->getrow() == clickCoord.y && e->getcol() == clickCoord.x)
+		if (e->getrow() == row && e->getcol() == col)
 		{
 			std::cout << "I got clicked on " << std::endl;
 			return e;
@@ -151,5 +152,6 @@ void Player::renderEntities() {
 }
 
 void Player::addEntity(Entity* e) {
+	std::cout << "Added entity at row: " << e->getrow() << ", col: " << e->getcol() << std::endl;
 	entities.push_back(e);
 }

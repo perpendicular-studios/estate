@@ -27,5 +27,5 @@ void Knight::update() {}
 
 void Knight::render() {
 	Vector2f coords(tm->isoToScreen(x, y));
-	al_draw_bitmap(img, coords.x, coords.y, 0);
+	al_draw_bitmap(img, x, y, 0);
 }

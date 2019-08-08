@@ -13,6 +13,7 @@ public:
 	//block types
 	static const int NORMAL = 0;
 	static const int BLOCKED = 1;
+	static const int NUM_TILES = 5;
 
 	TileMap(int tileWidth_, int tileHeight_) : tileWidth(tileWidth_), tileHeight(tileHeight_) { 
 		cols = rows = 0; height = width = 0;

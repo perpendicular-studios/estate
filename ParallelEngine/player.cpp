@@ -3,76 +3,22 @@
 // add resource items from entities standing on resource tiles on the map.
 void Player::updateInventory() {
 	for (Entity * e : entities) {
-		const GeneralResource* tileResource = WHEAT;
-		switch (e->getTileID()) {
-		case 6: //rice
-			tileResource = RICE;
-			break;
-		case 7: //chicken
-			tileResource = CHICKEN;
-			break;
-		case 8: //mutton
-			tileResource = MUTTON;
-			break;
-		case 9: //light_wood
-			tileResource = TREE;
-			break;
-		case 10: //light_gold_ore
-			tileResource = LIGHT_GOLD_ORE;
-			break;
-		case 11: //heavy_gold_ore
-			tileResource = HEAVY_GOLD_ORE;
-			break;
-		case 12: //light_stone_ore
-			tileResource = LIGHT_STONE_ORE;
-			break;
-		case 13: //heavy_stone_ore
-			tileResource = HEAVY_STONE_ORE;
-			break;
-		default:
-			tileResource = NULL;
-			break;
-		}
+		const GeneralResource* tileResource = (const GeneralResource*)allResource[e->getTileID()];
 		inventory->addGeneralResource(tileResource);
 	}
 }
 
 //temporary! remove when entity movement is implemented
 void Player::addTileToInventory(int tileID) {
-	const GeneralResource* tileResource;
-	switch (tileID) {
-	case 5:
-		tileResource = WHEAT;
-	case 6: //rice
-		tileResource = RICE;
-		break;
-	case 7: //chicken
-		tileResource = CHICKEN;
-		break;
-	case 8: //mutton
-		tileResource = MUTTON;
-		break;
-	case 9: //light_wood
-		tileResource = TREE;
-		break;
-	case 10: //light_gold_ore
-		tileResource = LIGHT_GOLD_ORE;
-		break;
-	case 11: //heavy_gold_ore
-		tileResource = HEAVY_GOLD_ORE;
-		break;
-	case 12: //light_stone_ore
-		tileResource = LIGHT_STONE_ORE;
-		break;
-	case 13: //heavy_stone_ore
-		tileResource = HEAVY_STONE_ORE;
-		break;
-	default:
-		tileResource = NULL;
-		break;
+	const Resource* tileResource = (tileID >= TileMap::NUM_TILES) ? allResource[tileID - TileMap::NUM_TILES] : NULL;
+	if (tileResource != NULL) {
+		if(tileResource->getType() == Resource::GENERAL) {
+			inventory->addGeneralResource((const GeneralResource*)tileResource);
+		}
+		else {
+			inventory->addMiscResource((const MiscResource*)tileResource, 1);
+		}
 	}
-
-	if(tileResource != NULL) inventory->addGeneralResource(tileResource);
 }
 
 

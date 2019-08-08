@@ -2,7 +2,9 @@
 #define PLAYER_H
 #include "inventory.h"
 #include "entity.h"
+#include "resources.h"
 #include "building.h"
+#include "tilemap.h"
 #include "buildinglist.h"
 #include <string>
 #include <vector>

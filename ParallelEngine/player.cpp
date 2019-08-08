@@ -134,8 +134,8 @@ bool Player::buyEntity(Entity* entity) {
 }
 
 // Input: row, col
-Entity* Player::entityInTile(Vector2i clickCoord) {
-	std::pair<int, int> pair(clickCoord.x, clickCoord.y);
+Entity* Player::entityInTile(int row, int col) {
+	std::pair<int, int> pair(row, col);
 	if (entities.find(pair) != entities.end()) {
 		std::cout << "I got clicked on " << std::endl;
 		return entities.at(pair);
@@ -151,6 +151,7 @@ void Player::renderEntities() {
 }
 
 void Player::addEntity(Entity* e) {
+	std::cout << "Added entity at row: " << e->getrow() << ", col: " << e->getcol() << std::endl;
 	std::pair<int, int> coords(e->getrow(), e->getcol());
 	entities.insert({ coords, e });
 }

@@ -23,7 +23,7 @@ public:
 	Inventory* getInventory() { return inventory; }
 	void addTileToInventory(int tileID);
 
-	Entity* entityInTile(Vector2i clickCoord);
+	Entity* entityInTile(int row, int col);
 	void renderEntities();
 	void addEntity(Entity* e);
 private:

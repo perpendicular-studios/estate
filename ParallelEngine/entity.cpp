@@ -10,14 +10,14 @@ Entity::~Entity() {
 // Input: row, col
 // TODO: Decide what to do when tile isn't found
 bool Entity::setPosition(int x_, int y_) {
-	Vector2f coords = findNearestUnoccupiedPos(x_, y_);
+	Vector2f mapCoords = findNearestUnoccupiedPos(x_, y_);
+	std::cout << "Found a spot at row: " << mapCoords.x << ", col: " << mapCoords.y << std::endl;
 	tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
-	tm->setOccupyStatus(coords.x, coords.y, TileMap::BLOCKED);
-	std::cout << "Found a spot at col and row: " << coords.x << ", " << coords.y << std::endl;
-	coords = tm->isoToScreen(coords.x, coords.y);
-	x = coords.x;
-	y = coords.y;
-	std::cout << "Found a spot at pixel: " << x << ", " << y << std::endl;
+	tm->setOccupyStatus(mapCoords.x, mapCoords.y, TileMap::BLOCKED);
+
+	Vector2f screenCoords = tm->isoToScreen(mapCoords.x, mapCoords.y);
+	x = screenCoords.x;
+	y = screenCoords.y;
 	return true;
 }
 

@@ -97,12 +97,11 @@ void TileMap::render() {
 			Vector2f screenCoord = isoToScreen(row, col);
 
 			// draws the base tile
-			int numTiles = tileSet.size() * tileSet[0].size();
-			if (rc < numTiles) {
+			if (rc < TileMap::NUM_TILES) {
 				al_draw_bitmap(tileSet[r][c].get(), screenCoord.x, screenCoord.y, 0);
 			}
 			else {
-				int resourceIndex = rc - numTiles;
+				int resourceIndex = rc - TileMap::NUM_TILES;
 			    al_draw_bitmap(resourceSet[resourceIndex].get(), screenCoord.x, screenCoord.y, 0);
 			}
 

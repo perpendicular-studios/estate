@@ -8,8 +8,12 @@ enum ResourceType { FOOD, WOOD, STONE, GOLD };
 
 class Resource {
 public:
+	static const int GENERAL = 0;
+	static const int MISC = 1;
+
 	ALLEGRO_BITMAP* getTileImage() const { return AssetLoader::manager->getImage("tile_" + name); }
 	std::string getName() const { return name; }
+	virtual int getType() const = 0;
 protected:
 	Resource(std::string name_) : name(name_) {}
 	std::string name;
@@ -19,6 +23,7 @@ class MiscResource : public Resource {
 public:
 	MiscResource(std::string name, std::string img_key_) : Resource(name), img_key(img_key_) {}
 	void render(int x, int y) const { al_draw_bitmap(AssetLoader::manager->getImage(img_key), x, y, 0); }
+	int getType() const { return MISC; }
 private:
 	std::string img_key;
 };
@@ -28,6 +33,7 @@ public:
 	GeneralResource(std::string name, ResourceType type_, int yield_) : Resource(name), type(type_), yield(yield_) {}
 	ResourceType getResourceType() const { return type; }
 	int getYield() const { return yield; }
+	int getType() const { return GENERAL; }
 private:
 	ResourceType type;
 	int yield;

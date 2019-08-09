@@ -12,6 +12,11 @@ void Entity::drawEntityHP() {
 	percentage = percentage * 75;
 	al_draw_filled_rectangle(Var::WIDTH - 190, 255, Var::WIDTH - 95, 270, al_map_rgb(0, 0, 0));
 	al_draw_filled_rectangle(Var::WIDTH - 185, 260, Var::WIDTH - 175 + percentage, 265, al_map_rgb(0, 255, 0));
+
+	char buffer1[100];
+	snprintf(buffer1, 33, "%d%s%d", currHp, "/", hp);
+	const char* fractionHp = buffer1;
+	al_draw_text(basic_font15, al_map_rgb(0, 0, 0), Var::WIDTH - 90, 255, 0, fractionHp);
 }
 
 void Entity::drawEntityWindowBackground() {

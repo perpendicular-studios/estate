@@ -7,6 +7,19 @@ Entity::Entity(TileMap* tm_, int tileCost_, int food_, int gold_, int stone_, in
 Entity::~Entity() {
 }
 
+void Entity::drawEntityHP() {
+	float percentage = ((float)currHp / hp);
+	percentage = percentage * 75;
+	al_draw_filled_rectangle(Var::WIDTH - 190, 255, Var::WIDTH - 95, 270, al_map_rgb(0, 0, 0));
+	al_draw_filled_rectangle(Var::WIDTH - 185, 260, Var::WIDTH - 175 + percentage, 265, al_map_rgb(0, 255, 0));
+}
+
+void Entity::drawEntityWindowBackground() {
+	al_draw_text(basic_font20, al_map_rgb(0, 0, 0), Var::WIDTH - 145, 175, ALLEGRO_ALIGN_CENTRE, entityTypeString.c_str());
+	al_draw_scaled_bitmap(img, 0, 0, al_get_bitmap_width(img), al_get_bitmap_height(img), Var::WIDTH - 170, 200, 50, 50, 0);
+	drawEntityHP();
+}
+
 // Input: row, col
 // TODO: Decide what to do when tile isn't found
 bool Entity::setPosition(int x_, int y_) {

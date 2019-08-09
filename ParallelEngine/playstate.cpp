@@ -71,21 +71,9 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 
 	tm->update();
 	cam->update();
-	menu->update(input.leftClickDown(), input.keyClickDown(), input.keyPressed(), mouseX, mouseY, bl);
+	menu->update(input.leftClickDown(), input.keyClickDown(), input.keyPressed(), mouseX, mouseY);
 
 	input.update(ks, ms);
-
-	if (input.leftClickDown()) {
-		player->addTileToInventory(tm->getTile(mapCoord.y, mapCoord.x));
-		Entity* clickEntity = player->entityInTile(mapCoord.y, mapCoord.x);
-
-		if (selectedEntity && clickEntity == selectedEntity) {
-			selectedEntity = NULL; // deselect
-		}
-		else {
-			selectedEntity = clickEntity; // select
-		}
-	}
 
 	cam->setLeft(al_key_down(&ks, ALLEGRO_KEY_A));
 	cam->setUp(al_key_down(&ks, ALLEGRO_KEY_W));

@@ -21,7 +21,7 @@ class IGM {
 public:
 	IGM(Player * player_, BuildingList* bl, TileMap * tm_);
 	// update states
-	void update(bool clicked, bool keyClicked, std::string key, int x, int y, BuildingList* bl);
+	void update(bool clicked, bool keyClicked, std::string key, int x, int y);
 	// render states 
 	void staticRender();
 	void isoRender();
@@ -38,7 +38,18 @@ public:
 	void productionMenu();
 	void inventoryMenu();
 	void buildingInfoBackground();
+	void entityInfoBackground();
+
+	//error checking methods
 	bool isInWindowBounds(int x, int y);
+	void edgeCaseStates(int x, int y);
+	void buildingChecks();
+
+	//iteration methods
+	void iterateBuildings(int x, int y);
+	void iterateEntities(int x, int y);
+	void iterateButtons(int x, int y);
+	void iterateResourceTiles(int x, int y);
 
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
@@ -48,31 +59,43 @@ public:
 	void setCol(int col) { currCol = col; }
 	void setRow(int row) { currRow = row; }
 private:
-	MenuState currState, prevState;
-	bool isLeftWindowOpen, isRightWindowOpen;
+	//fonts
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
-	bool isClicked = false;
-	ButtonManager* bm, *buildingbm;
+
+	//player
 	Player* player;
-	BuildingList* bl;
+
+	//states
+	MenuState currState, prevState;
+
+	//boolean checks
+	bool isLeftWindowOpen, isRightWindowOpen;
+
+	//buttons
+	ButtonManager* bm, * buildingbm;
 	MenuButton *flag, *production, *build, *exit, *exit1, *misc, *rightExit;
 	BuildButton *castle, *towncenter, *market, *newBuildingPlaceHolder;
 	UnitButton* peasant, *knight;
 	UnitQueueButton* zero, * one, * two, * three, * four, * five, * six, * seven, * eight, * nine, * ten;
 	std::vector<UnitQueueButton*> buttonQueue;
 	int buttonIndex;
-	Castle* c;
-	Towncenter* tc;
 
+	//buildings
+	BuildingList* bl;
+	Building* newBuilding, * selectedBuilding, * prevSelectedBuilding;
+	//template buildings
 	Castle* sampleCastle;
 	Towncenter* sampleTC;
 	Market* sampleMarket;
+
+	//units
+	Entity* selectedEntity;
+	//template units
 	Peasant* samplePeasant;
 	Knight* sampleKnight;
-	Building* newBuilding, *selectedBuilding, *prevSelectedBuilding;
-
+	
+	//map stuff
 	TileMap* tm;
-
 	int currCol = 0, currRow = 0;
 };
 #endif

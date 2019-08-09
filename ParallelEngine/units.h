@@ -7,6 +7,7 @@ public:
 	Entity* clone() const override;
 	void update() override;
 	void render() override;
+	void drawEntityWindow() override;
 };
 
 class Knight : public Entity {
@@ -15,6 +16,7 @@ public:
 	Entity* clone() const override;
 	void update() override;
 	void render() override;
+	void drawEntityWindow() override;
 };
 
 #endif

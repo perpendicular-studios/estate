@@ -19,6 +19,7 @@ AssetLoader::AssetLoader() {
 	manager->loadImage("images/resources_menu.png", "resources_menu", false);
 	manager->loadImage("images/peasant.png", "peasant", false);
 	manager->loadImage("images/knight.png","knight", false);
+	manager->loadImage("images/popup.png", "popup", false);
 
 	// load resource sprites
 	manager->loadImage("images/resources/tile_wheat.png", "tile_wheat", false);

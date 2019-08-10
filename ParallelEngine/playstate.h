@@ -15,6 +15,7 @@ public:
 	PlayState(GSM * gsm);
 	void render() override;
 	void update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) override; 
+	void setSelectedEntity(Entity* e) { selectedEntity = e; }
 private:
 	std::shared_ptr<TileMap> tm;
 	std::shared_ptr<Camera> cam;

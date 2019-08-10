@@ -2,6 +2,13 @@
 #define ENTITY_H
 #include "tilemap.h"
 #include "resources.h"
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include <string>
+#include "var.h"
 class Entity {
 public:
 	Entity(TileMap* tm_, int tileCost_, int food, int gold, int stone, int wood, ALLEGRO_BITMAP * img_, int x, int y);
@@ -10,6 +17,9 @@ public:
 	virtual Entity* clone() const = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;
+	virtual void drawEntityWindow() = 0;
+	void drawEntityWindowBackground();
+	void drawEntityHP();
 
 	int getx() const { return x; }
 	int gety() const { return y; }
@@ -51,9 +61,12 @@ protected:
 	int xdest, ydest;
 	int tileCost; // amount of tiles that unit can move per turn
 	int food, gold, stone, wood;
+	int currHp, hp;
 	std::string entityTypeString;
 	std::vector<Resource*> requiredItems;
 	ALLEGRO_BITMAP* img;
+	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
+	ALLEGRO_FONT* basic_font15 = al_load_font("basicfont.ttf", 15, 0);
 };
 
 #endif

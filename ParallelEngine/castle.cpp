@@ -9,7 +9,7 @@ Castle::Castle(int castleID_) : Building(AssetLoader::manager->getImage("castle"
 	height = 352;
 	buildingType = CASTLE;
 	buildingTypeString = "Castle";
-	currHp = hp = 500;
+	currHp = hp = 1000;
 	currGarrison = 0;
 	maxGarrison = 50;
 }

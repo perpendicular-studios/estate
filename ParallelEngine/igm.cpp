@@ -41,7 +41,7 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	bm->addButton(knight);
 
 	//all unit queue button stuff below
-	int leftEdge = Var::WIDTH - 290;
+	int leftEdge = Var::WIDTH - 290;					//variables for easier editing 
 	int gap = 55;
 	zero = new UnitQueueButton(Var::WIDTH - 290, 475, Var::WIDTH - 240, 525, AssetLoader::manager->getImage("basicbutton"), false, player, this, 0);
 
@@ -148,6 +148,12 @@ void IGM::buildingInfoBackground() {
 	isRightWindowOpen = true;
 }
 
+void IGM::entityInfoBackground() {
+	al_draw_filled_rectangle(Var::WIDTH, 150, Var::WIDTH - 300, 650, al_map_rgb(255, 204, 0));
+	al_draw_rectangle(Var::WIDTH - 1, 150, Var::WIDTH - 300, 650, al_map_rgb(153, 77, 0), 3);
+	rightExit->setVisible(true);
+}
+
 void IGM::inventoryMenu() {
 	exit1->setVisible(true);
 	std::vector<std::vector<const MiscResource*>> miscResources = player->getInventory()->getMiscResources();
@@ -188,6 +194,10 @@ void IGM::setState(MenuState state) {
 		buildingInfoBackground();
 		selectedBuilding->drawBuildingWindow();
 		break;
+	case ENTITYINFOSTATE:
+		entityInfoBackground();
+		selectedEntity->drawEntityWindow();
+		break;
 	case INVENTORY:
 		inventoryMenu();
 		break;
@@ -197,66 +207,99 @@ void IGM::setState(MenuState state) {
 	}
 }
 
-void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y, BuildingList* bl){ 
-	prevState = currState;
-	
-	if (clicked) {
-		//do not delete these edge case test conditions
-		if (currState == BUILDINGINFOSTATE && !isInWindowBounds(x,y)) { currState = DEFAULTSTATE; }
-		if (currState == PLACINGBUILDING) { prevState = currState = PLACINGBUILDINGTEST; }
+void IGM::edgeCaseStates(int x, int y) {
+	//edge case conditions, feel free to add
+	if (currState == BUILDINGINFOSTATE && !isInWindowBounds(x, y)) { currState = DEFAULTSTATE; }
+	if (currState == PLACINGBUILDING) { prevState = currState = PLACINGBUILDINGTEST; }
+}
 
-		//iterate through all current clickables and menu buttons
-		//iterate buildings and check to make sure the click is not behind a window
-		if (!isInWindowBounds(x, y)) {
-			selectedBuilding = bl->isTileInBounds(currCol, currRow);
-			if (selectedBuilding != NULL) {
-				// prevSelectedBuilding gives game "memory" of its last focused building
-				prevSelectedBuilding = selectedBuilding;
-				if (currState != PLACINGBUILDINGTEST) {
-					currState = BUILDINGINFOSTATE;
-				}
-			}
-		}
-		
-		//if spawning units, so window does not close
-	    if (prevState == BUILDINGINFOSTATE) { selectedBuilding = prevSelectedBuilding; }
+void IGM::buildingChecks() {
+	//when you click something else while placing building
+	if (prevState == PLACINGBUILDINGTEST && currState != prevState && currState != PLACINGBUILDING) {
+		bl->setPlacing(false);
+	}
 
-		//iterate menu buttons
-		for (int i = 0; i < bm->size(); i++) {
-			// check if button is properly clicked
-			if (bm->getList()[i]->isInBounds(x, y) && bm->getList()[i]->isVisible()) {
-				bm->getList()[i]->onClick();
-				buttonIndex = i;
-			}
+	//check if placing building in valid location 
+	if (currState == PLACINGBUILDINGTEST) {
+		if (bl->checkPlacingBounds(newBuilding)) {
+			std::cout << "Cannot place in this location \n";
 		}
-		if (currState == PLACINGBUILDING) {
-			//set template building info
-			newBuildingPlaceHolder = (BuildButton*)bm->getList()[buttonIndex];
-			newBuilding = newBuildingPlaceHolder->getBuilding();
-			bl->setCurrBuilding(newBuilding);
-			bl->setPlacing(true);
-		}
-
-		//when you click something else while placing building
-		if (prevState == PLACINGBUILDINGTEST && currState != prevState && currState != PLACINGBUILDING) {
+		//valid placement
+		else {
+			std::cout << "Placing Building \n";
+			bl->update(newBuilding, player);
 			bl->setPlacing(false);
+			currState = BUILDSTATE;
 		}
+	}
+}
 
-		//check if placing building in valid location 
-		if (currState == PLACINGBUILDINGTEST) {
-			if (bl->checkPlacingBounds(newBuilding)) {
-				std::cout << "Cannot place in this location \n";
-			}
-			//valid placement
-			else {
-				std::cout << "Placing Building \n";
-				bl->update(newBuilding, player);
-				bl->setPlacing(false);
-				currState = BUILDSTATE;
+void IGM::iterateBuildings(int x, int y) {
+	//iterate buildings and check to make sure the click is not behind a window
+	if (!isInWindowBounds(x, y)) {
+		selectedBuilding = bl->isTileInBounds(currCol, currRow);
+		if (selectedBuilding != NULL) {
+			// prevSelectedBuilding gives game "memory" of its last focused building
+			prevSelectedBuilding = selectedBuilding;
+			if (currState != PLACINGBUILDINGTEST) {
+				currState = BUILDINGINFOSTATE;
 			}
 		}
 	}
+}
 
+void IGM::iterateEntities(int x, int y) {
+	if (!isInWindowBounds(x, y)) {
+		Entity* clickEntity = player->entityInTile(currRow, currCol);
+		if (clickEntity) {
+			selectedEntity = clickEntity;
+			currState = ENTITYINFOSTATE;
+		}
+	}
+}
+
+void IGM::iterateButtons(int x, int y) {
+	for (int i = 0; i < bm->size(); i++) {
+		// check if button is properly clicked
+		if (bm->getList()[i]->isInBounds(x, y) && bm->getList()[i]->isVisible()) {
+			bm->getList()[i]->onClick();
+			buttonIndex = i;
+		}
+	}
+	if (currState == PLACINGBUILDING) {
+		//set template building info
+		newBuildingPlaceHolder = (BuildButton*)bm->getList()[buttonIndex];
+		newBuilding = newBuildingPlaceHolder->getBuilding();
+		bl->setCurrBuilding(newBuilding);
+		bl->setPlacing(true);
+	}
+}
+
+void IGM::iterateResourceTiles(int x, int y) {
+	if (!isInWindowBounds(x, y)) {
+		player->addTileToInventory(tm->getTile(currRow, currCol));
+	}
+}
+
+void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y){ 
+	prevState = currState;
+	
+	//mouse inputs for left click
+	if (clicked) {
+		//edge case checking for beginning
+		edgeCaseStates(x, y);
+
+		//iterate through all current clickables and menu buttons
+		iterateBuildings(x, y);
+		iterateEntities(x, y);
+		iterateButtons(x, y);
+		iterateResourceTiles(x, y);
+
+		//building checks
+		buildingChecks();
+	}
+
+	//keyboard inputs
 	if (keyClicked) {
 		if ((currState == PLACINGBUILDING || currState == PLACINGBUILDINGTEST) && key == "esc") { 
 			bl->setPlacing(false);

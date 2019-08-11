@@ -24,6 +24,9 @@ private:
 	IGM* menu;
 	Player* player;
 	Entity* selectedEntity;
+	int selectedTile;
+	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
+	ALLEGRO_FONT* basic_font12 = al_load_font("basicfont.ttf", 12, 0);
 
 	Vector2f mapCoord, screenCoord;
 

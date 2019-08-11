@@ -21,11 +21,12 @@ protected:
 
 class MiscResource : public Resource { 
 public:
-	MiscResource(std::string name, std::string img_key_) : Resource(name), img_key(img_key_) {}
-	void render(int x, int y) const { al_draw_bitmap(AssetLoader::manager->getImage(img_key), x, y, 0); }
+	MiscResource(std::string name, std::string desc_) : Resource(name), desc(desc_) {}
+	void render(int x, int y) const { al_draw_bitmap(AssetLoader::manager->getImage(name), x, y, 0); }
 	int getType() const { return MISC; }
+	std::string getDescription() const { return desc; }
 private:
-	std::string img_key;
+	std::string desc;
 };
 
 class GeneralResource : public Resource {
@@ -51,10 +52,10 @@ static const GeneralResource* HEAVY_GOLD_ORE = new GeneralResource("heavy_gold",
 static const GeneralResource* LIGHT_STONE_ORE = new GeneralResource("light_stone", STONE, 10);
 static const GeneralResource* HEAVY_STONE_ORE = new GeneralResource("heavy_stone", STONE, 10);
 
-static const MiscResource* CLOTH = new MiscResource("Cloth", "cloth");
-static const MiscResource* IRON_ORE = new MiscResource("Iron", "iron");
+static const MiscResource* CLOTH = new MiscResource("cloth", "Place loom adjacent to harvest");
+static const MiscResource* IRON_ORE = new MiscResource("iron", "Place furnace adjacent to harvest");
 
 // The id that each resource is referred to is the index in this list + the number of other map tiles. E.x. if there are 5 tiles in the map, wheat is 5, rice is 6, etc...
-static const Resource* allResource[2] = { WHEAT, RICE };
+static const Resource* allResource[3] = { WHEAT, RICE, IRON_ORE };
 
 #endif

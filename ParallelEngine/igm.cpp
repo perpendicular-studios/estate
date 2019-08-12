@@ -161,7 +161,9 @@ void IGM::inventoryMenu() {
 	al_draw_rectangle(Var::WIDTH - 549, 41, Var::WIDTH - 1, 40 + miscResources.size() * 35 - 1, al_map_rgb(153, 77, 0), 3);
 	for (int i = 0; i < miscResources.size(); i++) {
 		int h = 50 + i * 25;
-		std::string itemDesc = (miscResources[i][0]->getName() + " - " + std::to_string(miscResources[i].size()));
+		std::string resourceName = miscResources[i][0]->getName();
+		resourceName[0] = toupper(resourceName[0]);
+		std::string itemDesc = resourceName + " - " + std::to_string(miscResources[i].size());
 		miscResources[i][0]->render(Var::WIDTH - 225 - (itemDesc.size() * 20 + 28) / 2, h);
 		al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH - 225 - (itemDesc.size() * 20 - 28) / 2, h, 0,
 			itemDesc.c_str());

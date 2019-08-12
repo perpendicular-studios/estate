@@ -19,7 +19,9 @@ void TileMap::loadTileSet(ALLEGRO_BITMAP * tileSheet) {
 
 void TileMap::loadResourceSet(std::vector<const Resource*> allResources) {
 	resourceSet.resize(allResources.size());
+	std::cout << "Loading " << allResources.size() << " Resources." << std::endl;
 	for (int i = 0; i < resourceSet.size(); i++) {
+		std::cout << "Loading tile_" + allResources[i]->getName() << std::endl;
 		resourceSet[i] = std::shared_ptr<ALLEGRO_BITMAP>(allResources[i]->getTileImage(), al_destroy_bitmap);
 	}
 

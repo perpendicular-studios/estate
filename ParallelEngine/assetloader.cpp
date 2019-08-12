@@ -24,6 +24,7 @@ AssetLoader::AssetLoader() {
 	// load resource sprites
 	manager->loadImage("images/resources/tile_wheat.png", "tile_wheat", false);
 	manager->loadImage("images/resources/tile_rice.png", "tile_rice", false);
+	manager->loadImage("images/resources/tile_iron.png", "tile_iron", false);
 	manager->loadImage("images/resources/iron.png", "iron", false);
 	manager->loadImage("images/resources/cloth.png", "cloth", false);
 	std::cout << "Done Loading Images..." << std::endl;

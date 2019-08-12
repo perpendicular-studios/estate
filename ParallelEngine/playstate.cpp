@@ -64,15 +64,17 @@ void PlayState::render() {
 		int resourceIndex = selectedTile - TileMap::NUM_TILES;
 		const Resource* selectedResource = allResource[resourceIndex];
 		al_draw_bitmap(AssetLoader::manager->getImage("popup"), Var::WIDTH / 4 - 75, 0, 0);
-		al_draw_bitmap(selectedResource->getTileImage(), Var::WIDTH / 4 - 70, 10, 0);
 		std::string resourceName = selectedResource->getName();
 		resourceName[0] = toupper(resourceName[0]);
 		al_draw_text(basic_font20, al_map_rgb(255, 255, 255), Var::WIDTH / 4 , 5, 0, resourceName.c_str());
+		al_draw_bitmap(selectedResource->getTileImage(), Var::WIDTH / 4 - 70, 10, 0);
 		if (selectedResource->getType() == Resource::GENERAL) {
 			std::string yield = "Yield / Second: " + std::to_string(((const GeneralResource*)selectedResource)->getYield());
-			al_draw_text(basic_font12, al_map_rgb(255, 255, 255), Var::WIDTH / 4, 25, 0, yield.c_str());
+			al_draw_text(basic_font12, al_map_rgb(63, 235, 75), Var::WIDTH / 4, 25, 0, yield.c_str());
 		}
-		//TODO: MISC Resource tiles
+		else {
+			al_draw_text(basic_font12, al_map_rgb(247, 82, 22), Var::WIDTH / 4, 25, 0, ((const MiscResource*)selectedResource)->getDescription().c_str());
+		}
 	}
 	//used for camera
 	al_identity_transform(&trans);

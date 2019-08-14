@@ -32,18 +32,20 @@ void Entity::drawEntityWindowBackground() {
 }
 
 // Input: row, col
-// TODO: Decide what to do when tile isn't found
 bool Entity::setPosition(int row, int col) {
 	// building
-	Vector2f mapCoords = findNearestUnoccupiedPos(row, col);
-	if (mapCoords.x != -1) {
-		std::cout << "Found a spot at row: " << mapCoords.x << ", col: " << mapCoords.y << std::endl;
+	Vector2f isoCoords = findNearestUnoccupiedPos(row, col);
+	if (isoCoords.x != -1) {
 		tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
-		tm->setOccupyStatus(mapCoords.x, mapCoords.y, TileMap::BLOCKED);
+		tm->setOccupyStatus(isoCoords.x, isoCoords.y, TileMap::BLOCKED);
+		std::cout << "Found a spot at row: 1:" << isoCoords.x << ", col: " << isoCoords.y << std::endl;
+		Vector2f screenCoords = tm->isoToScreen(isoCoords.x, isoCoords.y);
+		isoCoords = tm->screenToIso(screenCoords.x, screenCoords.y);
+		std::cout << "Found a spot at row: 2:" << isoCoords.x << ", col: " << isoCoords.y << std::endl;
 
-		Vector2f screenCoords = tm->isoToScreen(mapCoords.x, mapCoords.y);
 		x = screenCoords.x;
 		y = screenCoords.y;
+		std::cout << "Found a spot at row: 3:" << tm->screenToIso(x, y).x << ", col: " << tm->screenToIso(x, y).y << std::endl;
 		return true;
 	}
 	else {
@@ -69,7 +71,7 @@ Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
 		if (currPos.x < 0 && currPos.y < 0 && currPos.x >= tm->getNumRows() && currPos.y >= tm->getNumCols()) {
 			continue;
 		}
-		if (tm->checkOccupied(currPos.x, currPos.y) || tm->getType(currPos.x, currPos.y) == TileMap::BLOCKED) { // getTile needs to be changed to getType
+		if (!tm->isResource(currPos.x, currPos.y) && (tm->checkOccupied(currPos.x, currPos.y) || tm->getType(currPos.x, currPos.y) == TileMap::BLOCKED)) { // getTile needs to be changed to getType
 			q.push(Vector2f(currPos.x, currPos.y + 1));
 			q.push(Vector2f(currPos.x + 1, currPos.y + 1));
 			q.push(Vector2f(currPos.x + 1, currPos.y));

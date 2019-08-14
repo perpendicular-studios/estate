@@ -7,6 +7,7 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
 	tm->loadResourceSet(std::vector<const Resource*>(allResource, allResource + sizeof(allResource) / sizeof(allResource[0])));
 	tm->loadTileMap("data/tilemap.ptm");
+	//tm->loadTileMap("data/europe.ptm");
 	cam = std::shared_ptr<Camera>(new Camera(500, 500, tm)); //100, 500
 	bl = new BuildingList(tm);
 	player = new Player();

@@ -242,6 +242,9 @@
     <None Include="data\tilemap.ptm">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="data\europe.ptm">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\tileset.png">

@@ -24,7 +24,7 @@ public:
 	int getx() const { return x; }
 	int gety() const { return y; }
 
-	bool setPosition(int x_, int y_);
+	void setPosition(int x_, int y_);
 	Vector2f findNearestUnoccupiedPos(int x_, int y_);
 
 	int getTileType() {
@@ -54,7 +54,7 @@ public:
 
 	ALLEGRO_BITMAP* getImage() { return img; }
 
-	bool operator==(Entity* rhs) { return (this->getrow() == rhs->getrow() && this->getcol() == rhs->getcol()); }
+	bool operator==(Entity* rhs);
 protected:
 	TileMap* tm;	
 	int x, y;

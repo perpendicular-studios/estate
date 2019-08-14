@@ -52,6 +52,7 @@ void PlayState::render() {
 	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuilding(), placingCoordX, placingCoordY); }
 	
 	if (selectedEntity) selectedEntity->renderRadius();
+
 	
 	//for static display images add here
 	al_identity_transform(&trans);

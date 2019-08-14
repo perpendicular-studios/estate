@@ -76,14 +76,9 @@ void Building::produceUnits() {
 	if (!unitQueue.empty() && isSpawn) {
 		newEntity = unitQueue.front();
 		unitQueue.erase(unitQueue.begin() + 0);
-		if (newEntity->setPosition(getRow(), getCol())) {
-			std::cout << "Troops spawned" << std::endl;
-			p->addEntity(newEntity);
-		}
-		else {
-			std::cout << "Could not spawn troop" << std::endl;
-			delete newEntity;
-		}
+		newEntity->setPosition(getRow(), getCol());
+		std::cout << "Troops spawned" << std::endl;
+		p->addEntity(newEntity);
 		startTime = al_get_timer_count(unitQueueTimer);
 		if (!unitQueue.empty()) { currEntity = unitQueue.front(); }
 	}

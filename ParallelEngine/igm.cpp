@@ -253,9 +253,21 @@ void IGM::iterateBuildings(int x, int y) {
 void IGM::iterateEntities(int x, int y) {
 	if (!isInWindowBounds(x, y)) {
 		Entity* clickEntity = player->entityInTile(currRow, currCol);
-		if (clickEntity) {
-			selectedEntity = clickEntity;
-			currState = ENTITYINFOSTATE;
+		if (clickEntity != NULL) {
+			if (clickEntity == selectedEntity) {
+				selectedEntity = NULL; // deselect
+				currState = DEFAULTSTATE;
+			}
+			else {
+				selectedEntity = clickEntity; // select
+				currState = ENTITYINFOSTATE;
+			}
+		}
+		if (selectedEntity != NULL) {
+			std::cout << "Here comes the moving part" << std::endl;
+			selectedEntity->moveTo(x, y);
+			selectedEntity = NULL;
+			currState = DEFAULTSTATE;
 		}
 	}
 }

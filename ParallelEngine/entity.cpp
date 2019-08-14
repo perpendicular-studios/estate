@@ -4,6 +4,12 @@ Entity::Entity(TileMap* tm_, int tileCost_, int food_, int gold_, int stone_, in
 	xdest = ydest = 0;
 }
 
+bool Entity::operator==(Entity* rhs) {
+	if (rhs == NULL)
+		return false;
+	return (this->getrow() == rhs->getrow() && this->getcol() == rhs->getcol());
+}
+
 Entity::~Entity() {
 }
 
@@ -27,7 +33,8 @@ void Entity::drawEntityWindowBackground() {
 
 // Input: row, col
 // TODO: Decide what to do when tile isn't found
-bool Entity::setPosition(int x_, int y_) {
+void Entity::setPosition(int x_, int y_) {
+	// building
 	Vector2f mapCoords = findNearestUnoccupiedPos(x_, y_);
 	std::cout << "Found a spot at row: " << mapCoords.x << ", col: " << mapCoords.y << std::endl;
 	tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
@@ -36,7 +43,6 @@ bool Entity::setPosition(int x_, int y_) {
 	Vector2f screenCoords = tm->isoToScreen(mapCoords.x, mapCoords.y);
 	x = screenCoords.x;
 	y = screenCoords.y;
-	return true;
 }
 
 // BFS
@@ -121,6 +127,9 @@ void Entity::renderRadius() {
 
 }
 
+// input: screenX, screenY
 void Entity::moveTo(int x, int y) {
-
+	// TODO: Animation
+	Vector2f isoCoords = tm->screenToIso(x, y);
+	setPosition(isoCoords.x, isoCoords.y);
 }

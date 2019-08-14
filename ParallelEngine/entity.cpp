@@ -33,9 +33,9 @@ void Entity::drawEntityWindowBackground() {
 
 // Input: row, col
 // TODO: Decide what to do when tile isn't found
-void Entity::setPosition(int x_, int y_) {
+void Entity::setPosition(int row, int col) {
 	// building
-	Vector2f mapCoords = findNearestUnoccupiedPos(x_, y_);
+	Vector2f mapCoords = findNearestUnoccupiedPos(row, col);
 	std::cout << "Found a spot at row: " << mapCoords.x << ", col: " << mapCoords.y << std::endl;
 	tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
 	tm->setOccupyStatus(mapCoords.x, mapCoords.y, TileMap::BLOCKED);
@@ -127,9 +127,8 @@ void Entity::renderRadius() {
 
 }
 
-// input: screenX, screenY
-void Entity::moveTo(int x, int y) {
+// input: row, col
+void Entity::moveTo(int row, int col) {
 	// TODO: Animation
-	Vector2f isoCoords = tm->screenToIso(x, y);
-	setPosition(isoCoords.x, isoCoords.y);
+	setPosition(row, col);
 }

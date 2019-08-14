@@ -33,16 +33,23 @@ void Entity::drawEntityWindowBackground() {
 
 // Input: row, col
 // TODO: Decide what to do when tile isn't found
-void Entity::setPosition(int row, int col) {
+bool Entity::setPosition(int row, int col) {
 	// building
 	Vector2f mapCoords = findNearestUnoccupiedPos(row, col);
-	std::cout << "Found a spot at row: " << mapCoords.x << ", col: " << mapCoords.y << std::endl;
-	tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
-	tm->setOccupyStatus(mapCoords.x, mapCoords.y, TileMap::BLOCKED);
+	if (mapCoords.x != -1) {
+		std::cout << "Found a spot at row: " << mapCoords.x << ", col: " << mapCoords.y << std::endl;
+		tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
+		tm->setOccupyStatus(mapCoords.x, mapCoords.y, TileMap::BLOCKED);
 
-	Vector2f screenCoords = tm->isoToScreen(mapCoords.x, mapCoords.y);
-	x = screenCoords.x;
-	y = screenCoords.y;
+		Vector2f screenCoords = tm->isoToScreen(mapCoords.x, mapCoords.y);
+		x = screenCoords.x;
+		y = screenCoords.y;
+		return true;
+	}
+	else {
+		std::cout << "Unable to find a spot" << std::endl;
+		return false;
+	}
 }
 
 // BFS
@@ -51,12 +58,14 @@ void Entity::setPosition(int row, int col) {
 // TODO:: Do something when nearest unoccupied tile isn't found
 // Intentional bug turned feature incoming
 Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
+	int iterNum = 1;
 	std::queue<Vector2f> q;
 	Vector2f currPos = Vector2f(x_, y_);
 	q.push(currPos);
 	while (!q.empty()) {
 		currPos = q.front();
 		q.pop();
+		iterNum++;
 		if (currPos.x < 0 && currPos.y < 0 && currPos.x >= tm->getNumRows() && currPos.y >= tm->getNumCols()) {
 			continue;
 		}
@@ -73,7 +82,9 @@ Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
 		else {
 			return currPos;
 		}
-
+		if (iterNum >= 250) { // fail safe iteration number
+			return Vector2f(-1, -1); // Cannot find appropriate position
+		}
 	}
 }
 

@@ -24,7 +24,7 @@ public:
 	int getx() const { return x; }
 	int gety() const { return y; }
 
-	void setPosition(int x_, int y_);
+	bool setPosition(int x_, int y_);
 	Vector2f findNearestUnoccupiedPos(int x_, int y_);
 
 	int getTileType() {

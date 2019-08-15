@@ -77,7 +77,6 @@ void Building::produceUnits() {
 		newEntity = unitQueue.front();
 		unitQueue.erase(unitQueue.begin() + 0);
 		if (newEntity->setPosition(getRow(), getCol())) {
-			std::cout << "Added new entity at row: " << newEntity->getrow() << ", col: " << newEntity->getcol() << std::endl;
 			std::cout << "Troops spawned" << std::endl;
 			p->addEntity(newEntity);
 		}

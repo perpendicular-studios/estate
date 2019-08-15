@@ -34,6 +34,10 @@ public:
 		return map[row][col];
 	}
 
+	bool isResource(int row, int col) {
+		return getTile(row, col) == 5 || getTile(row, col) == 6 || getTile(row, col) == 7;
+	}
+
 	Vector2f screenToIso(int x, int y) {
 
 		float col = (x / (tileWidth / 2) + y / (tileHeight / 2)) / 2;

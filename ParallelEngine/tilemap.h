@@ -26,15 +26,19 @@ public:
 	void render();
 	void update();
 
-	int getType(float row, float col) {
-		return collisionMap[(int)row][(int)col];
+	int getType(int row, int col) { 
+		return collisionMap[row][col];
 	}
 
-	int getTile(float row, float col) {
-		return map[(int)row][(int)col];
+	int getTile(int row, int col) {
+		return map[row][col];
 	}
 
-	Vector2f screenToIso(float x, float y) {
+	bool isResource(int row, int col) {
+		return getTile(row, col) == 5 || getTile(row, col) == 6 || getTile(row, col) == 7;
+	}
+
+	Vector2f screenToIso(int x, int y) {
 
 		float col = (x / (tileWidth / 2) + y / (tileHeight / 2)) / 2;
 		float row = (y / (tileHeight / 2) - x / (tileWidth / 2)) / 2;

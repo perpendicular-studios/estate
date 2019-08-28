@@ -42,8 +42,11 @@ bool Entity::setPosition(int row, int col) {
 		tm->setOccupyStatus(mapCoords.x, mapCoords.y, TileMap::BLOCKED);
 
 		Vector2f screenCoords = tm->isoToScreen(mapCoords.x, mapCoords.y);
+		std::cout << "Found a spot at x: " << screenCoords.x << ", y: " << screenCoords.y << std::endl;
 		x = screenCoords.x;
 		y = screenCoords.y;
+		this->col = mapCoords.x;
+		this->row = mapCoords.y;
 		return true;
 	}
 	else {

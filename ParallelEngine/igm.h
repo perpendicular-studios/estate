@@ -56,8 +56,8 @@ public:
 	Building* getPrevSelectedBuilding() { return prevSelectedBuilding; }
 
 	//setter methods
-	void setCol(int col) { currCol = col; }
-	void setRow(int row) { currRow = row; }
+	void setCol(float col) { currCol = col; }
+	void setRow(float row) { currRow = row; }
 private:
 	//fonts
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
@@ -96,6 +96,6 @@ private:
 	
 	//map stuff
 	TileMap* tm;
-	int currCol = 0, currRow = 0;
+	float currCol = 0, currRow = 0;
 };
 #endif

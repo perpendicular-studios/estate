@@ -21,8 +21,8 @@ public:
 	void drawEntityWindowBackground();
 	void drawEntityHP();
 
-	int getx() const { return x; }
-	int gety() const { return y; }
+	float getx() const { return x; }
+	float gety() const { return y; }
 
 	bool setPosition(int x_, int y_);
 	Vector2f findNearestUnoccupiedPos(int x_, int y_);
@@ -38,8 +38,16 @@ public:
 	void renderRadius();
 	void moveTo(int x, int y);
 
-	int getcol() const { return tm->screenToIso(x, y).x; }
-	int getrow() const { return tm->screenToIso(x, y).y; }
+	void setcol(float col_) { col = col_; }
+	void setrow(float row_) { row = row_; }
+
+	float getcol() const { 
+		return row;
+	}
+
+	float getrow() const {
+		return col;
+	}
 
 //	Vector2f getTileCenter();
 
@@ -57,7 +65,8 @@ public:
 	bool operator==(Entity* rhs);
 protected:
 	TileMap* tm;	
-	int x, y;
+	float x, y;
+	int row, col;
 	int xdest, ydest;
 	int tileCost; // amount of tiles that unit can move per turn
 	int food, gold, stone, wood;

@@ -4,6 +4,12 @@ Entity::Entity(TileMap* tm_, int tileCost_, int food_, int gold_, int stone_, in
 	xdest = ydest = 0;
 }
 
+bool Entity::operator==(Entity* rhs) {
+	if (rhs == NULL)
+		return false;
+	return (this->getrow() == rhs->getrow() && this->getcol() == rhs->getcol());
+}
+
 Entity::~Entity() {
 }
 
@@ -27,16 +33,26 @@ void Entity::drawEntityWindowBackground() {
 
 // Input: row, col
 // TODO: Decide what to do when tile isn't found
-bool Entity::setPosition(int x_, int y_) {
-	Vector2f mapCoords = findNearestUnoccupiedPos(x_, y_);
-	std::cout << "Found a spot at row: " << mapCoords.x << ", col: " << mapCoords.y << std::endl;
-	tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
-	tm->setOccupyStatus(mapCoords.x, mapCoords.y, TileMap::BLOCKED);
+bool Entity::setPosition(int row, int col) {
+	// building
+	Vector2f mapCoords = findNearestUnoccupiedPos(row, col);
+	if (mapCoords.x != -1) {
+		std::cout << "Found a spot at row: " << mapCoords.x << ", col: " << mapCoords.y << std::endl;
+		tm->setOccupyStatus(getrow(), getcol(), TileMap::NORMAL);
+		tm->setOccupyStatus(mapCoords.x, mapCoords.y, TileMap::BLOCKED);
 
-	Vector2f screenCoords = tm->isoToScreen(mapCoords.x, mapCoords.y);
-	x = screenCoords.x;
-	y = screenCoords.y;
-	return true;
+		Vector2f screenCoords = tm->isoToScreen(mapCoords.x, mapCoords.y);
+		std::cout << "Found a spot at x: " << screenCoords.x << ", y: " << screenCoords.y << std::endl;
+		x = screenCoords.x;
+		y = screenCoords.y;
+		this->col = mapCoords.x;
+		this->row = mapCoords.y;
+		return true;
+	}
+	else {
+		std::cout << "Unable to find a spot" << std::endl;
+		return false;
+	}
 }
 
 // BFS
@@ -45,16 +61,18 @@ bool Entity::setPosition(int x_, int y_) {
 // TODO:: Do something when nearest unoccupied tile isn't found
 // Intentional bug turned feature incoming
 Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
+	int iterNum = 1;
 	std::queue<Vector2f> q;
 	Vector2f currPos = Vector2f(x_, y_);
 	q.push(currPos);
 	while (!q.empty()) {
 		currPos = q.front();
 		q.pop();
+		iterNum++;
 		if (currPos.x < 0 && currPos.y < 0 && currPos.x >= tm->getNumRows() && currPos.y >= tm->getNumCols()) {
 			continue;
 		}
-		if (tm->checkOccupied(currPos.x, currPos.y) || tm->getType(currPos.x, currPos.y) == TileMap::BLOCKED) { // getTile needs to be changed to getType
+		if (!tm->isResource(currPos.x, currPos.y) && tm->checkOccupied(currPos.x, currPos.y) || tm->getType(currPos.x, currPos.y) == TileMap::BLOCKED) { // getTile needs to be changed to getType
 			q.push(Vector2f(currPos.x, currPos.y + 1));
 			q.push(Vector2f(currPos.x + 1, currPos.y + 1));
 			q.push(Vector2f(currPos.x + 1, currPos.y));
@@ -67,7 +85,9 @@ Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
 		else {
 			return currPos;
 		}
-
+		if (iterNum >= 250) { // fail safe iteration number
+			return Vector2f(-1, -1); // Cannot find appropriate position
+		}
 	}
 }
 
@@ -121,6 +141,8 @@ void Entity::renderRadius() {
 
 }
 
-void Entity::moveTo(int x, int y) {
-
+// input: row, col
+void Entity::moveTo(int row, int col) {
+	// TODO: Animation
+	setPosition(row, col);
 }

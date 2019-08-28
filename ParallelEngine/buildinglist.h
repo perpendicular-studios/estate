@@ -39,22 +39,22 @@ public:
 	void setCurrBuilding(Building* b) { currBuilding = b; }
 	int getSize() { return bl.size(); }
 
-	void setx(int x_) { x = x_; }
-	int getx() { return x; }
-	void sety(int y_) { y = y_; }
-	int gety() { return y; }
-	void setCol(int col_) { col = col_; }
-	int getCol() { return col; }
-	void setRow(int row_) { row = row_; }
-	int getRow() { return row; }
+	void setx(float x_) { x = x_; }
+	float getx() { return x; }
+	void sety(float y_) { y = y_; }
+	float gety() { return y; }
+	void setCol(float col_) { col = col_; }
+	float getCol() { return col; }
+	void setRow(float row_) { row = row_; }
+	float getRow() { return row; }
 	Building* getCurrBuilding() { return currBuilding; }
 
 private:
 	std::shared_ptr<TileMap> tm;
 	std::vector<Building*> bl; 
 	bool isPlacingTrue = false;
-	int x, y;
-	int col, row;
+	float x, y;
+	float col, row;
 	int numID = 0;
 	Building* currBuilding;
 };

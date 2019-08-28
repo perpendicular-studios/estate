@@ -97,7 +97,15 @@ void Player::renderEntities() {
 }
 
 void Player::addEntity(Entity* e) {
-	std::cout << "Added entity at row: " << e->getrow() << ", col: " << e->getcol() << std::endl;
+	std::cout << "Added new entity at row: " << e->getrow() << ", col: " << e->getcol() << std::endl;
 	std::pair<int, int> coords(e->getrow(), e->getcol());
 	entities.insert({ coords, e });
+}
+
+void Player::updateEntityPosition(Entity* e, int row, int col) {
+	std::cout << "Entity now at: " << e->getrow() << ", col: " << e->getcol() << std::endl;
+	std::pair<int, int> pair(e->getrow(), e->getcol());
+	entities.erase(pair);
+	e->moveTo(row, col);
+	addEntity(e);
 }

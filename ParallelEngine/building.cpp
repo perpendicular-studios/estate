@@ -81,7 +81,6 @@ void Building::produceUnits() {
 			p->addEntity(newEntity);
 		}
 		else {
-			std::cout << "Could not spawn troop" << std::endl;
 			delete newEntity;
 		}
 		startTime = al_get_timer_count(unitQueueTimer);

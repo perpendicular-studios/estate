@@ -1,17 +1,27 @@
 #include "units.h"
 
 //peasant
-Peasant::Peasant(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y) : 
-	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("peasant"), x, y) {
+Peasant::Peasant(TileMap* tm, Player* player_, int tileCost, int food, int gold, int stone, int wood, int x, int y) : 
+	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("peasant"), x, y), player(player_) {
 	entityTypeString = "Peasant";
 	currHp = hp = 50;
+	harvestCooldown = 1.0;
 }
 
 Entity* Peasant::clone() const {
 	return new Peasant(*this);
 }
 
-void Peasant::update() {}
+void Peasant::update() {
+	time += 1.0;
+	// add items to inventory if the peasant is on a resource tile
+	if (time / 60 >= harvestCooldown) {
+		if (tm->isResource(row, col)) {
+			player->addTileToInventory(tm->getTile(row, col));
+		}
+		time = 0;
+	}
+}
 
 void Peasant::render() {
 	al_draw_bitmap(img, x, y, 0);

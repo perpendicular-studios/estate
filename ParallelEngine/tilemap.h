@@ -35,7 +35,7 @@ public:
 	}
 
 	bool isResource(int row, int col) {
-		return getTile(row, col) == 5 || getTile(row, col) == 6 || getTile(row, col) == 7;
+		return getTile(row, col) >= TileMap::NUM_TILES;
 	}
 
 	Vector2f screenToIso(int x, int y) {

@@ -1,14 +1,5 @@
 #include "player.h"
 
-// add resource items from entities standing on resource tiles on the map.
-void Player::updateInventory() {
-	for (std::pair<std::pair<int, int>, Entity*> e : entities) {
-		const GeneralResource* tileResource = (const GeneralResource*)allResource[e.second->getTileID()];
-		inventory->addGeneralResource(tileResource);
-	}
-}
-
-//temporary! remove when entity movement is implemented
 void Player::addTileToInventory(int tileID) {
 	const Resource* tileResource = (tileID >= TileMap::NUM_TILES) ? allResource[tileID - TileMap::NUM_TILES] : NULL;
 	if (tileResource != NULL) {
@@ -94,6 +85,12 @@ void Player::renderEntities() {
 		for (auto& e : entities) {
 			e.second->render();
 		}
+}
+
+void Player::update() {
+	for (auto& e : entities) {
+		e.second->update();
+	}
 }
 
 void Player::addEntity(Entity* e) {

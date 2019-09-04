@@ -13,7 +13,6 @@ class Player {
 public:
 	Player() { inventory = new Inventory(0,0,0,0); }
 
-	void updateInventory(); //turn by turn update
 	bool buyBuilding(Building* building);
 	bool buyEntity(Entity* entity);
 
@@ -28,6 +27,7 @@ public:
 	Entity* entityInTile(int row, int col);
 	void renderEntities();
 	void addEntity(Entity* e);
+	void update();
 	void updateEntityPosition(Entity* e, int row, int col);
 private:
 	std::map<std::pair<int, int>, Entity*> entities;

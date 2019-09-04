@@ -45,7 +45,7 @@ bool BuildingList::checkPlacingBounds(Building* b) {
 	else {
 		for (int row_ = b->getRow(); row_ >= b->getRow() - b->getRowHeight(); row_--) {
 			for (int col_ = b->getCol(); col_ >= b->getCol() - b->getColWidth(); col_--) {
-				if (tm->checkOccupied(row_, col_) || tm->getType(row_, col_) == TileMap::BLOCKED) {
+				if (tm->checkOccupied(row_, col_) || tm->getType(row_, col_) == TileMap::BLOCKED || tm->isResource(row_, col_)) {
 					return true;
 				}
 			}

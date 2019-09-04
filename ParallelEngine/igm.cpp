@@ -7,7 +7,7 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	sampleCastle = new Castle(-1);
 	sampleTC = new Towncenter(-1);
 	sampleMarket = new Market(-1);
-	samplePeasant = new Peasant(tm, 20, 0, 0, 0, 0, 0, 0);
+	samplePeasant = new Peasant(tm, player, 20, 0, 0, 0, 0, 0, 0);
 	sampleKnight = new Knight(tm, 20, 0, 0, 0, 0, 0, 0);
 	newBuilding = sampleCastle;
 
@@ -289,12 +289,6 @@ void IGM::iterateButtons(int x, int y) {
 	}
 }
 
-void IGM::iterateResourceTiles(int x, int y) {
-	if (!isInWindowBounds(x, y)) {
-		player->addTileToInventory(tm->getTile(currRow, currCol));
-	}
-}
-
 void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y){ 
 	prevState = currState;
 	
@@ -307,7 +301,6 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y){
 		iterateBuildings(x, y);
 		iterateEntities(x, y);
 		iterateButtons(x, y);
-		iterateResourceTiles(x, y);
 
 		//building checks
 		buildingChecks();

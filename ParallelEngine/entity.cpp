@@ -45,8 +45,8 @@ bool Entity::setPosition(int row, int col) {
 		std::cout << "Found a spot at x: " << screenCoords.x << ", y: " << screenCoords.y << std::endl;
 		x = screenCoords.x;
 		y = screenCoords.y;
-		this->col = mapCoords.x;
-		this->row = mapCoords.y;
+		this->col = mapCoords.y;
+		this->row = mapCoords.x;
 		return true;
 	}
 	else {

@@ -91,6 +91,7 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 
 	tm->update();
 	cam->update();
+	player->update();
 	menu->update(input.leftClickDown(), input.keyClickDown(), input.keyPressed(), mouseX, mouseY);
 
 	input.update(ks, ms);

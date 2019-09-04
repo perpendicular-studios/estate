@@ -38,15 +38,12 @@ public:
 	void renderRadius();
 	void moveTo(int x, int y);
 
-	void setcol(float col_) { col = col_; }
-	void setrow(float row_) { row = row_; }
-
 	float getcol() const { 
-		return row;
+		return col;
 	}
 
 	float getrow() const {
-		return col;
+		return row;
 	}
 
 //	Vector2f getTileCenter();

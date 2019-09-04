@@ -221,6 +221,7 @@
     <ClCompile Include="units.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\europe.ptm" />
     <None Include="data\tilemap.ptm" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -28,12 +28,12 @@ void TileMap::loadResourceSet(std::vector<const Resource*> allResources) {
 }
 
 void TileMap::loadTileMap(std::string path) {
+	std::cout << "Loading Tilemap..." << std::endl;
 	/*
 	<width> 
 	<height>
 	<graphic map>
 	<collision map>
-	<depth map>
 	*/
 
 	std::ifstream file(path);
@@ -46,6 +46,9 @@ void TileMap::loadTileMap(std::string path) {
 
 		width = cols * tileWidth;
 		height = rows * tileHeight;
+
+		std::cout << "Tilemap is " << cols << " x " << rows << "." << std::endl;
+		std::cout << "Tilemap is " << width << " pixels wide and " << height << " pixels tall." << std::endl;
 
 		/* Resize all the maps to the proper dimensions of the map */
 		map.resize(rows);
@@ -76,6 +79,7 @@ void TileMap::loadTileMap(std::string path) {
 			}
 		}
 	}
+	std::cout << "Finished Loading Tilemap!" << std::endl;
 }
 
 bool TileMap::checkOccupied(int row, int col) {

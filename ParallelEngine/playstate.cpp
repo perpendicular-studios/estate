@@ -6,9 +6,9 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm = std::shared_ptr<TileMap>(new TileMap(64, 32));
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
 	tm->loadResourceSet(std::vector<const Resource*>(allResource, allResource + sizeof(allResource) / sizeof(allResource[0])));
-	tm->loadTileMap("data/tilemap.ptm");
-	//tm->loadTileMap("data/europe.ptm");
-	cam = std::shared_ptr<Camera>(new Camera(500, 500, tm)); //100, 500
+	//tm->loadTileMap("data/tilemap.ptm");
+	tm->loadTileMap("data/europe.ptm");
+	cam = std::shared_ptr<Camera>(new Camera(1000, 1000, tm)); //100, 500
 	bl = new BuildingList(tm);
 	player = new Player();
 	menu = new IGM(player, bl, tm.get());
@@ -16,7 +16,7 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 
 void PlayState::render() {
 	al_clear_to_color(al_map_rgba_f(0, 0, 0, 1));
-	tm->render();
+	tm->render(cam->getx(), cam->gety());
 	player->renderEntities();
 	bl->render();
 	menu->isoRender();

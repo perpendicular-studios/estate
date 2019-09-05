@@ -7,6 +7,7 @@
 #include <iostream>
 #include "vec2.h"
 #include "resources.h"
+#include "var.h"
 
 class TileMap {
 public:
@@ -23,7 +24,7 @@ public:
 	void loadTileMap(std::string path);
 	void loadTileSet(ALLEGRO_BITMAP * tileSheet);
 	void loadResourceSet(std::vector<const Resource*> allResources);
-	void render();
+	void render(int currX, int currY);
 	void update();
 
 	int getType(int row, int col) { 

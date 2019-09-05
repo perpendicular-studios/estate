@@ -92,21 +92,32 @@ void TileMap::setOccupyStatus(int row, int col, int status) {
 
 void TileMap::update() {}
 
-void TileMap::render() {
+void TileMap::render(int currX, int currY) {
 	// render tilemap
-	for (int row = 0; row < rows; row++) {
-		for (int col = 0; col < cols; col++) {
+	
+	Vector2f isoCoord = screenToIso(currX + Var::WIDTH /2, currY + Var::HEIGHT /2);
+	
+	int rowStart = isoCoord.y - 25;
+	int colStart = isoCoord.x - 25;
+	if (rowStart < 0) { rowStart = 0; }
+	if (colStart < 0) { colStart = 0; }
+	isoCoord.x += 25;
+	isoCoord.y += 25;
+	if (isoCoord.y > rows) { isoCoord.y = rows; }
+	if (isoCoord.x > cols) { isoCoord.x = cols; }
+	for (int row = rowStart; row < isoCoord.y; row++) {
+		for (int col = colStart; col < isoCoord.x; col++) {
 			int rc = map[row][col];
 			int r = rc / cols;
 			int c = rc % cols; 
 
 			Vector2f screenCoord = isoToScreen(row, col);
-
+			
 			// draws the base tile
 			if (rc < TileMap::NUM_TILES) {
 				al_draw_bitmap(tileSet[r][c].get(), screenCoord.x, screenCoord.y, 0);
 			}
-			else {
+			else { 
 				int resourceIndex = rc - TileMap::NUM_TILES;
 			    al_draw_bitmap(resourceSet[resourceIndex].get(), screenCoord.x, screenCoord.y, 0);
 			}

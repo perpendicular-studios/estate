@@ -232,6 +232,7 @@
     <Image Include="images\hover.png" />
     <Image Include="images\knight.png" />
     <Image Include="images\market.png" />
+    <Image Include="images\merchant.png" />
     <Image Include="images\miscbg.png" />
     <Image Include="images\peasant.png" />
     <Image Include="images\player.png" />

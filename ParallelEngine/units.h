@@ -25,4 +25,12 @@ public:
 	void drawEntityWindow() override;
 };
 
+class Merchant : public Entity {
+public:
+	Merchant(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y);
+	Entity* clone() const override;
+	void update() override;
+	void render() override;
+	void drawEntityWindow() override;
+};
 #endif

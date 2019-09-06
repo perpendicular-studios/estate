@@ -21,7 +21,7 @@ class IGM {
 public:
 	IGM(Player * player_, BuildingList* bl, TileMap * tm_);
 	// update states
-	void update(bool clicked, bool keyClicked, std::string key, int x, int y);
+	void update(bool leftClicked, bool rightClicked, bool keyClicked, std::string key, int x, int y);
 	// render states 
 	void staticRender();
 	void isoRender();
@@ -51,6 +51,9 @@ public:
 	void iterateButtons(int x, int y);
 	void iterateResourceTiles(int x, int y);
 
+	//entity movement
+	void moveEntity(int x, int y);
+
 	// getter methods
 	Building* getBuilding() { return newBuilding; }
 	Building* getPrevSelectedBuilding() { return prevSelectedBuilding; }
@@ -75,7 +78,7 @@ private:
 	ButtonManager* bm, * buildingbm;
 	MenuButton *flag, *production, *build, *exit, *exit1, *misc, *rightExit;
 	BuildButton *castle, *towncenter, *market, *newBuildingPlaceHolder;
-	UnitButton* peasant, *knight;
+	UnitButton* peasant, *knight, *merchant;
 	UnitQueueButton* zero, * one, * two, * three, * four, * five, * six, * seven, * eight, * nine, * ten;
 	std::vector<UnitQueueButton*> buttonQueue;
 	int buttonIndex;
@@ -93,6 +96,7 @@ private:
 	//template units
 	Peasant* samplePeasant;
 	Knight* sampleKnight;
+	Merchant* sampleMerchant;
 	
 	//map stuff
 	TileMap* tm;

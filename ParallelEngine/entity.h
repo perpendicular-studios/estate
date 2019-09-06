@@ -53,6 +53,12 @@ public:
 	int getStoneCost() const { return stone; }
 	int getWoodCost() const { return wood; }
 	int getTileCost() const { return tileCost; }
+	int getAtk() const { return atk; }
+	int getDef() const { return def; }
+	int getCurrHp() { return currHp; }
+	
+	void loseHp(int hp_);
+
 	std::string getEntityTypeString() const { return entityTypeString; }
 
 	std::vector<Resource*> getRequiredItems() { return requiredItems; }
@@ -67,7 +73,7 @@ protected:
 	int xdest, ydest;
 	int tileCost; // amount of tiles that unit can move per turn
 	int food, gold, stone, wood;
-	int currHp, hp;
+	int currHp, maxHp, atk, def;
 	std::string entityTypeString;
 	std::vector<Resource*> requiredItems;
 	ALLEGRO_BITMAP* img;

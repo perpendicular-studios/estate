@@ -4,8 +4,10 @@
 Peasant::Peasant(TileMap* tm, Player* player_, int tileCost, int food, int gold, int stone, int wood, int x, int y) : 
 	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("peasant"), x, y), player(player_) {
 	entityTypeString = "Peasant";
-	currHp = hp = 50;
+	currHp = maxHp = 50;
 	harvestCooldown = 1.0;
+	atk = 5;
+	def = 1;
 }
 
 Entity* Peasant::clone() const {
@@ -35,7 +37,9 @@ void Peasant::drawEntityWindow() {
 Knight::Knight(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y) :
 	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("knight"), x, y) {
 	entityTypeString = "Knight";
-	currHp = hp = 100;
+	currHp = maxHp = 100;
+	atk = 15;
+	def = 5;
 }
 
 Entity* Knight::clone() const {
@@ -49,5 +53,28 @@ void Knight::render() {
 }
 
 void Knight::drawEntityWindow() {
+	drawEntityWindowBackground();
+}
+
+//merchant
+Merchant::Merchant(TileMap* tm, int tileCost, int food, int gold, int stone, int wood, int x, int y) :
+	Entity(tm, tileCost, food, gold, stone, wood, AssetLoader::manager->getImage("merchant"), x, y) {
+	entityTypeString = "Merchant";
+	currHp = maxHp = 50;
+	atk = 5;
+	def = 1;
+}
+
+Entity* Merchant::clone() const {
+	return new Merchant(*this);
+}
+
+void Merchant::update() {}
+
+void Merchant::render() {
+	al_draw_bitmap(img, x, y, 0);
+}
+
+void Merchant::drawEntityWindow() {
 	drawEntityWindowBackground();
 }

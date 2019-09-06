@@ -292,6 +292,9 @@
     <Image Include="images\market.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="images\merchant.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="basicfont.ttf">

@@ -9,6 +9,7 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	sampleMarket = new Market(-1);
 	samplePeasant = new Peasant(tm, player, 20, 0, 0, 0, 0, 0, 0);
 	sampleKnight = new Knight(tm, 20, 0, 0, 0, 0, 0, 0);
+	sampleMerchant = new Merchant(tm, 20, 0, 0, 0, 0, 0, 0);
 	newBuilding = sampleCastle;
 
 	bm = new ButtonManager;
@@ -26,7 +27,8 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 
 	peasant = new UnitButton(Var::WIDTH - 290, 325, Var::WIDTH - 240, 375, AssetLoader::manager->getImage("basicbutton"), false, samplePeasant, player, this);
 	knight = new UnitButton(Var::WIDTH - 290, 325, Var::WIDTH - 240, 375, AssetLoader::manager->getImage("basicbutton"), false, sampleKnight, player, this);
-
+	merchant = new UnitButton(Var::WIDTH - 290, 325, Var::WIDTH - 240, 375, AssetLoader::manager->getImage("basicbutton"), false, sampleMerchant, player, this);
+	
 	bm->addButton(build);
 	bm->addButton(flag);
 	bm->addButton(production);
@@ -39,6 +41,7 @@ IGM::IGM(Player* player_, BuildingList* bl_, TileMap* tm_) : player(player_), bl
 	bm->addButton(rightExit);
 	bm->addButton(peasant);
 	bm->addButton(knight);
+	bm->addButton(merchant);
 
 	//all unit queue button stuff below
 	int leftEdge = Var::WIDTH - 290;					//variables for easier editing 
@@ -141,6 +144,7 @@ void IGM::buildingInfoBackground() {
 	rightExit->setVisible(true);
 	if (selectedBuilding->getBuildingType() == TOWNCENTER) peasant->setVisible(true);
 	if (selectedBuilding->getBuildingType() == CASTLE) knight->setVisible(true);
+	if (selectedBuilding->getBuildingType() == MARKET) merchant->setVisible(true);
 	for (int i = 0; i < selectedBuilding->getUnitQueue().size(); i++) {
 		buttonQueue[i]->setVisible(true);
 		buttonQueue[i]->setEntity(selectedBuilding->getUnitQueue()[i]);
@@ -251,23 +255,20 @@ void IGM::iterateBuildings(int x, int y) {
 }
 
 void IGM::iterateEntities(int x, int y) {
+	//check to see if click is on a window
 	if (!isInWindowBounds(x, y)) {
+		//check if entity is clicked 
 		Entity* clickEntity = player->entityInTile(currRow, currCol);
-		if (selectedEntity != NULL && clickEntity == NULL) {
-			player->updateEntityPosition(selectedEntity, currRow, currCol);
-			currState = DEFAULTSTATE;
-		}
+		//if entity is clicked
 		if (clickEntity != NULL) {
-			if (clickEntity == selectedEntity) {
-				selectedEntity = NULL; // deselect
-				currState = DEFAULTSTATE;
-			}
-			else {
-				selectedEntity = clickEntity; // select
-				currState = ENTITYINFOSTATE;
-			}
-		} else {
-				selectedEntity = NULL;
+			selectedEntity = clickEntity; // select
+			currState = ENTITYINFOSTATE;
+			//std::cout << "Select \n";
+		}
+		else if (selectedEntity != NULL) {
+			selectedEntity = NULL;		  // deselect
+			currState = DEFAULTSTATE;
+			//std::cout << "DeSelect \n";
 		}
 	}
 }
@@ -289,11 +290,32 @@ void IGM::iterateButtons(int x, int y) {
 	}
 }
 
-void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y){ 
+void IGM::moveEntity(int x, int y) {
+	if (!isInWindowBounds(x, y)) {
+		Entity* clickEntity = player->entityInTile(currRow, currCol);
+		//selected unit and right click open spot to move unit
+		if (selectedEntity != NULL && clickEntity == NULL) {
+			player->updateEntityPosition(selectedEntity, currRow, currCol);
+		}
+		//selected unit and right click other unit to attack other unit
+		else if (selectedEntity != NULL && clickEntity != selectedEntity) {
+			int dmg = selectedEntity->getAtk() - clickEntity->getDef();
+			std::cout << "Attack!" << " You dealt " << dmg << " damage! \n" ;
+			clickEntity->loseHp(dmg);
+			//if unit dies
+			if (clickEntity->getCurrHp() <= 0) { 
+				tm->setOccupyStatus(clickEntity->getrow(), clickEntity->getcol(), TileMap::NORMAL);
+				player->removeEntity(clickEntity);
+			}
+		}
+	}
+}
+
+void IGM::update(bool leftClicked, bool rightClicked, bool keyClicked, std::string key, int x, int y){ 
 	prevState = currState;
 	
 	//mouse inputs for left click
-	if (clicked) {
+	if (leftClicked) {
 		//edge case checking for beginning
 		edgeCaseStates(x, y);
 
@@ -304,6 +326,11 @@ void IGM::update(bool clicked, bool keyClicked, std::string key, int x, int y){
 
 		//building checks
 		buildingChecks();
+	}
+
+	//mouse inputs for right click
+	if (rightClicked) {
+		moveEntity(x, y);
 	}
 
 	//keyboard inputs

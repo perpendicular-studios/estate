@@ -27,6 +27,7 @@ public:
 	Entity* entityInTile(int row, int col);
 	void renderEntities();
 	void addEntity(Entity* e);
+	void removeEntity(Entity* e);
 	void update();
 	void updateEntityPosition(Entity* e, int row, int col);
 private:

@@ -6,8 +6,8 @@ PlayState::PlayState(GSM * gsm) : State(gsm) {
 	tm = std::shared_ptr<TileMap>(new TileMap(64, 32));
 	tm->loadTileSet(AssetLoader::manager->getImage("tileset"));
 	tm->loadResourceSet(std::vector<const Resource*>(allResource, allResource + sizeof(allResource) / sizeof(allResource[0])));
-	//tm->loadTileMap("data/tilemap.ptm");
-	tm->loadTileMap("data/europe.ptm");
+	tm->loadTileMap("data/tilemap.ptm");
+	//tm->loadTileMap("data/europe.ptm");
 	cam = std::shared_ptr<Camera>(new Camera(1000, 1000, tm)); //100, 500
 	bl = new BuildingList(tm);
 	player = new Player();
@@ -93,7 +93,7 @@ void PlayState::update(ALLEGRO_KEYBOARD_STATE & ks, ALLEGRO_MOUSE_STATE & ms) {
 	tm->update();
 	cam->update();
 	player->update();
-	menu->update(input.leftClickDown(), input.keyClickDown(), input.keyPressed(), mouseX, mouseY);
+	menu->update(input.leftClickDown(), input.rightClickDown(), input.keyClickDown(), input.keyPressed(), mouseX, mouseY);
 
 	input.update(ks, ms);
 

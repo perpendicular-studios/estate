@@ -18,6 +18,7 @@ AssetLoader::AssetLoader() {
 	manager->loadImage("images/miscbg.png", "miscbg", false);
 	manager->loadImage("images/resources_menu.png", "resources_menu", false);
 	manager->loadImage("images/peasant.png", "peasant", false);
+	manager->loadImage("images/merchant.png", "merchant", false);
 	manager->loadImage("images/knight.png","knight", false);
 	manager->loadImage("images/popup.png", "popup", false);
 

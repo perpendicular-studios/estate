@@ -99,6 +99,13 @@ void Player::addEntity(Entity* e) {
 	entities.insert({ coords, e });
 }
 
+void Player::removeEntity(Entity* e) {
+	std::cout << e->getEntityTypeString() << " died \n";
+	std::pair<int, int> coords(e->getrow(), e->getcol());
+	entities.erase(entities.find({ coords }));
+	delete e;
+}
+
 void Player::updateEntityPosition(Entity* e, int row, int col) {
 	std::cout << "Entity now at: " << e->getrow() << ", col: " << e->getcol() << std::endl;
 	std::pair<int, int> pair(e->getrow(), e->getcol());

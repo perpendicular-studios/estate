@@ -11,16 +11,21 @@ bool Entity::operator==(Entity* rhs) {
 }
 
 Entity::~Entity() {
+
+}
+
+void Entity::loseHp(int hp_) {
+	currHp -= hp_;
 }
 
 void Entity::drawEntityHP() {
-	float percentage = ((float)currHp / hp);
+	float percentage = ((float)currHp / maxHp);
 	percentage = percentage * 75;
 	al_draw_filled_rectangle(Var::WIDTH - 190, 255, Var::WIDTH - 95, 270, al_map_rgb(0, 0, 0));
 	al_draw_filled_rectangle(Var::WIDTH - 185, 260, Var::WIDTH - 175 + percentage, 265, al_map_rgb(0, 255, 0));
 
 	char buffer1[100];
-	snprintf(buffer1, 33, "%d%s%d", currHp, "/", hp);
+	snprintf(buffer1, 33, "%d%s%d", currHp, "/", maxHp);
 	const char* fractionHp = buffer1;
 	al_draw_text(basic_font15, al_map_rgb(0, 0, 0), Var::WIDTH - 90, 255, 0, fractionHp);
 }

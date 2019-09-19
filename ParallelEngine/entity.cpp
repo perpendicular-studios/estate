@@ -18,6 +18,13 @@ void Entity::loseHp(int hp_) {
 	currHp -= hp_;
 }
 
+void Entity::drawHP() {
+	float percentage = ((float)currHp / maxHp);
+	percentage = percentage * 36;
+	al_draw_filled_rectangle(x + tm->getTileWidth() / 4, y - 6, x + tm->getTileWidth() / 4 + 36, y - 2, al_map_rgb(0, 0, 0));
+	al_draw_filled_rectangle(x + tm->getTileWidth() / 4 + 2, y - 5, x + tm->getTileWidth() / 4 + percentage - 2, y - 3, al_map_rgb(0, 255, 0));
+}
+
 void Entity::drawEntityHP() {
 	float percentage = ((float)currHp / maxHp);
 	percentage = percentage * 75;

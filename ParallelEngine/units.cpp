@@ -26,7 +26,8 @@ void Peasant::update() {
 }
 
 void Peasant::render() {
-	al_draw_bitmap(img, x, y, 0);
+	al_draw_bitmap(img, x + tm->getTileWidth() / 3, y, 0);
+	drawHP();
 }
 
 void Peasant::drawEntityWindow() {
@@ -50,6 +51,7 @@ void Knight::update() {}
 
 void Knight::render() {
 	al_draw_bitmap(img, x, y, 0);
+	drawHP();
 }
 
 void Knight::drawEntityWindow() {
@@ -73,6 +75,7 @@ void Merchant::update() {}
 
 void Merchant::render() {
 	al_draw_bitmap(img, x, y, 0);
+	drawHP();
 }
 
 void Merchant::drawEntityWindow() {

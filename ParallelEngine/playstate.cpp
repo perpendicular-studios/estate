@@ -36,7 +36,7 @@ void PlayState::render() {
 	menu->setCol(mapCoord.x);
 	menu->setRow(mapCoord.y);
 
-	selectedTile = tm->getTile(mapCoord.y, mapCoord.x);
+	hoverTile = tm->getTile(mapCoord.y, mapCoord.x);
 	hoverEntity = player->entityInTile(mapCoord.y, mapCoord.x);
 
 	//hover
@@ -53,8 +53,6 @@ void PlayState::render() {
 
 	if (bl->getPlacing() == true) { bl->placingBuilding(menu->getBuilding(), placingCoordX, placingCoordY); }
 	
-	if (selectedEntity) selectedEntity->renderRadius();
-	
 	//for static display images add here
 	al_identity_transform(&trans);
 	al_use_transform(&trans);
@@ -62,8 +60,8 @@ void PlayState::render() {
 	menu->staticRender();
 
 	// resource hover (tile id is always >= NUM_TILES if tile is a resource)
-	if (selectedTile >= TileMap::NUM_TILES) {
-		int resourceIndex = selectedTile - TileMap::NUM_TILES;
+	if (hoverTile >= TileMap::NUM_TILES) {
+		int resourceIndex = hoverTile - TileMap::NUM_TILES;
 		const Resource* selectedResource = allResource[resourceIndex];
 		al_draw_bitmap(AssetLoader::manager->getImage("popup"), Var::WIDTH / 4 - 75, 0, 0);
 		std::string resourceName = selectedResource->getName();

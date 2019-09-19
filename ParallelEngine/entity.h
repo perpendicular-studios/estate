@@ -36,7 +36,6 @@ public:
 		return tm->getTile(getrow(), getcol());
 	}
 
-	void renderRadius();
 	void moveTo(int x, int y);
 
 	float getcol() const { 

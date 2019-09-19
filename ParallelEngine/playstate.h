@@ -24,7 +24,7 @@ private:
 	IGM* menu;
 	Player* player;
 	Entity* selectedEntity, *hoverEntity;
-	int selectedTile;
+	int hoverTile;
 	ALLEGRO_FONT* basic_font20 = al_load_font("basicfont.ttf", 20, 0);
 	ALLEGRO_FONT* basic_font12 = al_load_font("basicfont.ttf", 12, 0);
 

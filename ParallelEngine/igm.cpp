@@ -299,9 +299,9 @@ void IGM::moveEntity(int x, int y) {
 		}
 		//selected unit and right click other unit to attack other unit
 		else if (selectedEntity != NULL && clickEntity != selectedEntity) {
-			int dmg = selectedEntity->getAtk() - clickEntity->getDef();
-			std::cout << "Attack!" << " You dealt " << dmg << " damage! \n" ;
-			clickEntity->loseHp(dmg);
+			std::cout << "Attack!" << " You dealt " << selectedEntity->getAtk() << " damage, defender dealt: " << clickEntity->getDef() << "damage. " << std::endl;
+			clickEntity->loseHp(selectedEntity->getAtk());
+			selectedEntity->loseHp(clickEntity->getDef());
 			//if unit dies
 			if (clickEntity->getCurrHp() <= 0) { 
 				tm->setOccupyStatus(clickEntity->getrow(), clickEntity->getcol(), TileMap::NORMAL);

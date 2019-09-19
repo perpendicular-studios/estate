@@ -18,6 +18,13 @@ void Entity::loseHp(int hp_) {
 	currHp -= hp_;
 }
 
+void Entity::drawHP() {
+	float percentage = ((float)currHp / maxHp);
+	percentage = percentage * 36;
+	al_draw_filled_rectangle(x + tm->getTileWidth() / 4, y - 6, x + tm->getTileWidth() / 4 + 36, y - 2, al_map_rgb(0, 0, 0));
+	al_draw_filled_rectangle(x + tm->getTileWidth() / 4 + 2, y - 5, x + tm->getTileWidth() / 4 + percentage - 2, y - 3, al_map_rgb(0, 255, 0));
+}
+
 void Entity::drawEntityHP() {
 	float percentage = ((float)currHp / maxHp);
 	percentage = percentage * 75;
@@ -94,56 +101,6 @@ Vector2f Entity::findNearestUnoccupiedPos(int x_, int y_) {
 			return Vector2f(-1, -1); // Cannot find appropriate position
 		}
 	}
-}
-
-// TODO: Not working
-// Goal: Return the center x and y of the tile
-//Vector2f Entity::getTileCenter() {
-//	Vector2f rowCol = tm->screenToIso(x, y);
-//	return tm->isoToScreen(rowCol.x, rowCol.y);
-//}
-
-void Entity::renderRadius() {
-	// render radius of movement
-	int topBound, bottomBound, leftBound, rightBound;
-	topBound = bottomBound = leftBound = rightBound = tileCost;
-	
-	// start from far extreme of bound, decrement going back to center, if one tile is found that is not blocked, stop. 
-
-	// top
-	for (int i = tileCost; i > 0; i--) {
-		if (tm->getType(getrow() - i, getcol()) == TileMap::BLOCKED) topBound--;
-		if (tm->getType(getrow() - i, getcol()) == TileMap::NORMAL) break;
-	}
-
-	// bottom
-	for (int i = tileCost; i > 0; i--) {
-		if (tm->getType(getrow() + i, getcol()) == TileMap::BLOCKED) bottomBound--;
-		if (tm->getType(getrow() + i, getcol()) == TileMap::NORMAL) break;
-	}
-
-
-	// right
-	for (int i = tileCost; i > 0; i--) {
-		if (tm->getType(getrow(), getcol() + i) == TileMap::BLOCKED) rightBound--;
-		if (tm->getType(getrow(), getcol() + i) == TileMap::NORMAL) break;
-	}
-
-
-	// left
-	for (int i = tileCost; i > 0; i--) {
-		if (tm->getType(getrow(), getcol() - i) == TileMap::BLOCKED) leftBound--;
-		if (tm->getType(getrow(), getcol() - i) == TileMap::NORMAL) break;
-	}
-
-	// render bounds
-	for (int row = topBound; row < bottomBound; row++) {
-		for (int col = leftBound; col < rightBound; col++) {
-			Vector2f screenCoord = tm->isoToScreen(row, col);
-			al_draw_bitmap(AssetLoader::manager->getImage("radius"), screenCoord.x, screenCoord.y, 0);
-		}
-	}
-
 }
 
 // input: row, col

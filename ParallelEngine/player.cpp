@@ -74,7 +74,6 @@ bool Player::buyEntity(Entity* entity) {
 Entity* Player::entityInTile(int row, int col) {
 	std::pair<int, int> pair(row, col);
 	if (entities.find(pair) != entities.end()) {
-		std::cout << "I got clicked on " << std::endl;
 		return entities.at(pair);
 	}
 	else

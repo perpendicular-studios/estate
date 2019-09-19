@@ -20,6 +20,7 @@ public:
 	virtual void drawEntityWindow() = 0;
 	void drawEntityWindowBackground();
 	void drawEntityHP();
+	void drawHP();
 
 	float getx() const { return x; }
 	float gety() const { return y; }
@@ -35,7 +36,6 @@ public:
 		return tm->getTile(getrow(), getcol());
 	}
 
-	void renderRadius();
 	void moveTo(int x, int y);
 
 	float getcol() const { 
